@@ -5653,7 +5653,7 @@ const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<st
 { {"CopyAllScenes", "bool", "0x1", "0"}, {
 } }
 };
-const dotdot_bitmap CopySceneMode("CopySceneMode", "map0", CopySceneMode_bitmap_data);
+const dotdot_bitmap CopySceneMode("CopySceneMode", "map8", CopySceneMode_bitmap_data);
 
 const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> DeviceTemperatureConfigurationDeviceTempAlarmMask_bitmap_data {
 { {"DeviceTemperatureTooLow", "bool", "0x1", "0"}, {
@@ -6089,7 +6089,7 @@ const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<st
 { {"AcceptOnlyWhenOn", "bool", "0x1", "0"}, {
 } }
 };
-const dotdot_bitmap OnWithTimedOffOnOffControl("OnWithTimedOffOnOffControl", "map0", OnWithTimedOffOnOffControl_bitmap_data);
+const dotdot_bitmap OnWithTimedOffOnOffControl("OnWithTimedOffOnOffControl", "map8", OnWithTimedOffOnOffControl_bitmap_data);
 
 const std::vector<std::pair<std::vector<std::string>, std::vector<std::vector<std::string>>>> PowerConfigurationMainsAlarmMask_bitmap_data {
 { {"MainsVoltageTooLow", "bool", "0x1", "0"}, {

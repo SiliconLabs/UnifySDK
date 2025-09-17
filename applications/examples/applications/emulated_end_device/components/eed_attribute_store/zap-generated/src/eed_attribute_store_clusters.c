@@ -2689,6 +2689,38 @@ sl_status_t eed_attribute_store_clusters_init()
     DESIRED_ATTRIBUTE);
   attribute_store_register_callback_by_type_and_state(
     &on_zcl_desired_value_update,
+    DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS,
+    DESIRED_ATTRIBUTE);
+  attribute_store_register_callback_by_type_and_state(
+    &on_zcl_desired_value_update,
+    DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES,
+    DESIRED_ATTRIBUTE);
+  attribute_store_register_callback_by_type_and_state(
+    &on_zcl_desired_value_update,
+    DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES,
+    DESIRED_ATTRIBUTE);
+  attribute_store_register_callback_by_type_and_state(
+    &on_zcl_desired_value_update,
+    DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES,
+    DESIRED_ATTRIBUTE);
+  attribute_store_register_callback_by_type_and_state(
+    &on_zcl_desired_value_update,
+    DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM,
+    DESIRED_ATTRIBUTE);
+  attribute_store_register_callback_by_type_and_state(
+    &on_zcl_desired_value_update,
+    DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE,
+    DESIRED_ATTRIBUTE);
+  attribute_store_register_callback_by_type_and_state(
+    &on_zcl_desired_value_update,
+    DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION,
+    DESIRED_ATTRIBUTE);
+  attribute_store_register_callback_by_type_and_state(
+    &on_zcl_desired_value_update,
+    DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE,
+    DESIRED_ATTRIBUTE);
+  attribute_store_register_callback_by_type_and_state(
+    &on_zcl_desired_value_update,
     DOTDOT_ATTRIBUTE_ID_DESCRIPTOR_DEVICE_TYPE_LIST,
     DESIRED_ATTRIBUTE);
   attribute_store_register_callback_by_type_and_state(

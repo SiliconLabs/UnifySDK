@@ -120,6 +120,8 @@ const char* uic_dotdot_get_cluster_name(dotdot_cluster_id_t cluster_id) {
     return "NameAndLocation";
   case DOTDOT_CONFIGURATION_PARAMETERS_CLUSTER_ID:
     return "ConfigurationParameters";
+  case DOTDOT_USER_CREDENTIAL_CLUSTER_ID:
+    return "UserCredential";
   case DOTDOT_AOX_LOCATOR_CLUSTER_ID:
     return "AoXLocator";
   case DOTDOT_AOX_POSITION_ESTIMATION_CLUSTER_ID:
@@ -292,6 +294,9 @@ dotdot_cluster_id_t uic_dotdot_get_cluster_id(const char* cluster_name) {
  }
  if (strcmp ("ConfigurationParameters", cluster_name) == 0) {
    return DOTDOT_CONFIGURATION_PARAMETERS_CLUSTER_ID;
+ }
+ if (strcmp ("UserCredential", cluster_name) == 0) {
+   return DOTDOT_USER_CREDENTIAL_CLUSTER_ID;
  }
  if (strcmp ("AoXLocator", cluster_name) == 0) {
    return DOTDOT_AOX_LOCATOR_CLUSTER_ID;

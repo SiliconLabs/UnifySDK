@@ -3212,7 +3212,7 @@ static void uic_mqtt_dotdot_on_by_group_groups_get_group_membership(
 
     
     uic_mqtt_dotdot_groups_command_get_group_membership_fields_t fields;
-      std::vector<int16_t> group_list;
+      std::vector<uint16_t> group_list;
 
 
       nlohmann::json jsn;
@@ -3301,7 +3301,7 @@ static void uic_mqtt_dotdot_on_by_group_groups_get_group_membership_response(
 
     
     uic_mqtt_dotdot_groups_command_get_group_membership_response_fields_t fields;
-      std::vector<int16_t> group_list;
+      std::vector<uint16_t> group_list;
 
 
       nlohmann::json jsn;
@@ -5028,7 +5028,7 @@ static void uic_mqtt_dotdot_on_by_group_scenes_get_scene_membership_response(
 
     
     uic_mqtt_dotdot_scenes_command_get_scene_membership_response_fields_t fields;
-      std::vector<int8_t> scene_list;
+      std::vector<uint8_t> scene_list;
 
 
       nlohmann::json jsn;
@@ -21500,7 +21500,7 @@ static void uic_mqtt_dotdot_on_by_group_electrical_measurement_get_profile_info_
 
     
     uic_mqtt_dotdot_electrical_measurement_command_get_profile_info_response_fields_t fields;
-      std::vector<uint8_t> list_of_attributes;
+      std::vector<uint16_t> list_of_attributes;
 
 
       nlohmann::json jsn;
@@ -21681,7 +21681,7 @@ static void uic_mqtt_dotdot_on_by_group_electrical_measurement_get_measurement_p
 
     
     uic_mqtt_dotdot_electrical_measurement_command_get_measurement_profile_response_fields_t fields;
-      std::vector<int8_t> intervals;
+      std::vector<uint8_t> intervals;
 
 
       nlohmann::json jsn;

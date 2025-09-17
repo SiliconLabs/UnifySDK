@@ -104,8 +104,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -114,7 +114,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Basic ZCLVersion, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -128,8 +128,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -138,7 +138,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Basic ApplicationVersion, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -152,8 +152,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -162,7 +162,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Basic StackVersion, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -176,8 +176,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -186,7 +186,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Basic HWVersion, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -344,8 +344,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // octstr // octstr // uint8_t
-    std::string attribute_type_string           = "uint8_t";
+    // octstr // octstr // const char*
+    std::string attribute_type_string           = "const char*";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -354,7 +354,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Basic ProductCode, "
-                     "type:  octstr // uint8_t");
+                     "type:  octstr // const char*");
     }
 
     status |= attribute_store_register_type(
@@ -608,8 +608,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -618,7 +618,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration MainsVoltage, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -632,8 +632,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -642,7 +642,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration MainsFrequency, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -680,8 +680,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -690,7 +690,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration MainsVoltageMinThreshold, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -704,8 +704,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -714,7 +714,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration MainsVoltageMaxThreshold, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -728,8 +728,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -738,7 +738,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration MainsVoltageDwellTripPoint, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -752,8 +752,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -762,7 +762,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration BatteryVoltage, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -776,8 +776,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -786,7 +786,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration BatteryPercentageRemaining, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -848,8 +848,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -858,7 +858,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration BatteryAHrRating, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -872,8 +872,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -882,7 +882,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration BatteryQuantity, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -896,8 +896,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -906,7 +906,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration BatteryRatedVoltage, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -944,8 +944,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -954,7 +954,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration BatteryVoltageMinThreshold, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -968,8 +968,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -978,7 +978,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration BatteryVoltageThreshold1, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -992,8 +992,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1002,7 +1002,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration BatteryVoltageThreshold2, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1016,8 +1016,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1026,7 +1026,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration BatteryVoltageThreshold3, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1040,8 +1040,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1050,7 +1050,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration BatteryPercentageMinThreshold, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1064,8 +1064,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1074,7 +1074,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration BatteryPercentageThreshold1, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1088,8 +1088,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1098,7 +1098,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration BatteryPercentageThreshold2, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1112,8 +1112,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1122,7 +1122,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration BatteryPercentageThreshold3, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1160,8 +1160,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1170,7 +1170,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery2Voltage, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1184,8 +1184,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1194,7 +1194,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery2PercentageRemaining, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1256,8 +1256,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1266,7 +1266,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery2AHrRating, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -1280,8 +1280,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1290,7 +1290,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery2Quantity, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1304,8 +1304,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1314,7 +1314,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery2RatedVoltage, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1352,8 +1352,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1362,7 +1362,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery2VoltageMinThreshold, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1376,8 +1376,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1386,7 +1386,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery2VoltageThreshold1, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1400,8 +1400,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1410,7 +1410,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery2VoltageThreshold2, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1424,8 +1424,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1434,7 +1434,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery2VoltageThreshold3, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1448,8 +1448,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1458,7 +1458,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery2PercentageMinThreshold, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1472,8 +1472,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1482,7 +1482,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery2PercentageThreshold1, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1496,8 +1496,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1506,7 +1506,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery2PercentageThreshold2, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1520,8 +1520,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1530,7 +1530,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery2PercentageThreshold3, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1568,8 +1568,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1578,7 +1578,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery3Voltage, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1592,8 +1592,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1602,7 +1602,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery3PercentageRemaining, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1664,8 +1664,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1674,7 +1674,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery3AHrRating, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -1688,8 +1688,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1698,7 +1698,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery3Quantity, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1712,8 +1712,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1722,7 +1722,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery3RatedVoltage, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1760,8 +1760,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1770,7 +1770,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery3VoltageMinThreshold, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1784,8 +1784,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1794,7 +1794,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery3VoltageThreshold1, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1808,8 +1808,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1818,7 +1818,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery3VoltageThreshold2, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1832,8 +1832,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1842,7 +1842,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery3VoltageThreshold3, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1856,8 +1856,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1866,7 +1866,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery3PercentageMinThreshold, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1880,8 +1880,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1890,7 +1890,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery3PercentageThreshold1, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1904,8 +1904,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1914,7 +1914,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery3PercentageThreshold2, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -1928,8 +1928,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -1938,7 +1938,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PowerConfiguration Battery3PercentageThreshold3, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -2048,8 +2048,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2058,7 +2058,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DeviceTemperatureConfiguration OverTempTotalDwell, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -2144,8 +2144,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint24 // uint24 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint24 // uint24 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2154,7 +2154,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DeviceTemperatureConfiguration LowTempDwellTripPoint, "
-                     "type:  uint24 // int32_t");
+                     "type:  uint24 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -2168,8 +2168,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint24 // uint24 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint24 // uint24 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2178,7 +2178,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DeviceTemperatureConfiguration HighTempDwellTripPoint, "
-                     "type:  uint24 // int32_t");
+                     "type:  uint24 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -2192,8 +2192,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2202,7 +2202,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Identify IdentifyTime, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -2240,8 +2240,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2250,7 +2250,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Scenes SceneCount, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -2264,8 +2264,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2274,7 +2274,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Scenes CurrentScene, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -2288,8 +2288,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // SGroupId // SGroupId // uint8_t *
-    std::string attribute_type_string           = "uint8_t *";
+    // SGroupId // SGroupId // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2298,7 +2298,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Scenes CurrentGroup, "
-                     "type:  SGroupId // uint8_t *");
+                     "type:  SGroupId // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -2456,8 +2456,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2466,7 +2466,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL OnOff OnTime, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -2480,8 +2480,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2490,7 +2490,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL OnOff OffWaitTime, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -2528,8 +2528,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2538,7 +2538,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Level CurrentLevel, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -2552,8 +2552,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2562,7 +2562,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Level RemainingTime, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -2576,8 +2576,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2586,7 +2586,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Level MinLevel, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -2600,8 +2600,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2610,7 +2610,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Level MaxLevel, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -2624,8 +2624,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2634,7 +2634,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Level CurrentFrequency, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -2648,8 +2648,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2658,7 +2658,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Level MinFrequency, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -2672,8 +2672,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2682,7 +2682,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Level MaxFrequency, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -2720,8 +2720,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2730,7 +2730,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Level OnOffTransitionTime, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -2744,8 +2744,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2754,7 +2754,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Level OnLevel, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -2768,8 +2768,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2778,7 +2778,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Level OnTransitionTime, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -2792,8 +2792,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2802,7 +2802,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Level OffTransitionTime, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -2816,8 +2816,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2826,7 +2826,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Level DefaultMoveRate, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -2840,8 +2840,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2850,7 +2850,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Level StartUpCurrentLevel, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -2864,8 +2864,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2874,7 +2874,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Alarms AlarmCount, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -2888,8 +2888,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // UTC // UTC // uint8_t
-    std::string attribute_type_string           = "uint8_t";
+    // UTC // UTC // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2898,7 +2898,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Time Time, "
-                     "type:  UTC // uint8_t");
+                     "type:  UTC // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -2960,8 +2960,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2970,7 +2970,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Time DstStart, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -2984,8 +2984,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -2994,7 +2994,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Time DstEnd, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -3032,8 +3032,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3042,7 +3042,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Time StandardTime, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -3056,8 +3056,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3066,7 +3066,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Time LocalTime, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -3080,8 +3080,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // UTC // UTC // uint8_t
-    std::string attribute_type_string           = "uint8_t";
+    // UTC // UTC // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3090,7 +3090,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Time LastSetTime, "
-                     "type:  UTC // uint8_t");
+                     "type:  UTC // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -3104,8 +3104,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // UTC // UTC // uint8_t
-    std::string attribute_type_string           = "uint8_t";
+    // UTC // UTC // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3114,7 +3114,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Time ValidUntilTime, "
-                     "type:  UTC // uint8_t");
+                     "type:  UTC // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -3128,8 +3128,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3138,7 +3138,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PollControl CheckInInterval, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -3152,8 +3152,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3162,7 +3162,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PollControl LongPollInterval, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -3176,8 +3176,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3186,7 +3186,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PollControl ShortPollInterval, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -3200,8 +3200,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3210,7 +3210,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PollControl FastPollTimeout, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -3224,8 +3224,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3234,7 +3234,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PollControl CheckInIntervalMin, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -3248,8 +3248,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3258,7 +3258,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PollControl LongPollIntervalMin, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -3272,8 +3272,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3282,7 +3282,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PollControl FastPollTimeoutMax, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -3296,8 +3296,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3306,7 +3306,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ShadeConfiguration PhysicalClosedLimit, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -3320,8 +3320,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3330,7 +3330,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ShadeConfiguration MotorStepSize, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -3368,8 +3368,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3378,7 +3378,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ShadeConfiguration ClosedLimit, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -3512,8 +3512,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3522,7 +3522,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock DoorOpenEvents, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -3536,8 +3536,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3546,7 +3546,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock DoorClosedEvents, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -3560,8 +3560,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3570,7 +3570,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock OpenPeriod, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -3584,8 +3584,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3594,7 +3594,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock NumberOfLogRecordsSupported, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -3608,8 +3608,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3618,7 +3618,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock NumberOfTotalUsersSupported, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -3632,8 +3632,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3642,7 +3642,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock NumberOfPINUsersSupported, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -3656,8 +3656,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3666,7 +3666,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock NumberOfRFIDUsersSupported, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -3680,8 +3680,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3690,7 +3690,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock NumberOfWeekDaySchedulesSupportedPerUser, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -3704,8 +3704,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3714,7 +3714,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock NumberOfYearDaySchedulesSupportedPerUser, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -3728,8 +3728,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3738,7 +3738,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock NumberOfHolidaySchedulesSupported, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -3752,8 +3752,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3762,7 +3762,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock MaxPINCodeLength, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -3776,8 +3776,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3786,7 +3786,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock MinPINCodeLength, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -3800,8 +3800,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3810,7 +3810,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock MaxRFIDCodeLength, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -3824,8 +3824,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3834,7 +3834,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock MinRFIDCodeLength, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -3872,8 +3872,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3882,7 +3882,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock NumberOfCredentialsSupportedPerUser, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -3944,8 +3944,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3954,7 +3954,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock LEDSettings, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -3968,8 +3968,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -3978,7 +3978,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock AutoRelockTime, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -3992,8 +3992,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4002,7 +4002,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock SoundVolume, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -4208,8 +4208,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4218,7 +4218,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock WrongCodeEntryLimit, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -4232,8 +4232,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4242,7 +4242,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock UserCodeTemporaryDisableTime, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -4328,8 +4328,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4338,7 +4338,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DoorLock ExpiringUserTimeout, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -4592,8 +4592,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4602,7 +4602,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering PhysicalClosedLimitLift, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -4616,8 +4616,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4626,7 +4626,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering PhysicalClosedLimitTilt, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -4640,8 +4640,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4650,7 +4650,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering CurrentPositionLift, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -4664,8 +4664,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4674,7 +4674,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering CurrentPositionTilt, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -4688,8 +4688,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4698,7 +4698,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering NumberOfActuationsLift, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -4712,8 +4712,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4722,7 +4722,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering NumberOfActuationsTilt, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -4760,8 +4760,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4770,7 +4770,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering CurrentPositionLiftPercentage, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -4784,8 +4784,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4794,7 +4794,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering CurrentPositionTiltPercentage, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -4808,8 +4808,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4818,7 +4818,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering InstalledOpenLimitLift, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -4832,8 +4832,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4842,7 +4842,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering InstalledClosedLimitLift, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -4856,8 +4856,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4866,7 +4866,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering InstalledOpenLimitTilt, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -4880,8 +4880,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4890,7 +4890,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering InstalledClosedLimitTilt, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -4904,8 +4904,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4914,7 +4914,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering VelocityLift, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -4928,8 +4928,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4938,7 +4938,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering AccelerationTimeLift, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -4952,8 +4952,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -4962,7 +4962,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering DecelerationTimeLift, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -5000,8 +5000,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // octstr // octstr // uint8_t
-    std::string attribute_type_string           = "uint8_t";
+    // octstr // octstr // const char*
+    std::string attribute_type_string           = "const char*";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5010,7 +5010,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering IntermediateSetpointsLift, "
-                     "type:  octstr // uint8_t");
+                     "type:  octstr // const char*");
     }
 
     status |= attribute_store_register_type(
@@ -5024,8 +5024,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // octstr // octstr // uint8_t
-    std::string attribute_type_string           = "uint8_t";
+    // octstr // octstr // const char*
+    std::string attribute_type_string           = "const char*";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5034,7 +5034,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindowCovering IntermediateSetpointsTilt, "
-                     "type:  octstr // uint8_t");
+                     "type:  octstr // const char*");
     }
 
     status |= attribute_store_register_type(
@@ -5120,8 +5120,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5130,7 +5130,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BarrierControl OpenEvents, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -5144,8 +5144,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5154,7 +5154,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BarrierControl CloseEvents, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -5168,8 +5168,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5178,7 +5178,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BarrierControl CommandOpenEvents, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -5192,8 +5192,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5202,7 +5202,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BarrierControl CommandCloseEvents, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -5216,8 +5216,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5226,7 +5226,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BarrierControl OpenPeriod, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -5240,8 +5240,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5250,7 +5250,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BarrierControl ClosePeriod, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -5264,8 +5264,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5274,7 +5274,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BarrierControl BarrierPosition, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -5312,8 +5312,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5322,7 +5322,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PumpConfigurationAndControl MaxSpeed, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -5336,8 +5336,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5346,7 +5346,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PumpConfigurationAndControl MaxFlow, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -5456,8 +5456,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5466,7 +5466,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PumpConfigurationAndControl MinConstSpeed, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -5480,8 +5480,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5490,7 +5490,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PumpConfigurationAndControl MaxConstSpeed, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -5504,8 +5504,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5514,7 +5514,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PumpConfigurationAndControl MinConstFlow, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -5528,8 +5528,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5538,7 +5538,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PumpConfigurationAndControl MaxConstFlow, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -5696,8 +5696,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5706,7 +5706,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PumpConfigurationAndControl Speed, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -5720,8 +5720,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint24 // uint24 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint24 // uint24 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5730,7 +5730,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PumpConfigurationAndControl LifetimeRunningHours, "
-                     "type:  uint24 // int32_t");
+                     "type:  uint24 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -5744,8 +5744,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint24 // uint24 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint24 // uint24 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5754,7 +5754,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PumpConfigurationAndControl Power, "
-                     "type:  uint24 // int32_t");
+                     "type:  uint24 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -5768,8 +5768,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -5778,7 +5778,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PumpConfigurationAndControl LifetimeEnergyConsumed, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -6032,8 +6032,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -6042,7 +6042,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Thermostat PICoolingDemand, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -6056,8 +6056,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -6066,7 +6066,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Thermostat PIHeatingDemand, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -6488,8 +6488,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -6498,7 +6498,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Thermostat NumberOfWeeklyTransitions, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -6512,8 +6512,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -6522,7 +6522,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Thermostat NumberOfDailyTransitions, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -6560,8 +6560,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -6570,7 +6570,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Thermostat TemperatureSetpointHoldDuration, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -6680,8 +6680,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // UTC // UTC // uint8_t
-    std::string attribute_type_string           = "uint8_t";
+    // UTC // UTC // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -6690,7 +6690,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Thermostat SetpointChangeSourceTimestamp, "
-                     "type:  UTC // uint8_t");
+                     "type:  UTC // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -6704,8 +6704,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -6714,7 +6714,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Thermostat OccupiedSetback, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -6728,8 +6728,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -6738,7 +6738,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Thermostat OccupiedSetbackMin, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -6752,8 +6752,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -6762,7 +6762,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Thermostat OccupiedSetbackMax, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -6776,8 +6776,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -6786,7 +6786,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Thermostat UnoccupiedSetback, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -6800,8 +6800,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -6810,7 +6810,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Thermostat UnoccupiedSetbackMin, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -6824,8 +6824,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -6834,7 +6834,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Thermostat UnoccupiedSetbackMax, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -6848,8 +6848,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -6858,7 +6858,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Thermostat EmergencyHeatDelta, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -6896,8 +6896,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -6906,7 +6906,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Thermostat ACCapacity, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -7112,8 +7112,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7122,7 +7122,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DehumidificationControl RelativeHumidity, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -7136,8 +7136,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7146,7 +7146,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DehumidificationControl DehumidificationCooling, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -7160,8 +7160,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7170,7 +7170,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DehumidificationControl RHDehumidificationSetpoint, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -7232,8 +7232,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7242,7 +7242,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DehumidificationControl DehumidificationHysteresis, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -7256,8 +7256,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7266,7 +7266,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL DehumidificationControl DehumidificationMaxCool, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -7376,8 +7376,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7386,7 +7386,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl CurrentHue, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -7400,8 +7400,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7410,7 +7410,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl CurrentSaturation, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -7424,8 +7424,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7434,7 +7434,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl RemainingTime, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -7448,8 +7448,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7458,7 +7458,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl CurrentX, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -7472,8 +7472,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7482,7 +7482,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl CurrentY, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -7544,8 +7544,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7554,7 +7554,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorTemperatureMireds, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -7616,8 +7616,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7626,7 +7626,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl NumberOfPrimaries, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -7640,8 +7640,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7650,7 +7650,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary1X, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -7664,8 +7664,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7674,7 +7674,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary1Y, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -7688,8 +7688,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7698,7 +7698,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary1Intensity, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -7712,8 +7712,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7722,7 +7722,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary2X, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -7736,8 +7736,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7746,7 +7746,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary2Y, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -7760,8 +7760,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7770,7 +7770,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary2Intensity, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -7784,8 +7784,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7794,7 +7794,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary3X, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -7808,8 +7808,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7818,7 +7818,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary3Y, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -7832,8 +7832,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7842,7 +7842,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary3Intensity, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -7856,8 +7856,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7866,7 +7866,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary4X, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -7880,8 +7880,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7890,7 +7890,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary4Y, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -7904,8 +7904,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7914,7 +7914,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary4Intensity, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -7928,8 +7928,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7938,7 +7938,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary5X, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -7952,8 +7952,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7962,7 +7962,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary5Y, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -7976,8 +7976,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -7986,7 +7986,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary5Intensity, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -8000,8 +8000,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8010,7 +8010,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary6X, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8024,8 +8024,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8034,7 +8034,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary6Y, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8048,8 +8048,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8058,7 +8058,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl Primary6Intensity, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -8072,8 +8072,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8082,7 +8082,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl WhitePointX, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8096,8 +8096,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8106,7 +8106,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl WhitePointY, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8120,8 +8120,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8130,7 +8130,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorPointRX, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8144,8 +8144,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8154,7 +8154,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorPointRY, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8168,8 +8168,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8178,7 +8178,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorPointRIntensity, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -8192,8 +8192,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8202,7 +8202,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorPointGX, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8216,8 +8216,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8226,7 +8226,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorPointGY, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8240,8 +8240,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8250,7 +8250,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorPointGIntensity, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -8264,8 +8264,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8274,7 +8274,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorPointBX, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8288,8 +8288,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8298,7 +8298,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorPointBY, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8312,8 +8312,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8322,7 +8322,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorPointBIntensity, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -8336,8 +8336,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8346,7 +8346,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl EnhancedCurrentHue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8384,8 +8384,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8394,7 +8394,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorLoopActive, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -8408,8 +8408,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8418,7 +8418,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorLoopDirection, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -8432,8 +8432,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8442,7 +8442,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorLoopTime, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8456,8 +8456,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8466,7 +8466,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorLoopStartEnhancedHue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8480,8 +8480,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8490,7 +8490,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorLoopStoredEnhancedHue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8528,8 +8528,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8538,7 +8538,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorTempPhysicalMinMireds, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8552,8 +8552,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8562,7 +8562,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl ColorTempPhysicalMaxMireds, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8576,8 +8576,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8586,7 +8586,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl CoupleColorTempToLevelMinMireds, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8600,8 +8600,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8610,7 +8610,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ColorControl StartUpColorTemperatureMireds, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8624,8 +8624,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8634,7 +8634,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BallastConfiguration PhysicalMinLevel, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -8648,8 +8648,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8658,7 +8658,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BallastConfiguration PhysicalMaxLevel, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -8696,8 +8696,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8706,7 +8706,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BallastConfiguration MinLevel, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -8720,8 +8720,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8730,7 +8730,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BallastConfiguration MaxLevel, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -8744,8 +8744,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8754,7 +8754,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BallastConfiguration PowerOnLevel, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -8768,8 +8768,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8778,7 +8778,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BallastConfiguration PowerOnFadeTime, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -8792,8 +8792,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8802,7 +8802,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BallastConfiguration IntrinsicBallastFactor, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -8816,8 +8816,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8826,7 +8826,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BallastConfiguration BallastFactorAdjustment, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -8840,8 +8840,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8850,7 +8850,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BallastConfiguration LampQuantity, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -8912,8 +8912,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint24 // uint24 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint24 // uint24 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8922,7 +8922,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BallastConfiguration LampRatedHours, "
-                     "type:  uint24 // int32_t");
+                     "type:  uint24 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -8936,8 +8936,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint24 // uint24 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint24 // uint24 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8946,7 +8946,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BallastConfiguration LampBurnHours, "
-                     "type:  uint24 // int32_t");
+                     "type:  uint24 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -8984,8 +8984,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint24 // uint24 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint24 // uint24 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -8994,7 +8994,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL BallastConfiguration LampBurnHoursTripPoint, "
-                     "type:  uint24 // int32_t");
+                     "type:  uint24 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -9008,8 +9008,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9018,7 +9018,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL IlluminanceMeasurement MeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9032,8 +9032,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9042,7 +9042,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL IlluminanceMeasurement MinMeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9056,8 +9056,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9066,7 +9066,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL IlluminanceMeasurement MaxMeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9080,8 +9080,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9090,7 +9090,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL IlluminanceMeasurement Tolerance, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9176,8 +9176,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9186,7 +9186,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL IlluminanceLevelSensing IlluminanceTargetLevel, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9272,8 +9272,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9282,7 +9282,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL TemperatureMeasurement Tolerance, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9368,8 +9368,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9378,7 +9378,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PressureMeasurement Tolerance, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9464,8 +9464,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9474,7 +9474,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PressureMeasurement ScaledTolerance, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9512,8 +9512,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9522,7 +9522,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL FlowMeasurement MeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9536,8 +9536,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9546,7 +9546,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL FlowMeasurement MinMeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9560,8 +9560,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9570,7 +9570,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL FlowMeasurement MaxMeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9584,8 +9584,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9594,7 +9594,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL FlowMeasurement Tolerance, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9608,8 +9608,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9618,7 +9618,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL RelativityHumidity MeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9632,8 +9632,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9642,7 +9642,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL RelativityHumidity MinMeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9656,8 +9656,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9666,7 +9666,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL RelativityHumidity MaxMeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9680,8 +9680,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9690,7 +9690,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL RelativityHumidity Tolerance, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9776,8 +9776,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9786,7 +9786,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL OccupancySensing PIROccupiedToUnoccupiedDelay, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9800,8 +9800,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9810,7 +9810,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL OccupancySensing PIRUnoccupiedToOccupiedDelay, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9824,8 +9824,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9834,7 +9834,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL OccupancySensing PIRUnoccupiedToOccupiedThreshold, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -9848,8 +9848,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9858,7 +9858,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL OccupancySensing UltrasonicOccupiedToUnoccupiedDelay, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9872,8 +9872,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9882,7 +9882,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL OccupancySensing UltrasonicUnoccupiedToOccupiedDelay, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9896,8 +9896,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9906,7 +9906,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL OccupancySensing UltrasonicUnoccupiedToOccupiedThreshold, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -9920,8 +9920,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9930,7 +9930,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL OccupancySensing PhysicalContactOccupiedToUnoccupiedDelay, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9944,8 +9944,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9954,7 +9954,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL OccupancySensing PhysicalContactUnoccupiedToOccupiedDelay, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -9968,8 +9968,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -9978,7 +9978,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL OccupancySensing PhysicalContactUnoccupiedToOccupiedThreshold, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -9992,8 +9992,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10002,7 +10002,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL SoilMoisture MeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10016,8 +10016,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10026,7 +10026,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL SoilMoisture MinMeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10040,8 +10040,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10050,7 +10050,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL SoilMoisture MaxMeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10064,8 +10064,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10074,7 +10074,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL SoilMoisture Tolerance, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10088,8 +10088,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10098,7 +10098,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PhMeasurement MeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10112,8 +10112,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10122,7 +10122,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PhMeasurement MinMeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10136,8 +10136,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10146,7 +10146,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PhMeasurement MaxMeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10160,8 +10160,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10170,7 +10170,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL PhMeasurement Tolerance, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10184,8 +10184,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10194,7 +10194,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalConductivityMeasurement MeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10208,8 +10208,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10218,7 +10218,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalConductivityMeasurement MinMeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10232,8 +10232,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10242,7 +10242,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalConductivityMeasurement MaxMeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10256,8 +10256,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10266,7 +10266,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalConductivityMeasurement Tolerance, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10280,8 +10280,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10290,7 +10290,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindSpeedMeasurement MeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10304,8 +10304,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10314,7 +10314,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindSpeedMeasurement MinMeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10328,8 +10328,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10338,7 +10338,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindSpeedMeasurement MaxMeasuredValue, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10352,8 +10352,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10362,7 +10362,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL WindSpeedMeasurement Tolerance, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10760,8 +10760,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10770,7 +10770,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL IASZone ZoneID, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -10784,8 +10784,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10794,7 +10794,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL IASZone NumberOfZoneSensitivityLevelsSupported, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -10808,8 +10808,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10818,7 +10818,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL IASZone CurrentZoneSensitivityLevel, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -10832,8 +10832,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10842,7 +10842,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL IASWD MaxDuration, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -10856,8 +10856,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint64 // uint64 // int64_t
-    std::string attribute_type_string           = "int64_t";
+    // uint64 // uint64 // uint64_t
+    std::string attribute_type_string           = "uint64_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10866,7 +10866,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering CurrentSummationDelivered, "
-                     "type:  uint64 // int64_t");
+                     "type:  uint64 // uint64_t");
     }
 
     status |= attribute_store_register_type(
@@ -10880,8 +10880,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint64 // uint64 // int64_t
-    std::string attribute_type_string           = "int64_t";
+    // uint64 // uint64 // uint64_t
+    std::string attribute_type_string           = "uint64_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10890,7 +10890,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering CurrentSummationReceived, "
-                     "type:  uint64 // int64_t");
+                     "type:  uint64 // uint64_t");
     }
 
     status |= attribute_store_register_type(
@@ -10904,8 +10904,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint64 // uint64 // int64_t
-    std::string attribute_type_string           = "int64_t";
+    // uint64 // uint64 // uint64_t
+    std::string attribute_type_string           = "uint64_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10914,7 +10914,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering CurrentMaxDemandDelivered, "
-                     "type:  uint64 // int64_t");
+                     "type:  uint64 // uint64_t");
     }
 
     status |= attribute_store_register_type(
@@ -10976,8 +10976,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // UTC // UTC // uint8_t
-    std::string attribute_type_string           = "uint8_t";
+    // UTC // UTC // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -10986,7 +10986,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering ReadingSnapShotTime, "
-                     "type:  UTC // uint8_t");
+                     "type:  UTC // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -11000,8 +11000,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // UTC // UTC // uint8_t
-    std::string attribute_type_string           = "uint8_t";
+    // UTC // UTC // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11010,7 +11010,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering CurrentMaxDemandDeliveredTime, "
-                     "type:  UTC // uint8_t");
+                     "type:  UTC // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -11024,8 +11024,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // UTC // UTC // uint8_t
-    std::string attribute_type_string           = "uint8_t";
+    // UTC // UTC // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11034,7 +11034,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering CurrentMaxDemandReceivedTime, "
-                     "type:  UTC // uint8_t");
+                     "type:  UTC // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -11048,8 +11048,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11058,7 +11058,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering DefaultUpdatePeriod, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -11096,8 +11096,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint64 // uint64 // int64_t
-    std::string attribute_type_string           = "int64_t";
+    // uint64 // uint64 // uint64_t
+    std::string attribute_type_string           = "uint64_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11106,7 +11106,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering CurrentInletEnergyCarrierSummation, "
-                     "type:  uint64 // int64_t");
+                     "type:  uint64 // uint64_t");
     }
 
     status |= attribute_store_register_type(
@@ -11120,8 +11120,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint64 // uint64 // int64_t
-    std::string attribute_type_string           = "int64_t";
+    // uint64 // uint64 // uint64_t
+    std::string attribute_type_string           = "uint64_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11130,7 +11130,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering CurrentOutletEnergyCarrierSummation, "
-                     "type:  uint64 // int64_t");
+                     "type:  uint64 // uint64_t");
     }
 
     status |= attribute_store_register_type(
@@ -11216,8 +11216,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint24 // uint24 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint24 // uint24 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11226,7 +11226,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering Multiplier, "
-                     "type:  uint24 // int32_t");
+                     "type:  uint24 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -11240,8 +11240,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint24 // uint24 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint24 // uint24 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11250,7 +11250,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Metering Divisor, "
-                     "type:  uint24 // int32_t");
+                     "type:  uint24 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -11720,8 +11720,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11730,7 +11730,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement DCVoltageMultiplier, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -11744,8 +11744,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11754,7 +11754,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement DCVoltageDivisor, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -11768,8 +11768,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11778,7 +11778,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement DCCurrentMultiplier, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -11792,8 +11792,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11802,7 +11802,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement DCCurrentDivisor, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -11816,8 +11816,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11826,7 +11826,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement DCPowerMultiplier, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -11840,8 +11840,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11850,7 +11850,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement DCPowerDivisor, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -11864,8 +11864,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11874,7 +11874,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement ACFrequency, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -11888,8 +11888,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11898,7 +11898,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement ACFrequencyMin, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -11912,8 +11912,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11922,7 +11922,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement ACFrequencyMax, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -11936,8 +11936,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -11946,7 +11946,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement NeutralCurrent, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12008,8 +12008,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12018,7 +12018,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement TotalApparentPower, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -12320,8 +12320,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12330,7 +12330,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement ACFrequencyMultiplier, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12344,8 +12344,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12354,7 +12354,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement ACFrequencyDivisor, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12368,8 +12368,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12378,7 +12378,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement PowerMultiplier, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -12392,8 +12392,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12402,7 +12402,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement PowerDivisor, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -12464,8 +12464,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12474,7 +12474,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement LineCurrent, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12536,8 +12536,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12546,7 +12546,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSVoltage, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12560,8 +12560,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12570,7 +12570,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSVoltageMin, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12584,8 +12584,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12594,7 +12594,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSVoltageMax, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12608,8 +12608,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12618,7 +12618,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSCurrent, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12632,8 +12632,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12642,7 +12642,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSCurrentMin, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12656,8 +12656,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12666,7 +12666,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSCurrentMax, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12776,8 +12776,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12786,7 +12786,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement ApparentPower, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12824,8 +12824,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12834,7 +12834,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement AverageRMSVoltageMeasurementPeriod, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12848,8 +12848,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12858,7 +12858,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement AverageRMSOverVoltageCounter, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12872,8 +12872,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12882,7 +12882,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement AverageRMSUnderVoltageCounter, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12896,8 +12896,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12906,7 +12906,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSExtremeOverVoltagePeriod, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12920,8 +12920,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12930,7 +12930,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSExtremeUnderVoltagePeriod, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12944,8 +12944,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12954,7 +12954,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSVoltageSagPeriod, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12968,8 +12968,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -12978,7 +12978,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSVoltageSwellPeriod, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -12992,8 +12992,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13002,7 +13002,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement ACVoltageMultiplier, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13016,8 +13016,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13026,7 +13026,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement ACVoltageDivisor, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13040,8 +13040,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13050,7 +13050,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement ACCurrentMultiplier, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13064,8 +13064,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13074,7 +13074,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement ACCurrentDivisor, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13088,8 +13088,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13098,7 +13098,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement ACPowerMultiplier, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13112,8 +13112,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13122,7 +13122,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement ACPowerDivisor, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13472,8 +13472,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13482,7 +13482,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement LineCurrentPhB, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13544,8 +13544,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13554,7 +13554,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSVoltagePhB, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13568,8 +13568,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13578,7 +13578,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSVoltageMinPhB, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13592,8 +13592,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13602,7 +13602,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSVoltageMaxPhB, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13616,8 +13616,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13626,7 +13626,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSCurrentPhB, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13640,8 +13640,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13650,7 +13650,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSCurrentMinPhB, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13664,8 +13664,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13674,7 +13674,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSCurrentMaxPhB, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13784,8 +13784,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13794,7 +13794,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement ApparentPowerPhB, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13832,8 +13832,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13842,7 +13842,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement AverageRMSVoltageMeasurementPeriodPhB, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13856,8 +13856,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13866,7 +13866,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement AverageRMSOverVoltageCounterPhB, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13880,8 +13880,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13890,7 +13890,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement AverageRMSUnderVoltageCounterPhB, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13904,8 +13904,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13914,7 +13914,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSExtremeOverVoltagePeriodPhB, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13928,8 +13928,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13938,7 +13938,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSExtremeUnderVoltagePeriodPhB, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13952,8 +13952,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13962,7 +13962,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSVoltageSagPeriodPhB, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -13976,8 +13976,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -13986,7 +13986,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSVoltageSwellPeriodPhB, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14000,8 +14000,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14010,7 +14010,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement LineCurrentPhC, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14072,8 +14072,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14082,7 +14082,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSVoltagePhC, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14096,8 +14096,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14106,7 +14106,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSVoltageMinPhC, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14120,8 +14120,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14130,7 +14130,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSVoltageMaxPhC, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14144,8 +14144,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14154,7 +14154,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSCurrentPhC, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14168,8 +14168,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14178,7 +14178,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSCurrentMinPhC, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14192,8 +14192,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14202,7 +14202,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSCurrentMaxPhC, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14312,8 +14312,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14322,7 +14322,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement ApparentPowerPhC, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14360,8 +14360,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14370,7 +14370,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement AverageRMSVoltageMeasurementPeriodPhC, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14384,8 +14384,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14394,7 +14394,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement AverageRMSOverVoltageCounterPhC, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14408,8 +14408,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14418,7 +14418,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement AverageRMSUnderVoltageCounterPhC, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14432,8 +14432,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14442,7 +14442,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSExtremeOverVoltagePeriodPhC, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14456,8 +14456,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14466,7 +14466,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSExtremeUnderVoltagePeriodPhC, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14480,8 +14480,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14490,7 +14490,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSVoltageSagPeriodPhC, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14504,8 +14504,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14514,7 +14514,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ElectricalMeasurement RMSVoltageSwellPeriodPhC, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14528,8 +14528,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14538,7 +14538,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics NumberOfResets, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14552,8 +14552,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14562,7 +14562,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics PersistentMemoryWrites, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14576,8 +14576,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14586,7 +14586,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics MacRxBcast, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -14600,8 +14600,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14610,7 +14610,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics MacTxBcast, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -14624,8 +14624,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14634,7 +14634,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics MacRxUcast, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -14648,8 +14648,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14658,7 +14658,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics MacTxUcast, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -14672,8 +14672,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14682,7 +14682,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics MacTxUcastRetry, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14696,8 +14696,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14706,7 +14706,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics MacTxUcastFail, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14720,8 +14720,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14730,7 +14730,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics APSRxBcast, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14744,8 +14744,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14754,7 +14754,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics APSTxBcast, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14768,8 +14768,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14778,7 +14778,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics APSRxUcast, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14792,8 +14792,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14802,7 +14802,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics APSTxUcastSuccess, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14816,8 +14816,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14826,7 +14826,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics APSTxUcastRetry, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14840,8 +14840,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14850,7 +14850,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics APSTxUcastFail, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14864,8 +14864,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14874,7 +14874,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics RouteDiscInitiated, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14888,8 +14888,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14898,7 +14898,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics NeighborAdded, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14912,8 +14912,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14922,7 +14922,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics NeighborRemoved, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14936,8 +14936,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14946,7 +14946,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics NeighborStale, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14960,8 +14960,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14970,7 +14970,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics JoinIndication, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -14984,8 +14984,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -14994,7 +14994,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics ChildMoved, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -15008,8 +15008,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -15018,7 +15018,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics NWKFCFailure, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -15032,8 +15032,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -15042,7 +15042,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics APSFCFailure, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -15056,8 +15056,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -15066,7 +15066,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics APSUnauthorizedKey, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -15080,8 +15080,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -15090,7 +15090,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics NWKDecryptFailures, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -15104,8 +15104,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -15114,7 +15114,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics APSDecryptFailures, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -15128,8 +15128,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -15138,7 +15138,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics PacketBufferAllocateFailures, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -15152,8 +15152,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -15162,7 +15162,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics RelayedUcast, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -15176,8 +15176,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -15186,7 +15186,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics PHYToMACQueueLimitReached, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -15200,8 +15200,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -15210,7 +15210,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics PacketValidateDropCount, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -15224,8 +15224,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -15234,7 +15234,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics AverageMACRetryPerAPSMessageSent, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -15248,8 +15248,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -15258,7 +15258,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL Diagnostics LastMessageLQI, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -15344,8 +15344,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -15354,7 +15354,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL State EndpointIdList, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -15416,8 +15416,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -15426,7 +15426,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL State MaximumCommandDelay, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -15536,8 +15536,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -15546,7 +15546,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL SystemMetrics ReportingIntervalSeconds, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -15992,8 +15992,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint64 // uint64 // int64_t
-    std::string attribute_type_string           = "int64_t";
+    // uint64 // uint64 // uint64_t
+    std::string attribute_type_string           = "uint64_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -16002,7 +16002,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL SystemMetrics UptimeMinutes, "
-                     "type:  uint64 // int64_t");
+                     "type:  uint64 // uint64_t");
     }
 
     status |= attribute_store_register_type(
@@ -16160,8 +16160,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint64 // uint64 // int64_t
-    std::string attribute_type_string           = "int64_t";
+    // uint64 // uint64 // uint64_t
+    std::string attribute_type_string           = "uint64_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -16170,7 +16170,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL SystemMetrics SystemInterrupts, "
-                     "type:  uint64 // int64_t");
+                     "type:  uint64 // uint64_t");
     }
 
     status |= attribute_store_register_type(
@@ -16280,8 +16280,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint64 // uint64 // int64_t
-    std::string attribute_type_string           = "int64_t";
+    // uint64 // uint64 // uint64_t
+    std::string attribute_type_string           = "uint64_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -16290,7 +16290,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ApplicationMonitoring UptimeMinutes, "
-                     "type:  uint64 // int64_t");
+                     "type:  uint64 // uint64_t");
     }
 
     status |= attribute_store_register_type(
@@ -16304,8 +16304,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint64 // uint64 // int64_t
-    std::string attribute_type_string           = "int64_t";
+    // uint64 // uint64 // uint64_t
+    std::string attribute_type_string           = "uint64_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -16314,7 +16314,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ApplicationMonitoring ProcessId, "
-                     "type:  uint64 // int64_t");
+                     "type:  uint64 // uint64_t");
     }
 
     status |= attribute_store_register_type(
@@ -16424,8 +16424,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -16434,7 +16434,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ApplicationMonitoring MQTTStatisticsReportingIntervalSeconds, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -16448,8 +16448,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint64 // uint64 // int64_t
-    std::string attribute_type_string           = "int64_t";
+    // uint64 // uint64 // uint64_t
+    std::string attribute_type_string           = "uint64_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -16458,7 +16458,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ApplicationMonitoring MQTTMessagesSent, "
-                     "type:  uint64 // int64_t");
+                     "type:  uint64 // uint64_t");
     }
 
     status |= attribute_store_register_type(
@@ -16472,8 +16472,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint64 // uint64 // int64_t
-    std::string attribute_type_string           = "int64_t";
+    // uint64 // uint64 // uint64_t
+    std::string attribute_type_string           = "uint64_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -16482,7 +16482,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ApplicationMonitoring MQTTMessagesReceived, "
-                     "type:  uint64 // int64_t");
+                     "type:  uint64 // uint64_t");
     }
 
     status |= attribute_store_register_type(
@@ -16496,8 +16496,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint64 // uint64 // int64_t
-    std::string attribute_type_string           = "int64_t";
+    // uint64 // uint64 // uint64_t
+    std::string attribute_type_string           = "uint64_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -16506,7 +16506,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ApplicationMonitoring MQTTSubscriptionCount, "
-                     "type:  uint64 // int64_t");
+                     "type:  uint64 // uint64_t");
     }
 
     status |= attribute_store_register_type(
@@ -16592,8 +16592,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint32 // uint32 // int32_t
-    std::string attribute_type_string           = "int32_t";
+    // uint32 // uint32 // uint32_t
+    std::string attribute_type_string           = "uint32_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -16602,7 +16602,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL ApplicationMonitoring ApplicationStatisticsReportingIntervalSeconds, "
-                     "type:  uint32 // int32_t");
+                     "type:  uint32 // uint32_t");
     }
 
     status |= attribute_store_register_type(
@@ -16808,8 +16808,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint16 // uint16 // int16_t
-    std::string attribute_type_string           = "int16_t";
+    // uint16 // uint16 // uint16_t
+    std::string attribute_type_string           = "uint16_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -16818,7 +16818,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL UserCredential SupportedUserUniqueIdentifiers, "
-                     "type:  uint16 // int16_t");
+                     "type:  uint16 // uint16_t");
     }
 
     status |= attribute_store_register_type(
@@ -17384,8 +17384,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -17394,7 +17394,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL UnifyHumidityControl HumidifierSetpointPrecision, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -17504,8 +17504,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -17514,7 +17514,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL UnifyHumidityControl DehumidifierSetpointPrecision, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(
@@ -17624,8 +17624,8 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
   // clang-format on
 
   {
-    // uint8 // uint8 // int8_t
-    std::string attribute_type_string           = "int8_t";
+    // uint8 // uint8 // uint8_t
+    std::string attribute_type_string           = "uint8_t";
     attribute_store_storage_type_t storage_type = UNKNOWN_STORAGE_TYPE;
 
     // clang-format off
@@ -17634,7 +17634,7 @@ sl_status_t unify_dotdot_attribute_store_registration_init()
     if (storage_type == UNKNOWN_STORAGE_TYPE) {
       sl_log_warning(LOG_TAG,
                      "Unkown storage type for ZCL UnifyHumidityControl AutoSetpointPrecision, "
-                     "type:  uint8 // int8_t");
+                     "type:  uint8 // uint8_t");
     }
 
     status |= attribute_store_register_type(

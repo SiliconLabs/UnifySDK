@@ -3990,6 +3990,57 @@ void dotdot_create_configuration_parameters_wrapper(const dotdot_unid_t unid, co
 
 }
 
+void dotdot_create_user_credential_wrapper(const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id){
+    // Create and set a default value if undefined.
+    dotdot_create_user_credential_supported_user_unique_identifiers(unid,endpoint_id);
+    if (false == dotdot_user_credential_supported_user_unique_identifiers_is_reported_defined(unid,endpoint_id)){
+    dotdot_set_user_credential_supported_user_unique_identifiers(unid,endpoint_id,REPORTED_ATTRIBUTE, static_cast<uint16_t>(0));
+        }
+
+    // Create and set a default value if undefined.
+    dotdot_create_user_credential_supported_credential_rules(unid,endpoint_id);
+    if (false == dotdot_user_credential_supported_credential_rules_is_reported_defined(unid,endpoint_id)){
+    dotdot_set_user_credential_supported_credential_rules(unid,endpoint_id,REPORTED_ATTRIBUTE, static_cast<uint8_t>(0));
+        }
+
+    // Create and set a default value if undefined.
+    dotdot_create_user_credential_supported_credential_types(unid,endpoint_id);
+    if (false == dotdot_user_credential_supported_credential_types_is_reported_defined(unid,endpoint_id)){
+    dotdot_set_user_credential_supported_credential_types(unid,endpoint_id,REPORTED_ATTRIBUTE, static_cast<uint16_t>(0));
+        }
+
+    // Create and set a default value if undefined.
+    dotdot_create_user_credential_supported_user_types(unid,endpoint_id);
+    if (false == dotdot_user_credential_supported_user_types_is_reported_defined(unid,endpoint_id)){
+    dotdot_set_user_credential_supported_user_types(unid,endpoint_id,REPORTED_ATTRIBUTE, static_cast<uint16_t>(0));
+        }
+
+    // Create and set a default value if undefined.
+    dotdot_create_user_credential_support_credential_checksum(unid,endpoint_id);
+    if (false == dotdot_user_credential_support_credential_checksum_is_reported_defined(unid,endpoint_id)){
+    dotdot_set_user_credential_support_credential_checksum(unid,endpoint_id,REPORTED_ATTRIBUTE, static_cast<bool>(0));
+        }
+
+    // Create and set a default value if undefined.
+    dotdot_create_user_credential_support_admin_pin_code(unid,endpoint_id);
+    if (false == dotdot_user_credential_support_admin_pin_code_is_reported_defined(unid,endpoint_id)){
+    dotdot_set_user_credential_support_admin_pin_code(unid,endpoint_id,REPORTED_ATTRIBUTE, static_cast<bool>(0));
+        }
+
+    // Create and set a default value if undefined.
+    dotdot_create_user_credential_support_admin_pin_code_deactivation(unid,endpoint_id);
+    if (false == dotdot_user_credential_support_admin_pin_code_deactivation_is_reported_defined(unid,endpoint_id)){
+    dotdot_set_user_credential_support_admin_pin_code_deactivation(unid,endpoint_id,REPORTED_ATTRIBUTE, static_cast<bool>(0));
+        }
+
+    // Create and set a default value if undefined.
+    dotdot_create_user_credential_admin_pin_code(unid,endpoint_id);
+    if (false == dotdot_user_credential_admin_pin_code_is_reported_defined(unid,endpoint_id)){
+    dotdot_set_user_credential_admin_pin_code(unid,endpoint_id,REPORTED_ATTRIBUTE, "Dummy value");
+    }
+
+}
+
 void dotdot_create_descriptor_wrapper(const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id){
     // Create and set a default value if undefined.
     dotdot_create_descriptor_device_type_list(unid,endpoint_id);
@@ -6515,6 +6566,40 @@ void dotdot_unretain_configuration_parameters_wrapper(const dotdot_unid_t unid, 
     uic_mqtt_dotdot_configuration_parameters_publish_empty_supported_commands(unid, endpoint_id);
 }
 
+void dotdot_unretain_user_credential_wrapper(const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id){
+    char base_topic[256];
+    snprintf(base_topic, sizeof(base_topic), "ucl/by-unid/%s/ep%d", unid, endpoint_id);
+    attribute_store::attribute ep_node = eed_attribute_store_get_endpoint_node(unid, endpoint_id);
+
+    uic_mqtt_dotdot_user_credential_supported_user_unique_identifiers_unretain(base_topic,UCL_MQTT_PUBLISH_TYPE_ALL);
+    ep_node.child_by_type(DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS).delete_node();
+
+    uic_mqtt_dotdot_user_credential_supported_credential_rules_unretain(base_topic,UCL_MQTT_PUBLISH_TYPE_ALL);
+    ep_node.child_by_type(DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES).delete_node();
+
+    uic_mqtt_dotdot_user_credential_supported_credential_types_unretain(base_topic,UCL_MQTT_PUBLISH_TYPE_ALL);
+    ep_node.child_by_type(DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES).delete_node();
+
+    uic_mqtt_dotdot_user_credential_supported_user_types_unretain(base_topic,UCL_MQTT_PUBLISH_TYPE_ALL);
+    ep_node.child_by_type(DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_TYPES).delete_node();
+
+    uic_mqtt_dotdot_user_credential_support_credential_checksum_unretain(base_topic,UCL_MQTT_PUBLISH_TYPE_ALL);
+    ep_node.child_by_type(DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM).delete_node();
+
+    uic_mqtt_dotdot_user_credential_support_admin_pin_code_unretain(base_topic,UCL_MQTT_PUBLISH_TYPE_ALL);
+    ep_node.child_by_type(DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE).delete_node();
+
+    uic_mqtt_dotdot_user_credential_support_admin_pin_code_deactivation_unretain(base_topic,UCL_MQTT_PUBLISH_TYPE_ALL);
+    ep_node.child_by_type(DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION).delete_node();
+
+    uic_mqtt_dotdot_user_credential_admin_pin_code_unretain(base_topic,UCL_MQTT_PUBLISH_TYPE_ALL);
+    ep_node.child_by_type(DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_ADMIN_PIN_CODE).delete_node();
+
+
+    uic_mqtt_dotdot_user_credential_unretain_cluster_revision(base_topic);
+    uic_mqtt_dotdot_user_credential_publish_empty_supported_commands(unid, endpoint_id);
+}
+
 void dotdot_unretain_descriptor_wrapper(const dotdot_unid_t unid, const dotdot_endpoint_id_t endpoint_id){
     char base_topic[256];
     snprintf(base_topic, sizeof(base_topic), "ucl/by-unid/%s/ep%d", unid, endpoint_id);
@@ -6707,6 +6792,7 @@ std::map<std::string, eed_cluster_attribute_wrapper> CreateClusterMap = {
 { "Binding", dotdot_create_binding_wrapper },
 { "NameAndLocation", dotdot_create_name_and_location_wrapper },
 { "ConfigurationParameters", dotdot_create_configuration_parameters_wrapper },
+{ "UserCredential", dotdot_create_user_credential_wrapper },
 { "Descriptor", dotdot_create_descriptor_wrapper },
 { "UnifyFanControl", dotdot_create_unify_fan_control_wrapper },
 { "UnifyThermostat", dotdot_create_unify_thermostat_wrapper },
@@ -6758,6 +6844,7 @@ std::map<std::string, eed_cluster_attribute_wrapper> CreateUnretainMap = {
 { "Binding", dotdot_unretain_binding_wrapper },
 { "NameAndLocation", dotdot_unretain_name_and_location_wrapper },
 { "ConfigurationParameters", dotdot_unretain_configuration_parameters_wrapper },
+{ "UserCredential", dotdot_unretain_user_credential_wrapper },
 { "Descriptor", dotdot_unretain_descriptor_wrapper },
 { "UnifyFanControl", dotdot_unretain_unify_fan_control_wrapper },
 { "UnifyThermostat", dotdot_unretain_unify_thermostat_wrapper },

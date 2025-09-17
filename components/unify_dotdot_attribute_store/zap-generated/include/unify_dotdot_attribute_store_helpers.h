@@ -63,7 +63,7 @@ bool dotdot_is_supported_basic_zcl_version (
  *
  * @returns ZCLVersion attribute
  */
-int8_t dotdot_get_basic_zcl_version(
+uint8_t dotdot_get_basic_zcl_version(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -83,7 +83,7 @@ sl_status_t dotdot_set_basic_zcl_version(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_zcl_version
+  uint8_t new_zcl_version
   );
 
 /**
@@ -169,7 +169,7 @@ bool dotdot_is_supported_basic_application_version (
  *
  * @returns ApplicationVersion attribute
  */
-int8_t dotdot_get_basic_application_version(
+uint8_t dotdot_get_basic_application_version(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -189,7 +189,7 @@ sl_status_t dotdot_set_basic_application_version(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_application_version
+  uint8_t new_application_version
   );
 
 /**
@@ -275,7 +275,7 @@ bool dotdot_is_supported_basic_stack_version (
  *
  * @returns StackVersion attribute
  */
-int8_t dotdot_get_basic_stack_version(
+uint8_t dotdot_get_basic_stack_version(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -295,7 +295,7 @@ sl_status_t dotdot_set_basic_stack_version(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_stack_version
+  uint8_t new_stack_version
   );
 
 /**
@@ -381,7 +381,7 @@ bool dotdot_is_supported_basic_hw_version (
  *
  * @returns HWVersion attribute
  */
-int8_t dotdot_get_basic_hw_version(
+uint8_t dotdot_get_basic_hw_version(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -401,7 +401,7 @@ sl_status_t dotdot_set_basic_hw_version(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_hw_version
+  uint8_t new_hw_version
   );
 
 /**
@@ -1135,7 +1135,7 @@ bool dotdot_is_supported_basic_product_code (
  *
  * @returns ProductCode attribute
  */
-uint8_t dotdot_get_basic_product_code(
+const char* dotdot_get_basic_product_code(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -1155,7 +1155,7 @@ sl_status_t dotdot_set_basic_product_code(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_product_code
+  const char* new_product_code
   );
 
 /**
@@ -2347,7 +2347,7 @@ bool dotdot_is_supported_power_configuration_mains_voltage (
  *
  * @returns MainsVoltage attribute
  */
-int16_t dotdot_get_power_configuration_mains_voltage(
+uint16_t dotdot_get_power_configuration_mains_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -2367,7 +2367,7 @@ sl_status_t dotdot_set_power_configuration_mains_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_mains_voltage
+  uint16_t new_mains_voltage
   );
 
 /**
@@ -2453,7 +2453,7 @@ bool dotdot_is_supported_power_configuration_mains_frequency (
  *
  * @returns MainsFrequency attribute
  */
-int8_t dotdot_get_power_configuration_mains_frequency(
+uint8_t dotdot_get_power_configuration_mains_frequency(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -2473,7 +2473,7 @@ sl_status_t dotdot_set_power_configuration_mains_frequency(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_mains_frequency
+  uint8_t new_mains_frequency
   );
 
 /**
@@ -2665,7 +2665,7 @@ bool dotdot_is_supported_power_configuration_mains_voltage_min_threshold (
  *
  * @returns MainsVoltageMinThreshold attribute
  */
-int16_t dotdot_get_power_configuration_mains_voltage_min_threshold(
+uint16_t dotdot_get_power_configuration_mains_voltage_min_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -2685,7 +2685,7 @@ sl_status_t dotdot_set_power_configuration_mains_voltage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_mains_voltage_min_threshold
+  uint16_t new_mains_voltage_min_threshold
   );
 
 /**
@@ -2771,7 +2771,7 @@ bool dotdot_is_supported_power_configuration_mains_voltage_max_threshold (
  *
  * @returns MainsVoltageMaxThreshold attribute
  */
-int16_t dotdot_get_power_configuration_mains_voltage_max_threshold(
+uint16_t dotdot_get_power_configuration_mains_voltage_max_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -2791,7 +2791,7 @@ sl_status_t dotdot_set_power_configuration_mains_voltage_max_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_mains_voltage_max_threshold
+  uint16_t new_mains_voltage_max_threshold
   );
 
 /**
@@ -2877,7 +2877,7 @@ bool dotdot_is_supported_power_configuration_mains_voltage_dwell_trip_point (
  *
  * @returns MainsVoltageDwellTripPoint attribute
  */
-int16_t dotdot_get_power_configuration_mains_voltage_dwell_trip_point(
+uint16_t dotdot_get_power_configuration_mains_voltage_dwell_trip_point(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -2897,7 +2897,7 @@ sl_status_t dotdot_set_power_configuration_mains_voltage_dwell_trip_point(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_mains_voltage_dwell_trip_point
+  uint16_t new_mains_voltage_dwell_trip_point
   );
 
 /**
@@ -2983,7 +2983,7 @@ bool dotdot_is_supported_power_configuration_battery_voltage (
  *
  * @returns BatteryVoltage attribute
  */
-int8_t dotdot_get_power_configuration_battery_voltage(
+uint8_t dotdot_get_power_configuration_battery_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -3003,7 +3003,7 @@ sl_status_t dotdot_set_power_configuration_battery_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery_voltage
+  uint8_t new_battery_voltage
   );
 
 /**
@@ -3089,7 +3089,7 @@ bool dotdot_is_supported_power_configuration_battery_percentage_remaining (
  *
  * @returns BatteryPercentageRemaining attribute
  */
-int8_t dotdot_get_power_configuration_battery_percentage_remaining(
+uint8_t dotdot_get_power_configuration_battery_percentage_remaining(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -3109,7 +3109,7 @@ sl_status_t dotdot_set_power_configuration_battery_percentage_remaining(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery_percentage_remaining
+  uint8_t new_battery_percentage_remaining
   );
 
 /**
@@ -3410,7 +3410,7 @@ bool dotdot_is_supported_power_configuration_batterya_hr_rating (
  *
  * @returns BatteryAHrRating attribute
  */
-int16_t dotdot_get_power_configuration_batterya_hr_rating(
+uint16_t dotdot_get_power_configuration_batterya_hr_rating(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -3430,7 +3430,7 @@ sl_status_t dotdot_set_power_configuration_batterya_hr_rating(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_batterya_hr_rating
+  uint16_t new_batterya_hr_rating
   );
 
 /**
@@ -3516,7 +3516,7 @@ bool dotdot_is_supported_power_configuration_battery_quantity (
  *
  * @returns BatteryQuantity attribute
  */
-int8_t dotdot_get_power_configuration_battery_quantity(
+uint8_t dotdot_get_power_configuration_battery_quantity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -3536,7 +3536,7 @@ sl_status_t dotdot_set_power_configuration_battery_quantity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery_quantity
+  uint8_t new_battery_quantity
   );
 
 /**
@@ -3622,7 +3622,7 @@ bool dotdot_is_supported_power_configuration_battery_rated_voltage (
  *
  * @returns BatteryRatedVoltage attribute
  */
-int8_t dotdot_get_power_configuration_battery_rated_voltage(
+uint8_t dotdot_get_power_configuration_battery_rated_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -3642,7 +3642,7 @@ sl_status_t dotdot_set_power_configuration_battery_rated_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery_rated_voltage
+  uint8_t new_battery_rated_voltage
   );
 
 /**
@@ -3834,7 +3834,7 @@ bool dotdot_is_supported_power_configuration_battery_voltage_min_threshold (
  *
  * @returns BatteryVoltageMinThreshold attribute
  */
-int8_t dotdot_get_power_configuration_battery_voltage_min_threshold(
+uint8_t dotdot_get_power_configuration_battery_voltage_min_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -3854,7 +3854,7 @@ sl_status_t dotdot_set_power_configuration_battery_voltage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery_voltage_min_threshold
+  uint8_t new_battery_voltage_min_threshold
   );
 
 /**
@@ -3940,7 +3940,7 @@ bool dotdot_is_supported_power_configuration_battery_voltage_threshold1 (
  *
  * @returns BatteryVoltageThreshold1 attribute
  */
-int8_t dotdot_get_power_configuration_battery_voltage_threshold1(
+uint8_t dotdot_get_power_configuration_battery_voltage_threshold1(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -3960,7 +3960,7 @@ sl_status_t dotdot_set_power_configuration_battery_voltage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery_voltage_threshold1
+  uint8_t new_battery_voltage_threshold1
   );
 
 /**
@@ -4046,7 +4046,7 @@ bool dotdot_is_supported_power_configuration_battery_voltage_threshold2 (
  *
  * @returns BatteryVoltageThreshold2 attribute
  */
-int8_t dotdot_get_power_configuration_battery_voltage_threshold2(
+uint8_t dotdot_get_power_configuration_battery_voltage_threshold2(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -4066,7 +4066,7 @@ sl_status_t dotdot_set_power_configuration_battery_voltage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery_voltage_threshold2
+  uint8_t new_battery_voltage_threshold2
   );
 
 /**
@@ -4152,7 +4152,7 @@ bool dotdot_is_supported_power_configuration_battery_voltage_threshold3 (
  *
  * @returns BatteryVoltageThreshold3 attribute
  */
-int8_t dotdot_get_power_configuration_battery_voltage_threshold3(
+uint8_t dotdot_get_power_configuration_battery_voltage_threshold3(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -4172,7 +4172,7 @@ sl_status_t dotdot_set_power_configuration_battery_voltage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery_voltage_threshold3
+  uint8_t new_battery_voltage_threshold3
   );
 
 /**
@@ -4258,7 +4258,7 @@ bool dotdot_is_supported_power_configuration_battery_percentage_min_threshold (
  *
  * @returns BatteryPercentageMinThreshold attribute
  */
-int8_t dotdot_get_power_configuration_battery_percentage_min_threshold(
+uint8_t dotdot_get_power_configuration_battery_percentage_min_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -4278,7 +4278,7 @@ sl_status_t dotdot_set_power_configuration_battery_percentage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery_percentage_min_threshold
+  uint8_t new_battery_percentage_min_threshold
   );
 
 /**
@@ -4364,7 +4364,7 @@ bool dotdot_is_supported_power_configuration_battery_percentage_threshold1 (
  *
  * @returns BatteryPercentageThreshold1 attribute
  */
-int8_t dotdot_get_power_configuration_battery_percentage_threshold1(
+uint8_t dotdot_get_power_configuration_battery_percentage_threshold1(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -4384,7 +4384,7 @@ sl_status_t dotdot_set_power_configuration_battery_percentage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery_percentage_threshold1
+  uint8_t new_battery_percentage_threshold1
   );
 
 /**
@@ -4470,7 +4470,7 @@ bool dotdot_is_supported_power_configuration_battery_percentage_threshold2 (
  *
  * @returns BatteryPercentageThreshold2 attribute
  */
-int8_t dotdot_get_power_configuration_battery_percentage_threshold2(
+uint8_t dotdot_get_power_configuration_battery_percentage_threshold2(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -4490,7 +4490,7 @@ sl_status_t dotdot_set_power_configuration_battery_percentage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery_percentage_threshold2
+  uint8_t new_battery_percentage_threshold2
   );
 
 /**
@@ -4576,7 +4576,7 @@ bool dotdot_is_supported_power_configuration_battery_percentage_threshold3 (
  *
  * @returns BatteryPercentageThreshold3 attribute
  */
-int8_t dotdot_get_power_configuration_battery_percentage_threshold3(
+uint8_t dotdot_get_power_configuration_battery_percentage_threshold3(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -4596,7 +4596,7 @@ sl_status_t dotdot_set_power_configuration_battery_percentage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery_percentage_threshold3
+  uint8_t new_battery_percentage_threshold3
   );
 
 /**
@@ -4788,7 +4788,7 @@ bool dotdot_is_supported_power_configuration_battery2_voltage (
  *
  * @returns Battery2Voltage attribute
  */
-int8_t dotdot_get_power_configuration_battery2_voltage(
+uint8_t dotdot_get_power_configuration_battery2_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -4808,7 +4808,7 @@ sl_status_t dotdot_set_power_configuration_battery2_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery2_voltage
+  uint8_t new_battery2_voltage
   );
 
 /**
@@ -4894,7 +4894,7 @@ bool dotdot_is_supported_power_configuration_battery2_percentage_remaining (
  *
  * @returns Battery2PercentageRemaining attribute
  */
-int8_t dotdot_get_power_configuration_battery2_percentage_remaining(
+uint8_t dotdot_get_power_configuration_battery2_percentage_remaining(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -4914,7 +4914,7 @@ sl_status_t dotdot_set_power_configuration_battery2_percentage_remaining(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery2_percentage_remaining
+  uint8_t new_battery2_percentage_remaining
   );
 
 /**
@@ -5215,7 +5215,7 @@ bool dotdot_is_supported_power_configuration_battery2a_hr_rating (
  *
  * @returns Battery2AHrRating attribute
  */
-int16_t dotdot_get_power_configuration_battery2a_hr_rating(
+uint16_t dotdot_get_power_configuration_battery2a_hr_rating(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -5235,7 +5235,7 @@ sl_status_t dotdot_set_power_configuration_battery2a_hr_rating(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_battery2a_hr_rating
+  uint16_t new_battery2a_hr_rating
   );
 
 /**
@@ -5321,7 +5321,7 @@ bool dotdot_is_supported_power_configuration_battery2_quantity (
  *
  * @returns Battery2Quantity attribute
  */
-int8_t dotdot_get_power_configuration_battery2_quantity(
+uint8_t dotdot_get_power_configuration_battery2_quantity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -5341,7 +5341,7 @@ sl_status_t dotdot_set_power_configuration_battery2_quantity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery2_quantity
+  uint8_t new_battery2_quantity
   );
 
 /**
@@ -5427,7 +5427,7 @@ bool dotdot_is_supported_power_configuration_battery2_rated_voltage (
  *
  * @returns Battery2RatedVoltage attribute
  */
-int8_t dotdot_get_power_configuration_battery2_rated_voltage(
+uint8_t dotdot_get_power_configuration_battery2_rated_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -5447,7 +5447,7 @@ sl_status_t dotdot_set_power_configuration_battery2_rated_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery2_rated_voltage
+  uint8_t new_battery2_rated_voltage
   );
 
 /**
@@ -5639,7 +5639,7 @@ bool dotdot_is_supported_power_configuration_battery2_voltage_min_threshold (
  *
  * @returns Battery2VoltageMinThreshold attribute
  */
-int8_t dotdot_get_power_configuration_battery2_voltage_min_threshold(
+uint8_t dotdot_get_power_configuration_battery2_voltage_min_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -5659,7 +5659,7 @@ sl_status_t dotdot_set_power_configuration_battery2_voltage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery2_voltage_min_threshold
+  uint8_t new_battery2_voltage_min_threshold
   );
 
 /**
@@ -5745,7 +5745,7 @@ bool dotdot_is_supported_power_configuration_battery2_voltage_threshold1 (
  *
  * @returns Battery2VoltageThreshold1 attribute
  */
-int8_t dotdot_get_power_configuration_battery2_voltage_threshold1(
+uint8_t dotdot_get_power_configuration_battery2_voltage_threshold1(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -5765,7 +5765,7 @@ sl_status_t dotdot_set_power_configuration_battery2_voltage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery2_voltage_threshold1
+  uint8_t new_battery2_voltage_threshold1
   );
 
 /**
@@ -5851,7 +5851,7 @@ bool dotdot_is_supported_power_configuration_battery2_voltage_threshold2 (
  *
  * @returns Battery2VoltageThreshold2 attribute
  */
-int8_t dotdot_get_power_configuration_battery2_voltage_threshold2(
+uint8_t dotdot_get_power_configuration_battery2_voltage_threshold2(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -5871,7 +5871,7 @@ sl_status_t dotdot_set_power_configuration_battery2_voltage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery2_voltage_threshold2
+  uint8_t new_battery2_voltage_threshold2
   );
 
 /**
@@ -5957,7 +5957,7 @@ bool dotdot_is_supported_power_configuration_battery2_voltage_threshold3 (
  *
  * @returns Battery2VoltageThreshold3 attribute
  */
-int8_t dotdot_get_power_configuration_battery2_voltage_threshold3(
+uint8_t dotdot_get_power_configuration_battery2_voltage_threshold3(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -5977,7 +5977,7 @@ sl_status_t dotdot_set_power_configuration_battery2_voltage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery2_voltage_threshold3
+  uint8_t new_battery2_voltage_threshold3
   );
 
 /**
@@ -6063,7 +6063,7 @@ bool dotdot_is_supported_power_configuration_battery2_percentage_min_threshold (
  *
  * @returns Battery2PercentageMinThreshold attribute
  */
-int8_t dotdot_get_power_configuration_battery2_percentage_min_threshold(
+uint8_t dotdot_get_power_configuration_battery2_percentage_min_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -6083,7 +6083,7 @@ sl_status_t dotdot_set_power_configuration_battery2_percentage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery2_percentage_min_threshold
+  uint8_t new_battery2_percentage_min_threshold
   );
 
 /**
@@ -6169,7 +6169,7 @@ bool dotdot_is_supported_power_configuration_battery2_percentage_threshold1 (
  *
  * @returns Battery2PercentageThreshold1 attribute
  */
-int8_t dotdot_get_power_configuration_battery2_percentage_threshold1(
+uint8_t dotdot_get_power_configuration_battery2_percentage_threshold1(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -6189,7 +6189,7 @@ sl_status_t dotdot_set_power_configuration_battery2_percentage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery2_percentage_threshold1
+  uint8_t new_battery2_percentage_threshold1
   );
 
 /**
@@ -6275,7 +6275,7 @@ bool dotdot_is_supported_power_configuration_battery2_percentage_threshold2 (
  *
  * @returns Battery2PercentageThreshold2 attribute
  */
-int8_t dotdot_get_power_configuration_battery2_percentage_threshold2(
+uint8_t dotdot_get_power_configuration_battery2_percentage_threshold2(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -6295,7 +6295,7 @@ sl_status_t dotdot_set_power_configuration_battery2_percentage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery2_percentage_threshold2
+  uint8_t new_battery2_percentage_threshold2
   );
 
 /**
@@ -6381,7 +6381,7 @@ bool dotdot_is_supported_power_configuration_battery2_percentage_threshold3 (
  *
  * @returns Battery2PercentageThreshold3 attribute
  */
-int8_t dotdot_get_power_configuration_battery2_percentage_threshold3(
+uint8_t dotdot_get_power_configuration_battery2_percentage_threshold3(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -6401,7 +6401,7 @@ sl_status_t dotdot_set_power_configuration_battery2_percentage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery2_percentage_threshold3
+  uint8_t new_battery2_percentage_threshold3
   );
 
 /**
@@ -6593,7 +6593,7 @@ bool dotdot_is_supported_power_configuration_battery3_voltage (
  *
  * @returns Battery3Voltage attribute
  */
-int8_t dotdot_get_power_configuration_battery3_voltage(
+uint8_t dotdot_get_power_configuration_battery3_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -6613,7 +6613,7 @@ sl_status_t dotdot_set_power_configuration_battery3_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery3_voltage
+  uint8_t new_battery3_voltage
   );
 
 /**
@@ -6699,7 +6699,7 @@ bool dotdot_is_supported_power_configuration_battery3_percentage_remaining (
  *
  * @returns Battery3PercentageRemaining attribute
  */
-int8_t dotdot_get_power_configuration_battery3_percentage_remaining(
+uint8_t dotdot_get_power_configuration_battery3_percentage_remaining(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -6719,7 +6719,7 @@ sl_status_t dotdot_set_power_configuration_battery3_percentage_remaining(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery3_percentage_remaining
+  uint8_t new_battery3_percentage_remaining
   );
 
 /**
@@ -7020,7 +7020,7 @@ bool dotdot_is_supported_power_configuration_battery3a_hr_rating (
  *
  * @returns Battery3AHrRating attribute
  */
-int16_t dotdot_get_power_configuration_battery3a_hr_rating(
+uint16_t dotdot_get_power_configuration_battery3a_hr_rating(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -7040,7 +7040,7 @@ sl_status_t dotdot_set_power_configuration_battery3a_hr_rating(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_battery3a_hr_rating
+  uint16_t new_battery3a_hr_rating
   );
 
 /**
@@ -7126,7 +7126,7 @@ bool dotdot_is_supported_power_configuration_battery3_quantity (
  *
  * @returns Battery3Quantity attribute
  */
-int8_t dotdot_get_power_configuration_battery3_quantity(
+uint8_t dotdot_get_power_configuration_battery3_quantity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -7146,7 +7146,7 @@ sl_status_t dotdot_set_power_configuration_battery3_quantity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery3_quantity
+  uint8_t new_battery3_quantity
   );
 
 /**
@@ -7232,7 +7232,7 @@ bool dotdot_is_supported_power_configuration_battery3_rated_voltage (
  *
  * @returns Battery3RatedVoltage attribute
  */
-int8_t dotdot_get_power_configuration_battery3_rated_voltage(
+uint8_t dotdot_get_power_configuration_battery3_rated_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -7252,7 +7252,7 @@ sl_status_t dotdot_set_power_configuration_battery3_rated_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery3_rated_voltage
+  uint8_t new_battery3_rated_voltage
   );
 
 /**
@@ -7444,7 +7444,7 @@ bool dotdot_is_supported_power_configuration_battery3_voltage_min_threshold (
  *
  * @returns Battery3VoltageMinThreshold attribute
  */
-int8_t dotdot_get_power_configuration_battery3_voltage_min_threshold(
+uint8_t dotdot_get_power_configuration_battery3_voltage_min_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -7464,7 +7464,7 @@ sl_status_t dotdot_set_power_configuration_battery3_voltage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery3_voltage_min_threshold
+  uint8_t new_battery3_voltage_min_threshold
   );
 
 /**
@@ -7550,7 +7550,7 @@ bool dotdot_is_supported_power_configuration_battery3_voltage_threshold1 (
  *
  * @returns Battery3VoltageThreshold1 attribute
  */
-int8_t dotdot_get_power_configuration_battery3_voltage_threshold1(
+uint8_t dotdot_get_power_configuration_battery3_voltage_threshold1(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -7570,7 +7570,7 @@ sl_status_t dotdot_set_power_configuration_battery3_voltage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery3_voltage_threshold1
+  uint8_t new_battery3_voltage_threshold1
   );
 
 /**
@@ -7656,7 +7656,7 @@ bool dotdot_is_supported_power_configuration_battery3_voltage_threshold2 (
  *
  * @returns Battery3VoltageThreshold2 attribute
  */
-int8_t dotdot_get_power_configuration_battery3_voltage_threshold2(
+uint8_t dotdot_get_power_configuration_battery3_voltage_threshold2(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -7676,7 +7676,7 @@ sl_status_t dotdot_set_power_configuration_battery3_voltage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery3_voltage_threshold2
+  uint8_t new_battery3_voltage_threshold2
   );
 
 /**
@@ -7762,7 +7762,7 @@ bool dotdot_is_supported_power_configuration_battery3_voltage_threshold3 (
  *
  * @returns Battery3VoltageThreshold3 attribute
  */
-int8_t dotdot_get_power_configuration_battery3_voltage_threshold3(
+uint8_t dotdot_get_power_configuration_battery3_voltage_threshold3(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -7782,7 +7782,7 @@ sl_status_t dotdot_set_power_configuration_battery3_voltage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery3_voltage_threshold3
+  uint8_t new_battery3_voltage_threshold3
   );
 
 /**
@@ -7868,7 +7868,7 @@ bool dotdot_is_supported_power_configuration_battery3_percentage_min_threshold (
  *
  * @returns Battery3PercentageMinThreshold attribute
  */
-int8_t dotdot_get_power_configuration_battery3_percentage_min_threshold(
+uint8_t dotdot_get_power_configuration_battery3_percentage_min_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -7888,7 +7888,7 @@ sl_status_t dotdot_set_power_configuration_battery3_percentage_min_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery3_percentage_min_threshold
+  uint8_t new_battery3_percentage_min_threshold
   );
 
 /**
@@ -7974,7 +7974,7 @@ bool dotdot_is_supported_power_configuration_battery3_percentage_threshold1 (
  *
  * @returns Battery3PercentageThreshold1 attribute
  */
-int8_t dotdot_get_power_configuration_battery3_percentage_threshold1(
+uint8_t dotdot_get_power_configuration_battery3_percentage_threshold1(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -7994,7 +7994,7 @@ sl_status_t dotdot_set_power_configuration_battery3_percentage_threshold1(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery3_percentage_threshold1
+  uint8_t new_battery3_percentage_threshold1
   );
 
 /**
@@ -8080,7 +8080,7 @@ bool dotdot_is_supported_power_configuration_battery3_percentage_threshold2 (
  *
  * @returns Battery3PercentageThreshold2 attribute
  */
-int8_t dotdot_get_power_configuration_battery3_percentage_threshold2(
+uint8_t dotdot_get_power_configuration_battery3_percentage_threshold2(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -8100,7 +8100,7 @@ sl_status_t dotdot_set_power_configuration_battery3_percentage_threshold2(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery3_percentage_threshold2
+  uint8_t new_battery3_percentage_threshold2
   );
 
 /**
@@ -8186,7 +8186,7 @@ bool dotdot_is_supported_power_configuration_battery3_percentage_threshold3 (
  *
  * @returns Battery3PercentageThreshold3 attribute
  */
-int8_t dotdot_get_power_configuration_battery3_percentage_threshold3(
+uint8_t dotdot_get_power_configuration_battery3_percentage_threshold3(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -8206,7 +8206,7 @@ sl_status_t dotdot_set_power_configuration_battery3_percentage_threshold3(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_battery3_percentage_threshold3
+  uint8_t new_battery3_percentage_threshold3
   );
 
 /**
@@ -8744,7 +8744,7 @@ bool dotdot_is_supported_device_temperature_configuration_over_temp_total_dwell 
  *
  * @returns OverTempTotalDwell attribute
  */
-int16_t dotdot_get_device_temperature_configuration_over_temp_total_dwell(
+uint16_t dotdot_get_device_temperature_configuration_over_temp_total_dwell(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -8764,7 +8764,7 @@ sl_status_t dotdot_set_device_temperature_configuration_over_temp_total_dwell(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_over_temp_total_dwell
+  uint16_t new_over_temp_total_dwell
   );
 
 /**
@@ -9168,7 +9168,7 @@ bool dotdot_is_supported_device_temperature_configuration_low_temp_dwell_trip_po
  *
  * @returns LowTempDwellTripPoint attribute
  */
-int32_t dotdot_get_device_temperature_configuration_low_temp_dwell_trip_point(
+uint32_t dotdot_get_device_temperature_configuration_low_temp_dwell_trip_point(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -9188,7 +9188,7 @@ sl_status_t dotdot_set_device_temperature_configuration_low_temp_dwell_trip_poin
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_low_temp_dwell_trip_point
+  uint32_t new_low_temp_dwell_trip_point
   );
 
 /**
@@ -9274,7 +9274,7 @@ bool dotdot_is_supported_device_temperature_configuration_high_temp_dwell_trip_p
  *
  * @returns HighTempDwellTripPoint attribute
  */
-int32_t dotdot_get_device_temperature_configuration_high_temp_dwell_trip_point(
+uint32_t dotdot_get_device_temperature_configuration_high_temp_dwell_trip_point(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -9294,7 +9294,7 @@ sl_status_t dotdot_set_device_temperature_configuration_high_temp_dwell_trip_poi
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_high_temp_dwell_trip_point
+  uint32_t new_high_temp_dwell_trip_point
   );
 
 /**
@@ -9408,7 +9408,7 @@ bool dotdot_is_supported_identify_identify_time (
  *
  * @returns IdentifyTime attribute
  */
-int16_t dotdot_get_identify_identify_time(
+uint16_t dotdot_get_identify_identify_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -9428,7 +9428,7 @@ sl_status_t dotdot_set_identify_identify_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_identify_time
+  uint16_t new_identify_time
   );
 
 /**
@@ -9676,7 +9676,7 @@ bool dotdot_is_supported_scenes_scene_count (
  *
  * @returns SceneCount attribute
  */
-int8_t dotdot_get_scenes_scene_count(
+uint8_t dotdot_get_scenes_scene_count(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -9696,7 +9696,7 @@ sl_status_t dotdot_set_scenes_scene_count(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_scene_count
+  uint8_t new_scene_count
   );
 
 /**
@@ -9782,7 +9782,7 @@ bool dotdot_is_supported_scenes_current_scene (
  *
  * @returns CurrentScene attribute
  */
-int8_t dotdot_get_scenes_current_scene(
+uint8_t dotdot_get_scenes_current_scene(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -9802,7 +9802,7 @@ sl_status_t dotdot_set_scenes_current_scene(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_current_scene
+  uint8_t new_current_scene
   );
 
 /**
@@ -9888,7 +9888,7 @@ bool dotdot_is_supported_scenes_current_group (
  *
  * @returns CurrentGroup attribute
  */
-uint8_t * dotdot_get_scenes_current_group(
+uint16_t dotdot_get_scenes_current_group(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -9908,7 +9908,7 @@ sl_status_t dotdot_set_scenes_current_group(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t * new_current_group
+  uint16_t new_current_group
   );
 
 /**
@@ -10661,7 +10661,7 @@ bool dotdot_is_supported_on_off_on_time (
  *
  * @returns OnTime attribute
  */
-int16_t dotdot_get_on_off_on_time(
+uint16_t dotdot_get_on_off_on_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -10681,7 +10681,7 @@ sl_status_t dotdot_set_on_off_on_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_on_time
+  uint16_t new_on_time
   );
 
 /**
@@ -10767,7 +10767,7 @@ bool dotdot_is_supported_on_off_off_wait_time (
  *
  * @returns OffWaitTime attribute
  */
-int16_t dotdot_get_on_off_off_wait_time(
+uint16_t dotdot_get_on_off_off_wait_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -10787,7 +10787,7 @@ sl_status_t dotdot_set_on_off_off_wait_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_off_wait_time
+  uint16_t new_off_wait_time
   );
 
 /**
@@ -11007,7 +11007,7 @@ bool dotdot_is_supported_level_current_level (
  *
  * @returns CurrentLevel attribute
  */
-int8_t dotdot_get_level_current_level(
+uint8_t dotdot_get_level_current_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -11027,7 +11027,7 @@ sl_status_t dotdot_set_level_current_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_current_level
+  uint8_t new_current_level
   );
 
 /**
@@ -11113,7 +11113,7 @@ bool dotdot_is_supported_level_remaining_time (
  *
  * @returns RemainingTime attribute
  */
-int16_t dotdot_get_level_remaining_time(
+uint16_t dotdot_get_level_remaining_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -11133,7 +11133,7 @@ sl_status_t dotdot_set_level_remaining_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_remaining_time
+  uint16_t new_remaining_time
   );
 
 /**
@@ -11219,7 +11219,7 @@ bool dotdot_is_supported_level_min_level (
  *
  * @returns MinLevel attribute
  */
-int8_t dotdot_get_level_min_level(
+uint8_t dotdot_get_level_min_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -11239,7 +11239,7 @@ sl_status_t dotdot_set_level_min_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_min_level
+  uint8_t new_min_level
   );
 
 /**
@@ -11325,7 +11325,7 @@ bool dotdot_is_supported_level_max_level (
  *
  * @returns MaxLevel attribute
  */
-int8_t dotdot_get_level_max_level(
+uint8_t dotdot_get_level_max_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -11345,7 +11345,7 @@ sl_status_t dotdot_set_level_max_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_max_level
+  uint8_t new_max_level
   );
 
 /**
@@ -11431,7 +11431,7 @@ bool dotdot_is_supported_level_current_frequency (
  *
  * @returns CurrentFrequency attribute
  */
-int16_t dotdot_get_level_current_frequency(
+uint16_t dotdot_get_level_current_frequency(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -11451,7 +11451,7 @@ sl_status_t dotdot_set_level_current_frequency(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_current_frequency
+  uint16_t new_current_frequency
   );
 
 /**
@@ -11537,7 +11537,7 @@ bool dotdot_is_supported_level_min_frequency (
  *
  * @returns MinFrequency attribute
  */
-int16_t dotdot_get_level_min_frequency(
+uint16_t dotdot_get_level_min_frequency(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -11557,7 +11557,7 @@ sl_status_t dotdot_set_level_min_frequency(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_min_frequency
+  uint16_t new_min_frequency
   );
 
 /**
@@ -11643,7 +11643,7 @@ bool dotdot_is_supported_level_max_frequency (
  *
  * @returns MaxFrequency attribute
  */
-int16_t dotdot_get_level_max_frequency(
+uint16_t dotdot_get_level_max_frequency(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -11663,7 +11663,7 @@ sl_status_t dotdot_set_level_max_frequency(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_max_frequency
+  uint16_t new_max_frequency
   );
 
 /**
@@ -11855,7 +11855,7 @@ bool dotdot_is_supported_level_on_off_transition_time (
  *
  * @returns OnOffTransitionTime attribute
  */
-int16_t dotdot_get_level_on_off_transition_time(
+uint16_t dotdot_get_level_on_off_transition_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -11875,7 +11875,7 @@ sl_status_t dotdot_set_level_on_off_transition_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_on_off_transition_time
+  uint16_t new_on_off_transition_time
   );
 
 /**
@@ -11961,7 +11961,7 @@ bool dotdot_is_supported_level_on_level (
  *
  * @returns OnLevel attribute
  */
-int8_t dotdot_get_level_on_level(
+uint8_t dotdot_get_level_on_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -11981,7 +11981,7 @@ sl_status_t dotdot_set_level_on_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_on_level
+  uint8_t new_on_level
   );
 
 /**
@@ -12067,7 +12067,7 @@ bool dotdot_is_supported_level_on_transition_time (
  *
  * @returns OnTransitionTime attribute
  */
-int16_t dotdot_get_level_on_transition_time(
+uint16_t dotdot_get_level_on_transition_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -12087,7 +12087,7 @@ sl_status_t dotdot_set_level_on_transition_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_on_transition_time
+  uint16_t new_on_transition_time
   );
 
 /**
@@ -12173,7 +12173,7 @@ bool dotdot_is_supported_level_off_transition_time (
  *
  * @returns OffTransitionTime attribute
  */
-int16_t dotdot_get_level_off_transition_time(
+uint16_t dotdot_get_level_off_transition_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -12193,7 +12193,7 @@ sl_status_t dotdot_set_level_off_transition_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_off_transition_time
+  uint16_t new_off_transition_time
   );
 
 /**
@@ -12279,7 +12279,7 @@ bool dotdot_is_supported_level_default_move_rate (
  *
  * @returns DefaultMoveRate attribute
  */
-int16_t dotdot_get_level_default_move_rate(
+uint16_t dotdot_get_level_default_move_rate(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -12299,7 +12299,7 @@ sl_status_t dotdot_set_level_default_move_rate(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_default_move_rate
+  uint16_t new_default_move_rate
   );
 
 /**
@@ -12385,7 +12385,7 @@ bool dotdot_is_supported_level_start_up_current_level (
  *
  * @returns StartUpCurrentLevel attribute
  */
-int8_t dotdot_get_level_start_up_current_level(
+uint8_t dotdot_get_level_start_up_current_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -12405,7 +12405,7 @@ sl_status_t dotdot_set_level_start_up_current_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_start_up_current_level
+  uint8_t new_start_up_current_level
   );
 
 /**
@@ -12519,7 +12519,7 @@ bool dotdot_is_supported_alarms_alarm_count (
  *
  * @returns AlarmCount attribute
  */
-int16_t dotdot_get_alarms_alarm_count(
+uint16_t dotdot_get_alarms_alarm_count(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -12539,7 +12539,7 @@ sl_status_t dotdot_set_alarms_alarm_count(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_alarm_count
+  uint16_t new_alarm_count
   );
 
 /**
@@ -12653,7 +12653,7 @@ bool dotdot_is_supported_time_time (
  *
  * @returns Time attribute
  */
-uint8_t dotdot_get_time_time(
+uint32_t dotdot_get_time_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -12673,7 +12673,7 @@ sl_status_t dotdot_set_time_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_time
+  uint32_t new_time
   );
 
 /**
@@ -12971,7 +12971,7 @@ bool dotdot_is_supported_time_dst_start (
  *
  * @returns DstStart attribute
  */
-int32_t dotdot_get_time_dst_start(
+uint32_t dotdot_get_time_dst_start(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -12991,7 +12991,7 @@ sl_status_t dotdot_set_time_dst_start(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_dst_start
+  uint32_t new_dst_start
   );
 
 /**
@@ -13077,7 +13077,7 @@ bool dotdot_is_supported_time_dst_end (
  *
  * @returns DstEnd attribute
  */
-int32_t dotdot_get_time_dst_end(
+uint32_t dotdot_get_time_dst_end(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -13097,7 +13097,7 @@ sl_status_t dotdot_set_time_dst_end(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_dst_end
+  uint32_t new_dst_end
   );
 
 /**
@@ -13289,7 +13289,7 @@ bool dotdot_is_supported_time_standard_time (
  *
  * @returns StandardTime attribute
  */
-int32_t dotdot_get_time_standard_time(
+uint32_t dotdot_get_time_standard_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -13309,7 +13309,7 @@ sl_status_t dotdot_set_time_standard_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_standard_time
+  uint32_t new_standard_time
   );
 
 /**
@@ -13395,7 +13395,7 @@ bool dotdot_is_supported_time_local_time (
  *
  * @returns LocalTime attribute
  */
-int32_t dotdot_get_time_local_time(
+uint32_t dotdot_get_time_local_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -13415,7 +13415,7 @@ sl_status_t dotdot_set_time_local_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_local_time
+  uint32_t new_local_time
   );
 
 /**
@@ -13501,7 +13501,7 @@ bool dotdot_is_supported_time_last_set_time (
  *
  * @returns LastSetTime attribute
  */
-uint8_t dotdot_get_time_last_set_time(
+uint32_t dotdot_get_time_last_set_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -13521,7 +13521,7 @@ sl_status_t dotdot_set_time_last_set_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_last_set_time
+  uint32_t new_last_set_time
   );
 
 /**
@@ -13607,7 +13607,7 @@ bool dotdot_is_supported_time_valid_until_time (
  *
  * @returns ValidUntilTime attribute
  */
-uint8_t dotdot_get_time_valid_until_time(
+uint32_t dotdot_get_time_valid_until_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -13627,7 +13627,7 @@ sl_status_t dotdot_set_time_valid_until_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_valid_until_time
+  uint32_t new_valid_until_time
   );
 
 /**
@@ -13741,7 +13741,7 @@ bool dotdot_is_supported_poll_control_check_in_interval (
  *
  * @returns CheckInInterval attribute
  */
-int32_t dotdot_get_poll_control_check_in_interval(
+uint32_t dotdot_get_poll_control_check_in_interval(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -13761,7 +13761,7 @@ sl_status_t dotdot_set_poll_control_check_in_interval(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_check_in_interval
+  uint32_t new_check_in_interval
   );
 
 /**
@@ -13847,7 +13847,7 @@ bool dotdot_is_supported_poll_control_long_poll_interval (
  *
  * @returns LongPollInterval attribute
  */
-int32_t dotdot_get_poll_control_long_poll_interval(
+uint32_t dotdot_get_poll_control_long_poll_interval(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -13867,7 +13867,7 @@ sl_status_t dotdot_set_poll_control_long_poll_interval(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_long_poll_interval
+  uint32_t new_long_poll_interval
   );
 
 /**
@@ -13953,7 +13953,7 @@ bool dotdot_is_supported_poll_control_short_poll_interval (
  *
  * @returns ShortPollInterval attribute
  */
-int16_t dotdot_get_poll_control_short_poll_interval(
+uint16_t dotdot_get_poll_control_short_poll_interval(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -13973,7 +13973,7 @@ sl_status_t dotdot_set_poll_control_short_poll_interval(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_short_poll_interval
+  uint16_t new_short_poll_interval
   );
 
 /**
@@ -14059,7 +14059,7 @@ bool dotdot_is_supported_poll_control_fast_poll_timeout (
  *
  * @returns FastPollTimeout attribute
  */
-int16_t dotdot_get_poll_control_fast_poll_timeout(
+uint16_t dotdot_get_poll_control_fast_poll_timeout(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -14079,7 +14079,7 @@ sl_status_t dotdot_set_poll_control_fast_poll_timeout(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_fast_poll_timeout
+  uint16_t new_fast_poll_timeout
   );
 
 /**
@@ -14165,7 +14165,7 @@ bool dotdot_is_supported_poll_control_check_in_interval_min (
  *
  * @returns CheckInIntervalMin attribute
  */
-int32_t dotdot_get_poll_control_check_in_interval_min(
+uint32_t dotdot_get_poll_control_check_in_interval_min(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -14185,7 +14185,7 @@ sl_status_t dotdot_set_poll_control_check_in_interval_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_check_in_interval_min
+  uint32_t new_check_in_interval_min
   );
 
 /**
@@ -14271,7 +14271,7 @@ bool dotdot_is_supported_poll_control_long_poll_interval_min (
  *
  * @returns LongPollIntervalMin attribute
  */
-int32_t dotdot_get_poll_control_long_poll_interval_min(
+uint32_t dotdot_get_poll_control_long_poll_interval_min(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -14291,7 +14291,7 @@ sl_status_t dotdot_set_poll_control_long_poll_interval_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_long_poll_interval_min
+  uint32_t new_long_poll_interval_min
   );
 
 /**
@@ -14377,7 +14377,7 @@ bool dotdot_is_supported_poll_control_fast_poll_timeout_max (
  *
  * @returns FastPollTimeoutMax attribute
  */
-int16_t dotdot_get_poll_control_fast_poll_timeout_max(
+uint16_t dotdot_get_poll_control_fast_poll_timeout_max(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -14397,7 +14397,7 @@ sl_status_t dotdot_set_poll_control_fast_poll_timeout_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_fast_poll_timeout_max
+  uint16_t new_fast_poll_timeout_max
   );
 
 /**
@@ -14511,7 +14511,7 @@ bool dotdot_is_supported_shade_configuration_physical_closed_limit (
  *
  * @returns PhysicalClosedLimit attribute
  */
-int16_t dotdot_get_shade_configuration_physical_closed_limit(
+uint16_t dotdot_get_shade_configuration_physical_closed_limit(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -14531,7 +14531,7 @@ sl_status_t dotdot_set_shade_configuration_physical_closed_limit(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_physical_closed_limit
+  uint16_t new_physical_closed_limit
   );
 
 /**
@@ -14617,7 +14617,7 @@ bool dotdot_is_supported_shade_configuration_motor_step_size (
  *
  * @returns MotorStepSize attribute
  */
-int8_t dotdot_get_shade_configuration_motor_step_size(
+uint8_t dotdot_get_shade_configuration_motor_step_size(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -14637,7 +14637,7 @@ sl_status_t dotdot_set_shade_configuration_motor_step_size(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_motor_step_size
+  uint8_t new_motor_step_size
   );
 
 /**
@@ -14829,7 +14829,7 @@ bool dotdot_is_supported_shade_configuration_closed_limit (
  *
  * @returns ClosedLimit attribute
  */
-int16_t dotdot_get_shade_configuration_closed_limit(
+uint16_t dotdot_get_shade_configuration_closed_limit(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -14849,7 +14849,7 @@ sl_status_t dotdot_set_shade_configuration_closed_limit(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_closed_limit
+  uint16_t new_closed_limit
   );
 
 /**
@@ -15493,7 +15493,7 @@ bool dotdot_is_supported_door_lock_door_open_events (
  *
  * @returns DoorOpenEvents attribute
  */
-int32_t dotdot_get_door_lock_door_open_events(
+uint32_t dotdot_get_door_lock_door_open_events(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -15513,7 +15513,7 @@ sl_status_t dotdot_set_door_lock_door_open_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_door_open_events
+  uint32_t new_door_open_events
   );
 
 /**
@@ -15599,7 +15599,7 @@ bool dotdot_is_supported_door_lock_door_closed_events (
  *
  * @returns DoorClosedEvents attribute
  */
-int32_t dotdot_get_door_lock_door_closed_events(
+uint32_t dotdot_get_door_lock_door_closed_events(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -15619,7 +15619,7 @@ sl_status_t dotdot_set_door_lock_door_closed_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_door_closed_events
+  uint32_t new_door_closed_events
   );
 
 /**
@@ -15705,7 +15705,7 @@ bool dotdot_is_supported_door_lock_open_period (
  *
  * @returns OpenPeriod attribute
  */
-int16_t dotdot_get_door_lock_open_period(
+uint16_t dotdot_get_door_lock_open_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -15725,7 +15725,7 @@ sl_status_t dotdot_set_door_lock_open_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_open_period
+  uint16_t new_open_period
   );
 
 /**
@@ -15811,7 +15811,7 @@ bool dotdot_is_supported_door_lock_number_of_log_records_supported (
  *
  * @returns NumberOfLogRecordsSupported attribute
  */
-int16_t dotdot_get_door_lock_number_of_log_records_supported(
+uint16_t dotdot_get_door_lock_number_of_log_records_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -15831,7 +15831,7 @@ sl_status_t dotdot_set_door_lock_number_of_log_records_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_number_of_log_records_supported
+  uint16_t new_number_of_log_records_supported
   );
 
 /**
@@ -15917,7 +15917,7 @@ bool dotdot_is_supported_door_lock_number_of_total_users_supported (
  *
  * @returns NumberOfTotalUsersSupported attribute
  */
-int16_t dotdot_get_door_lock_number_of_total_users_supported(
+uint16_t dotdot_get_door_lock_number_of_total_users_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -15937,7 +15937,7 @@ sl_status_t dotdot_set_door_lock_number_of_total_users_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_number_of_total_users_supported
+  uint16_t new_number_of_total_users_supported
   );
 
 /**
@@ -16023,7 +16023,7 @@ bool dotdot_is_supported_door_lock_number_of_pin_users_supported (
  *
  * @returns NumberOfPINUsersSupported attribute
  */
-int16_t dotdot_get_door_lock_number_of_pin_users_supported(
+uint16_t dotdot_get_door_lock_number_of_pin_users_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -16043,7 +16043,7 @@ sl_status_t dotdot_set_door_lock_number_of_pin_users_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_number_of_pin_users_supported
+  uint16_t new_number_of_pin_users_supported
   );
 
 /**
@@ -16129,7 +16129,7 @@ bool dotdot_is_supported_door_lock_number_of_rfid_users_supported (
  *
  * @returns NumberOfRFIDUsersSupported attribute
  */
-int16_t dotdot_get_door_lock_number_of_rfid_users_supported(
+uint16_t dotdot_get_door_lock_number_of_rfid_users_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -16149,7 +16149,7 @@ sl_status_t dotdot_set_door_lock_number_of_rfid_users_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_number_of_rfid_users_supported
+  uint16_t new_number_of_rfid_users_supported
   );
 
 /**
@@ -16235,7 +16235,7 @@ bool dotdot_is_supported_door_lock_number_of_week_day_schedules_supported_per_us
  *
  * @returns NumberOfWeekDaySchedulesSupportedPerUser attribute
  */
-int8_t dotdot_get_door_lock_number_of_week_day_schedules_supported_per_user(
+uint8_t dotdot_get_door_lock_number_of_week_day_schedules_supported_per_user(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -16255,7 +16255,7 @@ sl_status_t dotdot_set_door_lock_number_of_week_day_schedules_supported_per_user
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_number_of_week_day_schedules_supported_per_user
+  uint8_t new_number_of_week_day_schedules_supported_per_user
   );
 
 /**
@@ -16341,7 +16341,7 @@ bool dotdot_is_supported_door_lock_number_of_year_day_schedules_supported_per_us
  *
  * @returns NumberOfYearDaySchedulesSupportedPerUser attribute
  */
-int8_t dotdot_get_door_lock_number_of_year_day_schedules_supported_per_user(
+uint8_t dotdot_get_door_lock_number_of_year_day_schedules_supported_per_user(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -16361,7 +16361,7 @@ sl_status_t dotdot_set_door_lock_number_of_year_day_schedules_supported_per_user
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_number_of_year_day_schedules_supported_per_user
+  uint8_t new_number_of_year_day_schedules_supported_per_user
   );
 
 /**
@@ -16447,7 +16447,7 @@ bool dotdot_is_supported_door_lock_number_of_holiday_schedules_supported (
  *
  * @returns NumberOfHolidaySchedulesSupported attribute
  */
-int8_t dotdot_get_door_lock_number_of_holiday_schedules_supported(
+uint8_t dotdot_get_door_lock_number_of_holiday_schedules_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -16467,7 +16467,7 @@ sl_status_t dotdot_set_door_lock_number_of_holiday_schedules_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_number_of_holiday_schedules_supported
+  uint8_t new_number_of_holiday_schedules_supported
   );
 
 /**
@@ -16553,7 +16553,7 @@ bool dotdot_is_supported_door_lock_max_pin_code_length (
  *
  * @returns MaxPINCodeLength attribute
  */
-int8_t dotdot_get_door_lock_max_pin_code_length(
+uint8_t dotdot_get_door_lock_max_pin_code_length(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -16573,7 +16573,7 @@ sl_status_t dotdot_set_door_lock_max_pin_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_max_pin_code_length
+  uint8_t new_max_pin_code_length
   );
 
 /**
@@ -16659,7 +16659,7 @@ bool dotdot_is_supported_door_lock_min_pin_code_length (
  *
  * @returns MinPINCodeLength attribute
  */
-int8_t dotdot_get_door_lock_min_pin_code_length(
+uint8_t dotdot_get_door_lock_min_pin_code_length(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -16679,7 +16679,7 @@ sl_status_t dotdot_set_door_lock_min_pin_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_min_pin_code_length
+  uint8_t new_min_pin_code_length
   );
 
 /**
@@ -16765,7 +16765,7 @@ bool dotdot_is_supported_door_lock_max_rfid_code_length (
  *
  * @returns MaxRFIDCodeLength attribute
  */
-int8_t dotdot_get_door_lock_max_rfid_code_length(
+uint8_t dotdot_get_door_lock_max_rfid_code_length(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -16785,7 +16785,7 @@ sl_status_t dotdot_set_door_lock_max_rfid_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_max_rfid_code_length
+  uint8_t new_max_rfid_code_length
   );
 
 /**
@@ -16871,7 +16871,7 @@ bool dotdot_is_supported_door_lock_min_rfid_code_length (
  *
  * @returns MinRFIDCodeLength attribute
  */
-int8_t dotdot_get_door_lock_min_rfid_code_length(
+uint8_t dotdot_get_door_lock_min_rfid_code_length(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -16891,7 +16891,7 @@ sl_status_t dotdot_set_door_lock_min_rfid_code_length(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_min_rfid_code_length
+  uint8_t new_min_rfid_code_length
   );
 
 /**
@@ -17083,7 +17083,7 @@ bool dotdot_is_supported_door_lock_number_of_credentials_supported_per_user (
  *
  * @returns NumberOfCredentialsSupportedPerUser attribute
  */
-int8_t dotdot_get_door_lock_number_of_credentials_supported_per_user(
+uint8_t dotdot_get_door_lock_number_of_credentials_supported_per_user(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -17103,7 +17103,7 @@ sl_status_t dotdot_set_door_lock_number_of_credentials_supported_per_user(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_number_of_credentials_supported_per_user
+  uint8_t new_number_of_credentials_supported_per_user
   );
 
 /**
@@ -17404,7 +17404,7 @@ bool dotdot_is_supported_door_lock_led_settings (
  *
  * @returns LEDSettings attribute
  */
-int8_t dotdot_get_door_lock_led_settings(
+uint8_t dotdot_get_door_lock_led_settings(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -17424,7 +17424,7 @@ sl_status_t dotdot_set_door_lock_led_settings(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_led_settings
+  uint8_t new_led_settings
   );
 
 /**
@@ -17510,7 +17510,7 @@ bool dotdot_is_supported_door_lock_auto_relock_time (
  *
  * @returns AutoRelockTime attribute
  */
-int32_t dotdot_get_door_lock_auto_relock_time(
+uint32_t dotdot_get_door_lock_auto_relock_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -17530,7 +17530,7 @@ sl_status_t dotdot_set_door_lock_auto_relock_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_auto_relock_time
+  uint32_t new_auto_relock_time
   );
 
 /**
@@ -17616,7 +17616,7 @@ bool dotdot_is_supported_door_lock_sound_volume (
  *
  * @returns SoundVolume attribute
  */
-int8_t dotdot_get_door_lock_sound_volume(
+uint8_t dotdot_get_door_lock_sound_volume(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -17636,7 +17636,7 @@ sl_status_t dotdot_set_door_lock_sound_volume(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_sound_volume
+  uint8_t new_sound_volume
   );
 
 /**
@@ -18570,7 +18570,7 @@ bool dotdot_is_supported_door_lock_wrong_code_entry_limit (
  *
  * @returns WrongCodeEntryLimit attribute
  */
-int8_t dotdot_get_door_lock_wrong_code_entry_limit(
+uint8_t dotdot_get_door_lock_wrong_code_entry_limit(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -18590,7 +18590,7 @@ sl_status_t dotdot_set_door_lock_wrong_code_entry_limit(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_wrong_code_entry_limit
+  uint8_t new_wrong_code_entry_limit
   );
 
 /**
@@ -18676,7 +18676,7 @@ bool dotdot_is_supported_door_lock_user_code_temporary_disable_time (
  *
  * @returns UserCodeTemporaryDisableTime attribute
  */
-int8_t dotdot_get_door_lock_user_code_temporary_disable_time(
+uint8_t dotdot_get_door_lock_user_code_temporary_disable_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -18696,7 +18696,7 @@ sl_status_t dotdot_set_door_lock_user_code_temporary_disable_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_user_code_temporary_disable_time
+  uint8_t new_user_code_temporary_disable_time
   );
 
 /**
@@ -19100,7 +19100,7 @@ bool dotdot_is_supported_door_lock_expiring_user_timeout (
  *
  * @returns ExpiringUserTimeout attribute
  */
-int16_t dotdot_get_door_lock_expiring_user_timeout(
+uint16_t dotdot_get_door_lock_expiring_user_timeout(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -19120,7 +19120,7 @@ sl_status_t dotdot_set_door_lock_expiring_user_timeout(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_expiring_user_timeout
+  uint16_t new_expiring_user_timeout
   );
 
 /**
@@ -20294,7 +20294,7 @@ bool dotdot_is_supported_window_covering_physical_closed_limit_lift (
  *
  * @returns PhysicalClosedLimitLift attribute
  */
-int16_t dotdot_get_window_covering_physical_closed_limit_lift(
+uint16_t dotdot_get_window_covering_physical_closed_limit_lift(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -20314,7 +20314,7 @@ sl_status_t dotdot_set_window_covering_physical_closed_limit_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_physical_closed_limit_lift
+  uint16_t new_physical_closed_limit_lift
   );
 
 /**
@@ -20400,7 +20400,7 @@ bool dotdot_is_supported_window_covering_physical_closed_limit_tilt (
  *
  * @returns PhysicalClosedLimitTilt attribute
  */
-int16_t dotdot_get_window_covering_physical_closed_limit_tilt(
+uint16_t dotdot_get_window_covering_physical_closed_limit_tilt(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -20420,7 +20420,7 @@ sl_status_t dotdot_set_window_covering_physical_closed_limit_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_physical_closed_limit_tilt
+  uint16_t new_physical_closed_limit_tilt
   );
 
 /**
@@ -20506,7 +20506,7 @@ bool dotdot_is_supported_window_covering_current_position_lift (
  *
  * @returns CurrentPositionLift attribute
  */
-int16_t dotdot_get_window_covering_current_position_lift(
+uint16_t dotdot_get_window_covering_current_position_lift(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -20526,7 +20526,7 @@ sl_status_t dotdot_set_window_covering_current_position_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_current_position_lift
+  uint16_t new_current_position_lift
   );
 
 /**
@@ -20612,7 +20612,7 @@ bool dotdot_is_supported_window_covering_current_position_tilt (
  *
  * @returns CurrentPositionTilt attribute
  */
-int16_t dotdot_get_window_covering_current_position_tilt(
+uint16_t dotdot_get_window_covering_current_position_tilt(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -20632,7 +20632,7 @@ sl_status_t dotdot_set_window_covering_current_position_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_current_position_tilt
+  uint16_t new_current_position_tilt
   );
 
 /**
@@ -20718,7 +20718,7 @@ bool dotdot_is_supported_window_covering_number_of_actuations_lift (
  *
  * @returns NumberOfActuationsLift attribute
  */
-int16_t dotdot_get_window_covering_number_of_actuations_lift(
+uint16_t dotdot_get_window_covering_number_of_actuations_lift(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -20738,7 +20738,7 @@ sl_status_t dotdot_set_window_covering_number_of_actuations_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_number_of_actuations_lift
+  uint16_t new_number_of_actuations_lift
   );
 
 /**
@@ -20824,7 +20824,7 @@ bool dotdot_is_supported_window_covering_number_of_actuations_tilt (
  *
  * @returns NumberOfActuationsTilt attribute
  */
-int16_t dotdot_get_window_covering_number_of_actuations_tilt(
+uint16_t dotdot_get_window_covering_number_of_actuations_tilt(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -20844,7 +20844,7 @@ sl_status_t dotdot_set_window_covering_number_of_actuations_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_number_of_actuations_tilt
+  uint16_t new_number_of_actuations_tilt
   );
 
 /**
@@ -21036,7 +21036,7 @@ bool dotdot_is_supported_window_covering_current_position_lift_percentage (
  *
  * @returns CurrentPositionLiftPercentage attribute
  */
-int8_t dotdot_get_window_covering_current_position_lift_percentage(
+uint8_t dotdot_get_window_covering_current_position_lift_percentage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -21056,7 +21056,7 @@ sl_status_t dotdot_set_window_covering_current_position_lift_percentage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_current_position_lift_percentage
+  uint8_t new_current_position_lift_percentage
   );
 
 /**
@@ -21142,7 +21142,7 @@ bool dotdot_is_supported_window_covering_current_position_tilt_percentage (
  *
  * @returns CurrentPositionTiltPercentage attribute
  */
-int8_t dotdot_get_window_covering_current_position_tilt_percentage(
+uint8_t dotdot_get_window_covering_current_position_tilt_percentage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -21162,7 +21162,7 @@ sl_status_t dotdot_set_window_covering_current_position_tilt_percentage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_current_position_tilt_percentage
+  uint8_t new_current_position_tilt_percentage
   );
 
 /**
@@ -21248,7 +21248,7 @@ bool dotdot_is_supported_window_covering_installed_open_limit_lift (
  *
  * @returns InstalledOpenLimitLift attribute
  */
-int16_t dotdot_get_window_covering_installed_open_limit_lift(
+uint16_t dotdot_get_window_covering_installed_open_limit_lift(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -21268,7 +21268,7 @@ sl_status_t dotdot_set_window_covering_installed_open_limit_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_installed_open_limit_lift
+  uint16_t new_installed_open_limit_lift
   );
 
 /**
@@ -21354,7 +21354,7 @@ bool dotdot_is_supported_window_covering_installed_closed_limit_lift (
  *
  * @returns InstalledClosedLimitLift attribute
  */
-int16_t dotdot_get_window_covering_installed_closed_limit_lift(
+uint16_t dotdot_get_window_covering_installed_closed_limit_lift(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -21374,7 +21374,7 @@ sl_status_t dotdot_set_window_covering_installed_closed_limit_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_installed_closed_limit_lift
+  uint16_t new_installed_closed_limit_lift
   );
 
 /**
@@ -21460,7 +21460,7 @@ bool dotdot_is_supported_window_covering_installed_open_limit_tilt (
  *
  * @returns InstalledOpenLimitTilt attribute
  */
-int16_t dotdot_get_window_covering_installed_open_limit_tilt(
+uint16_t dotdot_get_window_covering_installed_open_limit_tilt(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -21480,7 +21480,7 @@ sl_status_t dotdot_set_window_covering_installed_open_limit_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_installed_open_limit_tilt
+  uint16_t new_installed_open_limit_tilt
   );
 
 /**
@@ -21566,7 +21566,7 @@ bool dotdot_is_supported_window_covering_installed_closed_limit_tilt (
  *
  * @returns InstalledClosedLimitTilt attribute
  */
-int16_t dotdot_get_window_covering_installed_closed_limit_tilt(
+uint16_t dotdot_get_window_covering_installed_closed_limit_tilt(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -21586,7 +21586,7 @@ sl_status_t dotdot_set_window_covering_installed_closed_limit_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_installed_closed_limit_tilt
+  uint16_t new_installed_closed_limit_tilt
   );
 
 /**
@@ -21672,7 +21672,7 @@ bool dotdot_is_supported_window_covering_velocity_lift (
  *
  * @returns VelocityLift attribute
  */
-int16_t dotdot_get_window_covering_velocity_lift(
+uint16_t dotdot_get_window_covering_velocity_lift(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -21692,7 +21692,7 @@ sl_status_t dotdot_set_window_covering_velocity_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_velocity_lift
+  uint16_t new_velocity_lift
   );
 
 /**
@@ -21778,7 +21778,7 @@ bool dotdot_is_supported_window_covering_acceleration_time_lift (
  *
  * @returns AccelerationTimeLift attribute
  */
-int16_t dotdot_get_window_covering_acceleration_time_lift(
+uint16_t dotdot_get_window_covering_acceleration_time_lift(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -21798,7 +21798,7 @@ sl_status_t dotdot_set_window_covering_acceleration_time_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_acceleration_time_lift
+  uint16_t new_acceleration_time_lift
   );
 
 /**
@@ -21884,7 +21884,7 @@ bool dotdot_is_supported_window_covering_deceleration_time_lift (
  *
  * @returns DecelerationTimeLift attribute
  */
-int16_t dotdot_get_window_covering_deceleration_time_lift(
+uint16_t dotdot_get_window_covering_deceleration_time_lift(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -21904,7 +21904,7 @@ sl_status_t dotdot_set_window_covering_deceleration_time_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_deceleration_time_lift
+  uint16_t new_deceleration_time_lift
   );
 
 /**
@@ -22099,7 +22099,7 @@ bool dotdot_is_supported_window_covering_intermediate_setpoints_lift (
  *
  * @returns IntermediateSetpointsLift attribute
  */
-uint8_t dotdot_get_window_covering_intermediate_setpoints_lift(
+const char* dotdot_get_window_covering_intermediate_setpoints_lift(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -22119,7 +22119,7 @@ sl_status_t dotdot_set_window_covering_intermediate_setpoints_lift(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_intermediate_setpoints_lift
+  const char* new_intermediate_setpoints_lift
   );
 
 /**
@@ -22208,7 +22208,7 @@ bool dotdot_is_supported_window_covering_intermediate_setpoints_tilt (
  *
  * @returns IntermediateSetpointsTilt attribute
  */
-uint8_t dotdot_get_window_covering_intermediate_setpoints_tilt(
+const char* dotdot_get_window_covering_intermediate_setpoints_tilt(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -22228,7 +22228,7 @@ sl_status_t dotdot_set_window_covering_intermediate_setpoints_tilt(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_intermediate_setpoints_tilt
+  const char* new_intermediate_setpoints_tilt
   );
 
 /**
@@ -22660,7 +22660,7 @@ bool dotdot_is_supported_barrier_control_open_events (
  *
  * @returns OpenEvents attribute
  */
-int16_t dotdot_get_barrier_control_open_events(
+uint16_t dotdot_get_barrier_control_open_events(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -22680,7 +22680,7 @@ sl_status_t dotdot_set_barrier_control_open_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_open_events
+  uint16_t new_open_events
   );
 
 /**
@@ -22766,7 +22766,7 @@ bool dotdot_is_supported_barrier_control_close_events (
  *
  * @returns CloseEvents attribute
  */
-int16_t dotdot_get_barrier_control_close_events(
+uint16_t dotdot_get_barrier_control_close_events(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -22786,7 +22786,7 @@ sl_status_t dotdot_set_barrier_control_close_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_close_events
+  uint16_t new_close_events
   );
 
 /**
@@ -22872,7 +22872,7 @@ bool dotdot_is_supported_barrier_control_command_open_events (
  *
  * @returns CommandOpenEvents attribute
  */
-int16_t dotdot_get_barrier_control_command_open_events(
+uint16_t dotdot_get_barrier_control_command_open_events(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -22892,7 +22892,7 @@ sl_status_t dotdot_set_barrier_control_command_open_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_command_open_events
+  uint16_t new_command_open_events
   );
 
 /**
@@ -22978,7 +22978,7 @@ bool dotdot_is_supported_barrier_control_command_close_events (
  *
  * @returns CommandCloseEvents attribute
  */
-int16_t dotdot_get_barrier_control_command_close_events(
+uint16_t dotdot_get_barrier_control_command_close_events(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -22998,7 +22998,7 @@ sl_status_t dotdot_set_barrier_control_command_close_events(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_command_close_events
+  uint16_t new_command_close_events
   );
 
 /**
@@ -23084,7 +23084,7 @@ bool dotdot_is_supported_barrier_control_open_period (
  *
  * @returns OpenPeriod attribute
  */
-int16_t dotdot_get_barrier_control_open_period(
+uint16_t dotdot_get_barrier_control_open_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -23104,7 +23104,7 @@ sl_status_t dotdot_set_barrier_control_open_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_open_period
+  uint16_t new_open_period
   );
 
 /**
@@ -23190,7 +23190,7 @@ bool dotdot_is_supported_barrier_control_close_period (
  *
  * @returns ClosePeriod attribute
  */
-int16_t dotdot_get_barrier_control_close_period(
+uint16_t dotdot_get_barrier_control_close_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -23210,7 +23210,7 @@ sl_status_t dotdot_set_barrier_control_close_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_close_period
+  uint16_t new_close_period
   );
 
 /**
@@ -23296,7 +23296,7 @@ bool dotdot_is_supported_barrier_control_barrier_position (
  *
  * @returns BarrierPosition attribute
  */
-int8_t dotdot_get_barrier_control_barrier_position(
+uint8_t dotdot_get_barrier_control_barrier_position(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -23316,7 +23316,7 @@ sl_status_t dotdot_set_barrier_control_barrier_position(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_barrier_position
+  uint8_t new_barrier_position
   );
 
 /**
@@ -23536,7 +23536,7 @@ bool dotdot_is_supported_pump_configuration_and_control_max_speed (
  *
  * @returns MaxSpeed attribute
  */
-int16_t dotdot_get_pump_configuration_and_control_max_speed(
+uint16_t dotdot_get_pump_configuration_and_control_max_speed(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -23556,7 +23556,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_max_speed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_max_speed
+  uint16_t new_max_speed
   );
 
 /**
@@ -23642,7 +23642,7 @@ bool dotdot_is_supported_pump_configuration_and_control_max_flow (
  *
  * @returns MaxFlow attribute
  */
-int16_t dotdot_get_pump_configuration_and_control_max_flow(
+uint16_t dotdot_get_pump_configuration_and_control_max_flow(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -23662,7 +23662,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_max_flow(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_max_flow
+  uint16_t new_max_flow
   );
 
 /**
@@ -24172,7 +24172,7 @@ bool dotdot_is_supported_pump_configuration_and_control_min_const_speed (
  *
  * @returns MinConstSpeed attribute
  */
-int16_t dotdot_get_pump_configuration_and_control_min_const_speed(
+uint16_t dotdot_get_pump_configuration_and_control_min_const_speed(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -24192,7 +24192,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_min_const_speed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_min_const_speed
+  uint16_t new_min_const_speed
   );
 
 /**
@@ -24278,7 +24278,7 @@ bool dotdot_is_supported_pump_configuration_and_control_max_const_speed (
  *
  * @returns MaxConstSpeed attribute
  */
-int16_t dotdot_get_pump_configuration_and_control_max_const_speed(
+uint16_t dotdot_get_pump_configuration_and_control_max_const_speed(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -24298,7 +24298,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_max_const_speed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_max_const_speed
+  uint16_t new_max_const_speed
   );
 
 /**
@@ -24384,7 +24384,7 @@ bool dotdot_is_supported_pump_configuration_and_control_min_const_flow (
  *
  * @returns MinConstFlow attribute
  */
-int16_t dotdot_get_pump_configuration_and_control_min_const_flow(
+uint16_t dotdot_get_pump_configuration_and_control_min_const_flow(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -24404,7 +24404,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_min_const_flow(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_min_const_flow
+  uint16_t new_min_const_flow
   );
 
 /**
@@ -24490,7 +24490,7 @@ bool dotdot_is_supported_pump_configuration_and_control_max_const_flow (
  *
  * @returns MaxConstFlow attribute
  */
-int16_t dotdot_get_pump_configuration_and_control_max_const_flow(
+uint16_t dotdot_get_pump_configuration_and_control_max_const_flow(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -24510,7 +24510,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_max_const_flow(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_max_const_flow
+  uint16_t new_max_const_flow
   );
 
 /**
@@ -25232,7 +25232,7 @@ bool dotdot_is_supported_pump_configuration_and_control_speed (
  *
  * @returns Speed attribute
  */
-int16_t dotdot_get_pump_configuration_and_control_speed(
+uint16_t dotdot_get_pump_configuration_and_control_speed(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -25252,7 +25252,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_speed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_speed
+  uint16_t new_speed
   );
 
 /**
@@ -25338,7 +25338,7 @@ bool dotdot_is_supported_pump_configuration_and_control_lifetime_running_hours (
  *
  * @returns LifetimeRunningHours attribute
  */
-int32_t dotdot_get_pump_configuration_and_control_lifetime_running_hours(
+uint32_t dotdot_get_pump_configuration_and_control_lifetime_running_hours(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -25358,7 +25358,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_lifetime_running_hours(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_lifetime_running_hours
+  uint32_t new_lifetime_running_hours
   );
 
 /**
@@ -25444,7 +25444,7 @@ bool dotdot_is_supported_pump_configuration_and_control_power (
  *
  * @returns Power attribute
  */
-int32_t dotdot_get_pump_configuration_and_control_power(
+uint32_t dotdot_get_pump_configuration_and_control_power(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -25464,7 +25464,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_power(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_power
+  uint32_t new_power
   );
 
 /**
@@ -25550,7 +25550,7 @@ bool dotdot_is_supported_pump_configuration_and_control_lifetime_energy_consumed
  *
  * @returns LifetimeEnergyConsumed attribute
  */
-int32_t dotdot_get_pump_configuration_and_control_lifetime_energy_consumed(
+uint32_t dotdot_get_pump_configuration_and_control_lifetime_energy_consumed(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -25570,7 +25570,7 @@ sl_status_t dotdot_set_pump_configuration_and_control_lifetime_energy_consumed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_lifetime_energy_consumed
+  uint32_t new_lifetime_energy_consumed
   );
 
 /**
@@ -26744,7 +26744,7 @@ bool dotdot_is_supported_thermostat_pi_cooling_demand (
  *
  * @returns PICoolingDemand attribute
  */
-int8_t dotdot_get_thermostat_pi_cooling_demand(
+uint8_t dotdot_get_thermostat_pi_cooling_demand(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -26764,7 +26764,7 @@ sl_status_t dotdot_set_thermostat_pi_cooling_demand(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_pi_cooling_demand
+  uint8_t new_pi_cooling_demand
   );
 
 /**
@@ -26850,7 +26850,7 @@ bool dotdot_is_supported_thermostat_pi_heating_demand (
  *
  * @returns PIHeatingDemand attribute
  */
-int8_t dotdot_get_thermostat_pi_heating_demand(
+uint8_t dotdot_get_thermostat_pi_heating_demand(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -26870,7 +26870,7 @@ sl_status_t dotdot_set_thermostat_pi_heating_demand(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_pi_heating_demand
+  uint8_t new_pi_heating_demand
   );
 
 /**
@@ -28758,7 +28758,7 @@ bool dotdot_is_supported_thermostat_number_of_weekly_transitions (
  *
  * @returns NumberOfWeeklyTransitions attribute
  */
-int8_t dotdot_get_thermostat_number_of_weekly_transitions(
+uint8_t dotdot_get_thermostat_number_of_weekly_transitions(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -28778,7 +28778,7 @@ sl_status_t dotdot_set_thermostat_number_of_weekly_transitions(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_number_of_weekly_transitions
+  uint8_t new_number_of_weekly_transitions
   );
 
 /**
@@ -28864,7 +28864,7 @@ bool dotdot_is_supported_thermostat_number_of_daily_transitions (
  *
  * @returns NumberOfDailyTransitions attribute
  */
-int8_t dotdot_get_thermostat_number_of_daily_transitions(
+uint8_t dotdot_get_thermostat_number_of_daily_transitions(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -28884,7 +28884,7 @@ sl_status_t dotdot_set_thermostat_number_of_daily_transitions(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_number_of_daily_transitions
+  uint8_t new_number_of_daily_transitions
   );
 
 /**
@@ -29076,7 +29076,7 @@ bool dotdot_is_supported_thermostat_temperature_setpoint_hold_duration (
  *
  * @returns TemperatureSetpointHoldDuration attribute
  */
-int16_t dotdot_get_thermostat_temperature_setpoint_hold_duration(
+uint16_t dotdot_get_thermostat_temperature_setpoint_hold_duration(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -29096,7 +29096,7 @@ sl_status_t dotdot_set_thermostat_temperature_setpoint_hold_duration(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_temperature_setpoint_hold_duration
+  uint16_t new_temperature_setpoint_hold_duration
   );
 
 /**
@@ -29606,7 +29606,7 @@ bool dotdot_is_supported_thermostat_setpoint_change_source_timestamp (
  *
  * @returns SetpointChangeSourceTimestamp attribute
  */
-uint8_t dotdot_get_thermostat_setpoint_change_source_timestamp(
+uint32_t dotdot_get_thermostat_setpoint_change_source_timestamp(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -29626,7 +29626,7 @@ sl_status_t dotdot_set_thermostat_setpoint_change_source_timestamp(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_setpoint_change_source_timestamp
+  uint32_t new_setpoint_change_source_timestamp
   );
 
 /**
@@ -29712,7 +29712,7 @@ bool dotdot_is_supported_thermostat_occupied_setback (
  *
  * @returns OccupiedSetback attribute
  */
-int8_t dotdot_get_thermostat_occupied_setback(
+uint8_t dotdot_get_thermostat_occupied_setback(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -29732,7 +29732,7 @@ sl_status_t dotdot_set_thermostat_occupied_setback(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_occupied_setback
+  uint8_t new_occupied_setback
   );
 
 /**
@@ -29818,7 +29818,7 @@ bool dotdot_is_supported_thermostat_occupied_setback_min (
  *
  * @returns OccupiedSetbackMin attribute
  */
-int8_t dotdot_get_thermostat_occupied_setback_min(
+uint8_t dotdot_get_thermostat_occupied_setback_min(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -29838,7 +29838,7 @@ sl_status_t dotdot_set_thermostat_occupied_setback_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_occupied_setback_min
+  uint8_t new_occupied_setback_min
   );
 
 /**
@@ -29924,7 +29924,7 @@ bool dotdot_is_supported_thermostat_occupied_setback_max (
  *
  * @returns OccupiedSetbackMax attribute
  */
-int8_t dotdot_get_thermostat_occupied_setback_max(
+uint8_t dotdot_get_thermostat_occupied_setback_max(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -29944,7 +29944,7 @@ sl_status_t dotdot_set_thermostat_occupied_setback_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_occupied_setback_max
+  uint8_t new_occupied_setback_max
   );
 
 /**
@@ -30030,7 +30030,7 @@ bool dotdot_is_supported_thermostat_unoccupied_setback (
  *
  * @returns UnoccupiedSetback attribute
  */
-int8_t dotdot_get_thermostat_unoccupied_setback(
+uint8_t dotdot_get_thermostat_unoccupied_setback(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -30050,7 +30050,7 @@ sl_status_t dotdot_set_thermostat_unoccupied_setback(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_unoccupied_setback
+  uint8_t new_unoccupied_setback
   );
 
 /**
@@ -30136,7 +30136,7 @@ bool dotdot_is_supported_thermostat_unoccupied_setback_min (
  *
  * @returns UnoccupiedSetbackMin attribute
  */
-int8_t dotdot_get_thermostat_unoccupied_setback_min(
+uint8_t dotdot_get_thermostat_unoccupied_setback_min(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -30156,7 +30156,7 @@ sl_status_t dotdot_set_thermostat_unoccupied_setback_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_unoccupied_setback_min
+  uint8_t new_unoccupied_setback_min
   );
 
 /**
@@ -30242,7 +30242,7 @@ bool dotdot_is_supported_thermostat_unoccupied_setback_max (
  *
  * @returns UnoccupiedSetbackMax attribute
  */
-int8_t dotdot_get_thermostat_unoccupied_setback_max(
+uint8_t dotdot_get_thermostat_unoccupied_setback_max(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -30262,7 +30262,7 @@ sl_status_t dotdot_set_thermostat_unoccupied_setback_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_unoccupied_setback_max
+  uint8_t new_unoccupied_setback_max
   );
 
 /**
@@ -30348,7 +30348,7 @@ bool dotdot_is_supported_thermostat_emergency_heat_delta (
  *
  * @returns EmergencyHeatDelta attribute
  */
-int8_t dotdot_get_thermostat_emergency_heat_delta(
+uint8_t dotdot_get_thermostat_emergency_heat_delta(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -30368,7 +30368,7 @@ sl_status_t dotdot_set_thermostat_emergency_heat_delta(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_emergency_heat_delta
+  uint8_t new_emergency_heat_delta
   );
 
 /**
@@ -30560,7 +30560,7 @@ bool dotdot_is_supported_thermostat_ac_capacity (
  *
  * @returns ACCapacity attribute
  */
-int16_t dotdot_get_thermostat_ac_capacity(
+uint16_t dotdot_get_thermostat_ac_capacity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -30580,7 +30580,7 @@ sl_status_t dotdot_set_thermostat_ac_capacity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_ac_capacity
+  uint16_t new_ac_capacity
   );
 
 /**
@@ -31570,7 +31570,7 @@ bool dotdot_is_supported_dehumidification_control_relative_humidity (
  *
  * @returns RelativeHumidity attribute
  */
-int8_t dotdot_get_dehumidification_control_relative_humidity(
+uint8_t dotdot_get_dehumidification_control_relative_humidity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -31590,7 +31590,7 @@ sl_status_t dotdot_set_dehumidification_control_relative_humidity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_relative_humidity
+  uint8_t new_relative_humidity
   );
 
 /**
@@ -31676,7 +31676,7 @@ bool dotdot_is_supported_dehumidification_control_dehumidification_cooling (
  *
  * @returns DehumidificationCooling attribute
  */
-int8_t dotdot_get_dehumidification_control_dehumidification_cooling(
+uint8_t dotdot_get_dehumidification_control_dehumidification_cooling(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -31696,7 +31696,7 @@ sl_status_t dotdot_set_dehumidification_control_dehumidification_cooling(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_dehumidification_cooling
+  uint8_t new_dehumidification_cooling
   );
 
 /**
@@ -31782,7 +31782,7 @@ bool dotdot_is_supported_dehumidification_control_rh_dehumidification_setpoint (
  *
  * @returns RHDehumidificationSetpoint attribute
  */
-int8_t dotdot_get_dehumidification_control_rh_dehumidification_setpoint(
+uint8_t dotdot_get_dehumidification_control_rh_dehumidification_setpoint(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -31802,7 +31802,7 @@ sl_status_t dotdot_set_dehumidification_control_rh_dehumidification_setpoint(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_rh_dehumidification_setpoint
+  uint8_t new_rh_dehumidification_setpoint
   );
 
 /**
@@ -32100,7 +32100,7 @@ bool dotdot_is_supported_dehumidification_control_dehumidification_hysteresis (
  *
  * @returns DehumidificationHysteresis attribute
  */
-int8_t dotdot_get_dehumidification_control_dehumidification_hysteresis(
+uint8_t dotdot_get_dehumidification_control_dehumidification_hysteresis(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -32120,7 +32120,7 @@ sl_status_t dotdot_set_dehumidification_control_dehumidification_hysteresis(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_dehumidification_hysteresis
+  uint8_t new_dehumidification_hysteresis
   );
 
 /**
@@ -32206,7 +32206,7 @@ bool dotdot_is_supported_dehumidification_control_dehumidification_max_cool (
  *
  * @returns DehumidificationMaxCool attribute
  */
-int8_t dotdot_get_dehumidification_control_dehumidification_max_cool(
+uint8_t dotdot_get_dehumidification_control_dehumidification_max_cool(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -32226,7 +32226,7 @@ sl_status_t dotdot_set_dehumidification_control_dehumidification_max_cool(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_dehumidification_max_cool
+  uint8_t new_dehumidification_max_cool
   );
 
 /**
@@ -32792,7 +32792,7 @@ bool dotdot_is_supported_color_control_current_hue (
  *
  * @returns CurrentHue attribute
  */
-int8_t dotdot_get_color_control_current_hue(
+uint8_t dotdot_get_color_control_current_hue(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -32812,7 +32812,7 @@ sl_status_t dotdot_set_color_control_current_hue(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_current_hue
+  uint8_t new_current_hue
   );
 
 /**
@@ -32898,7 +32898,7 @@ bool dotdot_is_supported_color_control_current_saturation (
  *
  * @returns CurrentSaturation attribute
  */
-int8_t dotdot_get_color_control_current_saturation(
+uint8_t dotdot_get_color_control_current_saturation(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -32918,7 +32918,7 @@ sl_status_t dotdot_set_color_control_current_saturation(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_current_saturation
+  uint8_t new_current_saturation
   );
 
 /**
@@ -33004,7 +33004,7 @@ bool dotdot_is_supported_color_control_remaining_time (
  *
  * @returns RemainingTime attribute
  */
-int16_t dotdot_get_color_control_remaining_time(
+uint16_t dotdot_get_color_control_remaining_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -33024,7 +33024,7 @@ sl_status_t dotdot_set_color_control_remaining_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_remaining_time
+  uint16_t new_remaining_time
   );
 
 /**
@@ -33110,7 +33110,7 @@ bool dotdot_is_supported_color_control_currentx (
  *
  * @returns CurrentX attribute
  */
-int16_t dotdot_get_color_control_currentx(
+uint16_t dotdot_get_color_control_currentx(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -33130,7 +33130,7 @@ sl_status_t dotdot_set_color_control_currentx(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_currentx
+  uint16_t new_currentx
   );
 
 /**
@@ -33216,7 +33216,7 @@ bool dotdot_is_supported_color_control_currenty (
  *
  * @returns CurrentY attribute
  */
-int16_t dotdot_get_color_control_currenty(
+uint16_t dotdot_get_color_control_currenty(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -33236,7 +33236,7 @@ sl_status_t dotdot_set_color_control_currenty(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_currenty
+  uint16_t new_currenty
   );
 
 /**
@@ -33537,7 +33537,7 @@ bool dotdot_is_supported_color_control_color_temperature_mireds (
  *
  * @returns ColorTemperatureMireds attribute
  */
-int16_t dotdot_get_color_control_color_temperature_mireds(
+uint16_t dotdot_get_color_control_color_temperature_mireds(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -33557,7 +33557,7 @@ sl_status_t dotdot_set_color_control_color_temperature_mireds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_color_temperature_mireds
+  uint16_t new_color_temperature_mireds
   );
 
 /**
@@ -33855,7 +33855,7 @@ bool dotdot_is_supported_color_control_number_of_primaries (
  *
  * @returns NumberOfPrimaries attribute
  */
-int8_t dotdot_get_color_control_number_of_primaries(
+uint8_t dotdot_get_color_control_number_of_primaries(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -33875,7 +33875,7 @@ sl_status_t dotdot_set_color_control_number_of_primaries(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_number_of_primaries
+  uint8_t new_number_of_primaries
   );
 
 /**
@@ -33961,7 +33961,7 @@ bool dotdot_is_supported_color_control_primary1x (
  *
  * @returns Primary1X attribute
  */
-int16_t dotdot_get_color_control_primary1x(
+uint16_t dotdot_get_color_control_primary1x(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -33981,7 +33981,7 @@ sl_status_t dotdot_set_color_control_primary1x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_primary1x
+  uint16_t new_primary1x
   );
 
 /**
@@ -34067,7 +34067,7 @@ bool dotdot_is_supported_color_control_primary1y (
  *
  * @returns Primary1Y attribute
  */
-int16_t dotdot_get_color_control_primary1y(
+uint16_t dotdot_get_color_control_primary1y(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -34087,7 +34087,7 @@ sl_status_t dotdot_set_color_control_primary1y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_primary1y
+  uint16_t new_primary1y
   );
 
 /**
@@ -34173,7 +34173,7 @@ bool dotdot_is_supported_color_control_primary1_intensity (
  *
  * @returns Primary1Intensity attribute
  */
-int8_t dotdot_get_color_control_primary1_intensity(
+uint8_t dotdot_get_color_control_primary1_intensity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -34193,7 +34193,7 @@ sl_status_t dotdot_set_color_control_primary1_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_primary1_intensity
+  uint8_t new_primary1_intensity
   );
 
 /**
@@ -34279,7 +34279,7 @@ bool dotdot_is_supported_color_control_primary2x (
  *
  * @returns Primary2X attribute
  */
-int16_t dotdot_get_color_control_primary2x(
+uint16_t dotdot_get_color_control_primary2x(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -34299,7 +34299,7 @@ sl_status_t dotdot_set_color_control_primary2x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_primary2x
+  uint16_t new_primary2x
   );
 
 /**
@@ -34385,7 +34385,7 @@ bool dotdot_is_supported_color_control_primary2y (
  *
  * @returns Primary2Y attribute
  */
-int16_t dotdot_get_color_control_primary2y(
+uint16_t dotdot_get_color_control_primary2y(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -34405,7 +34405,7 @@ sl_status_t dotdot_set_color_control_primary2y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_primary2y
+  uint16_t new_primary2y
   );
 
 /**
@@ -34491,7 +34491,7 @@ bool dotdot_is_supported_color_control_primary2_intensity (
  *
  * @returns Primary2Intensity attribute
  */
-int8_t dotdot_get_color_control_primary2_intensity(
+uint8_t dotdot_get_color_control_primary2_intensity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -34511,7 +34511,7 @@ sl_status_t dotdot_set_color_control_primary2_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_primary2_intensity
+  uint8_t new_primary2_intensity
   );
 
 /**
@@ -34597,7 +34597,7 @@ bool dotdot_is_supported_color_control_primary3x (
  *
  * @returns Primary3X attribute
  */
-int16_t dotdot_get_color_control_primary3x(
+uint16_t dotdot_get_color_control_primary3x(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -34617,7 +34617,7 @@ sl_status_t dotdot_set_color_control_primary3x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_primary3x
+  uint16_t new_primary3x
   );
 
 /**
@@ -34703,7 +34703,7 @@ bool dotdot_is_supported_color_control_primary3y (
  *
  * @returns Primary3Y attribute
  */
-int16_t dotdot_get_color_control_primary3y(
+uint16_t dotdot_get_color_control_primary3y(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -34723,7 +34723,7 @@ sl_status_t dotdot_set_color_control_primary3y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_primary3y
+  uint16_t new_primary3y
   );
 
 /**
@@ -34809,7 +34809,7 @@ bool dotdot_is_supported_color_control_primary3_intensity (
  *
  * @returns Primary3Intensity attribute
  */
-int8_t dotdot_get_color_control_primary3_intensity(
+uint8_t dotdot_get_color_control_primary3_intensity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -34829,7 +34829,7 @@ sl_status_t dotdot_set_color_control_primary3_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_primary3_intensity
+  uint8_t new_primary3_intensity
   );
 
 /**
@@ -34915,7 +34915,7 @@ bool dotdot_is_supported_color_control_primary4x (
  *
  * @returns Primary4X attribute
  */
-int16_t dotdot_get_color_control_primary4x(
+uint16_t dotdot_get_color_control_primary4x(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -34935,7 +34935,7 @@ sl_status_t dotdot_set_color_control_primary4x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_primary4x
+  uint16_t new_primary4x
   );
 
 /**
@@ -35021,7 +35021,7 @@ bool dotdot_is_supported_color_control_primary4y (
  *
  * @returns Primary4Y attribute
  */
-int16_t dotdot_get_color_control_primary4y(
+uint16_t dotdot_get_color_control_primary4y(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -35041,7 +35041,7 @@ sl_status_t dotdot_set_color_control_primary4y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_primary4y
+  uint16_t new_primary4y
   );
 
 /**
@@ -35127,7 +35127,7 @@ bool dotdot_is_supported_color_control_primary4_intensity (
  *
  * @returns Primary4Intensity attribute
  */
-int8_t dotdot_get_color_control_primary4_intensity(
+uint8_t dotdot_get_color_control_primary4_intensity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -35147,7 +35147,7 @@ sl_status_t dotdot_set_color_control_primary4_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_primary4_intensity
+  uint8_t new_primary4_intensity
   );
 
 /**
@@ -35233,7 +35233,7 @@ bool dotdot_is_supported_color_control_primary5x (
  *
  * @returns Primary5X attribute
  */
-int16_t dotdot_get_color_control_primary5x(
+uint16_t dotdot_get_color_control_primary5x(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -35253,7 +35253,7 @@ sl_status_t dotdot_set_color_control_primary5x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_primary5x
+  uint16_t new_primary5x
   );
 
 /**
@@ -35339,7 +35339,7 @@ bool dotdot_is_supported_color_control_primary5y (
  *
  * @returns Primary5Y attribute
  */
-int16_t dotdot_get_color_control_primary5y(
+uint16_t dotdot_get_color_control_primary5y(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -35359,7 +35359,7 @@ sl_status_t dotdot_set_color_control_primary5y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_primary5y
+  uint16_t new_primary5y
   );
 
 /**
@@ -35445,7 +35445,7 @@ bool dotdot_is_supported_color_control_primary5_intensity (
  *
  * @returns Primary5Intensity attribute
  */
-int8_t dotdot_get_color_control_primary5_intensity(
+uint8_t dotdot_get_color_control_primary5_intensity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -35465,7 +35465,7 @@ sl_status_t dotdot_set_color_control_primary5_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_primary5_intensity
+  uint8_t new_primary5_intensity
   );
 
 /**
@@ -35551,7 +35551,7 @@ bool dotdot_is_supported_color_control_primary6x (
  *
  * @returns Primary6X attribute
  */
-int16_t dotdot_get_color_control_primary6x(
+uint16_t dotdot_get_color_control_primary6x(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -35571,7 +35571,7 @@ sl_status_t dotdot_set_color_control_primary6x(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_primary6x
+  uint16_t new_primary6x
   );
 
 /**
@@ -35657,7 +35657,7 @@ bool dotdot_is_supported_color_control_primary6y (
  *
  * @returns Primary6Y attribute
  */
-int16_t dotdot_get_color_control_primary6y(
+uint16_t dotdot_get_color_control_primary6y(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -35677,7 +35677,7 @@ sl_status_t dotdot_set_color_control_primary6y(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_primary6y
+  uint16_t new_primary6y
   );
 
 /**
@@ -35763,7 +35763,7 @@ bool dotdot_is_supported_color_control_primary6_intensity (
  *
  * @returns Primary6Intensity attribute
  */
-int8_t dotdot_get_color_control_primary6_intensity(
+uint8_t dotdot_get_color_control_primary6_intensity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -35783,7 +35783,7 @@ sl_status_t dotdot_set_color_control_primary6_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_primary6_intensity
+  uint8_t new_primary6_intensity
   );
 
 /**
@@ -35869,7 +35869,7 @@ bool dotdot_is_supported_color_control_white_pointx (
  *
  * @returns WhitePointX attribute
  */
-int16_t dotdot_get_color_control_white_pointx(
+uint16_t dotdot_get_color_control_white_pointx(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -35889,7 +35889,7 @@ sl_status_t dotdot_set_color_control_white_pointx(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_white_pointx
+  uint16_t new_white_pointx
   );
 
 /**
@@ -35975,7 +35975,7 @@ bool dotdot_is_supported_color_control_white_pointy (
  *
  * @returns WhitePointY attribute
  */
-int16_t dotdot_get_color_control_white_pointy(
+uint16_t dotdot_get_color_control_white_pointy(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -35995,7 +35995,7 @@ sl_status_t dotdot_set_color_control_white_pointy(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_white_pointy
+  uint16_t new_white_pointy
   );
 
 /**
@@ -36081,7 +36081,7 @@ bool dotdot_is_supported_color_control_color_pointrx (
  *
  * @returns ColorPointRX attribute
  */
-int16_t dotdot_get_color_control_color_pointrx(
+uint16_t dotdot_get_color_control_color_pointrx(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -36101,7 +36101,7 @@ sl_status_t dotdot_set_color_control_color_pointrx(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_color_pointrx
+  uint16_t new_color_pointrx
   );
 
 /**
@@ -36187,7 +36187,7 @@ bool dotdot_is_supported_color_control_color_pointry (
  *
  * @returns ColorPointRY attribute
  */
-int16_t dotdot_get_color_control_color_pointry(
+uint16_t dotdot_get_color_control_color_pointry(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -36207,7 +36207,7 @@ sl_status_t dotdot_set_color_control_color_pointry(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_color_pointry
+  uint16_t new_color_pointry
   );
 
 /**
@@ -36293,7 +36293,7 @@ bool dotdot_is_supported_color_control_color_pointr_intensity (
  *
  * @returns ColorPointRIntensity attribute
  */
-int8_t dotdot_get_color_control_color_pointr_intensity(
+uint8_t dotdot_get_color_control_color_pointr_intensity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -36313,7 +36313,7 @@ sl_status_t dotdot_set_color_control_color_pointr_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_color_pointr_intensity
+  uint8_t new_color_pointr_intensity
   );
 
 /**
@@ -36399,7 +36399,7 @@ bool dotdot_is_supported_color_control_color_pointgx (
  *
  * @returns ColorPointGX attribute
  */
-int16_t dotdot_get_color_control_color_pointgx(
+uint16_t dotdot_get_color_control_color_pointgx(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -36419,7 +36419,7 @@ sl_status_t dotdot_set_color_control_color_pointgx(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_color_pointgx
+  uint16_t new_color_pointgx
   );
 
 /**
@@ -36505,7 +36505,7 @@ bool dotdot_is_supported_color_control_color_pointgy (
  *
  * @returns ColorPointGY attribute
  */
-int16_t dotdot_get_color_control_color_pointgy(
+uint16_t dotdot_get_color_control_color_pointgy(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -36525,7 +36525,7 @@ sl_status_t dotdot_set_color_control_color_pointgy(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_color_pointgy
+  uint16_t new_color_pointgy
   );
 
 /**
@@ -36611,7 +36611,7 @@ bool dotdot_is_supported_color_control_color_pointg_intensity (
  *
  * @returns ColorPointGIntensity attribute
  */
-int8_t dotdot_get_color_control_color_pointg_intensity(
+uint8_t dotdot_get_color_control_color_pointg_intensity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -36631,7 +36631,7 @@ sl_status_t dotdot_set_color_control_color_pointg_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_color_pointg_intensity
+  uint8_t new_color_pointg_intensity
   );
 
 /**
@@ -36717,7 +36717,7 @@ bool dotdot_is_supported_color_control_color_pointbx (
  *
  * @returns ColorPointBX attribute
  */
-int16_t dotdot_get_color_control_color_pointbx(
+uint16_t dotdot_get_color_control_color_pointbx(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -36737,7 +36737,7 @@ sl_status_t dotdot_set_color_control_color_pointbx(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_color_pointbx
+  uint16_t new_color_pointbx
   );
 
 /**
@@ -36823,7 +36823,7 @@ bool dotdot_is_supported_color_control_color_pointby (
  *
  * @returns ColorPointBY attribute
  */
-int16_t dotdot_get_color_control_color_pointby(
+uint16_t dotdot_get_color_control_color_pointby(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -36843,7 +36843,7 @@ sl_status_t dotdot_set_color_control_color_pointby(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_color_pointby
+  uint16_t new_color_pointby
   );
 
 /**
@@ -36929,7 +36929,7 @@ bool dotdot_is_supported_color_control_color_pointb_intensity (
  *
  * @returns ColorPointBIntensity attribute
  */
-int8_t dotdot_get_color_control_color_pointb_intensity(
+uint8_t dotdot_get_color_control_color_pointb_intensity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -36949,7 +36949,7 @@ sl_status_t dotdot_set_color_control_color_pointb_intensity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_color_pointb_intensity
+  uint8_t new_color_pointb_intensity
   );
 
 /**
@@ -37035,7 +37035,7 @@ bool dotdot_is_supported_color_control_enhanced_current_hue (
  *
  * @returns EnhancedCurrentHue attribute
  */
-int16_t dotdot_get_color_control_enhanced_current_hue(
+uint16_t dotdot_get_color_control_enhanced_current_hue(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -37055,7 +37055,7 @@ sl_status_t dotdot_set_color_control_enhanced_current_hue(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_enhanced_current_hue
+  uint16_t new_enhanced_current_hue
   );
 
 /**
@@ -37247,7 +37247,7 @@ bool dotdot_is_supported_color_control_color_loop_active (
  *
  * @returns ColorLoopActive attribute
  */
-int8_t dotdot_get_color_control_color_loop_active(
+uint8_t dotdot_get_color_control_color_loop_active(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -37267,7 +37267,7 @@ sl_status_t dotdot_set_color_control_color_loop_active(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_color_loop_active
+  uint8_t new_color_loop_active
   );
 
 /**
@@ -37353,7 +37353,7 @@ bool dotdot_is_supported_color_control_color_loop_direction (
  *
  * @returns ColorLoopDirection attribute
  */
-int8_t dotdot_get_color_control_color_loop_direction(
+uint8_t dotdot_get_color_control_color_loop_direction(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -37373,7 +37373,7 @@ sl_status_t dotdot_set_color_control_color_loop_direction(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_color_loop_direction
+  uint8_t new_color_loop_direction
   );
 
 /**
@@ -37459,7 +37459,7 @@ bool dotdot_is_supported_color_control_color_loop_time (
  *
  * @returns ColorLoopTime attribute
  */
-int16_t dotdot_get_color_control_color_loop_time(
+uint16_t dotdot_get_color_control_color_loop_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -37479,7 +37479,7 @@ sl_status_t dotdot_set_color_control_color_loop_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_color_loop_time
+  uint16_t new_color_loop_time
   );
 
 /**
@@ -37565,7 +37565,7 @@ bool dotdot_is_supported_color_control_color_loop_start_enhanced_hue (
  *
  * @returns ColorLoopStartEnhancedHue attribute
  */
-int16_t dotdot_get_color_control_color_loop_start_enhanced_hue(
+uint16_t dotdot_get_color_control_color_loop_start_enhanced_hue(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -37585,7 +37585,7 @@ sl_status_t dotdot_set_color_control_color_loop_start_enhanced_hue(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_color_loop_start_enhanced_hue
+  uint16_t new_color_loop_start_enhanced_hue
   );
 
 /**
@@ -37671,7 +37671,7 @@ bool dotdot_is_supported_color_control_color_loop_stored_enhanced_hue (
  *
  * @returns ColorLoopStoredEnhancedHue attribute
  */
-int16_t dotdot_get_color_control_color_loop_stored_enhanced_hue(
+uint16_t dotdot_get_color_control_color_loop_stored_enhanced_hue(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -37691,7 +37691,7 @@ sl_status_t dotdot_set_color_control_color_loop_stored_enhanced_hue(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_color_loop_stored_enhanced_hue
+  uint16_t new_color_loop_stored_enhanced_hue
   );
 
 /**
@@ -37883,7 +37883,7 @@ bool dotdot_is_supported_color_control_color_temp_physical_min_mireds (
  *
  * @returns ColorTempPhysicalMinMireds attribute
  */
-int16_t dotdot_get_color_control_color_temp_physical_min_mireds(
+uint16_t dotdot_get_color_control_color_temp_physical_min_mireds(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -37903,7 +37903,7 @@ sl_status_t dotdot_set_color_control_color_temp_physical_min_mireds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_color_temp_physical_min_mireds
+  uint16_t new_color_temp_physical_min_mireds
   );
 
 /**
@@ -37989,7 +37989,7 @@ bool dotdot_is_supported_color_control_color_temp_physical_max_mireds (
  *
  * @returns ColorTempPhysicalMaxMireds attribute
  */
-int16_t dotdot_get_color_control_color_temp_physical_max_mireds(
+uint16_t dotdot_get_color_control_color_temp_physical_max_mireds(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -38009,7 +38009,7 @@ sl_status_t dotdot_set_color_control_color_temp_physical_max_mireds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_color_temp_physical_max_mireds
+  uint16_t new_color_temp_physical_max_mireds
   );
 
 /**
@@ -38095,7 +38095,7 @@ bool dotdot_is_supported_color_control_couple_color_temp_to_level_min_mireds (
  *
  * @returns CoupleColorTempToLevelMinMireds attribute
  */
-int16_t dotdot_get_color_control_couple_color_temp_to_level_min_mireds(
+uint16_t dotdot_get_color_control_couple_color_temp_to_level_min_mireds(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -38115,7 +38115,7 @@ sl_status_t dotdot_set_color_control_couple_color_temp_to_level_min_mireds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_couple_color_temp_to_level_min_mireds
+  uint16_t new_couple_color_temp_to_level_min_mireds
   );
 
 /**
@@ -38201,7 +38201,7 @@ bool dotdot_is_supported_color_control_start_up_color_temperature_mireds (
  *
  * @returns StartUpColorTemperatureMireds attribute
  */
-int16_t dotdot_get_color_control_start_up_color_temperature_mireds(
+uint16_t dotdot_get_color_control_start_up_color_temperature_mireds(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -38221,7 +38221,7 @@ sl_status_t dotdot_set_color_control_start_up_color_temperature_mireds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_start_up_color_temperature_mireds
+  uint16_t new_start_up_color_temperature_mireds
   );
 
 /**
@@ -38335,7 +38335,7 @@ bool dotdot_is_supported_ballast_configuration_physical_min_level (
  *
  * @returns PhysicalMinLevel attribute
  */
-int8_t dotdot_get_ballast_configuration_physical_min_level(
+uint8_t dotdot_get_ballast_configuration_physical_min_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -38355,7 +38355,7 @@ sl_status_t dotdot_set_ballast_configuration_physical_min_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_physical_min_level
+  uint8_t new_physical_min_level
   );
 
 /**
@@ -38441,7 +38441,7 @@ bool dotdot_is_supported_ballast_configuration_physical_max_level (
  *
  * @returns PhysicalMaxLevel attribute
  */
-int8_t dotdot_get_ballast_configuration_physical_max_level(
+uint8_t dotdot_get_ballast_configuration_physical_max_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -38461,7 +38461,7 @@ sl_status_t dotdot_set_ballast_configuration_physical_max_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_physical_max_level
+  uint8_t new_physical_max_level
   );
 
 /**
@@ -38653,7 +38653,7 @@ bool dotdot_is_supported_ballast_configuration_min_level (
  *
  * @returns MinLevel attribute
  */
-int8_t dotdot_get_ballast_configuration_min_level(
+uint8_t dotdot_get_ballast_configuration_min_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -38673,7 +38673,7 @@ sl_status_t dotdot_set_ballast_configuration_min_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_min_level
+  uint8_t new_min_level
   );
 
 /**
@@ -38759,7 +38759,7 @@ bool dotdot_is_supported_ballast_configuration_max_level (
  *
  * @returns MaxLevel attribute
  */
-int8_t dotdot_get_ballast_configuration_max_level(
+uint8_t dotdot_get_ballast_configuration_max_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -38779,7 +38779,7 @@ sl_status_t dotdot_set_ballast_configuration_max_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_max_level
+  uint8_t new_max_level
   );
 
 /**
@@ -38865,7 +38865,7 @@ bool dotdot_is_supported_ballast_configuration_power_on_level (
  *
  * @returns PowerOnLevel attribute
  */
-int8_t dotdot_get_ballast_configuration_power_on_level(
+uint8_t dotdot_get_ballast_configuration_power_on_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -38885,7 +38885,7 @@ sl_status_t dotdot_set_ballast_configuration_power_on_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_power_on_level
+  uint8_t new_power_on_level
   );
 
 /**
@@ -38971,7 +38971,7 @@ bool dotdot_is_supported_ballast_configuration_power_on_fade_time (
  *
  * @returns PowerOnFadeTime attribute
  */
-int16_t dotdot_get_ballast_configuration_power_on_fade_time(
+uint16_t dotdot_get_ballast_configuration_power_on_fade_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -38991,7 +38991,7 @@ sl_status_t dotdot_set_ballast_configuration_power_on_fade_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_power_on_fade_time
+  uint16_t new_power_on_fade_time
   );
 
 /**
@@ -39077,7 +39077,7 @@ bool dotdot_is_supported_ballast_configuration_intrinsic_ballast_factor (
  *
  * @returns IntrinsicBallastFactor attribute
  */
-int8_t dotdot_get_ballast_configuration_intrinsic_ballast_factor(
+uint8_t dotdot_get_ballast_configuration_intrinsic_ballast_factor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -39097,7 +39097,7 @@ sl_status_t dotdot_set_ballast_configuration_intrinsic_ballast_factor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_intrinsic_ballast_factor
+  uint8_t new_intrinsic_ballast_factor
   );
 
 /**
@@ -39183,7 +39183,7 @@ bool dotdot_is_supported_ballast_configuration_ballast_factor_adjustment (
  *
  * @returns BallastFactorAdjustment attribute
  */
-int8_t dotdot_get_ballast_configuration_ballast_factor_adjustment(
+uint8_t dotdot_get_ballast_configuration_ballast_factor_adjustment(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -39203,7 +39203,7 @@ sl_status_t dotdot_set_ballast_configuration_ballast_factor_adjustment(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_ballast_factor_adjustment
+  uint8_t new_ballast_factor_adjustment
   );
 
 /**
@@ -39289,7 +39289,7 @@ bool dotdot_is_supported_ballast_configuration_lamp_quantity (
  *
  * @returns LampQuantity attribute
  */
-int8_t dotdot_get_ballast_configuration_lamp_quantity(
+uint8_t dotdot_get_ballast_configuration_lamp_quantity(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -39309,7 +39309,7 @@ sl_status_t dotdot_set_ballast_configuration_lamp_quantity(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_lamp_quantity
+  uint8_t new_lamp_quantity
   );
 
 /**
@@ -39613,7 +39613,7 @@ bool dotdot_is_supported_ballast_configuration_lamp_rated_hours (
  *
  * @returns LampRatedHours attribute
  */
-int32_t dotdot_get_ballast_configuration_lamp_rated_hours(
+uint32_t dotdot_get_ballast_configuration_lamp_rated_hours(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -39633,7 +39633,7 @@ sl_status_t dotdot_set_ballast_configuration_lamp_rated_hours(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_lamp_rated_hours
+  uint32_t new_lamp_rated_hours
   );
 
 /**
@@ -39719,7 +39719,7 @@ bool dotdot_is_supported_ballast_configuration_lamp_burn_hours (
  *
  * @returns LampBurnHours attribute
  */
-int32_t dotdot_get_ballast_configuration_lamp_burn_hours(
+uint32_t dotdot_get_ballast_configuration_lamp_burn_hours(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -39739,7 +39739,7 @@ sl_status_t dotdot_set_ballast_configuration_lamp_burn_hours(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_lamp_burn_hours
+  uint32_t new_lamp_burn_hours
   );
 
 /**
@@ -39931,7 +39931,7 @@ bool dotdot_is_supported_ballast_configuration_lamp_burn_hours_trip_point (
  *
  * @returns LampBurnHoursTripPoint attribute
  */
-int32_t dotdot_get_ballast_configuration_lamp_burn_hours_trip_point(
+uint32_t dotdot_get_ballast_configuration_lamp_burn_hours_trip_point(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -39951,7 +39951,7 @@ sl_status_t dotdot_set_ballast_configuration_lamp_burn_hours_trip_point(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_lamp_burn_hours_trip_point
+  uint32_t new_lamp_burn_hours_trip_point
   );
 
 /**
@@ -40065,7 +40065,7 @@ bool dotdot_is_supported_illuminance_measurement_measured_value (
  *
  * @returns MeasuredValue attribute
  */
-int16_t dotdot_get_illuminance_measurement_measured_value(
+uint16_t dotdot_get_illuminance_measurement_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -40085,7 +40085,7 @@ sl_status_t dotdot_set_illuminance_measurement_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_measured_value
+  uint16_t new_measured_value
   );
 
 /**
@@ -40171,7 +40171,7 @@ bool dotdot_is_supported_illuminance_measurement_min_measured_value (
  *
  * @returns MinMeasuredValue attribute
  */
-int16_t dotdot_get_illuminance_measurement_min_measured_value(
+uint16_t dotdot_get_illuminance_measurement_min_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -40191,7 +40191,7 @@ sl_status_t dotdot_set_illuminance_measurement_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_min_measured_value
+  uint16_t new_min_measured_value
   );
 
 /**
@@ -40277,7 +40277,7 @@ bool dotdot_is_supported_illuminance_measurement_max_measured_value (
  *
  * @returns MaxMeasuredValue attribute
  */
-int16_t dotdot_get_illuminance_measurement_max_measured_value(
+uint16_t dotdot_get_illuminance_measurement_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -40297,7 +40297,7 @@ sl_status_t dotdot_set_illuminance_measurement_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_max_measured_value
+  uint16_t new_max_measured_value
   );
 
 /**
@@ -40383,7 +40383,7 @@ bool dotdot_is_supported_illuminance_measurement_tolerance (
  *
  * @returns Tolerance attribute
  */
-int16_t dotdot_get_illuminance_measurement_tolerance(
+uint16_t dotdot_get_illuminance_measurement_tolerance(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -40403,7 +40403,7 @@ sl_status_t dotdot_set_illuminance_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_tolerance
+  uint16_t new_tolerance
   );
 
 /**
@@ -40835,7 +40835,7 @@ bool dotdot_is_supported_illuminance_level_sensing_illuminance_target_level (
  *
  * @returns IlluminanceTargetLevel attribute
  */
-int16_t dotdot_get_illuminance_level_sensing_illuminance_target_level(
+uint16_t dotdot_get_illuminance_level_sensing_illuminance_target_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -40855,7 +40855,7 @@ sl_status_t dotdot_set_illuminance_level_sensing_illuminance_target_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_illuminance_target_level
+  uint16_t new_illuminance_target_level
   );
 
 /**
@@ -41287,7 +41287,7 @@ bool dotdot_is_supported_temperature_measurement_tolerance (
  *
  * @returns Tolerance attribute
  */
-int16_t dotdot_get_temperature_measurement_tolerance(
+uint16_t dotdot_get_temperature_measurement_tolerance(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -41307,7 +41307,7 @@ sl_status_t dotdot_set_temperature_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_tolerance
+  uint16_t new_tolerance
   );
 
 /**
@@ -41739,7 +41739,7 @@ bool dotdot_is_supported_pressure_measurement_tolerance (
  *
  * @returns Tolerance attribute
  */
-int16_t dotdot_get_pressure_measurement_tolerance(
+uint16_t dotdot_get_pressure_measurement_tolerance(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -41759,7 +41759,7 @@ sl_status_t dotdot_set_pressure_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_tolerance
+  uint16_t new_tolerance
   );
 
 /**
@@ -42163,7 +42163,7 @@ bool dotdot_is_supported_pressure_measurement_scaled_tolerance (
  *
  * @returns ScaledTolerance attribute
  */
-int16_t dotdot_get_pressure_measurement_scaled_tolerance(
+uint16_t dotdot_get_pressure_measurement_scaled_tolerance(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -42183,7 +42183,7 @@ sl_status_t dotdot_set_pressure_measurement_scaled_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_scaled_tolerance
+  uint16_t new_scaled_tolerance
   );
 
 /**
@@ -42403,7 +42403,7 @@ bool dotdot_is_supported_flow_measurement_measured_value (
  *
  * @returns MeasuredValue attribute
  */
-int16_t dotdot_get_flow_measurement_measured_value(
+uint16_t dotdot_get_flow_measurement_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -42423,7 +42423,7 @@ sl_status_t dotdot_set_flow_measurement_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_measured_value
+  uint16_t new_measured_value
   );
 
 /**
@@ -42509,7 +42509,7 @@ bool dotdot_is_supported_flow_measurement_min_measured_value (
  *
  * @returns MinMeasuredValue attribute
  */
-int16_t dotdot_get_flow_measurement_min_measured_value(
+uint16_t dotdot_get_flow_measurement_min_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -42529,7 +42529,7 @@ sl_status_t dotdot_set_flow_measurement_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_min_measured_value
+  uint16_t new_min_measured_value
   );
 
 /**
@@ -42615,7 +42615,7 @@ bool dotdot_is_supported_flow_measurement_max_measured_value (
  *
  * @returns MaxMeasuredValue attribute
  */
-int16_t dotdot_get_flow_measurement_max_measured_value(
+uint16_t dotdot_get_flow_measurement_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -42635,7 +42635,7 @@ sl_status_t dotdot_set_flow_measurement_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_max_measured_value
+  uint16_t new_max_measured_value
   );
 
 /**
@@ -42721,7 +42721,7 @@ bool dotdot_is_supported_flow_measurement_tolerance (
  *
  * @returns Tolerance attribute
  */
-int16_t dotdot_get_flow_measurement_tolerance(
+uint16_t dotdot_get_flow_measurement_tolerance(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -42741,7 +42741,7 @@ sl_status_t dotdot_set_flow_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_tolerance
+  uint16_t new_tolerance
   );
 
 /**
@@ -42855,7 +42855,7 @@ bool dotdot_is_supported_relativity_humidity_measured_value (
  *
  * @returns MeasuredValue attribute
  */
-int16_t dotdot_get_relativity_humidity_measured_value(
+uint16_t dotdot_get_relativity_humidity_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -42875,7 +42875,7 @@ sl_status_t dotdot_set_relativity_humidity_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_measured_value
+  uint16_t new_measured_value
   );
 
 /**
@@ -42961,7 +42961,7 @@ bool dotdot_is_supported_relativity_humidity_min_measured_value (
  *
  * @returns MinMeasuredValue attribute
  */
-int16_t dotdot_get_relativity_humidity_min_measured_value(
+uint16_t dotdot_get_relativity_humidity_min_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -42981,7 +42981,7 @@ sl_status_t dotdot_set_relativity_humidity_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_min_measured_value
+  uint16_t new_min_measured_value
   );
 
 /**
@@ -43067,7 +43067,7 @@ bool dotdot_is_supported_relativity_humidity_max_measured_value (
  *
  * @returns MaxMeasuredValue attribute
  */
-int16_t dotdot_get_relativity_humidity_max_measured_value(
+uint16_t dotdot_get_relativity_humidity_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -43087,7 +43087,7 @@ sl_status_t dotdot_set_relativity_humidity_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_max_measured_value
+  uint16_t new_max_measured_value
   );
 
 /**
@@ -43173,7 +43173,7 @@ bool dotdot_is_supported_relativity_humidity_tolerance (
  *
  * @returns Tolerance attribute
  */
-int16_t dotdot_get_relativity_humidity_tolerance(
+uint16_t dotdot_get_relativity_humidity_tolerance(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -43193,7 +43193,7 @@ sl_status_t dotdot_set_relativity_humidity_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_tolerance
+  uint16_t new_tolerance
   );
 
 /**
@@ -43625,7 +43625,7 @@ bool dotdot_is_supported_occupancy_sensing_pir_occupied_to_unoccupied_delay (
  *
  * @returns PIROccupiedToUnoccupiedDelay attribute
  */
-int16_t dotdot_get_occupancy_sensing_pir_occupied_to_unoccupied_delay(
+uint16_t dotdot_get_occupancy_sensing_pir_occupied_to_unoccupied_delay(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -43645,7 +43645,7 @@ sl_status_t dotdot_set_occupancy_sensing_pir_occupied_to_unoccupied_delay(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_pir_occupied_to_unoccupied_delay
+  uint16_t new_pir_occupied_to_unoccupied_delay
   );
 
 /**
@@ -43731,7 +43731,7 @@ bool dotdot_is_supported_occupancy_sensing_pir_unoccupied_to_occupied_delay (
  *
  * @returns PIRUnoccupiedToOccupiedDelay attribute
  */
-int16_t dotdot_get_occupancy_sensing_pir_unoccupied_to_occupied_delay(
+uint16_t dotdot_get_occupancy_sensing_pir_unoccupied_to_occupied_delay(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -43751,7 +43751,7 @@ sl_status_t dotdot_set_occupancy_sensing_pir_unoccupied_to_occupied_delay(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_pir_unoccupied_to_occupied_delay
+  uint16_t new_pir_unoccupied_to_occupied_delay
   );
 
 /**
@@ -43837,7 +43837,7 @@ bool dotdot_is_supported_occupancy_sensing_pir_unoccupied_to_occupied_threshold 
  *
  * @returns PIRUnoccupiedToOccupiedThreshold attribute
  */
-int8_t dotdot_get_occupancy_sensing_pir_unoccupied_to_occupied_threshold(
+uint8_t dotdot_get_occupancy_sensing_pir_unoccupied_to_occupied_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -43857,7 +43857,7 @@ sl_status_t dotdot_set_occupancy_sensing_pir_unoccupied_to_occupied_threshold(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_pir_unoccupied_to_occupied_threshold
+  uint8_t new_pir_unoccupied_to_occupied_threshold
   );
 
 /**
@@ -43943,7 +43943,7 @@ bool dotdot_is_supported_occupancy_sensing_ultrasonic_occupied_to_unoccupied_del
  *
  * @returns UltrasonicOccupiedToUnoccupiedDelay attribute
  */
-int16_t dotdot_get_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay(
+uint16_t dotdot_get_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -43963,7 +43963,7 @@ sl_status_t dotdot_set_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_ultrasonic_occupied_to_unoccupied_delay
+  uint16_t new_ultrasonic_occupied_to_unoccupied_delay
   );
 
 /**
@@ -44049,7 +44049,7 @@ bool dotdot_is_supported_occupancy_sensing_ultrasonic_unoccupied_to_occupied_del
  *
  * @returns UltrasonicUnoccupiedToOccupiedDelay attribute
  */
-int16_t dotdot_get_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay(
+uint16_t dotdot_get_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -44069,7 +44069,7 @@ sl_status_t dotdot_set_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_ultrasonic_unoccupied_to_occupied_delay
+  uint16_t new_ultrasonic_unoccupied_to_occupied_delay
   );
 
 /**
@@ -44155,7 +44155,7 @@ bool dotdot_is_supported_occupancy_sensing_ultrasonic_unoccupied_to_occupied_thr
  *
  * @returns UltrasonicUnoccupiedToOccupiedThreshold attribute
  */
-int8_t dotdot_get_occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold(
+uint8_t dotdot_get_occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -44175,7 +44175,7 @@ sl_status_t dotdot_set_occupancy_sensing_ultrasonic_unoccupied_to_occupied_thres
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_ultrasonic_unoccupied_to_occupied_threshold
+  uint8_t new_ultrasonic_unoccupied_to_occupied_threshold
   );
 
 /**
@@ -44261,7 +44261,7 @@ bool dotdot_is_supported_occupancy_sensing_physical_contact_occupied_to_unoccupi
  *
  * @returns PhysicalContactOccupiedToUnoccupiedDelay attribute
  */
-int16_t dotdot_get_occupancy_sensing_physical_contact_occupied_to_unoccupied_delay(
+uint16_t dotdot_get_occupancy_sensing_physical_contact_occupied_to_unoccupied_delay(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -44281,7 +44281,7 @@ sl_status_t dotdot_set_occupancy_sensing_physical_contact_occupied_to_unoccupied
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_physical_contact_occupied_to_unoccupied_delay
+  uint16_t new_physical_contact_occupied_to_unoccupied_delay
   );
 
 /**
@@ -44367,7 +44367,7 @@ bool dotdot_is_supported_occupancy_sensing_physical_contact_unoccupied_to_occupi
  *
  * @returns PhysicalContactUnoccupiedToOccupiedDelay attribute
  */
-int16_t dotdot_get_occupancy_sensing_physical_contact_unoccupied_to_occupied_delay(
+uint16_t dotdot_get_occupancy_sensing_physical_contact_unoccupied_to_occupied_delay(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -44387,7 +44387,7 @@ sl_status_t dotdot_set_occupancy_sensing_physical_contact_unoccupied_to_occupied
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_physical_contact_unoccupied_to_occupied_delay
+  uint16_t new_physical_contact_unoccupied_to_occupied_delay
   );
 
 /**
@@ -44473,7 +44473,7 @@ bool dotdot_is_supported_occupancy_sensing_physical_contact_unoccupied_to_occupi
  *
  * @returns PhysicalContactUnoccupiedToOccupiedThreshold attribute
  */
-int8_t dotdot_get_occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold(
+uint8_t dotdot_get_occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -44493,7 +44493,7 @@ sl_status_t dotdot_set_occupancy_sensing_physical_contact_unoccupied_to_occupied
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_physical_contact_unoccupied_to_occupied_threshold
+  uint8_t new_physical_contact_unoccupied_to_occupied_threshold
   );
 
 /**
@@ -44607,7 +44607,7 @@ bool dotdot_is_supported_soil_moisture_measured_value (
  *
  * @returns MeasuredValue attribute
  */
-int16_t dotdot_get_soil_moisture_measured_value(
+uint16_t dotdot_get_soil_moisture_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -44627,7 +44627,7 @@ sl_status_t dotdot_set_soil_moisture_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_measured_value
+  uint16_t new_measured_value
   );
 
 /**
@@ -44713,7 +44713,7 @@ bool dotdot_is_supported_soil_moisture_min_measured_value (
  *
  * @returns MinMeasuredValue attribute
  */
-int16_t dotdot_get_soil_moisture_min_measured_value(
+uint16_t dotdot_get_soil_moisture_min_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -44733,7 +44733,7 @@ sl_status_t dotdot_set_soil_moisture_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_min_measured_value
+  uint16_t new_min_measured_value
   );
 
 /**
@@ -44819,7 +44819,7 @@ bool dotdot_is_supported_soil_moisture_max_measured_value (
  *
  * @returns MaxMeasuredValue attribute
  */
-int16_t dotdot_get_soil_moisture_max_measured_value(
+uint16_t dotdot_get_soil_moisture_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -44839,7 +44839,7 @@ sl_status_t dotdot_set_soil_moisture_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_max_measured_value
+  uint16_t new_max_measured_value
   );
 
 /**
@@ -44925,7 +44925,7 @@ bool dotdot_is_supported_soil_moisture_tolerance (
  *
  * @returns Tolerance attribute
  */
-int16_t dotdot_get_soil_moisture_tolerance(
+uint16_t dotdot_get_soil_moisture_tolerance(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -44945,7 +44945,7 @@ sl_status_t dotdot_set_soil_moisture_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_tolerance
+  uint16_t new_tolerance
   );
 
 /**
@@ -45059,7 +45059,7 @@ bool dotdot_is_supported_ph_measurement_measured_value (
  *
  * @returns MeasuredValue attribute
  */
-int16_t dotdot_get_ph_measurement_measured_value(
+uint16_t dotdot_get_ph_measurement_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -45079,7 +45079,7 @@ sl_status_t dotdot_set_ph_measurement_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_measured_value
+  uint16_t new_measured_value
   );
 
 /**
@@ -45165,7 +45165,7 @@ bool dotdot_is_supported_ph_measurement_min_measured_value (
  *
  * @returns MinMeasuredValue attribute
  */
-int16_t dotdot_get_ph_measurement_min_measured_value(
+uint16_t dotdot_get_ph_measurement_min_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -45185,7 +45185,7 @@ sl_status_t dotdot_set_ph_measurement_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_min_measured_value
+  uint16_t new_min_measured_value
   );
 
 /**
@@ -45271,7 +45271,7 @@ bool dotdot_is_supported_ph_measurement_max_measured_value (
  *
  * @returns MaxMeasuredValue attribute
  */
-int16_t dotdot_get_ph_measurement_max_measured_value(
+uint16_t dotdot_get_ph_measurement_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -45291,7 +45291,7 @@ sl_status_t dotdot_set_ph_measurement_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_max_measured_value
+  uint16_t new_max_measured_value
   );
 
 /**
@@ -45377,7 +45377,7 @@ bool dotdot_is_supported_ph_measurement_tolerance (
  *
  * @returns Tolerance attribute
  */
-int16_t dotdot_get_ph_measurement_tolerance(
+uint16_t dotdot_get_ph_measurement_tolerance(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -45397,7 +45397,7 @@ sl_status_t dotdot_set_ph_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_tolerance
+  uint16_t new_tolerance
   );
 
 /**
@@ -45511,7 +45511,7 @@ bool dotdot_is_supported_electrical_conductivity_measurement_measured_value (
  *
  * @returns MeasuredValue attribute
  */
-int16_t dotdot_get_electrical_conductivity_measurement_measured_value(
+uint16_t dotdot_get_electrical_conductivity_measurement_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -45531,7 +45531,7 @@ sl_status_t dotdot_set_electrical_conductivity_measurement_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_measured_value
+  uint16_t new_measured_value
   );
 
 /**
@@ -45617,7 +45617,7 @@ bool dotdot_is_supported_electrical_conductivity_measurement_min_measured_value 
  *
  * @returns MinMeasuredValue attribute
  */
-int16_t dotdot_get_electrical_conductivity_measurement_min_measured_value(
+uint16_t dotdot_get_electrical_conductivity_measurement_min_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -45637,7 +45637,7 @@ sl_status_t dotdot_set_electrical_conductivity_measurement_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_min_measured_value
+  uint16_t new_min_measured_value
   );
 
 /**
@@ -45723,7 +45723,7 @@ bool dotdot_is_supported_electrical_conductivity_measurement_max_measured_value 
  *
  * @returns MaxMeasuredValue attribute
  */
-int16_t dotdot_get_electrical_conductivity_measurement_max_measured_value(
+uint16_t dotdot_get_electrical_conductivity_measurement_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -45743,7 +45743,7 @@ sl_status_t dotdot_set_electrical_conductivity_measurement_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_max_measured_value
+  uint16_t new_max_measured_value
   );
 
 /**
@@ -45829,7 +45829,7 @@ bool dotdot_is_supported_electrical_conductivity_measurement_tolerance (
  *
  * @returns Tolerance attribute
  */
-int16_t dotdot_get_electrical_conductivity_measurement_tolerance(
+uint16_t dotdot_get_electrical_conductivity_measurement_tolerance(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -45849,7 +45849,7 @@ sl_status_t dotdot_set_electrical_conductivity_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_tolerance
+  uint16_t new_tolerance
   );
 
 /**
@@ -45963,7 +45963,7 @@ bool dotdot_is_supported_wind_speed_measurement_measured_value (
  *
  * @returns MeasuredValue attribute
  */
-int16_t dotdot_get_wind_speed_measurement_measured_value(
+uint16_t dotdot_get_wind_speed_measurement_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -45983,7 +45983,7 @@ sl_status_t dotdot_set_wind_speed_measurement_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_measured_value
+  uint16_t new_measured_value
   );
 
 /**
@@ -46069,7 +46069,7 @@ bool dotdot_is_supported_wind_speed_measurement_min_measured_value (
  *
  * @returns MinMeasuredValue attribute
  */
-int16_t dotdot_get_wind_speed_measurement_min_measured_value(
+uint16_t dotdot_get_wind_speed_measurement_min_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -46089,7 +46089,7 @@ sl_status_t dotdot_set_wind_speed_measurement_min_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_min_measured_value
+  uint16_t new_min_measured_value
   );
 
 /**
@@ -46175,7 +46175,7 @@ bool dotdot_is_supported_wind_speed_measurement_max_measured_value (
  *
  * @returns MaxMeasuredValue attribute
  */
-int16_t dotdot_get_wind_speed_measurement_max_measured_value(
+uint16_t dotdot_get_wind_speed_measurement_max_measured_value(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -46195,7 +46195,7 @@ sl_status_t dotdot_set_wind_speed_measurement_max_measured_value(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_max_measured_value
+  uint16_t new_max_measured_value
   );
 
 /**
@@ -46281,7 +46281,7 @@ bool dotdot_is_supported_wind_speed_measurement_tolerance (
  *
  * @returns Tolerance attribute
  */
-int16_t dotdot_get_wind_speed_measurement_tolerance(
+uint16_t dotdot_get_wind_speed_measurement_tolerance(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -46301,7 +46301,7 @@ sl_status_t dotdot_set_wind_speed_measurement_tolerance(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_tolerance
+  uint16_t new_tolerance
   );
 
 /**
@@ -48195,7 +48195,7 @@ bool dotdot_is_supported_ias_zone_zoneid (
  *
  * @returns ZoneID attribute
  */
-int8_t dotdot_get_ias_zone_zoneid(
+uint8_t dotdot_get_ias_zone_zoneid(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -48215,7 +48215,7 @@ sl_status_t dotdot_set_ias_zone_zoneid(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_zoneid
+  uint8_t new_zoneid
   );
 
 /**
@@ -48301,7 +48301,7 @@ bool dotdot_is_supported_ias_zone_number_of_zone_sensitivity_levels_supported (
  *
  * @returns NumberOfZoneSensitivityLevelsSupported attribute
  */
-int8_t dotdot_get_ias_zone_number_of_zone_sensitivity_levels_supported(
+uint8_t dotdot_get_ias_zone_number_of_zone_sensitivity_levels_supported(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -48321,7 +48321,7 @@ sl_status_t dotdot_set_ias_zone_number_of_zone_sensitivity_levels_supported(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_number_of_zone_sensitivity_levels_supported
+  uint8_t new_number_of_zone_sensitivity_levels_supported
   );
 
 /**
@@ -48407,7 +48407,7 @@ bool dotdot_is_supported_ias_zone_current_zone_sensitivity_level (
  *
  * @returns CurrentZoneSensitivityLevel attribute
  */
-int8_t dotdot_get_ias_zone_current_zone_sensitivity_level(
+uint8_t dotdot_get_ias_zone_current_zone_sensitivity_level(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -48427,7 +48427,7 @@ sl_status_t dotdot_set_ias_zone_current_zone_sensitivity_level(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_current_zone_sensitivity_level
+  uint8_t new_current_zone_sensitivity_level
   );
 
 /**
@@ -48541,7 +48541,7 @@ bool dotdot_is_supported_iaswd_max_duration (
  *
  * @returns MaxDuration attribute
  */
-int16_t dotdot_get_iaswd_max_duration(
+uint16_t dotdot_get_iaswd_max_duration(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -48561,7 +48561,7 @@ sl_status_t dotdot_set_iaswd_max_duration(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_max_duration
+  uint16_t new_max_duration
   );
 
 /**
@@ -48675,7 +48675,7 @@ bool dotdot_is_supported_metering_current_summation_delivered (
  *
  * @returns CurrentSummationDelivered attribute
  */
-int64_t dotdot_get_metering_current_summation_delivered(
+uint64_t dotdot_get_metering_current_summation_delivered(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -48695,7 +48695,7 @@ sl_status_t dotdot_set_metering_current_summation_delivered(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int64_t new_current_summation_delivered
+  uint64_t new_current_summation_delivered
   );
 
 /**
@@ -48781,7 +48781,7 @@ bool dotdot_is_supported_metering_current_summation_received (
  *
  * @returns CurrentSummationReceived attribute
  */
-int64_t dotdot_get_metering_current_summation_received(
+uint64_t dotdot_get_metering_current_summation_received(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -48801,7 +48801,7 @@ sl_status_t dotdot_set_metering_current_summation_received(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int64_t new_current_summation_received
+  uint64_t new_current_summation_received
   );
 
 /**
@@ -48887,7 +48887,7 @@ bool dotdot_is_supported_metering_current_max_demand_delivered (
  *
  * @returns CurrentMaxDemandDelivered attribute
  */
-int64_t dotdot_get_metering_current_max_demand_delivered(
+uint64_t dotdot_get_metering_current_max_demand_delivered(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -48907,7 +48907,7 @@ sl_status_t dotdot_set_metering_current_max_demand_delivered(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int64_t new_current_max_demand_delivered
+  uint64_t new_current_max_demand_delivered
   );
 
 /**
@@ -49205,7 +49205,7 @@ bool dotdot_is_supported_metering_reading_snap_shot_time (
  *
  * @returns ReadingSnapShotTime attribute
  */
-uint8_t dotdot_get_metering_reading_snap_shot_time(
+uint32_t dotdot_get_metering_reading_snap_shot_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -49225,7 +49225,7 @@ sl_status_t dotdot_set_metering_reading_snap_shot_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_reading_snap_shot_time
+  uint32_t new_reading_snap_shot_time
   );
 
 /**
@@ -49311,7 +49311,7 @@ bool dotdot_is_supported_metering_current_max_demand_delivered_time (
  *
  * @returns CurrentMaxDemandDeliveredTime attribute
  */
-uint8_t dotdot_get_metering_current_max_demand_delivered_time(
+uint32_t dotdot_get_metering_current_max_demand_delivered_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -49331,7 +49331,7 @@ sl_status_t dotdot_set_metering_current_max_demand_delivered_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_current_max_demand_delivered_time
+  uint32_t new_current_max_demand_delivered_time
   );
 
 /**
@@ -49417,7 +49417,7 @@ bool dotdot_is_supported_metering_current_max_demand_received_time (
  *
  * @returns CurrentMaxDemandReceivedTime attribute
  */
-uint8_t dotdot_get_metering_current_max_demand_received_time(
+uint32_t dotdot_get_metering_current_max_demand_received_time(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -49437,7 +49437,7 @@ sl_status_t dotdot_set_metering_current_max_demand_received_time(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  uint8_t new_current_max_demand_received_time
+  uint32_t new_current_max_demand_received_time
   );
 
 /**
@@ -49523,7 +49523,7 @@ bool dotdot_is_supported_metering_default_update_period (
  *
  * @returns DefaultUpdatePeriod attribute
  */
-int8_t dotdot_get_metering_default_update_period(
+uint8_t dotdot_get_metering_default_update_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -49543,7 +49543,7 @@ sl_status_t dotdot_set_metering_default_update_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_default_update_period
+  uint8_t new_default_update_period
   );
 
 /**
@@ -49735,7 +49735,7 @@ bool dotdot_is_supported_metering_current_inlet_energy_carrier_summation (
  *
  * @returns CurrentInletEnergyCarrierSummation attribute
  */
-int64_t dotdot_get_metering_current_inlet_energy_carrier_summation(
+uint64_t dotdot_get_metering_current_inlet_energy_carrier_summation(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -49755,7 +49755,7 @@ sl_status_t dotdot_set_metering_current_inlet_energy_carrier_summation(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int64_t new_current_inlet_energy_carrier_summation
+  uint64_t new_current_inlet_energy_carrier_summation
   );
 
 /**
@@ -49841,7 +49841,7 @@ bool dotdot_is_supported_metering_current_outlet_energy_carrier_summation (
  *
  * @returns CurrentOutletEnergyCarrierSummation attribute
  */
-int64_t dotdot_get_metering_current_outlet_energy_carrier_summation(
+uint64_t dotdot_get_metering_current_outlet_energy_carrier_summation(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -49861,7 +49861,7 @@ sl_status_t dotdot_set_metering_current_outlet_energy_carrier_summation(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int64_t new_current_outlet_energy_carrier_summation
+  uint64_t new_current_outlet_energy_carrier_summation
   );
 
 /**
@@ -50265,7 +50265,7 @@ bool dotdot_is_supported_metering_multiplier (
  *
  * @returns Multiplier attribute
  */
-int32_t dotdot_get_metering_multiplier(
+uint32_t dotdot_get_metering_multiplier(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -50285,7 +50285,7 @@ sl_status_t dotdot_set_metering_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_multiplier
+  uint32_t new_multiplier
   );
 
 /**
@@ -50371,7 +50371,7 @@ bool dotdot_is_supported_metering_divisor (
  *
  * @returns Divisor attribute
  */
-int32_t dotdot_get_metering_divisor(
+uint32_t dotdot_get_metering_divisor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -50391,7 +50391,7 @@ sl_status_t dotdot_set_metering_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_divisor
+  uint32_t new_divisor
   );
 
 /**
@@ -52519,7 +52519,7 @@ bool dotdot_is_supported_electrical_measurement_dc_voltage_multiplier (
  *
  * @returns DCVoltageMultiplier attribute
  */
-int16_t dotdot_get_electrical_measurement_dc_voltage_multiplier(
+uint16_t dotdot_get_electrical_measurement_dc_voltage_multiplier(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -52539,7 +52539,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_voltage_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_dc_voltage_multiplier
+  uint16_t new_dc_voltage_multiplier
   );
 
 /**
@@ -52625,7 +52625,7 @@ bool dotdot_is_supported_electrical_measurement_dc_voltage_divisor (
  *
  * @returns DCVoltageDivisor attribute
  */
-int16_t dotdot_get_electrical_measurement_dc_voltage_divisor(
+uint16_t dotdot_get_electrical_measurement_dc_voltage_divisor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -52645,7 +52645,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_voltage_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_dc_voltage_divisor
+  uint16_t new_dc_voltage_divisor
   );
 
 /**
@@ -52731,7 +52731,7 @@ bool dotdot_is_supported_electrical_measurement_dc_current_multiplier (
  *
  * @returns DCCurrentMultiplier attribute
  */
-int16_t dotdot_get_electrical_measurement_dc_current_multiplier(
+uint16_t dotdot_get_electrical_measurement_dc_current_multiplier(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -52751,7 +52751,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_current_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_dc_current_multiplier
+  uint16_t new_dc_current_multiplier
   );
 
 /**
@@ -52837,7 +52837,7 @@ bool dotdot_is_supported_electrical_measurement_dc_current_divisor (
  *
  * @returns DCCurrentDivisor attribute
  */
-int16_t dotdot_get_electrical_measurement_dc_current_divisor(
+uint16_t dotdot_get_electrical_measurement_dc_current_divisor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -52857,7 +52857,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_current_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_dc_current_divisor
+  uint16_t new_dc_current_divisor
   );
 
 /**
@@ -52943,7 +52943,7 @@ bool dotdot_is_supported_electrical_measurement_dc_power_multiplier (
  *
  * @returns DCPowerMultiplier attribute
  */
-int16_t dotdot_get_electrical_measurement_dc_power_multiplier(
+uint16_t dotdot_get_electrical_measurement_dc_power_multiplier(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -52963,7 +52963,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_power_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_dc_power_multiplier
+  uint16_t new_dc_power_multiplier
   );
 
 /**
@@ -53049,7 +53049,7 @@ bool dotdot_is_supported_electrical_measurement_dc_power_divisor (
  *
  * @returns DCPowerDivisor attribute
  */
-int16_t dotdot_get_electrical_measurement_dc_power_divisor(
+uint16_t dotdot_get_electrical_measurement_dc_power_divisor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -53069,7 +53069,7 @@ sl_status_t dotdot_set_electrical_measurement_dc_power_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_dc_power_divisor
+  uint16_t new_dc_power_divisor
   );
 
 /**
@@ -53155,7 +53155,7 @@ bool dotdot_is_supported_electrical_measurement_ac_frequency (
  *
  * @returns ACFrequency attribute
  */
-int16_t dotdot_get_electrical_measurement_ac_frequency(
+uint16_t dotdot_get_electrical_measurement_ac_frequency(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -53175,7 +53175,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_frequency(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_ac_frequency
+  uint16_t new_ac_frequency
   );
 
 /**
@@ -53261,7 +53261,7 @@ bool dotdot_is_supported_electrical_measurement_ac_frequency_min (
  *
  * @returns ACFrequencyMin attribute
  */
-int16_t dotdot_get_electrical_measurement_ac_frequency_min(
+uint16_t dotdot_get_electrical_measurement_ac_frequency_min(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -53281,7 +53281,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_frequency_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_ac_frequency_min
+  uint16_t new_ac_frequency_min
   );
 
 /**
@@ -53367,7 +53367,7 @@ bool dotdot_is_supported_electrical_measurement_ac_frequency_max (
  *
  * @returns ACFrequencyMax attribute
  */
-int16_t dotdot_get_electrical_measurement_ac_frequency_max(
+uint16_t dotdot_get_electrical_measurement_ac_frequency_max(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -53387,7 +53387,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_frequency_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_ac_frequency_max
+  uint16_t new_ac_frequency_max
   );
 
 /**
@@ -53473,7 +53473,7 @@ bool dotdot_is_supported_electrical_measurement_neutral_current (
  *
  * @returns NeutralCurrent attribute
  */
-int16_t dotdot_get_electrical_measurement_neutral_current(
+uint16_t dotdot_get_electrical_measurement_neutral_current(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -53493,7 +53493,7 @@ sl_status_t dotdot_set_electrical_measurement_neutral_current(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_neutral_current
+  uint16_t new_neutral_current
   );
 
 /**
@@ -53791,7 +53791,7 @@ bool dotdot_is_supported_electrical_measurement_total_apparent_power (
  *
  * @returns TotalApparentPower attribute
  */
-int32_t dotdot_get_electrical_measurement_total_apparent_power(
+uint32_t dotdot_get_electrical_measurement_total_apparent_power(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -53811,7 +53811,7 @@ sl_status_t dotdot_set_electrical_measurement_total_apparent_power(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_total_apparent_power
+  uint32_t new_total_apparent_power
   );
 
 /**
@@ -55169,7 +55169,7 @@ bool dotdot_is_supported_electrical_measurement_ac_frequency_multiplier (
  *
  * @returns ACFrequencyMultiplier attribute
  */
-int16_t dotdot_get_electrical_measurement_ac_frequency_multiplier(
+uint16_t dotdot_get_electrical_measurement_ac_frequency_multiplier(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -55189,7 +55189,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_frequency_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_ac_frequency_multiplier
+  uint16_t new_ac_frequency_multiplier
   );
 
 /**
@@ -55275,7 +55275,7 @@ bool dotdot_is_supported_electrical_measurement_ac_frequency_divisor (
  *
  * @returns ACFrequencyDivisor attribute
  */
-int16_t dotdot_get_electrical_measurement_ac_frequency_divisor(
+uint16_t dotdot_get_electrical_measurement_ac_frequency_divisor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -55295,7 +55295,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_frequency_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_ac_frequency_divisor
+  uint16_t new_ac_frequency_divisor
   );
 
 /**
@@ -55381,7 +55381,7 @@ bool dotdot_is_supported_electrical_measurement_power_multiplier (
  *
  * @returns PowerMultiplier attribute
  */
-int32_t dotdot_get_electrical_measurement_power_multiplier(
+uint32_t dotdot_get_electrical_measurement_power_multiplier(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -55401,7 +55401,7 @@ sl_status_t dotdot_set_electrical_measurement_power_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_power_multiplier
+  uint32_t new_power_multiplier
   );
 
 /**
@@ -55487,7 +55487,7 @@ bool dotdot_is_supported_electrical_measurement_power_divisor (
  *
  * @returns PowerDivisor attribute
  */
-int32_t dotdot_get_electrical_measurement_power_divisor(
+uint32_t dotdot_get_electrical_measurement_power_divisor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -55507,7 +55507,7 @@ sl_status_t dotdot_set_electrical_measurement_power_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_power_divisor
+  uint32_t new_power_divisor
   );
 
 /**
@@ -55805,7 +55805,7 @@ bool dotdot_is_supported_electrical_measurement_line_current (
  *
  * @returns LineCurrent attribute
  */
-int16_t dotdot_get_electrical_measurement_line_current(
+uint16_t dotdot_get_electrical_measurement_line_current(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -55825,7 +55825,7 @@ sl_status_t dotdot_set_electrical_measurement_line_current(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_line_current
+  uint16_t new_line_current
   );
 
 /**
@@ -56123,7 +56123,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage (
  *
  * @returns RMSVoltage attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_voltage(
+uint16_t dotdot_get_electrical_measurement_rms_voltage(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -56143,7 +56143,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_voltage
+  uint16_t new_rms_voltage
   );
 
 /**
@@ -56229,7 +56229,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_min (
  *
  * @returns RMSVoltageMin attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_voltage_min(
+uint16_t dotdot_get_electrical_measurement_rms_voltage_min(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -56249,7 +56249,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_voltage_min
+  uint16_t new_rms_voltage_min
   );
 
 /**
@@ -56335,7 +56335,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_max (
  *
  * @returns RMSVoltageMax attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_voltage_max(
+uint16_t dotdot_get_electrical_measurement_rms_voltage_max(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -56355,7 +56355,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_voltage_max
+  uint16_t new_rms_voltage_max
   );
 
 /**
@@ -56441,7 +56441,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current (
  *
  * @returns RMSCurrent attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_current(
+uint16_t dotdot_get_electrical_measurement_rms_current(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -56461,7 +56461,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_current
+  uint16_t new_rms_current
   );
 
 /**
@@ -56547,7 +56547,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_min (
  *
  * @returns RMSCurrentMin attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_current_min(
+uint16_t dotdot_get_electrical_measurement_rms_current_min(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -56567,7 +56567,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_min(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_current_min
+  uint16_t new_rms_current_min
   );
 
 /**
@@ -56653,7 +56653,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_max (
  *
  * @returns RMSCurrentMax attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_current_max(
+uint16_t dotdot_get_electrical_measurement_rms_current_max(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -56673,7 +56673,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_max(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_current_max
+  uint16_t new_rms_current_max
   );
 
 /**
@@ -57183,7 +57183,7 @@ bool dotdot_is_supported_electrical_measurement_apparent_power (
  *
  * @returns ApparentPower attribute
  */
-int16_t dotdot_get_electrical_measurement_apparent_power(
+uint16_t dotdot_get_electrical_measurement_apparent_power(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -57203,7 +57203,7 @@ sl_status_t dotdot_set_electrical_measurement_apparent_power(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_apparent_power
+  uint16_t new_apparent_power
   );
 
 /**
@@ -57395,7 +57395,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_voltage_measurement_
  *
  * @returns AverageRMSVoltageMeasurementPeriod attribute
  */
-int16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_period(
+uint16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -57415,7 +57415,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_voltage_measurement_pe
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_average_rms_voltage_measurement_period
+  uint16_t new_average_rms_voltage_measurement_period
   );
 
 /**
@@ -57501,7 +57501,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_over_voltage_counter
  *
  * @returns AverageRMSOverVoltageCounter attribute
  */
-int16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter(
+uint16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -57521,7 +57521,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_over_voltage_counter(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_average_rms_over_voltage_counter
+  uint16_t new_average_rms_over_voltage_counter
   );
 
 /**
@@ -57607,7 +57607,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_under_voltage_counte
  *
  * @returns AverageRMSUnderVoltageCounter attribute
  */
-int16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter(
+uint16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -57627,7 +57627,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_under_voltage_counter(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_average_rms_under_voltage_counter
+  uint16_t new_average_rms_under_voltage_counter
   );
 
 /**
@@ -57713,7 +57713,7 @@ bool dotdot_is_supported_electrical_measurement_rms_extreme_over_voltage_period 
  *
  * @returns RMSExtremeOverVoltagePeriod attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_extreme_over_voltage_period(
+uint16_t dotdot_get_electrical_measurement_rms_extreme_over_voltage_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -57733,7 +57733,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_over_voltage_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_extreme_over_voltage_period
+  uint16_t new_rms_extreme_over_voltage_period
   );
 
 /**
@@ -57819,7 +57819,7 @@ bool dotdot_is_supported_electrical_measurement_rms_extreme_under_voltage_period
  *
  * @returns RMSExtremeUnderVoltagePeriod attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_extreme_under_voltage_period(
+uint16_t dotdot_get_electrical_measurement_rms_extreme_under_voltage_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -57839,7 +57839,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_under_voltage_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_extreme_under_voltage_period
+  uint16_t new_rms_extreme_under_voltage_period
   );
 
 /**
@@ -57925,7 +57925,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_sag_period (
  *
  * @returns RMSVoltageSagPeriod attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_voltage_sag_period(
+uint16_t dotdot_get_electrical_measurement_rms_voltage_sag_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -57945,7 +57945,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_sag_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_voltage_sag_period
+  uint16_t new_rms_voltage_sag_period
   );
 
 /**
@@ -58031,7 +58031,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_swell_period (
  *
  * @returns RMSVoltageSwellPeriod attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_voltage_swell_period(
+uint16_t dotdot_get_electrical_measurement_rms_voltage_swell_period(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -58051,7 +58051,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_swell_period(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_voltage_swell_period
+  uint16_t new_rms_voltage_swell_period
   );
 
 /**
@@ -58137,7 +58137,7 @@ bool dotdot_is_supported_electrical_measurement_ac_voltage_multiplier (
  *
  * @returns ACVoltageMultiplier attribute
  */
-int16_t dotdot_get_electrical_measurement_ac_voltage_multiplier(
+uint16_t dotdot_get_electrical_measurement_ac_voltage_multiplier(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -58157,7 +58157,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_voltage_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_ac_voltage_multiplier
+  uint16_t new_ac_voltage_multiplier
   );
 
 /**
@@ -58243,7 +58243,7 @@ bool dotdot_is_supported_electrical_measurement_ac_voltage_divisor (
  *
  * @returns ACVoltageDivisor attribute
  */
-int16_t dotdot_get_electrical_measurement_ac_voltage_divisor(
+uint16_t dotdot_get_electrical_measurement_ac_voltage_divisor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -58263,7 +58263,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_voltage_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_ac_voltage_divisor
+  uint16_t new_ac_voltage_divisor
   );
 
 /**
@@ -58349,7 +58349,7 @@ bool dotdot_is_supported_electrical_measurement_ac_current_multiplier (
  *
  * @returns ACCurrentMultiplier attribute
  */
-int16_t dotdot_get_electrical_measurement_ac_current_multiplier(
+uint16_t dotdot_get_electrical_measurement_ac_current_multiplier(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -58369,7 +58369,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_current_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_ac_current_multiplier
+  uint16_t new_ac_current_multiplier
   );
 
 /**
@@ -58455,7 +58455,7 @@ bool dotdot_is_supported_electrical_measurement_ac_current_divisor (
  *
  * @returns ACCurrentDivisor attribute
  */
-int16_t dotdot_get_electrical_measurement_ac_current_divisor(
+uint16_t dotdot_get_electrical_measurement_ac_current_divisor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -58475,7 +58475,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_current_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_ac_current_divisor
+  uint16_t new_ac_current_divisor
   );
 
 /**
@@ -58561,7 +58561,7 @@ bool dotdot_is_supported_electrical_measurement_ac_power_multiplier (
  *
  * @returns ACPowerMultiplier attribute
  */
-int16_t dotdot_get_electrical_measurement_ac_power_multiplier(
+uint16_t dotdot_get_electrical_measurement_ac_power_multiplier(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -58581,7 +58581,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_power_multiplier(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_ac_power_multiplier
+  uint16_t new_ac_power_multiplier
   );
 
 /**
@@ -58667,7 +58667,7 @@ bool dotdot_is_supported_electrical_measurement_ac_power_divisor (
  *
  * @returns ACPowerDivisor attribute
  */
-int16_t dotdot_get_electrical_measurement_ac_power_divisor(
+uint16_t dotdot_get_electrical_measurement_ac_power_divisor(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -58687,7 +58687,7 @@ sl_status_t dotdot_set_electrical_measurement_ac_power_divisor(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_ac_power_divisor
+  uint16_t new_ac_power_divisor
   );
 
 /**
@@ -60257,7 +60257,7 @@ bool dotdot_is_supported_electrical_measurement_line_current_phb (
  *
  * @returns LineCurrentPhB attribute
  */
-int16_t dotdot_get_electrical_measurement_line_current_phb(
+uint16_t dotdot_get_electrical_measurement_line_current_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -60277,7 +60277,7 @@ sl_status_t dotdot_set_electrical_measurement_line_current_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_line_current_phb
+  uint16_t new_line_current_phb
   );
 
 /**
@@ -60575,7 +60575,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_phb (
  *
  * @returns RMSVoltagePhB attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_voltage_phb(
+uint16_t dotdot_get_electrical_measurement_rms_voltage_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -60595,7 +60595,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_voltage_phb
+  uint16_t new_rms_voltage_phb
   );
 
 /**
@@ -60681,7 +60681,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_min_phb (
  *
  * @returns RMSVoltageMinPhB attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_voltage_min_phb(
+uint16_t dotdot_get_electrical_measurement_rms_voltage_min_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -60701,7 +60701,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_min_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_voltage_min_phb
+  uint16_t new_rms_voltage_min_phb
   );
 
 /**
@@ -60787,7 +60787,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_max_phb (
  *
  * @returns RMSVoltageMaxPhB attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_voltage_max_phb(
+uint16_t dotdot_get_electrical_measurement_rms_voltage_max_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -60807,7 +60807,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_max_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_voltage_max_phb
+  uint16_t new_rms_voltage_max_phb
   );
 
 /**
@@ -60893,7 +60893,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_phb (
  *
  * @returns RMSCurrentPhB attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_current_phb(
+uint16_t dotdot_get_electrical_measurement_rms_current_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -60913,7 +60913,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_current_phb
+  uint16_t new_rms_current_phb
   );
 
 /**
@@ -60999,7 +60999,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_min_phb (
  *
  * @returns RMSCurrentMinPhB attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_current_min_phb(
+uint16_t dotdot_get_electrical_measurement_rms_current_min_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -61019,7 +61019,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_min_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_current_min_phb
+  uint16_t new_rms_current_min_phb
   );
 
 /**
@@ -61105,7 +61105,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_max_phb (
  *
  * @returns RMSCurrentMaxPhB attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_current_max_phb(
+uint16_t dotdot_get_electrical_measurement_rms_current_max_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -61125,7 +61125,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_max_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_current_max_phb
+  uint16_t new_rms_current_max_phb
   );
 
 /**
@@ -61635,7 +61635,7 @@ bool dotdot_is_supported_electrical_measurement_apparent_power_phb (
  *
  * @returns ApparentPowerPhB attribute
  */
-int16_t dotdot_get_electrical_measurement_apparent_power_phb(
+uint16_t dotdot_get_electrical_measurement_apparent_power_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -61655,7 +61655,7 @@ sl_status_t dotdot_set_electrical_measurement_apparent_power_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_apparent_power_phb
+  uint16_t new_apparent_power_phb
   );
 
 /**
@@ -61847,7 +61847,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_voltage_measurement_
  *
  * @returns AverageRMSVoltageMeasurementPeriodPhB attribute
  */
-int16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_period_phb(
+uint16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_period_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -61867,7 +61867,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_voltage_measurement_pe
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_average_rms_voltage_measurement_period_phb
+  uint16_t new_average_rms_voltage_measurement_period_phb
   );
 
 /**
@@ -61953,7 +61953,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_over_voltage_counter
  *
  * @returns AverageRMSOverVoltageCounterPhB attribute
  */
-int16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter_phb(
+uint16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -61973,7 +61973,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_over_voltage_counter_p
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_average_rms_over_voltage_counter_phb
+  uint16_t new_average_rms_over_voltage_counter_phb
   );
 
 /**
@@ -62059,7 +62059,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_under_voltage_counte
  *
  * @returns AverageRMSUnderVoltageCounterPhB attribute
  */
-int16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter_phb(
+uint16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -62079,7 +62079,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_under_voltage_counter_
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_average_rms_under_voltage_counter_phb
+  uint16_t new_average_rms_under_voltage_counter_phb
   );
 
 /**
@@ -62165,7 +62165,7 @@ bool dotdot_is_supported_electrical_measurement_rms_extreme_over_voltage_period_
  *
  * @returns RMSExtremeOverVoltagePeriodPhB attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_extreme_over_voltage_period_phb(
+uint16_t dotdot_get_electrical_measurement_rms_extreme_over_voltage_period_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -62185,7 +62185,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_over_voltage_period_ph
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_extreme_over_voltage_period_phb
+  uint16_t new_rms_extreme_over_voltage_period_phb
   );
 
 /**
@@ -62271,7 +62271,7 @@ bool dotdot_is_supported_electrical_measurement_rms_extreme_under_voltage_period
  *
  * @returns RMSExtremeUnderVoltagePeriodPhB attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_extreme_under_voltage_period_phb(
+uint16_t dotdot_get_electrical_measurement_rms_extreme_under_voltage_period_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -62291,7 +62291,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_under_voltage_period_p
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_extreme_under_voltage_period_phb
+  uint16_t new_rms_extreme_under_voltage_period_phb
   );
 
 /**
@@ -62377,7 +62377,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_sag_period_phb (
  *
  * @returns RMSVoltageSagPeriodPhB attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_voltage_sag_period_phb(
+uint16_t dotdot_get_electrical_measurement_rms_voltage_sag_period_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -62397,7 +62397,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_sag_period_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_voltage_sag_period_phb
+  uint16_t new_rms_voltage_sag_period_phb
   );
 
 /**
@@ -62483,7 +62483,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_swell_period_phb (
  *
  * @returns RMSVoltageSwellPeriodPhB attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_voltage_swell_period_phb(
+uint16_t dotdot_get_electrical_measurement_rms_voltage_swell_period_phb(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -62503,7 +62503,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_swell_period_phb(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_voltage_swell_period_phb
+  uint16_t new_rms_voltage_swell_period_phb
   );
 
 /**
@@ -62589,7 +62589,7 @@ bool dotdot_is_supported_electrical_measurement_line_current_phc (
  *
  * @returns LineCurrentPhC attribute
  */
-int16_t dotdot_get_electrical_measurement_line_current_phc(
+uint16_t dotdot_get_electrical_measurement_line_current_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -62609,7 +62609,7 @@ sl_status_t dotdot_set_electrical_measurement_line_current_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_line_current_phc
+  uint16_t new_line_current_phc
   );
 
 /**
@@ -62907,7 +62907,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_phc (
  *
  * @returns RMSVoltagePhC attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_voltage_phc(
+uint16_t dotdot_get_electrical_measurement_rms_voltage_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -62927,7 +62927,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_voltage_phc
+  uint16_t new_rms_voltage_phc
   );
 
 /**
@@ -63013,7 +63013,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_min_phc (
  *
  * @returns RMSVoltageMinPhC attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_voltage_min_phc(
+uint16_t dotdot_get_electrical_measurement_rms_voltage_min_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -63033,7 +63033,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_min_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_voltage_min_phc
+  uint16_t new_rms_voltage_min_phc
   );
 
 /**
@@ -63119,7 +63119,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_max_phc (
  *
  * @returns RMSVoltageMaxPhC attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_voltage_max_phc(
+uint16_t dotdot_get_electrical_measurement_rms_voltage_max_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -63139,7 +63139,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_max_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_voltage_max_phc
+  uint16_t new_rms_voltage_max_phc
   );
 
 /**
@@ -63225,7 +63225,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_phc (
  *
  * @returns RMSCurrentPhC attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_current_phc(
+uint16_t dotdot_get_electrical_measurement_rms_current_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -63245,7 +63245,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_current_phc
+  uint16_t new_rms_current_phc
   );
 
 /**
@@ -63331,7 +63331,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_min_phc (
  *
  * @returns RMSCurrentMinPhC attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_current_min_phc(
+uint16_t dotdot_get_electrical_measurement_rms_current_min_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -63351,7 +63351,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_min_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_current_min_phc
+  uint16_t new_rms_current_min_phc
   );
 
 /**
@@ -63437,7 +63437,7 @@ bool dotdot_is_supported_electrical_measurement_rms_current_max_phc (
  *
  * @returns RMSCurrentMaxPhC attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_current_max_phc(
+uint16_t dotdot_get_electrical_measurement_rms_current_max_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -63457,7 +63457,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_current_max_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_current_max_phc
+  uint16_t new_rms_current_max_phc
   );
 
 /**
@@ -63967,7 +63967,7 @@ bool dotdot_is_supported_electrical_measurement_apparent_power_phc (
  *
  * @returns ApparentPowerPhC attribute
  */
-int16_t dotdot_get_electrical_measurement_apparent_power_phc(
+uint16_t dotdot_get_electrical_measurement_apparent_power_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -63987,7 +63987,7 @@ sl_status_t dotdot_set_electrical_measurement_apparent_power_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_apparent_power_phc
+  uint16_t new_apparent_power_phc
   );
 
 /**
@@ -64179,7 +64179,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_voltage_measurement_
  *
  * @returns AverageRMSVoltageMeasurementPeriodPhC attribute
  */
-int16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_period_phc(
+uint16_t dotdot_get_electrical_measurement_average_rms_voltage_measurement_period_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -64199,7 +64199,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_voltage_measurement_pe
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_average_rms_voltage_measurement_period_phc
+  uint16_t new_average_rms_voltage_measurement_period_phc
   );
 
 /**
@@ -64285,7 +64285,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_over_voltage_counter
  *
  * @returns AverageRMSOverVoltageCounterPhC attribute
  */
-int16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter_phc(
+uint16_t dotdot_get_electrical_measurement_average_rms_over_voltage_counter_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -64305,7 +64305,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_over_voltage_counter_p
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_average_rms_over_voltage_counter_phc
+  uint16_t new_average_rms_over_voltage_counter_phc
   );
 
 /**
@@ -64391,7 +64391,7 @@ bool dotdot_is_supported_electrical_measurement_average_rms_under_voltage_counte
  *
  * @returns AverageRMSUnderVoltageCounterPhC attribute
  */
-int16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter_phc(
+uint16_t dotdot_get_electrical_measurement_average_rms_under_voltage_counter_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -64411,7 +64411,7 @@ sl_status_t dotdot_set_electrical_measurement_average_rms_under_voltage_counter_
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_average_rms_under_voltage_counter_phc
+  uint16_t new_average_rms_under_voltage_counter_phc
   );
 
 /**
@@ -64497,7 +64497,7 @@ bool dotdot_is_supported_electrical_measurement_rms_extreme_over_voltage_period_
  *
  * @returns RMSExtremeOverVoltagePeriodPhC attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_extreme_over_voltage_period_phc(
+uint16_t dotdot_get_electrical_measurement_rms_extreme_over_voltage_period_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -64517,7 +64517,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_over_voltage_period_ph
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_extreme_over_voltage_period_phc
+  uint16_t new_rms_extreme_over_voltage_period_phc
   );
 
 /**
@@ -64603,7 +64603,7 @@ bool dotdot_is_supported_electrical_measurement_rms_extreme_under_voltage_period
  *
  * @returns RMSExtremeUnderVoltagePeriodPhC attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_extreme_under_voltage_period_phc(
+uint16_t dotdot_get_electrical_measurement_rms_extreme_under_voltage_period_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -64623,7 +64623,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_extreme_under_voltage_period_p
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_extreme_under_voltage_period_phc
+  uint16_t new_rms_extreme_under_voltage_period_phc
   );
 
 /**
@@ -64709,7 +64709,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_sag_period_phc (
  *
  * @returns RMSVoltageSagPeriodPhC attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_voltage_sag_period_phc(
+uint16_t dotdot_get_electrical_measurement_rms_voltage_sag_period_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -64729,7 +64729,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_sag_period_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_voltage_sag_period_phc
+  uint16_t new_rms_voltage_sag_period_phc
   );
 
 /**
@@ -64815,7 +64815,7 @@ bool dotdot_is_supported_electrical_measurement_rms_voltage_swell_period_phc (
  *
  * @returns RMSVoltageSwellPeriodPhC attribute
  */
-int16_t dotdot_get_electrical_measurement_rms_voltage_swell_period_phc(
+uint16_t dotdot_get_electrical_measurement_rms_voltage_swell_period_phc(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -64835,7 +64835,7 @@ sl_status_t dotdot_set_electrical_measurement_rms_voltage_swell_period_phc(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_rms_voltage_swell_period_phc
+  uint16_t new_rms_voltage_swell_period_phc
   );
 
 /**
@@ -64949,7 +64949,7 @@ bool dotdot_is_supported_diagnostics_number_of_resets (
  *
  * @returns NumberOfResets attribute
  */
-int16_t dotdot_get_diagnostics_number_of_resets(
+uint16_t dotdot_get_diagnostics_number_of_resets(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -64969,7 +64969,7 @@ sl_status_t dotdot_set_diagnostics_number_of_resets(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_number_of_resets
+  uint16_t new_number_of_resets
   );
 
 /**
@@ -65055,7 +65055,7 @@ bool dotdot_is_supported_diagnostics_persistent_memory_writes (
  *
  * @returns PersistentMemoryWrites attribute
  */
-int16_t dotdot_get_diagnostics_persistent_memory_writes(
+uint16_t dotdot_get_diagnostics_persistent_memory_writes(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -65075,7 +65075,7 @@ sl_status_t dotdot_set_diagnostics_persistent_memory_writes(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_persistent_memory_writes
+  uint16_t new_persistent_memory_writes
   );
 
 /**
@@ -65161,7 +65161,7 @@ bool dotdot_is_supported_diagnostics_mac_rx_bcast (
  *
  * @returns MacRxBcast attribute
  */
-int32_t dotdot_get_diagnostics_mac_rx_bcast(
+uint32_t dotdot_get_diagnostics_mac_rx_bcast(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -65181,7 +65181,7 @@ sl_status_t dotdot_set_diagnostics_mac_rx_bcast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_mac_rx_bcast
+  uint32_t new_mac_rx_bcast
   );
 
 /**
@@ -65267,7 +65267,7 @@ bool dotdot_is_supported_diagnostics_mac_tx_bcast (
  *
  * @returns MacTxBcast attribute
  */
-int32_t dotdot_get_diagnostics_mac_tx_bcast(
+uint32_t dotdot_get_diagnostics_mac_tx_bcast(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -65287,7 +65287,7 @@ sl_status_t dotdot_set_diagnostics_mac_tx_bcast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_mac_tx_bcast
+  uint32_t new_mac_tx_bcast
   );
 
 /**
@@ -65373,7 +65373,7 @@ bool dotdot_is_supported_diagnostics_mac_rx_ucast (
  *
  * @returns MacRxUcast attribute
  */
-int32_t dotdot_get_diagnostics_mac_rx_ucast(
+uint32_t dotdot_get_diagnostics_mac_rx_ucast(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -65393,7 +65393,7 @@ sl_status_t dotdot_set_diagnostics_mac_rx_ucast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_mac_rx_ucast
+  uint32_t new_mac_rx_ucast
   );
 
 /**
@@ -65479,7 +65479,7 @@ bool dotdot_is_supported_diagnostics_mac_tx_ucast (
  *
  * @returns MacTxUcast attribute
  */
-int32_t dotdot_get_diagnostics_mac_tx_ucast(
+uint32_t dotdot_get_diagnostics_mac_tx_ucast(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -65499,7 +65499,7 @@ sl_status_t dotdot_set_diagnostics_mac_tx_ucast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_mac_tx_ucast
+  uint32_t new_mac_tx_ucast
   );
 
 /**
@@ -65585,7 +65585,7 @@ bool dotdot_is_supported_diagnostics_mac_tx_ucast_retry (
  *
  * @returns MacTxUcastRetry attribute
  */
-int16_t dotdot_get_diagnostics_mac_tx_ucast_retry(
+uint16_t dotdot_get_diagnostics_mac_tx_ucast_retry(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -65605,7 +65605,7 @@ sl_status_t dotdot_set_diagnostics_mac_tx_ucast_retry(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_mac_tx_ucast_retry
+  uint16_t new_mac_tx_ucast_retry
   );
 
 /**
@@ -65691,7 +65691,7 @@ bool dotdot_is_supported_diagnostics_mac_tx_ucast_fail (
  *
  * @returns MacTxUcastFail attribute
  */
-int16_t dotdot_get_diagnostics_mac_tx_ucast_fail(
+uint16_t dotdot_get_diagnostics_mac_tx_ucast_fail(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -65711,7 +65711,7 @@ sl_status_t dotdot_set_diagnostics_mac_tx_ucast_fail(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_mac_tx_ucast_fail
+  uint16_t new_mac_tx_ucast_fail
   );
 
 /**
@@ -65797,7 +65797,7 @@ bool dotdot_is_supported_diagnostics_aps_rx_bcast (
  *
  * @returns APSRxBcast attribute
  */
-int16_t dotdot_get_diagnostics_aps_rx_bcast(
+uint16_t dotdot_get_diagnostics_aps_rx_bcast(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -65817,7 +65817,7 @@ sl_status_t dotdot_set_diagnostics_aps_rx_bcast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_aps_rx_bcast
+  uint16_t new_aps_rx_bcast
   );
 
 /**
@@ -65903,7 +65903,7 @@ bool dotdot_is_supported_diagnostics_aps_tx_bcast (
  *
  * @returns APSTxBcast attribute
  */
-int16_t dotdot_get_diagnostics_aps_tx_bcast(
+uint16_t dotdot_get_diagnostics_aps_tx_bcast(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -65923,7 +65923,7 @@ sl_status_t dotdot_set_diagnostics_aps_tx_bcast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_aps_tx_bcast
+  uint16_t new_aps_tx_bcast
   );
 
 /**
@@ -66009,7 +66009,7 @@ bool dotdot_is_supported_diagnostics_aps_rx_ucast (
  *
  * @returns APSRxUcast attribute
  */
-int16_t dotdot_get_diagnostics_aps_rx_ucast(
+uint16_t dotdot_get_diagnostics_aps_rx_ucast(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -66029,7 +66029,7 @@ sl_status_t dotdot_set_diagnostics_aps_rx_ucast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_aps_rx_ucast
+  uint16_t new_aps_rx_ucast
   );
 
 /**
@@ -66115,7 +66115,7 @@ bool dotdot_is_supported_diagnostics_aps_tx_ucast_success (
  *
  * @returns APSTxUcastSuccess attribute
  */
-int16_t dotdot_get_diagnostics_aps_tx_ucast_success(
+uint16_t dotdot_get_diagnostics_aps_tx_ucast_success(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -66135,7 +66135,7 @@ sl_status_t dotdot_set_diagnostics_aps_tx_ucast_success(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_aps_tx_ucast_success
+  uint16_t new_aps_tx_ucast_success
   );
 
 /**
@@ -66221,7 +66221,7 @@ bool dotdot_is_supported_diagnostics_aps_tx_ucast_retry (
  *
  * @returns APSTxUcastRetry attribute
  */
-int16_t dotdot_get_diagnostics_aps_tx_ucast_retry(
+uint16_t dotdot_get_diagnostics_aps_tx_ucast_retry(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -66241,7 +66241,7 @@ sl_status_t dotdot_set_diagnostics_aps_tx_ucast_retry(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_aps_tx_ucast_retry
+  uint16_t new_aps_tx_ucast_retry
   );
 
 /**
@@ -66327,7 +66327,7 @@ bool dotdot_is_supported_diagnostics_aps_tx_ucast_fail (
  *
  * @returns APSTxUcastFail attribute
  */
-int16_t dotdot_get_diagnostics_aps_tx_ucast_fail(
+uint16_t dotdot_get_diagnostics_aps_tx_ucast_fail(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -66347,7 +66347,7 @@ sl_status_t dotdot_set_diagnostics_aps_tx_ucast_fail(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_aps_tx_ucast_fail
+  uint16_t new_aps_tx_ucast_fail
   );
 
 /**
@@ -66433,7 +66433,7 @@ bool dotdot_is_supported_diagnostics_route_disc_initiated (
  *
  * @returns RouteDiscInitiated attribute
  */
-int16_t dotdot_get_diagnostics_route_disc_initiated(
+uint16_t dotdot_get_diagnostics_route_disc_initiated(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -66453,7 +66453,7 @@ sl_status_t dotdot_set_diagnostics_route_disc_initiated(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_route_disc_initiated
+  uint16_t new_route_disc_initiated
   );
 
 /**
@@ -66539,7 +66539,7 @@ bool dotdot_is_supported_diagnostics_neighbor_added (
  *
  * @returns NeighborAdded attribute
  */
-int16_t dotdot_get_diagnostics_neighbor_added(
+uint16_t dotdot_get_diagnostics_neighbor_added(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -66559,7 +66559,7 @@ sl_status_t dotdot_set_diagnostics_neighbor_added(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_neighbor_added
+  uint16_t new_neighbor_added
   );
 
 /**
@@ -66645,7 +66645,7 @@ bool dotdot_is_supported_diagnostics_neighbor_removed (
  *
  * @returns NeighborRemoved attribute
  */
-int16_t dotdot_get_diagnostics_neighbor_removed(
+uint16_t dotdot_get_diagnostics_neighbor_removed(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -66665,7 +66665,7 @@ sl_status_t dotdot_set_diagnostics_neighbor_removed(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_neighbor_removed
+  uint16_t new_neighbor_removed
   );
 
 /**
@@ -66751,7 +66751,7 @@ bool dotdot_is_supported_diagnostics_neighbor_stale (
  *
  * @returns NeighborStale attribute
  */
-int16_t dotdot_get_diagnostics_neighbor_stale(
+uint16_t dotdot_get_diagnostics_neighbor_stale(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -66771,7 +66771,7 @@ sl_status_t dotdot_set_diagnostics_neighbor_stale(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_neighbor_stale
+  uint16_t new_neighbor_stale
   );
 
 /**
@@ -66857,7 +66857,7 @@ bool dotdot_is_supported_diagnostics_join_indication (
  *
  * @returns JoinIndication attribute
  */
-int16_t dotdot_get_diagnostics_join_indication(
+uint16_t dotdot_get_diagnostics_join_indication(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -66877,7 +66877,7 @@ sl_status_t dotdot_set_diagnostics_join_indication(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_join_indication
+  uint16_t new_join_indication
   );
 
 /**
@@ -66963,7 +66963,7 @@ bool dotdot_is_supported_diagnostics_child_moved (
  *
  * @returns ChildMoved attribute
  */
-int16_t dotdot_get_diagnostics_child_moved(
+uint16_t dotdot_get_diagnostics_child_moved(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -66983,7 +66983,7 @@ sl_status_t dotdot_set_diagnostics_child_moved(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_child_moved
+  uint16_t new_child_moved
   );
 
 /**
@@ -67069,7 +67069,7 @@ bool dotdot_is_supported_diagnostics_nwkfc_failure (
  *
  * @returns NWKFCFailure attribute
  */
-int16_t dotdot_get_diagnostics_nwkfc_failure(
+uint16_t dotdot_get_diagnostics_nwkfc_failure(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -67089,7 +67089,7 @@ sl_status_t dotdot_set_diagnostics_nwkfc_failure(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_nwkfc_failure
+  uint16_t new_nwkfc_failure
   );
 
 /**
@@ -67175,7 +67175,7 @@ bool dotdot_is_supported_diagnostics_apsfc_failure (
  *
  * @returns APSFCFailure attribute
  */
-int16_t dotdot_get_diagnostics_apsfc_failure(
+uint16_t dotdot_get_diagnostics_apsfc_failure(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -67195,7 +67195,7 @@ sl_status_t dotdot_set_diagnostics_apsfc_failure(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_apsfc_failure
+  uint16_t new_apsfc_failure
   );
 
 /**
@@ -67281,7 +67281,7 @@ bool dotdot_is_supported_diagnostics_aps_unauthorized_key (
  *
  * @returns APSUnauthorizedKey attribute
  */
-int16_t dotdot_get_diagnostics_aps_unauthorized_key(
+uint16_t dotdot_get_diagnostics_aps_unauthorized_key(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -67301,7 +67301,7 @@ sl_status_t dotdot_set_diagnostics_aps_unauthorized_key(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_aps_unauthorized_key
+  uint16_t new_aps_unauthorized_key
   );
 
 /**
@@ -67387,7 +67387,7 @@ bool dotdot_is_supported_diagnostics_nwk_decrypt_failures (
  *
  * @returns NWKDecryptFailures attribute
  */
-int16_t dotdot_get_diagnostics_nwk_decrypt_failures(
+uint16_t dotdot_get_diagnostics_nwk_decrypt_failures(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -67407,7 +67407,7 @@ sl_status_t dotdot_set_diagnostics_nwk_decrypt_failures(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_nwk_decrypt_failures
+  uint16_t new_nwk_decrypt_failures
   );
 
 /**
@@ -67493,7 +67493,7 @@ bool dotdot_is_supported_diagnostics_aps_decrypt_failures (
  *
  * @returns APSDecryptFailures attribute
  */
-int16_t dotdot_get_diagnostics_aps_decrypt_failures(
+uint16_t dotdot_get_diagnostics_aps_decrypt_failures(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -67513,7 +67513,7 @@ sl_status_t dotdot_set_diagnostics_aps_decrypt_failures(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_aps_decrypt_failures
+  uint16_t new_aps_decrypt_failures
   );
 
 /**
@@ -67599,7 +67599,7 @@ bool dotdot_is_supported_diagnostics_packet_buffer_allocate_failures (
  *
  * @returns PacketBufferAllocateFailures attribute
  */
-int16_t dotdot_get_diagnostics_packet_buffer_allocate_failures(
+uint16_t dotdot_get_diagnostics_packet_buffer_allocate_failures(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -67619,7 +67619,7 @@ sl_status_t dotdot_set_diagnostics_packet_buffer_allocate_failures(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_packet_buffer_allocate_failures
+  uint16_t new_packet_buffer_allocate_failures
   );
 
 /**
@@ -67705,7 +67705,7 @@ bool dotdot_is_supported_diagnostics_relayed_ucast (
  *
  * @returns RelayedUcast attribute
  */
-int16_t dotdot_get_diagnostics_relayed_ucast(
+uint16_t dotdot_get_diagnostics_relayed_ucast(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -67725,7 +67725,7 @@ sl_status_t dotdot_set_diagnostics_relayed_ucast(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_relayed_ucast
+  uint16_t new_relayed_ucast
   );
 
 /**
@@ -67811,7 +67811,7 @@ bool dotdot_is_supported_diagnostics_phy_to_mac_queue_limit_reached (
  *
  * @returns PHYToMACQueueLimitReached attribute
  */
-int16_t dotdot_get_diagnostics_phy_to_mac_queue_limit_reached(
+uint16_t dotdot_get_diagnostics_phy_to_mac_queue_limit_reached(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -67831,7 +67831,7 @@ sl_status_t dotdot_set_diagnostics_phy_to_mac_queue_limit_reached(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_phy_to_mac_queue_limit_reached
+  uint16_t new_phy_to_mac_queue_limit_reached
   );
 
 /**
@@ -67917,7 +67917,7 @@ bool dotdot_is_supported_diagnostics_packet_validate_drop_count (
  *
  * @returns PacketValidateDropCount attribute
  */
-int16_t dotdot_get_diagnostics_packet_validate_drop_count(
+uint16_t dotdot_get_diagnostics_packet_validate_drop_count(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -67937,7 +67937,7 @@ sl_status_t dotdot_set_diagnostics_packet_validate_drop_count(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_packet_validate_drop_count
+  uint16_t new_packet_validate_drop_count
   );
 
 /**
@@ -68023,7 +68023,7 @@ bool dotdot_is_supported_diagnostics_average_mac_retry_per_aps_message_sent (
  *
  * @returns AverageMACRetryPerAPSMessageSent attribute
  */
-int16_t dotdot_get_diagnostics_average_mac_retry_per_aps_message_sent(
+uint16_t dotdot_get_diagnostics_average_mac_retry_per_aps_message_sent(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -68043,7 +68043,7 @@ sl_status_t dotdot_set_diagnostics_average_mac_retry_per_aps_message_sent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_average_mac_retry_per_aps_message_sent
+  uint16_t new_average_mac_retry_per_aps_message_sent
   );
 
 /**
@@ -68129,7 +68129,7 @@ bool dotdot_is_supported_diagnostics_last_messagelqi (
  *
  * @returns LastMessageLQI attribute
  */
-int8_t dotdot_get_diagnostics_last_messagelqi(
+uint8_t dotdot_get_diagnostics_last_messagelqi(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -68149,7 +68149,7 @@ sl_status_t dotdot_set_diagnostics_last_messagelqi(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_last_messagelqi
+  uint8_t new_last_messagelqi
   );
 
 /**
@@ -68609,7 +68609,7 @@ bool dotdot_is_supported_state_endpoint_id_list (
  *
  * @returns EndpointIdList attribute
  */
-int8_t dotdot_get_state_endpoint_id_list(
+uint8_t dotdot_get_state_endpoint_id_list(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -68632,7 +68632,7 @@ sl_status_t dotdot_set_state_endpoint_id_list(
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
   size_t new_endpoint_id_list_count,
-  const int8_t* new_endpoint_id_list
+  const uint8_t* new_endpoint_id_list
   );
 
 /**
@@ -68930,7 +68930,7 @@ bool dotdot_is_supported_state_maximum_command_delay (
  *
  * @returns MaximumCommandDelay attribute
  */
-int32_t dotdot_get_state_maximum_command_delay(
+uint32_t dotdot_get_state_maximum_command_delay(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -68950,7 +68950,7 @@ sl_status_t dotdot_set_state_maximum_command_delay(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_maximum_command_delay
+  uint32_t new_maximum_command_delay
   );
 
 /**
@@ -69531,7 +69531,7 @@ bool dotdot_is_supported_system_metrics_reporting_interval_seconds (
  *
  * @returns ReportingIntervalSeconds attribute
  */
-int32_t dotdot_get_system_metrics_reporting_interval_seconds(
+uint32_t dotdot_get_system_metrics_reporting_interval_seconds(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -69551,7 +69551,7 @@ sl_status_t dotdot_set_system_metrics_reporting_interval_seconds(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_reporting_interval_seconds
+  uint32_t new_reporting_interval_seconds
   );
 
 /**
@@ -71578,7 +71578,7 @@ bool dotdot_is_supported_system_metrics_uptime_minutes (
  *
  * @returns UptimeMinutes attribute
  */
-int64_t dotdot_get_system_metrics_uptime_minutes(
+uint64_t dotdot_get_system_metrics_uptime_minutes(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -71598,7 +71598,7 @@ sl_status_t dotdot_set_system_metrics_uptime_minutes(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int64_t new_uptime_minutes
+  uint64_t new_uptime_minutes
   );
 
 /**
@@ -72320,7 +72320,7 @@ bool dotdot_is_supported_system_metrics_system_interrupts (
  *
  * @returns SystemInterrupts attribute
  */
-int64_t dotdot_get_system_metrics_system_interrupts(
+uint64_t dotdot_get_system_metrics_system_interrupts(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -72340,7 +72340,7 @@ sl_status_t dotdot_set_system_metrics_system_interrupts(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int64_t new_system_interrupts
+  uint64_t new_system_interrupts
   );
 
 /**
@@ -72890,7 +72890,7 @@ bool dotdot_is_supported_application_monitoring_uptime_minutes (
  *
  * @returns UptimeMinutes attribute
  */
-int64_t dotdot_get_application_monitoring_uptime_minutes(
+uint64_t dotdot_get_application_monitoring_uptime_minutes(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -72910,7 +72910,7 @@ sl_status_t dotdot_set_application_monitoring_uptime_minutes(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int64_t new_uptime_minutes
+  uint64_t new_uptime_minutes
   );
 
 /**
@@ -72996,7 +72996,7 @@ bool dotdot_is_supported_application_monitoring_process_id (
  *
  * @returns ProcessId attribute
  */
-int64_t dotdot_get_application_monitoring_process_id(
+uint64_t dotdot_get_application_monitoring_process_id(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -73016,7 +73016,7 @@ sl_status_t dotdot_set_application_monitoring_process_id(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int64_t new_process_id
+  uint64_t new_process_id
   );
 
 /**
@@ -73532,7 +73532,7 @@ bool dotdot_is_supported_application_monitoring_mqtt_statistics_reporting_interv
  *
  * @returns MQTTStatisticsReportingIntervalSeconds attribute
  */
-int32_t dotdot_get_application_monitoring_mqtt_statistics_reporting_interval_seconds(
+uint32_t dotdot_get_application_monitoring_mqtt_statistics_reporting_interval_seconds(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -73552,7 +73552,7 @@ sl_status_t dotdot_set_application_monitoring_mqtt_statistics_reporting_interval
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_mqtt_statistics_reporting_interval_seconds
+  uint32_t new_mqtt_statistics_reporting_interval_seconds
   );
 
 /**
@@ -73638,7 +73638,7 @@ bool dotdot_is_supported_application_monitoring_mqtt_messages_sent (
  *
  * @returns MQTTMessagesSent attribute
  */
-int64_t dotdot_get_application_monitoring_mqtt_messages_sent(
+uint64_t dotdot_get_application_monitoring_mqtt_messages_sent(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -73658,7 +73658,7 @@ sl_status_t dotdot_set_application_monitoring_mqtt_messages_sent(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int64_t new_mqtt_messages_sent
+  uint64_t new_mqtt_messages_sent
   );
 
 /**
@@ -73744,7 +73744,7 @@ bool dotdot_is_supported_application_monitoring_mqtt_messages_received (
  *
  * @returns MQTTMessagesReceived attribute
  */
-int64_t dotdot_get_application_monitoring_mqtt_messages_received(
+uint64_t dotdot_get_application_monitoring_mqtt_messages_received(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -73764,7 +73764,7 @@ sl_status_t dotdot_set_application_monitoring_mqtt_messages_received(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int64_t new_mqtt_messages_received
+  uint64_t new_mqtt_messages_received
   );
 
 /**
@@ -73850,7 +73850,7 @@ bool dotdot_is_supported_application_monitoring_mqtt_subscription_count (
  *
  * @returns MQTTSubscriptionCount attribute
  */
-int64_t dotdot_get_application_monitoring_mqtt_subscription_count(
+uint64_t dotdot_get_application_monitoring_mqtt_subscription_count(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -73870,7 +73870,7 @@ sl_status_t dotdot_set_application_monitoring_mqtt_subscription_count(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int64_t new_mqtt_subscription_count
+  uint64_t new_mqtt_subscription_count
   );
 
 /**
@@ -74274,7 +74274,7 @@ bool dotdot_is_supported_application_monitoring_application_statistics_reporting
  *
  * @returns ApplicationStatisticsReportingIntervalSeconds attribute
  */
-int32_t dotdot_get_application_monitoring_application_statistics_reporting_interval_seconds(
+uint32_t dotdot_get_application_monitoring_application_statistics_reporting_interval_seconds(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -74294,7 +74294,7 @@ sl_status_t dotdot_set_application_monitoring_application_statistics_reporting_i
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int32_t new_application_statistics_reporting_interval_seconds
+  uint32_t new_application_statistics_reporting_interval_seconds
   );
 
 /**
@@ -75321,7 +75321,7 @@ bool dotdot_is_supported_user_credential_supported_user_unique_identifiers (
  *
  * @returns SupportedUserUniqueIdentifiers attribute
  */
-int16_t dotdot_get_user_credential_supported_user_unique_identifiers(
+uint16_t dotdot_get_user_credential_supported_user_unique_identifiers(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -75341,7 +75341,7 @@ sl_status_t dotdot_set_user_credential_supported_user_unique_identifiers(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int16_t new_supported_user_unique_identifiers
+  uint16_t new_supported_user_unique_identifiers
   );
 
 /**
@@ -78011,7 +78011,7 @@ bool dotdot_is_supported_unify_humidity_control_humidifier_setpoint_precision (
  *
  * @returns HumidifierSetpointPrecision attribute
  */
-int8_t dotdot_get_unify_humidity_control_humidifier_setpoint_precision(
+uint8_t dotdot_get_unify_humidity_control_humidifier_setpoint_precision(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -78031,7 +78031,7 @@ sl_status_t dotdot_set_unify_humidity_control_humidifier_setpoint_precision(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_humidifier_setpoint_precision
+  uint8_t new_humidifier_setpoint_precision
   );
 
 /**
@@ -78541,7 +78541,7 @@ bool dotdot_is_supported_unify_humidity_control_dehumidifier_setpoint_precision 
  *
  * @returns DehumidifierSetpointPrecision attribute
  */
-int8_t dotdot_get_unify_humidity_control_dehumidifier_setpoint_precision(
+uint8_t dotdot_get_unify_humidity_control_dehumidifier_setpoint_precision(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -78561,7 +78561,7 @@ sl_status_t dotdot_set_unify_humidity_control_dehumidifier_setpoint_precision(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_dehumidifier_setpoint_precision
+  uint8_t new_dehumidifier_setpoint_precision
   );
 
 /**
@@ -79071,7 +79071,7 @@ bool dotdot_is_supported_unify_humidity_control_auto_setpoint_precision (
  *
  * @returns AutoSetpointPrecision attribute
  */
-int8_t dotdot_get_unify_humidity_control_auto_setpoint_precision(
+uint8_t dotdot_get_unify_humidity_control_auto_setpoint_precision(
   const dotdot_unid_t unid,
   const dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state);
@@ -79091,7 +79091,7 @@ sl_status_t dotdot_set_unify_humidity_control_auto_setpoint_precision(
   const dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint_id,
   attribute_store_node_value_state_t value_state,
-  int8_t new_auto_setpoint_precision
+  uint8_t new_auto_setpoint_precision
   );
 
 /**

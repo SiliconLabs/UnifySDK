@@ -98,28 +98,28 @@ static void basic_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_BASIC_ZCL_VERSION) {
           uic_mqtt_dotdot_basic_zcl_version_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BASIC_APPLICATION_VERSION) {
           uic_mqtt_dotdot_basic_application_version_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BASIC_STACK_VERSION) {
           uic_mqtt_dotdot_basic_stack_version_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BASIC_HW_VERSION) {
           uic_mqtt_dotdot_basic_hw_version_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -172,7 +172,7 @@ static void basic_cluster_publish_desired_value_callback(
           std::vector<char> str_desired = attr.desired_or_reported<std::vector<char>>();
           uic_mqtt_dotdot_basic_product_code_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(str_desired.data()),
+            static_cast<const char*>(str_desired.data()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -501,28 +501,28 @@ static void basic_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_BASIC_ZCL_VERSION) {
           uic_mqtt_dotdot_basic_zcl_version_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BASIC_APPLICATION_VERSION) {
           uic_mqtt_dotdot_basic_application_version_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BASIC_STACK_VERSION) {
           uic_mqtt_dotdot_basic_stack_version_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BASIC_HW_VERSION) {
           uic_mqtt_dotdot_basic_hw_version_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -575,7 +575,7 @@ static void basic_cluster_publish_reported_value_callback(
           std::vector<char> str_desired = attr.reported<std::vector<char>>();
           uic_mqtt_dotdot_basic_product_code_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>( str_desired.data() ),
+            static_cast<const char*>( str_desired.data() ),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -773,14 +773,14 @@ static void power_configuration_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE) {
           uic_mqtt_dotdot_power_configuration_mains_voltage_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_FREQUENCY) {
           uic_mqtt_dotdot_power_configuration_mains_frequency_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -794,35 +794,35 @@ static void power_configuration_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_MIN_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_mains_voltage_min_threshold_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_MAX_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_mains_voltage_max_threshold_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_DWELL_TRIP_POINT) {
           uic_mqtt_dotdot_power_configuration_mains_voltage_dwell_trip_point_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE) {
           uic_mqtt_dotdot_power_configuration_battery_voltage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_REMAINING) {
           uic_mqtt_dotdot_power_configuration_battery_percentage_remaining_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -844,21 +844,21 @@ static void power_configuration_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERYA_HR_RATING) {
           uic_mqtt_dotdot_power_configuration_batterya_hr_rating_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_QUANTITY) {
           uic_mqtt_dotdot_power_configuration_battery_quantity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_RATED_VOLTAGE) {
           uic_mqtt_dotdot_power_configuration_battery_rated_voltage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -872,56 +872,56 @@ static void power_configuration_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_MIN_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_battery_voltage_min_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD1) {
           uic_mqtt_dotdot_power_configuration_battery_voltage_threshold1_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD2) {
           uic_mqtt_dotdot_power_configuration_battery_voltage_threshold2_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD3) {
           uic_mqtt_dotdot_power_configuration_battery_voltage_threshold3_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_MIN_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_battery_percentage_min_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD1) {
           uic_mqtt_dotdot_power_configuration_battery_percentage_threshold1_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD2) {
           uic_mqtt_dotdot_power_configuration_battery_percentage_threshold2_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD3) {
           uic_mqtt_dotdot_power_configuration_battery_percentage_threshold3_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -935,14 +935,14 @@ static void power_configuration_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE) {
           uic_mqtt_dotdot_power_configuration_battery2_voltage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_REMAINING) {
           uic_mqtt_dotdot_power_configuration_battery2_percentage_remaining_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -964,21 +964,21 @@ static void power_configuration_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2A_HR_RATING) {
           uic_mqtt_dotdot_power_configuration_battery2a_hr_rating_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_QUANTITY) {
           uic_mqtt_dotdot_power_configuration_battery2_quantity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_RATED_VOLTAGE) {
           uic_mqtt_dotdot_power_configuration_battery2_rated_voltage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -992,56 +992,56 @@ static void power_configuration_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_MIN_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_battery2_voltage_min_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD1) {
           uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold1_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD2) {
           uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold2_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD3) {
           uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold3_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_MIN_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_battery2_percentage_min_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD1) {
           uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold1_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD2) {
           uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold2_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD3) {
           uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold3_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -1055,14 +1055,14 @@ static void power_configuration_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE) {
           uic_mqtt_dotdot_power_configuration_battery3_voltage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_REMAINING) {
           uic_mqtt_dotdot_power_configuration_battery3_percentage_remaining_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -1084,21 +1084,21 @@ static void power_configuration_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3A_HR_RATING) {
           uic_mqtt_dotdot_power_configuration_battery3a_hr_rating_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_QUANTITY) {
           uic_mqtt_dotdot_power_configuration_battery3_quantity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_RATED_VOLTAGE) {
           uic_mqtt_dotdot_power_configuration_battery3_rated_voltage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -1112,56 +1112,56 @@ static void power_configuration_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_MIN_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_battery3_voltage_min_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD1) {
           uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold1_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD2) {
           uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold2_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD3) {
           uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold3_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_MIN_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_battery3_percentage_min_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD1) {
           uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold1_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD2) {
           uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold2_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD3) {
           uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold3_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -1709,14 +1709,14 @@ static void power_configuration_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE) {
           uic_mqtt_dotdot_power_configuration_mains_voltage_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_FREQUENCY) {
           uic_mqtt_dotdot_power_configuration_mains_frequency_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -1730,35 +1730,35 @@ static void power_configuration_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_MIN_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_mains_voltage_min_threshold_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_MAX_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_mains_voltage_max_threshold_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_MAINS_VOLTAGE_DWELL_TRIP_POINT) {
           uic_mqtt_dotdot_power_configuration_mains_voltage_dwell_trip_point_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE) {
           uic_mqtt_dotdot_power_configuration_battery_voltage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_REMAINING) {
           uic_mqtt_dotdot_power_configuration_battery_percentage_remaining_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -1780,21 +1780,21 @@ static void power_configuration_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERYA_HR_RATING) {
           uic_mqtt_dotdot_power_configuration_batterya_hr_rating_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_QUANTITY) {
           uic_mqtt_dotdot_power_configuration_battery_quantity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_RATED_VOLTAGE) {
           uic_mqtt_dotdot_power_configuration_battery_rated_voltage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -1808,56 +1808,56 @@ static void power_configuration_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_MIN_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_battery_voltage_min_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD1) {
           uic_mqtt_dotdot_power_configuration_battery_voltage_threshold1_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD2) {
           uic_mqtt_dotdot_power_configuration_battery_voltage_threshold2_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_VOLTAGE_THRESHOLD3) {
           uic_mqtt_dotdot_power_configuration_battery_voltage_threshold3_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_MIN_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_battery_percentage_min_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD1) {
           uic_mqtt_dotdot_power_configuration_battery_percentage_threshold1_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD2) {
           uic_mqtt_dotdot_power_configuration_battery_percentage_threshold2_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY_PERCENTAGE_THRESHOLD3) {
           uic_mqtt_dotdot_power_configuration_battery_percentage_threshold3_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -1871,14 +1871,14 @@ static void power_configuration_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE) {
           uic_mqtt_dotdot_power_configuration_battery2_voltage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_REMAINING) {
           uic_mqtt_dotdot_power_configuration_battery2_percentage_remaining_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -1900,21 +1900,21 @@ static void power_configuration_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2A_HR_RATING) {
           uic_mqtt_dotdot_power_configuration_battery2a_hr_rating_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_QUANTITY) {
           uic_mqtt_dotdot_power_configuration_battery2_quantity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_RATED_VOLTAGE) {
           uic_mqtt_dotdot_power_configuration_battery2_rated_voltage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -1928,56 +1928,56 @@ static void power_configuration_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_MIN_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_battery2_voltage_min_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD1) {
           uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold1_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD2) {
           uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold2_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_VOLTAGE_THRESHOLD3) {
           uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold3_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_MIN_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_battery2_percentage_min_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD1) {
           uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold1_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD2) {
           uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold2_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY2_PERCENTAGE_THRESHOLD3) {
           uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold3_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -1991,14 +1991,14 @@ static void power_configuration_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE) {
           uic_mqtt_dotdot_power_configuration_battery3_voltage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_REMAINING) {
           uic_mqtt_dotdot_power_configuration_battery3_percentage_remaining_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -2020,21 +2020,21 @@ static void power_configuration_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3A_HR_RATING) {
           uic_mqtt_dotdot_power_configuration_battery3a_hr_rating_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_QUANTITY) {
           uic_mqtt_dotdot_power_configuration_battery3_quantity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_RATED_VOLTAGE) {
           uic_mqtt_dotdot_power_configuration_battery3_rated_voltage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -2048,56 +2048,56 @@ static void power_configuration_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_MIN_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_battery3_voltage_min_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD1) {
           uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold1_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD2) {
           uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold2_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_VOLTAGE_THRESHOLD3) {
           uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold3_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_MIN_THRESHOLD) {
           uic_mqtt_dotdot_power_configuration_battery3_percentage_min_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD1) {
           uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold1_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD2) {
           uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold2_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POWER_CONFIGURATION_BATTERY3_PERCENTAGE_THRESHOLD3) {
           uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold3_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -2247,7 +2247,7 @@ static void device_temperature_configuration_cluster_publish_desired_value_callb
           if (type == DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_OVER_TEMP_TOTAL_DWELL) {
           uic_mqtt_dotdot_device_temperature_configuration_over_temp_total_dwell_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -2275,14 +2275,14 @@ static void device_temperature_configuration_cluster_publish_desired_value_callb
           if (type == DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_LOW_TEMP_DWELL_TRIP_POINT) {
           uic_mqtt_dotdot_device_temperature_configuration_low_temp_dwell_trip_point_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_HIGH_TEMP_DWELL_TRIP_POINT) {
           uic_mqtt_dotdot_device_temperature_configuration_high_temp_dwell_trip_point_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -2460,7 +2460,7 @@ static void device_temperature_configuration_cluster_publish_reported_value_call
           if (type == DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_OVER_TEMP_TOTAL_DWELL) {
           uic_mqtt_dotdot_device_temperature_configuration_over_temp_total_dwell_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -2488,14 +2488,14 @@ static void device_temperature_configuration_cluster_publish_reported_value_call
           if (type == DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_LOW_TEMP_DWELL_TRIP_POINT) {
           uic_mqtt_dotdot_device_temperature_configuration_low_temp_dwell_trip_point_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DEVICE_TEMPERATURE_CONFIGURATION_HIGH_TEMP_DWELL_TRIP_POINT) {
           uic_mqtt_dotdot_device_temperature_configuration_high_temp_dwell_trip_point_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -2617,7 +2617,7 @@ static void identify_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_IDENTIFY_IDENTIFY_TIME) {
           uic_mqtt_dotdot_identify_identify_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -2710,7 +2710,7 @@ static void identify_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_IDENTIFY_IDENTIFY_TIME) {
           uic_mqtt_dotdot_identify_identify_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -3047,21 +3047,21 @@ static void scenes_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_COUNT) {
           uic_mqtt_dotdot_scenes_scene_count_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_SCENES_CURRENT_SCENE) {
           uic_mqtt_dotdot_scenes_current_scene_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_SCENES_CURRENT_GROUP) {
           uic_mqtt_dotdot_scenes_current_group_publish(
             base_topic.c_str(),
-            static_cast<uint8_t *>(attr.desired_or_reported<uint8_t *>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -3226,21 +3226,21 @@ static void scenes_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_SCENES_SCENE_COUNT) {
           uic_mqtt_dotdot_scenes_scene_count_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_SCENES_CURRENT_SCENE) {
           uic_mqtt_dotdot_scenes_current_scene_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_SCENES_CURRENT_GROUP) {
           uic_mqtt_dotdot_scenes_current_group_publish(
             base_topic.c_str(),
-            static_cast<uint8_t *>(attr.reported<uint8_t *>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -3400,14 +3400,14 @@ static void on_off_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_TIME) {
           uic_mqtt_dotdot_on_off_on_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ON_OFF_OFF_WAIT_TIME) {
           uic_mqtt_dotdot_on_off_off_wait_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -3553,14 +3553,14 @@ static void on_off_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ON_OFF_ON_TIME) {
           uic_mqtt_dotdot_on_off_on_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ON_OFF_OFF_WAIT_TIME) {
           uic_mqtt_dotdot_on_off_off_wait_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -3689,49 +3689,49 @@ static void level_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL) {
           uic_mqtt_dotdot_level_current_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_REMAINING_TIME) {
           uic_mqtt_dotdot_level_remaining_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_MIN_LEVEL) {
           uic_mqtt_dotdot_level_min_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_MAX_LEVEL) {
           uic_mqtt_dotdot_level_max_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_FREQUENCY) {
           uic_mqtt_dotdot_level_current_frequency_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_MIN_FREQUENCY) {
           uic_mqtt_dotdot_level_min_frequency_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_MAX_FREQUENCY) {
           uic_mqtt_dotdot_level_max_frequency_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -3745,42 +3745,42 @@ static void level_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_ON_OFF_TRANSITION_TIME) {
           uic_mqtt_dotdot_level_on_off_transition_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_ON_LEVEL) {
           uic_mqtt_dotdot_level_on_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_ON_TRANSITION_TIME) {
           uic_mqtt_dotdot_level_on_transition_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_OFF_TRANSITION_TIME) {
           uic_mqtt_dotdot_level_off_transition_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_DEFAULT_MOVE_RATE) {
           uic_mqtt_dotdot_level_default_move_rate_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_START_UP_CURRENT_LEVEL) {
           uic_mqtt_dotdot_level_start_up_current_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -3977,49 +3977,49 @@ static void level_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_LEVEL) {
           uic_mqtt_dotdot_level_current_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_REMAINING_TIME) {
           uic_mqtt_dotdot_level_remaining_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_MIN_LEVEL) {
           uic_mqtt_dotdot_level_min_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_MAX_LEVEL) {
           uic_mqtt_dotdot_level_max_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_CURRENT_FREQUENCY) {
           uic_mqtt_dotdot_level_current_frequency_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_MIN_FREQUENCY) {
           uic_mqtt_dotdot_level_min_frequency_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_MAX_FREQUENCY) {
           uic_mqtt_dotdot_level_max_frequency_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -4033,42 +4033,42 @@ static void level_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_ON_OFF_TRANSITION_TIME) {
           uic_mqtt_dotdot_level_on_off_transition_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_ON_LEVEL) {
           uic_mqtt_dotdot_level_on_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_ON_TRANSITION_TIME) {
           uic_mqtt_dotdot_level_on_transition_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_OFF_TRANSITION_TIME) {
           uic_mqtt_dotdot_level_off_transition_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_DEFAULT_MOVE_RATE) {
           uic_mqtt_dotdot_level_default_move_rate_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_LEVEL_START_UP_CURRENT_LEVEL) {
           uic_mqtt_dotdot_level_start_up_current_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -4190,7 +4190,7 @@ static void alarms_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_ALARMS_ALARM_COUNT) {
           uic_mqtt_dotdot_alarms_alarm_count_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -4283,7 +4283,7 @@ static void alarms_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_ALARMS_ALARM_COUNT) {
           uic_mqtt_dotdot_alarms_alarm_count_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -4405,7 +4405,7 @@ static void time_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_TIME_TIME) {
           uic_mqtt_dotdot_time_time_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -4426,14 +4426,14 @@ static void time_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_DST_START) {
           uic_mqtt_dotdot_time_dst_start_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_DST_END) {
           uic_mqtt_dotdot_time_dst_end_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -4447,28 +4447,28 @@ static void time_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_STANDARD_TIME) {
           uic_mqtt_dotdot_time_standard_time_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_LOCAL_TIME) {
           uic_mqtt_dotdot_time_local_time_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_LAST_SET_TIME) {
           uic_mqtt_dotdot_time_last_set_time_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_VALID_UNTIL_TIME) {
           uic_mqtt_dotdot_time_valid_until_time_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -4633,7 +4633,7 @@ static void time_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_TIME_TIME) {
           uic_mqtt_dotdot_time_time_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -4654,14 +4654,14 @@ static void time_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_DST_START) {
           uic_mqtt_dotdot_time_dst_start_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_DST_END) {
           uic_mqtt_dotdot_time_dst_end_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -4675,28 +4675,28 @@ static void time_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_STANDARD_TIME) {
           uic_mqtt_dotdot_time_standard_time_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_LOCAL_TIME) {
           uic_mqtt_dotdot_time_local_time_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_LAST_SET_TIME) {
           uic_mqtt_dotdot_time_last_set_time_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_TIME_VALID_UNTIL_TIME) {
           uic_mqtt_dotdot_time_valid_until_time_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -4818,49 +4818,49 @@ static void poll_control_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_CHECK_IN_INTERVAL) {
           uic_mqtt_dotdot_poll_control_check_in_interval_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_LONG_POLL_INTERVAL) {
           uic_mqtt_dotdot_poll_control_long_poll_interval_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_SHORT_POLL_INTERVAL) {
           uic_mqtt_dotdot_poll_control_short_poll_interval_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_FAST_POLL_TIMEOUT) {
           uic_mqtt_dotdot_poll_control_fast_poll_timeout_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_CHECK_IN_INTERVAL_MIN) {
           uic_mqtt_dotdot_poll_control_check_in_interval_min_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_LONG_POLL_INTERVAL_MIN) {
           uic_mqtt_dotdot_poll_control_long_poll_interval_min_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_FAST_POLL_TIMEOUT_MAX) {
           uic_mqtt_dotdot_poll_control_fast_poll_timeout_max_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -5001,49 +5001,49 @@ static void poll_control_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_CHECK_IN_INTERVAL) {
           uic_mqtt_dotdot_poll_control_check_in_interval_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_LONG_POLL_INTERVAL) {
           uic_mqtt_dotdot_poll_control_long_poll_interval_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_SHORT_POLL_INTERVAL) {
           uic_mqtt_dotdot_poll_control_short_poll_interval_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_FAST_POLL_TIMEOUT) {
           uic_mqtt_dotdot_poll_control_fast_poll_timeout_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_CHECK_IN_INTERVAL_MIN) {
           uic_mqtt_dotdot_poll_control_check_in_interval_min_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_LONG_POLL_INTERVAL_MIN) {
           uic_mqtt_dotdot_poll_control_long_poll_interval_min_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_POLL_CONTROL_FAST_POLL_TIMEOUT_MAX) {
           uic_mqtt_dotdot_poll_control_fast_poll_timeout_max_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -5165,14 +5165,14 @@ static void shade_configuration_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_PHYSICAL_CLOSED_LIMIT) {
           uic_mqtt_dotdot_shade_configuration_physical_closed_limit_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_MOTOR_STEP_SIZE) {
           uic_mqtt_dotdot_shade_configuration_motor_step_size_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -5186,7 +5186,7 @@ static void shade_configuration_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_CLOSED_LIMIT) {
           uic_mqtt_dotdot_shade_configuration_closed_limit_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -5318,14 +5318,14 @@ static void shade_configuration_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_PHYSICAL_CLOSED_LIMIT) {
           uic_mqtt_dotdot_shade_configuration_physical_closed_limit_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_MOTOR_STEP_SIZE) {
           uic_mqtt_dotdot_shade_configuration_motor_step_size_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -5339,7 +5339,7 @@ static void shade_configuration_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_SHADE_CONFIGURATION_CLOSED_LIMIT) {
           uic_mqtt_dotdot_shade_configuration_closed_limit_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -5496,98 +5496,98 @@ static void door_lock_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DOOR_OPEN_EVENTS) {
           uic_mqtt_dotdot_door_lock_door_open_events_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DOOR_CLOSED_EVENTS) {
           uic_mqtt_dotdot_door_lock_door_closed_events_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_OPEN_PERIOD) {
           uic_mqtt_dotdot_door_lock_open_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_LOG_RECORDS_SUPPORTED) {
           uic_mqtt_dotdot_door_lock_number_of_log_records_supported_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_TOTAL_USERS_SUPPORTED) {
           uic_mqtt_dotdot_door_lock_number_of_total_users_supported_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED) {
           uic_mqtt_dotdot_door_lock_number_of_pin_users_supported_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED) {
           uic_mqtt_dotdot_door_lock_number_of_rfid_users_supported_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER) {
           uic_mqtt_dotdot_door_lock_number_of_week_day_schedules_supported_per_user_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_YEAR_DAY_SCHEDULES_SUPPORTED_PER_USER) {
           uic_mqtt_dotdot_door_lock_number_of_year_day_schedules_supported_per_user_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED) {
           uic_mqtt_dotdot_door_lock_number_of_holiday_schedules_supported_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH) {
           uic_mqtt_dotdot_door_lock_max_pin_code_length_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH) {
           uic_mqtt_dotdot_door_lock_min_pin_code_length_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH) {
           uic_mqtt_dotdot_door_lock_max_rfid_code_length_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH) {
           uic_mqtt_dotdot_door_lock_min_rfid_code_length_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -5601,7 +5601,7 @@ static void door_lock_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER) {
           uic_mqtt_dotdot_door_lock_number_of_credentials_supported_per_user_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -5623,21 +5623,21 @@ static void door_lock_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LED_SETTINGS) {
           uic_mqtt_dotdot_door_lock_led_settings_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_AUTO_RELOCK_TIME) {
           uic_mqtt_dotdot_door_lock_auto_relock_time_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SOUND_VOLUME) {
           uic_mqtt_dotdot_door_lock_sound_volume_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -5700,14 +5700,14 @@ static void door_lock_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT) {
           uic_mqtt_dotdot_door_lock_wrong_code_entry_limit_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_USER_CODE_TEMPORARY_DISABLE_TIME) {
           uic_mqtt_dotdot_door_lock_user_code_temporary_disable_time_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -5735,7 +5735,7 @@ static void door_lock_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT) {
           uic_mqtt_dotdot_door_lock_expiring_user_timeout_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -6295,98 +6295,98 @@ static void door_lock_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DOOR_OPEN_EVENTS) {
           uic_mqtt_dotdot_door_lock_door_open_events_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_DOOR_CLOSED_EVENTS) {
           uic_mqtt_dotdot_door_lock_door_closed_events_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_OPEN_PERIOD) {
           uic_mqtt_dotdot_door_lock_open_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_LOG_RECORDS_SUPPORTED) {
           uic_mqtt_dotdot_door_lock_number_of_log_records_supported_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_TOTAL_USERS_SUPPORTED) {
           uic_mqtt_dotdot_door_lock_number_of_total_users_supported_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_PIN_USERS_SUPPORTED) {
           uic_mqtt_dotdot_door_lock_number_of_pin_users_supported_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_RFID_USERS_SUPPORTED) {
           uic_mqtt_dotdot_door_lock_number_of_rfid_users_supported_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_WEEK_DAY_SCHEDULES_SUPPORTED_PER_USER) {
           uic_mqtt_dotdot_door_lock_number_of_week_day_schedules_supported_per_user_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_YEAR_DAY_SCHEDULES_SUPPORTED_PER_USER) {
           uic_mqtt_dotdot_door_lock_number_of_year_day_schedules_supported_per_user_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_HOLIDAY_SCHEDULES_SUPPORTED) {
           uic_mqtt_dotdot_door_lock_number_of_holiday_schedules_supported_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_PIN_CODE_LENGTH) {
           uic_mqtt_dotdot_door_lock_max_pin_code_length_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_PIN_CODE_LENGTH) {
           uic_mqtt_dotdot_door_lock_min_pin_code_length_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MAX_RFID_CODE_LENGTH) {
           uic_mqtt_dotdot_door_lock_max_rfid_code_length_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_MIN_RFID_CODE_LENGTH) {
           uic_mqtt_dotdot_door_lock_min_rfid_code_length_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -6400,7 +6400,7 @@ static void door_lock_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_NUMBER_OF_CREDENTIALS_SUPPORTED_PER_USER) {
           uic_mqtt_dotdot_door_lock_number_of_credentials_supported_per_user_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -6422,21 +6422,21 @@ static void door_lock_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_LED_SETTINGS) {
           uic_mqtt_dotdot_door_lock_led_settings_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_AUTO_RELOCK_TIME) {
           uic_mqtt_dotdot_door_lock_auto_relock_time_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_SOUND_VOLUME) {
           uic_mqtt_dotdot_door_lock_sound_volume_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -6499,14 +6499,14 @@ static void door_lock_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_WRONG_CODE_ENTRY_LIMIT) {
           uic_mqtt_dotdot_door_lock_wrong_code_entry_limit_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_USER_CODE_TEMPORARY_DISABLE_TIME) {
           uic_mqtt_dotdot_door_lock_user_code_temporary_disable_time_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -6534,7 +6534,7 @@ static void door_lock_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_DOOR_LOCK_EXPIRING_USER_TIMEOUT) {
           uic_mqtt_dotdot_door_lock_expiring_user_timeout_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -6726,42 +6726,42 @@ static void window_covering_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_PHYSICAL_CLOSED_LIMIT_LIFT) {
           uic_mqtt_dotdot_window_covering_physical_closed_limit_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_PHYSICAL_CLOSED_LIMIT_TILT) {
           uic_mqtt_dotdot_window_covering_physical_closed_limit_tilt_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_LIFT) {
           uic_mqtt_dotdot_window_covering_current_position_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_TILT) {
           uic_mqtt_dotdot_window_covering_current_position_tilt_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_NUMBER_OF_ACTUATIONS_LIFT) {
           uic_mqtt_dotdot_window_covering_number_of_actuations_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_NUMBER_OF_ACTUATIONS_TILT) {
           uic_mqtt_dotdot_window_covering_number_of_actuations_tilt_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -6775,63 +6775,63 @@ static void window_covering_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_LIFT_PERCENTAGE) {
           uic_mqtt_dotdot_window_covering_current_position_lift_percentage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_TILT_PERCENTAGE) {
           uic_mqtt_dotdot_window_covering_current_position_tilt_percentage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_OPEN_LIMIT_LIFT) {
           uic_mqtt_dotdot_window_covering_installed_open_limit_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_LIFT) {
           uic_mqtt_dotdot_window_covering_installed_closed_limit_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_OPEN_LIMIT_TILT) {
           uic_mqtt_dotdot_window_covering_installed_open_limit_tilt_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_TILT) {
           uic_mqtt_dotdot_window_covering_installed_closed_limit_tilt_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_VELOCITY_LIFT) {
           uic_mqtt_dotdot_window_covering_velocity_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_ACCELERATION_TIME_LIFT) {
           uic_mqtt_dotdot_window_covering_acceleration_time_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_DECELERATION_TIME_LIFT) {
           uic_mqtt_dotdot_window_covering_deceleration_time_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -6846,7 +6846,7 @@ static void window_covering_cluster_publish_desired_value_callback(
           std::vector<char> str_desired = attr.desired_or_reported<std::vector<char>>();
           uic_mqtt_dotdot_window_covering_intermediate_setpoints_lift_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(str_desired.data()),
+            static_cast<const char*>(str_desired.data()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -6854,7 +6854,7 @@ static void window_covering_cluster_publish_desired_value_callback(
           std::vector<char> str_desired = attr.desired_or_reported<std::vector<char>>();
           uic_mqtt_dotdot_window_covering_intermediate_setpoints_tilt_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(str_desired.data()),
+            static_cast<const char*>(str_desired.data()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -7106,42 +7106,42 @@ static void window_covering_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_PHYSICAL_CLOSED_LIMIT_LIFT) {
           uic_mqtt_dotdot_window_covering_physical_closed_limit_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_PHYSICAL_CLOSED_LIMIT_TILT) {
           uic_mqtt_dotdot_window_covering_physical_closed_limit_tilt_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_LIFT) {
           uic_mqtt_dotdot_window_covering_current_position_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_TILT) {
           uic_mqtt_dotdot_window_covering_current_position_tilt_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_NUMBER_OF_ACTUATIONS_LIFT) {
           uic_mqtt_dotdot_window_covering_number_of_actuations_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_NUMBER_OF_ACTUATIONS_TILT) {
           uic_mqtt_dotdot_window_covering_number_of_actuations_tilt_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -7155,63 +7155,63 @@ static void window_covering_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_LIFT_PERCENTAGE) {
           uic_mqtt_dotdot_window_covering_current_position_lift_percentage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_CURRENT_POSITION_TILT_PERCENTAGE) {
           uic_mqtt_dotdot_window_covering_current_position_tilt_percentage_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_OPEN_LIMIT_LIFT) {
           uic_mqtt_dotdot_window_covering_installed_open_limit_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_LIFT) {
           uic_mqtt_dotdot_window_covering_installed_closed_limit_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_OPEN_LIMIT_TILT) {
           uic_mqtt_dotdot_window_covering_installed_open_limit_tilt_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_INSTALLED_CLOSED_LIMIT_TILT) {
           uic_mqtt_dotdot_window_covering_installed_closed_limit_tilt_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_VELOCITY_LIFT) {
           uic_mqtt_dotdot_window_covering_velocity_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_ACCELERATION_TIME_LIFT) {
           uic_mqtt_dotdot_window_covering_acceleration_time_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WINDOW_COVERING_DECELERATION_TIME_LIFT) {
           uic_mqtt_dotdot_window_covering_deceleration_time_lift_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -7226,7 +7226,7 @@ static void window_covering_cluster_publish_reported_value_callback(
           std::vector<char> str_desired = attr.reported<std::vector<char>>();
           uic_mqtt_dotdot_window_covering_intermediate_setpoints_lift_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>( str_desired.data() ),
+            static_cast<const char*>( str_desired.data() ),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -7234,7 +7234,7 @@ static void window_covering_cluster_publish_reported_value_callback(
           std::vector<char> str_desired = attr.reported<std::vector<char>>();
           uic_mqtt_dotdot_window_covering_intermediate_setpoints_tilt_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>( str_desired.data() ),
+            static_cast<const char*>( str_desired.data() ),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -7377,49 +7377,49 @@ static void barrier_control_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_OPEN_EVENTS) {
           uic_mqtt_dotdot_barrier_control_open_events_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_CLOSE_EVENTS) {
           uic_mqtt_dotdot_barrier_control_close_events_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_COMMAND_OPEN_EVENTS) {
           uic_mqtt_dotdot_barrier_control_command_open_events_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_COMMAND_CLOSE_EVENTS) {
           uic_mqtt_dotdot_barrier_control_command_close_events_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_OPEN_PERIOD) {
           uic_mqtt_dotdot_barrier_control_open_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_CLOSE_PERIOD) {
           uic_mqtt_dotdot_barrier_control_close_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_BARRIER_POSITION) {
           uic_mqtt_dotdot_barrier_control_barrier_position_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -7605,49 +7605,49 @@ static void barrier_control_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_OPEN_EVENTS) {
           uic_mqtt_dotdot_barrier_control_open_events_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_CLOSE_EVENTS) {
           uic_mqtt_dotdot_barrier_control_close_events_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_COMMAND_OPEN_EVENTS) {
           uic_mqtt_dotdot_barrier_control_command_open_events_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_COMMAND_CLOSE_EVENTS) {
           uic_mqtt_dotdot_barrier_control_command_close_events_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_OPEN_PERIOD) {
           uic_mqtt_dotdot_barrier_control_open_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_CLOSE_PERIOD) {
           uic_mqtt_dotdot_barrier_control_close_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BARRIER_CONTROL_BARRIER_POSITION) {
           uic_mqtt_dotdot_barrier_control_barrier_position_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -7776,14 +7776,14 @@ static void pump_configuration_and_control_cluster_publish_desired_value_callbac
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_SPEED) {
           uic_mqtt_dotdot_pump_configuration_and_control_max_speed_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_FLOW) {
           uic_mqtt_dotdot_pump_configuration_and_control_max_flow_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -7818,28 +7818,28 @@ static void pump_configuration_and_control_cluster_publish_desired_value_callbac
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_SPEED) {
           uic_mqtt_dotdot_pump_configuration_and_control_min_const_speed_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_SPEED) {
           uic_mqtt_dotdot_pump_configuration_and_control_max_const_speed_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_FLOW) {
           uic_mqtt_dotdot_pump_configuration_and_control_min_const_flow_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_FLOW) {
           uic_mqtt_dotdot_pump_configuration_and_control_max_const_flow_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -7888,28 +7888,28 @@ static void pump_configuration_and_control_cluster_publish_desired_value_callbac
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_SPEED) {
           uic_mqtt_dotdot_pump_configuration_and_control_speed_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_LIFETIME_RUNNING_HOURS) {
           uic_mqtt_dotdot_pump_configuration_and_control_lifetime_running_hours_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_POWER) {
           uic_mqtt_dotdot_pump_configuration_and_control_power_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_LIFETIME_ENERGY_CONSUMED) {
           uic_mqtt_dotdot_pump_configuration_and_control_lifetime_energy_consumed_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -8214,14 +8214,14 @@ static void pump_configuration_and_control_cluster_publish_reported_value_callba
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_SPEED) {
           uic_mqtt_dotdot_pump_configuration_and_control_max_speed_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_FLOW) {
           uic_mqtt_dotdot_pump_configuration_and_control_max_flow_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -8256,28 +8256,28 @@ static void pump_configuration_and_control_cluster_publish_reported_value_callba
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_SPEED) {
           uic_mqtt_dotdot_pump_configuration_and_control_min_const_speed_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_SPEED) {
           uic_mqtt_dotdot_pump_configuration_and_control_max_const_speed_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MIN_CONST_FLOW) {
           uic_mqtt_dotdot_pump_configuration_and_control_min_const_flow_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_MAX_CONST_FLOW) {
           uic_mqtt_dotdot_pump_configuration_and_control_max_const_flow_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -8326,28 +8326,28 @@ static void pump_configuration_and_control_cluster_publish_reported_value_callba
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_SPEED) {
           uic_mqtt_dotdot_pump_configuration_and_control_speed_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_LIFETIME_RUNNING_HOURS) {
           uic_mqtt_dotdot_pump_configuration_and_control_lifetime_running_hours_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_POWER) {
           uic_mqtt_dotdot_pump_configuration_and_control_power_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PUMP_CONFIGURATION_AND_CONTROL_LIFETIME_ENERGY_CONSUMED) {
           uic_mqtt_dotdot_pump_configuration_and_control_lifetime_energy_consumed_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -8539,14 +8539,14 @@ static void thermostat_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_PI_COOLING_DEMAND) {
           uic_mqtt_dotdot_thermostat_pi_cooling_demand_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_PI_HEATING_DEMAND) {
           uic_mqtt_dotdot_thermostat_pi_heating_demand_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -8672,14 +8672,14 @@ static void thermostat_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_NUMBER_OF_WEEKLY_TRANSITIONS) {
           uic_mqtt_dotdot_thermostat_number_of_weekly_transitions_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_NUMBER_OF_DAILY_TRANSITIONS) {
           uic_mqtt_dotdot_thermostat_number_of_daily_transitions_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -8693,7 +8693,7 @@ static void thermostat_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_TEMPERATURE_SETPOINT_HOLD_DURATION) {
           uic_mqtt_dotdot_thermostat_temperature_setpoint_hold_duration_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -8728,56 +8728,56 @@ static void thermostat_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SETPOINT_CHANGE_SOURCE_TIMESTAMP) {
           uic_mqtt_dotdot_thermostat_setpoint_change_source_timestamp_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK) {
           uic_mqtt_dotdot_thermostat_occupied_setback_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK_MIN) {
           uic_mqtt_dotdot_thermostat_occupied_setback_min_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK_MAX) {
           uic_mqtt_dotdot_thermostat_occupied_setback_max_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK) {
           uic_mqtt_dotdot_thermostat_unoccupied_setback_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK_MIN) {
           uic_mqtt_dotdot_thermostat_unoccupied_setback_min_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK_MAX) {
           uic_mqtt_dotdot_thermostat_unoccupied_setback_max_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_EMERGENCY_HEAT_DELTA) {
           uic_mqtt_dotdot_thermostat_emergency_heat_delta_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -8791,7 +8791,7 @@ static void thermostat_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_CAPACITY) {
           uic_mqtt_dotdot_thermostat_ac_capacity_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -9367,14 +9367,14 @@ static void thermostat_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_PI_COOLING_DEMAND) {
           uic_mqtt_dotdot_thermostat_pi_cooling_demand_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_PI_HEATING_DEMAND) {
           uic_mqtt_dotdot_thermostat_pi_heating_demand_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -9500,14 +9500,14 @@ static void thermostat_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_NUMBER_OF_WEEKLY_TRANSITIONS) {
           uic_mqtt_dotdot_thermostat_number_of_weekly_transitions_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_NUMBER_OF_DAILY_TRANSITIONS) {
           uic_mqtt_dotdot_thermostat_number_of_daily_transitions_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -9521,7 +9521,7 @@ static void thermostat_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_TEMPERATURE_SETPOINT_HOLD_DURATION) {
           uic_mqtt_dotdot_thermostat_temperature_setpoint_hold_duration_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -9556,56 +9556,56 @@ static void thermostat_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_SETPOINT_CHANGE_SOURCE_TIMESTAMP) {
           uic_mqtt_dotdot_thermostat_setpoint_change_source_timestamp_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK) {
           uic_mqtt_dotdot_thermostat_occupied_setback_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK_MIN) {
           uic_mqtt_dotdot_thermostat_occupied_setback_min_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_OCCUPIED_SETBACK_MAX) {
           uic_mqtt_dotdot_thermostat_occupied_setback_max_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK) {
           uic_mqtt_dotdot_thermostat_unoccupied_setback_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK_MIN) {
           uic_mqtt_dotdot_thermostat_unoccupied_setback_min_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_UNOCCUPIED_SETBACK_MAX) {
           uic_mqtt_dotdot_thermostat_unoccupied_setback_max_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_EMERGENCY_HEAT_DELTA) {
           uic_mqtt_dotdot_thermostat_emergency_heat_delta_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -9619,7 +9619,7 @@ static void thermostat_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_THERMOSTAT_AC_CAPACITY) {
           uic_mqtt_dotdot_thermostat_ac_capacity_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -10020,21 +10020,21 @@ static void dehumidification_control_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY) {
           uic_mqtt_dotdot_dehumidification_control_relative_humidity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_COOLING) {
           uic_mqtt_dotdot_dehumidification_control_dehumidification_cooling_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RH_DEHUMIDIFICATION_SETPOINT) {
           uic_mqtt_dotdot_dehumidification_control_rh_dehumidification_setpoint_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -10055,14 +10055,14 @@ static void dehumidification_control_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_HYSTERESIS) {
           uic_mqtt_dotdot_dehumidification_control_dehumidification_hysteresis_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_MAX_COOL) {
           uic_mqtt_dotdot_dehumidification_control_dehumidification_max_cool_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -10218,21 +10218,21 @@ static void dehumidification_control_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RELATIVE_HUMIDITY) {
           uic_mqtt_dotdot_dehumidification_control_relative_humidity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_COOLING) {
           uic_mqtt_dotdot_dehumidification_control_dehumidification_cooling_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_RH_DEHUMIDIFICATION_SETPOINT) {
           uic_mqtt_dotdot_dehumidification_control_rh_dehumidification_setpoint_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -10253,14 +10253,14 @@ static void dehumidification_control_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_HYSTERESIS) {
           uic_mqtt_dotdot_dehumidification_control_dehumidification_hysteresis_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DEHUMIDIFICATION_CONTROL_DEHUMIDIFICATION_MAX_COOL) {
           uic_mqtt_dotdot_dehumidification_control_dehumidification_max_cool_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -10648,35 +10648,35 @@ static void color_control_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENT_HUE) {
           uic_mqtt_dotdot_color_control_current_hue_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENT_SATURATION) {
           uic_mqtt_dotdot_color_control_current_saturation_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_REMAINING_TIME) {
           uic_mqtt_dotdot_color_control_remaining_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENTX) {
           uic_mqtt_dotdot_color_control_currentx_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENTY) {
           uic_mqtt_dotdot_color_control_currenty_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -10698,7 +10698,7 @@ static void color_control_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMPERATURE_MIREDS) {
           uic_mqtt_dotdot_color_control_color_temperature_mireds_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -10719,217 +10719,217 @@ static void color_control_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_NUMBER_OF_PRIMARIES) {
           uic_mqtt_dotdot_color_control_number_of_primaries_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1X) {
           uic_mqtt_dotdot_color_control_primary1x_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1Y) {
           uic_mqtt_dotdot_color_control_primary1y_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1_INTENSITY) {
           uic_mqtt_dotdot_color_control_primary1_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2X) {
           uic_mqtt_dotdot_color_control_primary2x_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2Y) {
           uic_mqtt_dotdot_color_control_primary2y_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2_INTENSITY) {
           uic_mqtt_dotdot_color_control_primary2_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3X) {
           uic_mqtt_dotdot_color_control_primary3x_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3Y) {
           uic_mqtt_dotdot_color_control_primary3y_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3_INTENSITY) {
           uic_mqtt_dotdot_color_control_primary3_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4X) {
           uic_mqtt_dotdot_color_control_primary4x_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4Y) {
           uic_mqtt_dotdot_color_control_primary4y_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4_INTENSITY) {
           uic_mqtt_dotdot_color_control_primary4_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5X) {
           uic_mqtt_dotdot_color_control_primary5x_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5Y) {
           uic_mqtt_dotdot_color_control_primary5y_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5_INTENSITY) {
           uic_mqtt_dotdot_color_control_primary5_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6X) {
           uic_mqtt_dotdot_color_control_primary6x_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6Y) {
           uic_mqtt_dotdot_color_control_primary6y_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6_INTENSITY) {
           uic_mqtt_dotdot_color_control_primary6_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_WHITE_POINTX) {
           uic_mqtt_dotdot_color_control_white_pointx_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_WHITE_POINTY) {
           uic_mqtt_dotdot_color_control_white_pointy_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTRX) {
           uic_mqtt_dotdot_color_control_color_pointrx_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTRY) {
           uic_mqtt_dotdot_color_control_color_pointry_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTR_INTENSITY) {
           uic_mqtt_dotdot_color_control_color_pointr_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTGX) {
           uic_mqtt_dotdot_color_control_color_pointgx_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTGY) {
           uic_mqtt_dotdot_color_control_color_pointgy_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTG_INTENSITY) {
           uic_mqtt_dotdot_color_control_color_pointg_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTBX) {
           uic_mqtt_dotdot_color_control_color_pointbx_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTBY) {
           uic_mqtt_dotdot_color_control_color_pointby_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTB_INTENSITY) {
           uic_mqtt_dotdot_color_control_color_pointb_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_ENHANCED_CURRENT_HUE) {
           uic_mqtt_dotdot_color_control_enhanced_current_hue_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -10943,35 +10943,35 @@ static void color_control_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_ACTIVE) {
           uic_mqtt_dotdot_color_control_color_loop_active_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_DIRECTION) {
           uic_mqtt_dotdot_color_control_color_loop_direction_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_TIME) {
           uic_mqtt_dotdot_color_control_color_loop_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_START_ENHANCED_HUE) {
           uic_mqtt_dotdot_color_control_color_loop_start_enhanced_hue_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_STORED_ENHANCED_HUE) {
           uic_mqtt_dotdot_color_control_color_loop_stored_enhanced_hue_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -10985,28 +10985,28 @@ static void color_control_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMP_PHYSICAL_MIN_MIREDS) {
           uic_mqtt_dotdot_color_control_color_temp_physical_min_mireds_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMP_PHYSICAL_MAX_MIREDS) {
           uic_mqtt_dotdot_color_control_color_temp_physical_max_mireds_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COUPLE_COLOR_TEMP_TO_LEVEL_MIN_MIREDS) {
           uic_mqtt_dotdot_color_control_couple_color_temp_to_level_min_mireds_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_START_UP_COLOR_TEMPERATURE_MIREDS) {
           uic_mqtt_dotdot_color_control_start_up_color_temperature_mireds_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -11507,35 +11507,35 @@ static void color_control_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENT_HUE) {
           uic_mqtt_dotdot_color_control_current_hue_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENT_SATURATION) {
           uic_mqtt_dotdot_color_control_current_saturation_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_REMAINING_TIME) {
           uic_mqtt_dotdot_color_control_remaining_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENTX) {
           uic_mqtt_dotdot_color_control_currentx_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_CURRENTY) {
           uic_mqtt_dotdot_color_control_currenty_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -11557,7 +11557,7 @@ static void color_control_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMPERATURE_MIREDS) {
           uic_mqtt_dotdot_color_control_color_temperature_mireds_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -11578,217 +11578,217 @@ static void color_control_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_NUMBER_OF_PRIMARIES) {
           uic_mqtt_dotdot_color_control_number_of_primaries_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1X) {
           uic_mqtt_dotdot_color_control_primary1x_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1Y) {
           uic_mqtt_dotdot_color_control_primary1y_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY1_INTENSITY) {
           uic_mqtt_dotdot_color_control_primary1_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2X) {
           uic_mqtt_dotdot_color_control_primary2x_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2Y) {
           uic_mqtt_dotdot_color_control_primary2y_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY2_INTENSITY) {
           uic_mqtt_dotdot_color_control_primary2_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3X) {
           uic_mqtt_dotdot_color_control_primary3x_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3Y) {
           uic_mqtt_dotdot_color_control_primary3y_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY3_INTENSITY) {
           uic_mqtt_dotdot_color_control_primary3_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4X) {
           uic_mqtt_dotdot_color_control_primary4x_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4Y) {
           uic_mqtt_dotdot_color_control_primary4y_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY4_INTENSITY) {
           uic_mqtt_dotdot_color_control_primary4_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5X) {
           uic_mqtt_dotdot_color_control_primary5x_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5Y) {
           uic_mqtt_dotdot_color_control_primary5y_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY5_INTENSITY) {
           uic_mqtt_dotdot_color_control_primary5_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6X) {
           uic_mqtt_dotdot_color_control_primary6x_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6Y) {
           uic_mqtt_dotdot_color_control_primary6y_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_PRIMARY6_INTENSITY) {
           uic_mqtt_dotdot_color_control_primary6_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_WHITE_POINTX) {
           uic_mqtt_dotdot_color_control_white_pointx_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_WHITE_POINTY) {
           uic_mqtt_dotdot_color_control_white_pointy_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTRX) {
           uic_mqtt_dotdot_color_control_color_pointrx_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTRY) {
           uic_mqtt_dotdot_color_control_color_pointry_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTR_INTENSITY) {
           uic_mqtt_dotdot_color_control_color_pointr_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTGX) {
           uic_mqtt_dotdot_color_control_color_pointgx_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTGY) {
           uic_mqtt_dotdot_color_control_color_pointgy_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTG_INTENSITY) {
           uic_mqtt_dotdot_color_control_color_pointg_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTBX) {
           uic_mqtt_dotdot_color_control_color_pointbx_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTBY) {
           uic_mqtt_dotdot_color_control_color_pointby_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_POINTB_INTENSITY) {
           uic_mqtt_dotdot_color_control_color_pointb_intensity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_ENHANCED_CURRENT_HUE) {
           uic_mqtt_dotdot_color_control_enhanced_current_hue_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -11802,35 +11802,35 @@ static void color_control_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_ACTIVE) {
           uic_mqtt_dotdot_color_control_color_loop_active_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_DIRECTION) {
           uic_mqtt_dotdot_color_control_color_loop_direction_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_TIME) {
           uic_mqtt_dotdot_color_control_color_loop_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_START_ENHANCED_HUE) {
           uic_mqtt_dotdot_color_control_color_loop_start_enhanced_hue_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_LOOP_STORED_ENHANCED_HUE) {
           uic_mqtt_dotdot_color_control_color_loop_stored_enhanced_hue_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -11844,28 +11844,28 @@ static void color_control_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMP_PHYSICAL_MIN_MIREDS) {
           uic_mqtt_dotdot_color_control_color_temp_physical_min_mireds_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COLOR_TEMP_PHYSICAL_MAX_MIREDS) {
           uic_mqtt_dotdot_color_control_color_temp_physical_max_mireds_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_COUPLE_COLOR_TEMP_TO_LEVEL_MIN_MIREDS) {
           uic_mqtt_dotdot_color_control_couple_color_temp_to_level_min_mireds_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_COLOR_CONTROL_START_UP_COLOR_TEMPERATURE_MIREDS) {
           uic_mqtt_dotdot_color_control_start_up_color_temperature_mireds_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -11987,14 +11987,14 @@ static void ballast_configuration_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_PHYSICAL_MIN_LEVEL) {
           uic_mqtt_dotdot_ballast_configuration_physical_min_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_PHYSICAL_MAX_LEVEL) {
           uic_mqtt_dotdot_ballast_configuration_physical_max_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -12008,49 +12008,49 @@ static void ballast_configuration_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_MIN_LEVEL) {
           uic_mqtt_dotdot_ballast_configuration_min_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_MAX_LEVEL) {
           uic_mqtt_dotdot_ballast_configuration_max_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_POWER_ON_LEVEL) {
           uic_mqtt_dotdot_ballast_configuration_power_on_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_POWER_ON_FADE_TIME) {
           uic_mqtt_dotdot_ballast_configuration_power_on_fade_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_INTRINSIC_BALLAST_FACTOR) {
           uic_mqtt_dotdot_ballast_configuration_intrinsic_ballast_factor_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_BALLAST_FACTOR_ADJUSTMENT) {
           uic_mqtt_dotdot_ballast_configuration_ballast_factor_adjustment_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_QUANTITY) {
           uic_mqtt_dotdot_ballast_configuration_lamp_quantity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -12073,14 +12073,14 @@ static void ballast_configuration_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_RATED_HOURS) {
           uic_mqtt_dotdot_ballast_configuration_lamp_rated_hours_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_BURN_HOURS) {
           uic_mqtt_dotdot_ballast_configuration_lamp_burn_hours_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -12094,7 +12094,7 @@ static void ballast_configuration_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_BURN_HOURS_TRIP_POINT) {
           uic_mqtt_dotdot_ballast_configuration_lamp_burn_hours_trip_point_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -12307,14 +12307,14 @@ static void ballast_configuration_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_PHYSICAL_MIN_LEVEL) {
           uic_mqtt_dotdot_ballast_configuration_physical_min_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_PHYSICAL_MAX_LEVEL) {
           uic_mqtt_dotdot_ballast_configuration_physical_max_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -12328,49 +12328,49 @@ static void ballast_configuration_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_MIN_LEVEL) {
           uic_mqtt_dotdot_ballast_configuration_min_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_MAX_LEVEL) {
           uic_mqtt_dotdot_ballast_configuration_max_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_POWER_ON_LEVEL) {
           uic_mqtt_dotdot_ballast_configuration_power_on_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_POWER_ON_FADE_TIME) {
           uic_mqtt_dotdot_ballast_configuration_power_on_fade_time_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_INTRINSIC_BALLAST_FACTOR) {
           uic_mqtt_dotdot_ballast_configuration_intrinsic_ballast_factor_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_BALLAST_FACTOR_ADJUSTMENT) {
           uic_mqtt_dotdot_ballast_configuration_ballast_factor_adjustment_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_QUANTITY) {
           uic_mqtt_dotdot_ballast_configuration_lamp_quantity_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -12393,14 +12393,14 @@ static void ballast_configuration_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_RATED_HOURS) {
           uic_mqtt_dotdot_ballast_configuration_lamp_rated_hours_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_BURN_HOURS) {
           uic_mqtt_dotdot_ballast_configuration_lamp_burn_hours_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -12414,7 +12414,7 @@ static void ballast_configuration_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_BALLAST_CONFIGURATION_LAMP_BURN_HOURS_TRIP_POINT) {
           uic_mqtt_dotdot_ballast_configuration_lamp_burn_hours_trip_point_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -12536,28 +12536,28 @@ static void illuminance_measurement_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MEASURED_VALUE) {
           uic_mqtt_dotdot_illuminance_measurement_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MIN_MEASURED_VALUE) {
           uic_mqtt_dotdot_illuminance_measurement_min_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MAX_MEASURED_VALUE) {
           uic_mqtt_dotdot_illuminance_measurement_max_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_TOLERANCE) {
           uic_mqtt_dotdot_illuminance_measurement_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -12689,28 +12689,28 @@ static void illuminance_measurement_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MEASURED_VALUE) {
           uic_mqtt_dotdot_illuminance_measurement_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MIN_MEASURED_VALUE) {
           uic_mqtt_dotdot_illuminance_measurement_min_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_MAX_MEASURED_VALUE) {
           uic_mqtt_dotdot_illuminance_measurement_max_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_MEASUREMENT_TOLERANCE) {
           uic_mqtt_dotdot_illuminance_measurement_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -12853,7 +12853,7 @@ static void illuminance_level_sensing_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_LEVEL_SENSING_ILLUMINANCE_TARGET_LEVEL) {
           uic_mqtt_dotdot_illuminance_level_sensing_illuminance_target_level_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -12976,7 +12976,7 @@ static void illuminance_level_sensing_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ILLUMINANCE_LEVEL_SENSING_ILLUMINANCE_TARGET_LEVEL) {
           uic_mqtt_dotdot_illuminance_level_sensing_illuminance_target_level_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -13119,7 +13119,7 @@ static void temperature_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_TOLERANCE) {
           uic_mqtt_dotdot_temperature_measurement_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -13257,7 +13257,7 @@ static void temperature_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_TEMPERATURE_MEASUREMENT_TOLERANCE) {
           uic_mqtt_dotdot_temperature_measurement_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -13400,7 +13400,7 @@ static void pressure_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_TOLERANCE) {
           uic_mqtt_dotdot_pressure_measurement_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -13428,7 +13428,7 @@ static void pressure_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_SCALED_TOLERANCE) {
           uic_mqtt_dotdot_pressure_measurement_scaled_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -13613,7 +13613,7 @@ static void pressure_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_TOLERANCE) {
           uic_mqtt_dotdot_pressure_measurement_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -13641,7 +13641,7 @@ static void pressure_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_PRESSURE_MEASUREMENT_SCALED_TOLERANCE) {
           uic_mqtt_dotdot_pressure_measurement_scaled_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -13770,28 +13770,28 @@ static void flow_measurement_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MEASURED_VALUE) {
           uic_mqtt_dotdot_flow_measurement_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MIN_MEASURED_VALUE) {
           uic_mqtt_dotdot_flow_measurement_min_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MAX_MEASURED_VALUE) {
           uic_mqtt_dotdot_flow_measurement_max_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_TOLERANCE) {
           uic_mqtt_dotdot_flow_measurement_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -13908,28 +13908,28 @@ static void flow_measurement_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MEASURED_VALUE) {
           uic_mqtt_dotdot_flow_measurement_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MIN_MEASURED_VALUE) {
           uic_mqtt_dotdot_flow_measurement_min_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_MAX_MEASURED_VALUE) {
           uic_mqtt_dotdot_flow_measurement_max_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_FLOW_MEASUREMENT_TOLERANCE) {
           uic_mqtt_dotdot_flow_measurement_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -14051,28 +14051,28 @@ static void relativity_humidity_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MEASURED_VALUE) {
           uic_mqtt_dotdot_relativity_humidity_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MIN_MEASURED_VALUE) {
           uic_mqtt_dotdot_relativity_humidity_min_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MAX_MEASURED_VALUE) {
           uic_mqtt_dotdot_relativity_humidity_max_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_TOLERANCE) {
           uic_mqtt_dotdot_relativity_humidity_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -14189,28 +14189,28 @@ static void relativity_humidity_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MEASURED_VALUE) {
           uic_mqtt_dotdot_relativity_humidity_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MIN_MEASURED_VALUE) {
           uic_mqtt_dotdot_relativity_humidity_min_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_MAX_MEASURED_VALUE) {
           uic_mqtt_dotdot_relativity_humidity_max_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_RELATIVITY_HUMIDITY_TOLERANCE) {
           uic_mqtt_dotdot_relativity_humidity_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -14353,63 +14353,63 @@ static void occupancy_sensing_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_OCCUPIED_TO_UNOCCUPIED_DELAY) {
           uic_mqtt_dotdot_occupancy_sensing_pir_occupied_to_unoccupied_delay_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_UNOCCUPIED_TO_OCCUPIED_DELAY) {
           uic_mqtt_dotdot_occupancy_sensing_pir_unoccupied_to_occupied_delay_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_UNOCCUPIED_TO_OCCUPIED_THRESHOLD) {
           uic_mqtt_dotdot_occupancy_sensing_pir_unoccupied_to_occupied_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_OCCUPIED_TO_UNOCCUPIED_DELAY) {
           uic_mqtt_dotdot_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_DELAY) {
           uic_mqtt_dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_THRESHOLD) {
           uic_mqtt_dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_OCCUPIED_TO_UNOCCUPIED_DELAY) {
           uic_mqtt_dotdot_occupancy_sensing_physical_contact_occupied_to_unoccupied_delay_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_DELAY) {
           uic_mqtt_dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_delay_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD) {
           uic_mqtt_dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -14611,63 +14611,63 @@ static void occupancy_sensing_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_OCCUPIED_TO_UNOCCUPIED_DELAY) {
           uic_mqtt_dotdot_occupancy_sensing_pir_occupied_to_unoccupied_delay_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_UNOCCUPIED_TO_OCCUPIED_DELAY) {
           uic_mqtt_dotdot_occupancy_sensing_pir_unoccupied_to_occupied_delay_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PIR_UNOCCUPIED_TO_OCCUPIED_THRESHOLD) {
           uic_mqtt_dotdot_occupancy_sensing_pir_unoccupied_to_occupied_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_OCCUPIED_TO_UNOCCUPIED_DELAY) {
           uic_mqtt_dotdot_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_DELAY) {
           uic_mqtt_dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_ULTRASONIC_UNOCCUPIED_TO_OCCUPIED_THRESHOLD) {
           uic_mqtt_dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_OCCUPIED_TO_UNOCCUPIED_DELAY) {
           uic_mqtt_dotdot_occupancy_sensing_physical_contact_occupied_to_unoccupied_delay_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_DELAY) {
           uic_mqtt_dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_delay_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_OCCUPANCY_SENSING_PHYSICAL_CONTACT_UNOCCUPIED_TO_OCCUPIED_THRESHOLD) {
           uic_mqtt_dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -14789,28 +14789,28 @@ static void soil_moisture_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MEASURED_VALUE) {
           uic_mqtt_dotdot_soil_moisture_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MIN_MEASURED_VALUE) {
           uic_mqtt_dotdot_soil_moisture_min_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MAX_MEASURED_VALUE) {
           uic_mqtt_dotdot_soil_moisture_max_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_TOLERANCE) {
           uic_mqtt_dotdot_soil_moisture_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -14927,28 +14927,28 @@ static void soil_moisture_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MEASURED_VALUE) {
           uic_mqtt_dotdot_soil_moisture_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MIN_MEASURED_VALUE) {
           uic_mqtt_dotdot_soil_moisture_min_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_MAX_MEASURED_VALUE) {
           uic_mqtt_dotdot_soil_moisture_max_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_SOIL_MOISTURE_TOLERANCE) {
           uic_mqtt_dotdot_soil_moisture_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -15070,28 +15070,28 @@ static void ph_measurement_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MEASURED_VALUE) {
           uic_mqtt_dotdot_ph_measurement_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MIN_MEASURED_VALUE) {
           uic_mqtt_dotdot_ph_measurement_min_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MAX_MEASURED_VALUE) {
           uic_mqtt_dotdot_ph_measurement_max_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_TOLERANCE) {
           uic_mqtt_dotdot_ph_measurement_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -15208,28 +15208,28 @@ static void ph_measurement_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MEASURED_VALUE) {
           uic_mqtt_dotdot_ph_measurement_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MIN_MEASURED_VALUE) {
           uic_mqtt_dotdot_ph_measurement_min_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_MAX_MEASURED_VALUE) {
           uic_mqtt_dotdot_ph_measurement_max_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_PH_MEASUREMENT_TOLERANCE) {
           uic_mqtt_dotdot_ph_measurement_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -15351,28 +15351,28 @@ static void electrical_conductivity_measurement_cluster_publish_desired_value_ca
       if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MEASURED_VALUE) {
           uic_mqtt_dotdot_electrical_conductivity_measurement_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MIN_MEASURED_VALUE) {
           uic_mqtt_dotdot_electrical_conductivity_measurement_min_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MAX_MEASURED_VALUE) {
           uic_mqtt_dotdot_electrical_conductivity_measurement_max_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_TOLERANCE) {
           uic_mqtt_dotdot_electrical_conductivity_measurement_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -15489,28 +15489,28 @@ static void electrical_conductivity_measurement_cluster_publish_reported_value_c
       if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MEASURED_VALUE) {
           uic_mqtt_dotdot_electrical_conductivity_measurement_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MIN_MEASURED_VALUE) {
           uic_mqtt_dotdot_electrical_conductivity_measurement_min_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_MAX_MEASURED_VALUE) {
           uic_mqtt_dotdot_electrical_conductivity_measurement_max_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_CONDUCTIVITY_MEASUREMENT_TOLERANCE) {
           uic_mqtt_dotdot_electrical_conductivity_measurement_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -15632,28 +15632,28 @@ static void wind_speed_measurement_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MEASURED_VALUE) {
           uic_mqtt_dotdot_wind_speed_measurement_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MIN_MEASURED_VALUE) {
           uic_mqtt_dotdot_wind_speed_measurement_min_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MAX_MEASURED_VALUE) {
           uic_mqtt_dotdot_wind_speed_measurement_max_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_TOLERANCE) {
           uic_mqtt_dotdot_wind_speed_measurement_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -15770,28 +15770,28 @@ static void wind_speed_measurement_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MEASURED_VALUE) {
           uic_mqtt_dotdot_wind_speed_measurement_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MIN_MEASURED_VALUE) {
           uic_mqtt_dotdot_wind_speed_measurement_min_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_MAX_MEASURED_VALUE) {
           uic_mqtt_dotdot_wind_speed_measurement_max_measured_value_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_WIND_SPEED_MEASUREMENT_TOLERANCE) {
           uic_mqtt_dotdot_wind_speed_measurement_tolerance_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -16784,21 +16784,21 @@ static void ias_zone_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONEID) {
           uic_mqtt_dotdot_ias_zone_zoneid_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_IAS_ZONE_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED) {
           uic_mqtt_dotdot_ias_zone_number_of_zone_sensitivity_levels_supported_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_IAS_ZONE_CURRENT_ZONE_SENSITIVITY_LEVEL) {
           uic_mqtt_dotdot_ias_zone_current_zone_sensitivity_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -16967,21 +16967,21 @@ static void ias_zone_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_IAS_ZONE_ZONEID) {
           uic_mqtt_dotdot_ias_zone_zoneid_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_IAS_ZONE_NUMBER_OF_ZONE_SENSITIVITY_LEVELS_SUPPORTED) {
           uic_mqtt_dotdot_ias_zone_number_of_zone_sensitivity_levels_supported_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_IAS_ZONE_CURRENT_ZONE_SENSITIVITY_LEVEL) {
           uic_mqtt_dotdot_ias_zone_current_zone_sensitivity_level_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -17103,7 +17103,7 @@ static void iaswd_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_IASWD_MAX_DURATION) {
           uic_mqtt_dotdot_iaswd_max_duration_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -17196,7 +17196,7 @@ static void iaswd_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_IASWD_MAX_DURATION) {
           uic_mqtt_dotdot_iaswd_max_duration_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -17318,21 +17318,21 @@ static void metering_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_SUMMATION_DELIVERED) {
           uic_mqtt_dotdot_metering_current_summation_delivered_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.desired_or_reported<int64_t>()),
+            static_cast<uint64_t>(attr.desired_or_reported<uint64_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_SUMMATION_RECEIVED) {
           uic_mqtt_dotdot_metering_current_summation_received_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.desired_or_reported<int64_t>()),
+            static_cast<uint64_t>(attr.desired_or_reported<uint64_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_DELIVERED) {
           uic_mqtt_dotdot_metering_current_max_demand_delivered_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.desired_or_reported<int64_t>()),
+            static_cast<uint64_t>(attr.desired_or_reported<uint64_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -17353,28 +17353,28 @@ static void metering_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_READING_SNAP_SHOT_TIME) {
           uic_mqtt_dotdot_metering_reading_snap_shot_time_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_DELIVERED_TIME) {
           uic_mqtt_dotdot_metering_current_max_demand_delivered_time_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_RECEIVED_TIME) {
           uic_mqtt_dotdot_metering_current_max_demand_received_time_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_DEFAULT_UPDATE_PERIOD) {
           uic_mqtt_dotdot_metering_default_update_period_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -17388,14 +17388,14 @@ static void metering_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_INLET_ENERGY_CARRIER_SUMMATION) {
           uic_mqtt_dotdot_metering_current_inlet_energy_carrier_summation_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.desired_or_reported<int64_t>()),
+            static_cast<uint64_t>(attr.desired_or_reported<uint64_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION) {
           uic_mqtt_dotdot_metering_current_outlet_energy_carrier_summation_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.desired_or_reported<int64_t>()),
+            static_cast<uint64_t>(attr.desired_or_reported<uint64_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -17423,14 +17423,14 @@ static void metering_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_MULTIPLIER) {
           uic_mqtt_dotdot_metering_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_DIVISOR) {
           uic_mqtt_dotdot_metering_divisor_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -17786,21 +17786,21 @@ static void metering_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_SUMMATION_DELIVERED) {
           uic_mqtt_dotdot_metering_current_summation_delivered_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.reported<int64_t>()),
+            static_cast<uint64_t>(attr.reported<uint64_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_SUMMATION_RECEIVED) {
           uic_mqtt_dotdot_metering_current_summation_received_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.reported<int64_t>()),
+            static_cast<uint64_t>(attr.reported<uint64_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_DELIVERED) {
           uic_mqtt_dotdot_metering_current_max_demand_delivered_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.reported<int64_t>()),
+            static_cast<uint64_t>(attr.reported<uint64_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -17821,28 +17821,28 @@ static void metering_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_READING_SNAP_SHOT_TIME) {
           uic_mqtt_dotdot_metering_reading_snap_shot_time_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_DELIVERED_TIME) {
           uic_mqtt_dotdot_metering_current_max_demand_delivered_time_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_MAX_DEMAND_RECEIVED_TIME) {
           uic_mqtt_dotdot_metering_current_max_demand_received_time_publish(
             base_topic.c_str(),
-            static_cast<uint8_t>(attr.reported<uint8_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_DEFAULT_UPDATE_PERIOD) {
           uic_mqtt_dotdot_metering_default_update_period_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -17856,14 +17856,14 @@ static void metering_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_INLET_ENERGY_CARRIER_SUMMATION) {
           uic_mqtt_dotdot_metering_current_inlet_energy_carrier_summation_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.reported<int64_t>()),
+            static_cast<uint64_t>(attr.reported<uint64_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_CURRENT_OUTLET_ENERGY_CARRIER_SUMMATION) {
           uic_mqtt_dotdot_metering_current_outlet_energy_carrier_summation_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.reported<int64_t>()),
+            static_cast<uint64_t>(attr.reported<uint64_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -17891,14 +17891,14 @@ static void metering_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_MULTIPLIER) {
           uic_mqtt_dotdot_metering_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_METERING_DIVISOR) {
           uic_mqtt_dotdot_metering_divisor_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -18153,70 +18153,70 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_dc_voltage_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_dc_voltage_divisor_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_dc_current_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_dc_current_divisor_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_dc_power_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_dc_power_divisor_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY) {
           uic_mqtt_dotdot_electrical_measurement_ac_frequency_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MIN) {
           uic_mqtt_dotdot_electrical_measurement_ac_frequency_min_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MAX) {
           uic_mqtt_dotdot_electrical_measurement_ac_frequency_max_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_NEUTRAL_CURRENT) {
           uic_mqtt_dotdot_electrical_measurement_neutral_current_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -18237,7 +18237,7 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_TOTAL_APPARENT_POWER) {
           uic_mqtt_dotdot_electrical_measurement_total_apparent_power_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -18328,28 +18328,28 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_ac_frequency_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_ac_frequency_divisor_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_power_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_power_divisor_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -18370,7 +18370,7 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT) {
           uic_mqtt_dotdot_electrical_measurement_line_current_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -18391,42 +18391,42 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_min_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_max_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -18461,7 +18461,7 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_APPARENT_POWER) {
           uic_mqtt_dotdot_electrical_measurement_apparent_power_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -18475,91 +18475,91 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD) {
           uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD) {
           uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_VOLTAGE_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_ac_voltage_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_VOLTAGE_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_ac_voltage_divisor_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_CURRENT_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_ac_current_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_CURRENT_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_ac_current_divisor_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_POWER_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_ac_power_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_POWER_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_ac_power_divisor_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -18664,7 +18664,7 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHB) {
           uic_mqtt_dotdot_electrical_measurement_line_current_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -18685,42 +18685,42 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_min_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_max_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -18755,7 +18755,7 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_APPARENT_POWER_PHB) {
           uic_mqtt_dotdot_electrical_measurement_apparent_power_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -18769,56 +18769,56 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_period_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_period_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHC) {
           uic_mqtt_dotdot_electrical_measurement_line_current_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -18839,42 +18839,42 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_min_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_max_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -18909,7 +18909,7 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_APPARENT_POWER_PHC) {
           uic_mqtt_dotdot_electrical_measurement_apparent_power_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -18923,49 +18923,49 @@ static void electrical_measurement_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_period_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_period_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -20136,70 +20136,70 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_dc_voltage_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_VOLTAGE_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_dc_voltage_divisor_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_dc_current_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_CURRENT_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_dc_current_divisor_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_dc_power_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_DC_POWER_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_dc_power_divisor_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY) {
           uic_mqtt_dotdot_electrical_measurement_ac_frequency_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MIN) {
           uic_mqtt_dotdot_electrical_measurement_ac_frequency_min_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MAX) {
           uic_mqtt_dotdot_electrical_measurement_ac_frequency_max_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_NEUTRAL_CURRENT) {
           uic_mqtt_dotdot_electrical_measurement_neutral_current_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -20220,7 +20220,7 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_TOTAL_APPARENT_POWER) {
           uic_mqtt_dotdot_electrical_measurement_total_apparent_power_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -20311,28 +20311,28 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_ac_frequency_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_FREQUENCY_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_ac_frequency_divisor_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_power_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_POWER_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_power_divisor_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -20353,7 +20353,7 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT) {
           uic_mqtt_dotdot_electrical_measurement_line_current_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -20374,42 +20374,42 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_min_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_max_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -20444,7 +20444,7 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_APPARENT_POWER) {
           uic_mqtt_dotdot_electrical_measurement_apparent_power_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -20458,91 +20458,91 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD) {
           uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD) {
           uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_VOLTAGE_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_ac_voltage_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_VOLTAGE_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_ac_voltage_divisor_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_CURRENT_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_ac_current_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_CURRENT_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_ac_current_divisor_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_POWER_MULTIPLIER) {
           uic_mqtt_dotdot_electrical_measurement_ac_power_multiplier_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AC_POWER_DIVISOR) {
           uic_mqtt_dotdot_electrical_measurement_ac_power_divisor_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -20647,7 +20647,7 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHB) {
           uic_mqtt_dotdot_electrical_measurement_line_current_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -20668,42 +20668,42 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_min_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_max_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -20738,7 +20738,7 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_APPARENT_POWER_PHB) {
           uic_mqtt_dotdot_electrical_measurement_apparent_power_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -20752,56 +20752,56 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHB) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHB) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHB) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_period_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_period_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_PHB) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_phb_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_LINE_CURRENT_PHC) {
           uic_mqtt_dotdot_electrical_measurement_line_current_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -20822,42 +20822,42 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MIN_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_MAX_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MIN_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_min_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_CURRENT_MAX_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_current_max_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -20892,7 +20892,7 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_APPARENT_POWER_PHC) {
           uic_mqtt_dotdot_electrical_measurement_apparent_power_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -20906,49 +20906,49 @@ static void electrical_measurement_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_VOLTAGE_MEASUREMENT_PERIOD_PHC) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_OVER_VOLTAGE_COUNTER_PHC) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_AVERAGE_RMS_UNDER_VOLTAGE_COUNTER_PHC) {
           uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_OVER_VOLTAGE_PERIOD_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_period_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_EXTREME_UNDER_VOLTAGE_PERIOD_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_period_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SAG_PERIOD_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_ELECTRICAL_MEASUREMENT_RMS_VOLTAGE_SWELL_PERIOD_PHC) {
           uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_phc_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -21070,217 +21070,217 @@ static void diagnostics_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NUMBER_OF_RESETS) {
           uic_mqtt_dotdot_diagnostics_number_of_resets_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PERSISTENT_MEMORY_WRITES) {
           uic_mqtt_dotdot_diagnostics_persistent_memory_writes_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_RX_BCAST) {
           uic_mqtt_dotdot_diagnostics_mac_rx_bcast_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_BCAST) {
           uic_mqtt_dotdot_diagnostics_mac_tx_bcast_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_RX_UCAST) {
           uic_mqtt_dotdot_diagnostics_mac_rx_ucast_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST) {
           uic_mqtt_dotdot_diagnostics_mac_tx_ucast_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST_RETRY) {
           uic_mqtt_dotdot_diagnostics_mac_tx_ucast_retry_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST_FAIL) {
           uic_mqtt_dotdot_diagnostics_mac_tx_ucast_fail_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_RX_BCAST) {
           uic_mqtt_dotdot_diagnostics_aps_rx_bcast_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_BCAST) {
           uic_mqtt_dotdot_diagnostics_aps_tx_bcast_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_RX_UCAST) {
           uic_mqtt_dotdot_diagnostics_aps_rx_ucast_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_SUCCESS) {
           uic_mqtt_dotdot_diagnostics_aps_tx_ucast_success_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_RETRY) {
           uic_mqtt_dotdot_diagnostics_aps_tx_ucast_retry_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_FAIL) {
           uic_mqtt_dotdot_diagnostics_aps_tx_ucast_fail_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_ROUTE_DISC_INITIATED) {
           uic_mqtt_dotdot_diagnostics_route_disc_initiated_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_ADDED) {
           uic_mqtt_dotdot_diagnostics_neighbor_added_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_REMOVED) {
           uic_mqtt_dotdot_diagnostics_neighbor_removed_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_STALE) {
           uic_mqtt_dotdot_diagnostics_neighbor_stale_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_JOIN_INDICATION) {
           uic_mqtt_dotdot_diagnostics_join_indication_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_CHILD_MOVED) {
           uic_mqtt_dotdot_diagnostics_child_moved_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NWKFC_FAILURE) {
           uic_mqtt_dotdot_diagnostics_nwkfc_failure_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APSFC_FAILURE) {
           uic_mqtt_dotdot_diagnostics_apsfc_failure_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_UNAUTHORIZED_KEY) {
           uic_mqtt_dotdot_diagnostics_aps_unauthorized_key_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NWK_DECRYPT_FAILURES) {
           uic_mqtt_dotdot_diagnostics_nwk_decrypt_failures_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_DECRYPT_FAILURES) {
           uic_mqtt_dotdot_diagnostics_aps_decrypt_failures_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PACKET_BUFFER_ALLOCATE_FAILURES) {
           uic_mqtt_dotdot_diagnostics_packet_buffer_allocate_failures_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_RELAYED_UCAST) {
           uic_mqtt_dotdot_diagnostics_relayed_ucast_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED) {
           uic_mqtt_dotdot_diagnostics_phy_to_mac_queue_limit_reached_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PACKET_VALIDATE_DROP_COUNT) {
           uic_mqtt_dotdot_diagnostics_packet_validate_drop_count_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT) {
           uic_mqtt_dotdot_diagnostics_average_mac_retry_per_aps_message_sent_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_LAST_MESSAGELQI) {
           uic_mqtt_dotdot_diagnostics_last_messagelqi_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -21628,217 +21628,217 @@ static void diagnostics_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NUMBER_OF_RESETS) {
           uic_mqtt_dotdot_diagnostics_number_of_resets_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PERSISTENT_MEMORY_WRITES) {
           uic_mqtt_dotdot_diagnostics_persistent_memory_writes_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_RX_BCAST) {
           uic_mqtt_dotdot_diagnostics_mac_rx_bcast_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_BCAST) {
           uic_mqtt_dotdot_diagnostics_mac_tx_bcast_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_RX_UCAST) {
           uic_mqtt_dotdot_diagnostics_mac_rx_ucast_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST) {
           uic_mqtt_dotdot_diagnostics_mac_tx_ucast_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST_RETRY) {
           uic_mqtt_dotdot_diagnostics_mac_tx_ucast_retry_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_MAC_TX_UCAST_FAIL) {
           uic_mqtt_dotdot_diagnostics_mac_tx_ucast_fail_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_RX_BCAST) {
           uic_mqtt_dotdot_diagnostics_aps_rx_bcast_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_BCAST) {
           uic_mqtt_dotdot_diagnostics_aps_tx_bcast_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_RX_UCAST) {
           uic_mqtt_dotdot_diagnostics_aps_rx_ucast_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_SUCCESS) {
           uic_mqtt_dotdot_diagnostics_aps_tx_ucast_success_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_RETRY) {
           uic_mqtt_dotdot_diagnostics_aps_tx_ucast_retry_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_TX_UCAST_FAIL) {
           uic_mqtt_dotdot_diagnostics_aps_tx_ucast_fail_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_ROUTE_DISC_INITIATED) {
           uic_mqtt_dotdot_diagnostics_route_disc_initiated_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_ADDED) {
           uic_mqtt_dotdot_diagnostics_neighbor_added_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_REMOVED) {
           uic_mqtt_dotdot_diagnostics_neighbor_removed_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NEIGHBOR_STALE) {
           uic_mqtt_dotdot_diagnostics_neighbor_stale_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_JOIN_INDICATION) {
           uic_mqtt_dotdot_diagnostics_join_indication_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_CHILD_MOVED) {
           uic_mqtt_dotdot_diagnostics_child_moved_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NWKFC_FAILURE) {
           uic_mqtt_dotdot_diagnostics_nwkfc_failure_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APSFC_FAILURE) {
           uic_mqtt_dotdot_diagnostics_apsfc_failure_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_UNAUTHORIZED_KEY) {
           uic_mqtt_dotdot_diagnostics_aps_unauthorized_key_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_NWK_DECRYPT_FAILURES) {
           uic_mqtt_dotdot_diagnostics_nwk_decrypt_failures_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_APS_DECRYPT_FAILURES) {
           uic_mqtt_dotdot_diagnostics_aps_decrypt_failures_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PACKET_BUFFER_ALLOCATE_FAILURES) {
           uic_mqtt_dotdot_diagnostics_packet_buffer_allocate_failures_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_RELAYED_UCAST) {
           uic_mqtt_dotdot_diagnostics_relayed_ucast_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PHY_TO_MAC_QUEUE_LIMIT_REACHED) {
           uic_mqtt_dotdot_diagnostics_phy_to_mac_queue_limit_reached_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_PACKET_VALIDATE_DROP_COUNT) {
           uic_mqtt_dotdot_diagnostics_packet_validate_drop_count_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_AVERAGE_MAC_RETRY_PER_APS_MESSAGE_SENT) {
           uic_mqtt_dotdot_diagnostics_average_mac_retry_per_aps_message_sent_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_DIAGNOSTICS_LAST_MESSAGELQI) {
           uic_mqtt_dotdot_diagnostics_last_messagelqi_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -22202,7 +22202,7 @@ static void state_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_STATE_MAXIMUM_COMMAND_DELAY) {
           uic_mqtt_dotdot_state_maximum_command_delay_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -22342,7 +22342,7 @@ static void state_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_STATE_MAXIMUM_COMMAND_DELAY) {
           uic_mqtt_dotdot_state_maximum_command_delay_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -22701,7 +22701,7 @@ static void system_metrics_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_REPORTING_INTERVAL_SECONDS) {
           uic_mqtt_dotdot_system_metrics_reporting_interval_seconds_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -22800,7 +22800,7 @@ static void system_metrics_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_UPTIME_MINUTES) {
           uic_mqtt_dotdot_system_metrics_uptime_minutes_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.desired_or_reported<int64_t>()),
+            static_cast<uint64_t>(attr.desired_or_reported<uint64_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -22849,7 +22849,7 @@ static void system_metrics_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_SYSTEM_INTERRUPTS) {
           uic_mqtt_dotdot_system_metrics_system_interrupts_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.desired_or_reported<int64_t>()),
+            static_cast<uint64_t>(attr.desired_or_reported<uint64_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -23145,7 +23145,7 @@ static void system_metrics_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_REPORTING_INTERVAL_SECONDS) {
           uic_mqtt_dotdot_system_metrics_reporting_interval_seconds_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -23244,7 +23244,7 @@ static void system_metrics_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_UPTIME_MINUTES) {
           uic_mqtt_dotdot_system_metrics_uptime_minutes_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.reported<int64_t>()),
+            static_cast<uint64_t>(attr.reported<uint64_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -23293,7 +23293,7 @@ static void system_metrics_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_SYSTEM_METRICS_SYSTEM_INTERRUPTS) {
           uic_mqtt_dotdot_system_metrics_system_interrupts_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.reported<int64_t>()),
+            static_cast<uint64_t>(attr.reported<uint64_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -23432,14 +23432,14 @@ static void application_monitoring_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_UPTIME_MINUTES) {
           uic_mqtt_dotdot_application_monitoring_uptime_minutes_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.desired_or_reported<int64_t>()),
+            static_cast<uint64_t>(attr.desired_or_reported<uint64_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_PROCESS_ID) {
           uic_mqtt_dotdot_application_monitoring_process_id_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.desired_or_reported<int64_t>()),
+            static_cast<uint64_t>(attr.desired_or_reported<uint64_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -23476,28 +23476,28 @@ static void application_monitoring_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_STATISTICS_REPORTING_INTERVAL_SECONDS) {
           uic_mqtt_dotdot_application_monitoring_mqtt_statistics_reporting_interval_seconds_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MESSAGES_SENT) {
           uic_mqtt_dotdot_application_monitoring_mqtt_messages_sent_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.desired_or_reported<int64_t>()),
+            static_cast<uint64_t>(attr.desired_or_reported<uint64_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MESSAGES_RECEIVED) {
           uic_mqtt_dotdot_application_monitoring_mqtt_messages_received_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.desired_or_reported<int64_t>()),
+            static_cast<uint64_t>(attr.desired_or_reported<uint64_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_SUBSCRIPTION_COUNT) {
           uic_mqtt_dotdot_application_monitoring_mqtt_subscription_count_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.desired_or_reported<int64_t>()),
+            static_cast<uint64_t>(attr.desired_or_reported<uint64_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -23525,7 +23525,7 @@ static void application_monitoring_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS) {
           uic_mqtt_dotdot_application_monitoring_application_statistics_reporting_interval_seconds_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.desired_or_reported<int32_t>()),
+            static_cast<uint32_t>(attr.desired_or_reported<uint32_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -23850,14 +23850,14 @@ static void application_monitoring_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_UPTIME_MINUTES) {
           uic_mqtt_dotdot_application_monitoring_uptime_minutes_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.reported<int64_t>()),
+            static_cast<uint64_t>(attr.reported<uint64_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_PROCESS_ID) {
           uic_mqtt_dotdot_application_monitoring_process_id_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.reported<int64_t>()),
+            static_cast<uint64_t>(attr.reported<uint64_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -23894,28 +23894,28 @@ static void application_monitoring_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_STATISTICS_REPORTING_INTERVAL_SECONDS) {
           uic_mqtt_dotdot_application_monitoring_mqtt_statistics_reporting_interval_seconds_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MESSAGES_SENT) {
           uic_mqtt_dotdot_application_monitoring_mqtt_messages_sent_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.reported<int64_t>()),
+            static_cast<uint64_t>(attr.reported<uint64_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_MESSAGES_RECEIVED) {
           uic_mqtt_dotdot_application_monitoring_mqtt_messages_received_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.reported<int64_t>()),
+            static_cast<uint64_t>(attr.reported<uint64_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
           if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_MQTT_SUBSCRIPTION_COUNT) {
           uic_mqtt_dotdot_application_monitoring_mqtt_subscription_count_publish(
             base_topic.c_str(),
-            static_cast<int64_t>(attr.reported<int64_t>()),
+            static_cast<uint64_t>(attr.reported<uint64_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -23943,7 +23943,7 @@ static void application_monitoring_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_APPLICATION_MONITORING_APPLICATION_STATISTICS_REPORTING_INTERVAL_SECONDS) {
           uic_mqtt_dotdot_application_monitoring_application_statistics_reporting_interval_seconds_publish(
             base_topic.c_str(),
-            static_cast<int32_t>(attr.reported<int32_t>()),
+            static_cast<uint32_t>(attr.reported<uint32_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -24544,7 +24544,7 @@ static void user_credential_cluster_publish_desired_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS) {
           uic_mqtt_dotdot_user_credential_supported_user_unique_identifiers_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.desired_or_reported<int16_t>()),
+            static_cast<uint16_t>(attr.desired_or_reported<uint16_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -24743,7 +24743,7 @@ static void user_credential_cluster_publish_reported_value_callback(
       if (type == DOTDOT_ATTRIBUTE_ID_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS) {
           uic_mqtt_dotdot_user_credential_supported_user_unique_identifiers_publish(
             base_topic.c_str(),
-            static_cast<int16_t>(attr.reported<int16_t>()),
+            static_cast<uint16_t>(attr.reported<uint16_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -25889,7 +25889,7 @@ static void unify_humidity_control_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION) {
           uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_precision_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -25924,7 +25924,7 @@ static void unify_humidity_control_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION) {
           uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_precision_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -25959,7 +25959,7 @@ static void unify_humidity_control_cluster_publish_desired_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION) {
           uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_precision_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.desired_or_reported<int8_t>()),
+            static_cast<uint8_t>(attr.desired_or_reported<uint8_t>()),
             UCL_MQTT_PUBLISH_TYPE_DESIRED);
         return;
       }
@@ -26252,7 +26252,7 @@ static void unify_humidity_control_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_HUMIDIFIER_SETPOINT_PRECISION) {
           uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_precision_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -26287,7 +26287,7 @@ static void unify_humidity_control_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_DEHUMIDIFIER_SETPOINT_PRECISION) {
           uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_precision_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }
@@ -26322,7 +26322,7 @@ static void unify_humidity_control_cluster_publish_reported_value_callback(
           if (type == DOTDOT_ATTRIBUTE_ID_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION) {
           uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_precision_publish(
             base_topic.c_str(),
-            static_cast<int8_t>(attr.reported<int8_t>()),
+            static_cast<uint8_t>(attr.reported<uint8_t>()),
             (attr.desired_exists() && !attribute_store_is_value_matched(updated_node)) ? UCL_MQTT_PUBLISH_TYPE_REPORTED : UCL_MQTT_PUBLISH_TYPE_ALL);
         return;
       }

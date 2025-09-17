@@ -29,7 +29,7 @@ static sl_status_t uic_mqtt_dotdot_identify_identify_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t identify_time
+    uint16_t identify_time
 
 ) {
   uic_mqtt_dotdot_identify_identify_callback_count++;
@@ -42,7 +42,7 @@ static sl_status_t uic_mqtt_dotdot_identify_identify_query_response_callback_fun
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t timeout
+    uint16_t timeout
 
 ) {
   uic_mqtt_dotdot_identify_identify_query_response_callback_count++;
@@ -81,7 +81,7 @@ static sl_status_t uic_mqtt_dotdot_groups_add_group_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t group_id,
+    uint16_t group_id,
 
     const char* group_name
 
@@ -98,7 +98,7 @@ static sl_status_t uic_mqtt_dotdot_groups_add_group_response_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     uint8_t status,
 
-    int16_t group_id
+    uint16_t group_id
 
 ) {
   uic_mqtt_dotdot_groups_add_group_response_callback_count++;
@@ -111,7 +111,7 @@ static sl_status_t uic_mqtt_dotdot_groups_view_group_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t group_id
+    uint16_t group_id
 
 ) {
   uic_mqtt_dotdot_groups_view_group_callback_count++;
@@ -126,7 +126,7 @@ static sl_status_t uic_mqtt_dotdot_groups_view_group_response_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     uint8_t status,
 
-    int16_t group_id,
+    uint16_t group_id,
 
     const char* group_name
 
@@ -142,7 +142,7 @@ static sl_status_t uic_mqtt_dotdot_groups_get_group_membership_callback_func(
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     uint8_t group_list_count,
-    const int16_t *group_list
+    const uint16_t *group_list
 
 ) {
   uic_mqtt_dotdot_groups_get_group_membership_callback_count++;
@@ -155,10 +155,10 @@ static sl_status_t uic_mqtt_dotdot_groups_get_group_membership_response_callback
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int8_t capacity,
+    uint8_t capacity,
 
     uint8_t group_list_count,
-    const int16_t *group_list
+    const uint16_t *group_list
 
 ) {
   uic_mqtt_dotdot_groups_get_group_membership_response_callback_count++;
@@ -171,7 +171,7 @@ static sl_status_t uic_mqtt_dotdot_groups_remove_group_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t group_id
+    uint16_t group_id
 
 ) {
   uic_mqtt_dotdot_groups_remove_group_callback_count++;
@@ -186,7 +186,7 @@ static sl_status_t uic_mqtt_dotdot_groups_remove_group_response_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     uint8_t status,
 
-    int16_t group_id
+    uint16_t group_id
 
 ) {
   uic_mqtt_dotdot_groups_remove_group_response_callback_count++;
@@ -210,7 +210,7 @@ static sl_status_t uic_mqtt_dotdot_groups_add_group_if_identifying_callback_func
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t group_id,
+    uint16_t group_id,
 
     const char* group_name
 
@@ -225,18 +225,18 @@ static sl_status_t uic_mqtt_dotdot_scenes_add_scene_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid,
+    uint8_t sceneid,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
-    uint8_t * scene_name,
+    const char* scene_name,
 
     uint8_t extension_field_sets_count,
     const SExtensionFieldSetList *extension_field_sets,
 
-    int8_t transition_time100ms
+    uint8_t transition_time100ms
 
 ) {
   uic_mqtt_dotdot_scenes_add_scene_callback_count++;
@@ -251,9 +251,9 @@ static sl_status_t uic_mqtt_dotdot_scenes_add_scene_response_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     zclStatus status,
 
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 ) {
   uic_mqtt_dotdot_scenes_add_scene_response_callback_count++;
@@ -266,9 +266,9 @@ static sl_status_t uic_mqtt_dotdot_scenes_view_scene_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 ) {
   uic_mqtt_dotdot_scenes_view_scene_callback_count++;
@@ -283,13 +283,13 @@ static sl_status_t uic_mqtt_dotdot_scenes_view_scene_response_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     zclStatus status,
 
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid,
+    uint8_t sceneid,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
-    uint8_t * scene_name,
+    const char* scene_name,
 
     uint8_t extension_field_sets_count,
     const SExtensionFieldSetList *extension_field_sets
@@ -305,9 +305,9 @@ static sl_status_t uic_mqtt_dotdot_scenes_remove_scene_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 ) {
   uic_mqtt_dotdot_scenes_remove_scene_callback_count++;
@@ -322,9 +322,9 @@ static sl_status_t uic_mqtt_dotdot_scenes_remove_scene_response_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     zclStatus status,
 
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 ) {
   uic_mqtt_dotdot_scenes_remove_scene_response_callback_count++;
@@ -337,7 +337,7 @@ static sl_status_t uic_mqtt_dotdot_scenes_remove_all_scenes_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * groupid
+    uint16_t groupid
 
 ) {
   uic_mqtt_dotdot_scenes_remove_all_scenes_callback_count++;
@@ -352,7 +352,7 @@ static sl_status_t uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback_fu
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     zclStatus status,
 
-    uint8_t * groupid
+    uint16_t groupid
 
 ) {
   uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback_count++;
@@ -365,9 +365,9 @@ static sl_status_t uic_mqtt_dotdot_scenes_store_scene_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 ) {
   uic_mqtt_dotdot_scenes_store_scene_callback_count++;
@@ -382,9 +382,9 @@ static sl_status_t uic_mqtt_dotdot_scenes_store_scene_response_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     zclStatus status,
 
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 ) {
   uic_mqtt_dotdot_scenes_store_scene_response_callback_count++;
@@ -397,11 +397,11 @@ static sl_status_t uic_mqtt_dotdot_scenes_recall_scene_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid,
+    uint8_t sceneid,
 
-    int16_t transition_time
+    uint16_t transition_time
 
 ) {
   uic_mqtt_dotdot_scenes_recall_scene_callback_count++;
@@ -414,7 +414,7 @@ static sl_status_t uic_mqtt_dotdot_scenes_get_scene_membership_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * groupid
+    uint16_t groupid
 
 ) {
   uic_mqtt_dotdot_scenes_get_scene_membership_callback_count++;
@@ -429,12 +429,12 @@ static sl_status_t uic_mqtt_dotdot_scenes_get_scene_membership_response_callback
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     zclStatus status,
 
-    int8_t capacity,
+    uint8_t capacity,
 
-    uint8_t * groupid,
+    uint16_t groupid,
 
     uint8_t scene_list_count,
-    const int8_t *scene_list
+    const uint8_t *scene_list
 
 ) {
   uic_mqtt_dotdot_scenes_get_scene_membership_response_callback_count++;
@@ -447,13 +447,13 @@ static sl_status_t uic_mqtt_dotdot_scenes_enhanced_add_scene_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid,
+    uint8_t sceneid,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
-    uint8_t * scene_name,
+    const char* scene_name,
 
     uint8_t extension_field_sets_count,
     const SExtensionFieldSetList *extension_field_sets
@@ -471,9 +471,9 @@ static sl_status_t uic_mqtt_dotdot_scenes_enhanced_add_scene_response_callback_f
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     zclStatus status,
 
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 ) {
   uic_mqtt_dotdot_scenes_enhanced_add_scene_response_callback_count++;
@@ -486,9 +486,9 @@ static sl_status_t uic_mqtt_dotdot_scenes_enhanced_view_scene_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 ) {
   uic_mqtt_dotdot_scenes_enhanced_view_scene_callback_count++;
@@ -503,13 +503,13 @@ static sl_status_t uic_mqtt_dotdot_scenes_enhanced_view_scene_response_callback_
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     zclStatus status,
 
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid,
+    uint8_t sceneid,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
-    uint8_t * scene_name,
+    const char* scene_name,
 
     uint8_t extension_field_sets_count,
     const SExtensionFieldSetList *extension_field_sets
@@ -527,13 +527,13 @@ static sl_status_t uic_mqtt_dotdot_scenes_copy_scene_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     uint8_t mode,
 
-    uint8_t * group_identifier_from,
+    uint16_t group_identifier_from,
 
-    int8_t scene_identifier_from,
+    uint8_t scene_identifier_from,
 
-    uint8_t * group_identifier_to,
+    uint16_t group_identifier_to,
 
-    int8_t scene_identifier_to
+    uint8_t scene_identifier_to
 
 ) {
   uic_mqtt_dotdot_scenes_copy_scene_callback_count++;
@@ -548,9 +548,9 @@ static sl_status_t uic_mqtt_dotdot_scenes_copy_scene_response_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     zclStatus status,
 
-    uint8_t * group_identifier_from,
+    uint16_t group_identifier_from,
 
-    int8_t scene_identifier_from
+    uint8_t scene_identifier_from
 
 ) {
   uic_mqtt_dotdot_scenes_copy_scene_response_callback_count++;
@@ -598,7 +598,7 @@ static sl_status_t uic_mqtt_dotdot_on_off_off_with_effect_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     OffWithEffectEffectIdentifier effect_identifier,
 
-    int8_t effect_variant
+    uint8_t effect_variant
 
 ) {
   uic_mqtt_dotdot_on_off_off_with_effect_callback_count++;
@@ -624,9 +624,9 @@ static sl_status_t uic_mqtt_dotdot_on_off_on_with_timed_off_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     uint8_t on_off_control,
 
-    int16_t on_time,
+    uint16_t on_time,
 
-    int16_t off_wait_time
+    uint16_t off_wait_time
 
 ) {
   uic_mqtt_dotdot_on_off_on_with_timed_off_callback_count++;
@@ -639,9 +639,9 @@ static sl_status_t uic_mqtt_dotdot_level_move_to_level_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int8_t level,
+    uint8_t level,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -660,7 +660,7 @@ static sl_status_t uic_mqtt_dotdot_level_move_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     MoveStepMode move_mode,
 
-    int8_t rate,
+    uint8_t rate,
 
     uint8_t options_mask,
 
@@ -679,9 +679,9 @@ static sl_status_t uic_mqtt_dotdot_level_step_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     MoveStepMode step_mode,
 
-    int8_t step_size,
+    uint8_t step_size,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -713,9 +713,9 @@ static sl_status_t uic_mqtt_dotdot_level_move_to_level_with_on_off_callback_func
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int8_t level,
+    uint8_t level,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -734,7 +734,7 @@ static sl_status_t uic_mqtt_dotdot_level_move_with_on_off_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     MoveStepMode move_mode,
 
-    int8_t rate,
+    uint8_t rate,
 
     uint8_t options_mask,
 
@@ -753,9 +753,9 @@ static sl_status_t uic_mqtt_dotdot_level_step_with_on_off_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     MoveStepMode step_mode,
 
-    int8_t step_size,
+    uint8_t step_size,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -787,7 +787,7 @@ static sl_status_t uic_mqtt_dotdot_level_move_to_closest_frequency_callback_func
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t frequency
+    uint16_t frequency
 
 ) {
   uic_mqtt_dotdot_level_move_to_closest_frequency_callback_count++;
@@ -802,7 +802,7 @@ static sl_status_t uic_mqtt_dotdot_alarms_reset_alarm_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     uint8_t alarm_code,
 
-    uint8_t cluster_identifier
+    uint16_t cluster_identifier
 
 ) {
   uic_mqtt_dotdot_alarms_reset_alarm_callback_count++;
@@ -817,7 +817,7 @@ static sl_status_t uic_mqtt_dotdot_alarms_alarm_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     uint8_t alarm_code,
 
-    uint8_t cluster_identifier
+    uint16_t cluster_identifier
 
 ) {
   uic_mqtt_dotdot_alarms_alarm_callback_count++;
@@ -845,9 +845,9 @@ static sl_status_t uic_mqtt_dotdot_alarms_get_alarm_response_callback_func(
 
     uint8_t alarm_code,
 
-    uint8_t cluster_identifier,
+    uint16_t cluster_identifier,
 
-    int32_t time_stamp
+    uint32_t time_stamp
 
 ) {
   uic_mqtt_dotdot_alarms_get_alarm_response_callback_count++;
@@ -895,7 +895,7 @@ static sl_status_t uic_mqtt_dotdot_poll_control_check_in_response_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     bool start_fast_polling,
 
-    int16_t fast_poll_timeout
+    uint16_t fast_poll_timeout
 
 ) {
   uic_mqtt_dotdot_poll_control_check_in_response_callback_count++;
@@ -919,7 +919,7 @@ static sl_status_t uic_mqtt_dotdot_poll_control_set_long_poll_interval_callback_
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int32_t new_long_poll_interval
+    uint32_t new_long_poll_interval
 
 ) {
   uic_mqtt_dotdot_poll_control_set_long_poll_interval_callback_count++;
@@ -932,7 +932,7 @@ static sl_status_t uic_mqtt_dotdot_poll_control_set_short_poll_interval_callback
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t new_short_poll_interval
+    uint16_t new_short_poll_interval
 
 ) {
   uic_mqtt_dotdot_poll_control_set_short_poll_interval_callback_count++;
@@ -945,7 +945,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_lock_door_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t pin_or_rfid_code
+    const char* pin_or_rfid_code
 
 ) {
   uic_mqtt_dotdot_door_lock_lock_door_callback_count++;
@@ -971,7 +971,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_unlock_door_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t pin_or_rfid_code
+    const char* pin_or_rfid_code
 
 ) {
   uic_mqtt_dotdot_door_lock_unlock_door_callback_count++;
@@ -997,7 +997,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_toggle_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t pin_or_rfid_code
+    const char* pin_or_rfid_code
 
 ) {
   uic_mqtt_dotdot_door_lock_toggle_callback_count++;
@@ -1023,9 +1023,9 @@ static sl_status_t uic_mqtt_dotdot_door_lock_unlock_with_timeout_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t timeout_in_seconds,
+    uint16_t timeout_in_seconds,
 
-    uint8_t pin_or_rfid_code
+    const char* pin_or_rfid_code
 
 ) {
   uic_mqtt_dotdot_door_lock_unlock_with_timeout_callback_count++;
@@ -1051,7 +1051,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_log_record_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t log_index
+    uint16_t log_index
 
 ) {
   uic_mqtt_dotdot_door_lock_get_log_record_callback_count++;
@@ -1064,19 +1064,19 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_log_record_response_callback_fu
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t log_entryid,
+    uint16_t log_entryid,
 
-    int32_t timestamp,
+    uint32_t timestamp,
 
     GetLogRecordResponseEventType event_type,
 
     DrlkOperEventSource source_operation_event,
 
-    int8_t event_id_or_alarm_code,
+    uint8_t event_id_or_alarm_code,
 
-    int16_t userid,
+    uint16_t userid,
 
-    uint8_t pin
+    const char* pin
 
 ) {
   uic_mqtt_dotdot_door_lock_get_log_record_response_callback_count++;
@@ -1089,13 +1089,13 @@ static sl_status_t uic_mqtt_dotdot_door_lock_set_pin_code_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * userid,
+    uint16_t userid,
 
     DrlkSettableUserStatus user_status,
 
     DrlkUserType user_type,
 
-    uint8_t pin
+    const char* pin
 
 ) {
   uic_mqtt_dotdot_door_lock_set_pin_code_callback_count++;
@@ -1121,7 +1121,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_pin_code_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * userid
+    uint16_t userid
 
 ) {
   uic_mqtt_dotdot_door_lock_get_pin_code_callback_count++;
@@ -1134,13 +1134,13 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_func
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t userid,
+    uint16_t userid,
 
     DrlkUserStatus user_status,
 
     DrlkUserType user_type,
 
-    uint8_t code
+    const char* code
 
 ) {
   uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_count++;
@@ -1153,7 +1153,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_clear_pin_code_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * userid
+    uint16_t userid
 
 ) {
   uic_mqtt_dotdot_door_lock_clear_pin_code_callback_count++;
@@ -1203,7 +1203,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_set_user_status_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * userid,
+    uint16_t userid,
 
     DrlkSettableUserStatus user_status
 
@@ -1231,7 +1231,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_user_status_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * userid
+    uint16_t userid
 
 ) {
   uic_mqtt_dotdot_door_lock_get_user_status_callback_count++;
@@ -1244,7 +1244,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_user_status_response_callback_f
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t userid,
+    uint16_t userid,
 
     DrlkUserStatus user_status
 
@@ -1259,19 +1259,19 @@ static sl_status_t uic_mqtt_dotdot_door_lock_set_weekday_schedule_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * scheduleid,
+    uint8_t scheduleid,
 
-    uint8_t * userid,
+    uint16_t userid,
 
     uint8_t days_mask,
 
-    int8_t start_hour,
+    uint8_t start_hour,
 
-    int8_t start_minute,
+    uint8_t start_minute,
 
-    int8_t end_hour,
+    uint8_t end_hour,
 
-    int8_t end_minute
+    uint8_t end_minute
 
 ) {
   uic_mqtt_dotdot_door_lock_set_weekday_schedule_callback_count++;
@@ -1297,9 +1297,9 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * scheduleid,
+    uint8_t scheduleid,
 
-    uint8_t * userid
+    uint16_t userid
 
 ) {
   uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback_count++;
@@ -1312,21 +1312,21 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_weekday_schedule_response_callb
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int8_t scheduleid,
+    uint8_t scheduleid,
 
-    int16_t userid,
+    uint16_t userid,
 
     zclStatus status,
 
     uint8_t days_mask,
 
-    int8_t start_hour,
+    uint8_t start_hour,
 
-    int8_t start_minute,
+    uint8_t start_minute,
 
-    int8_t end_hour,
+    uint8_t end_hour,
 
-    int8_t end_minute
+    uint8_t end_minute
 
 ) {
   uic_mqtt_dotdot_door_lock_get_weekday_schedule_response_callback_count++;
@@ -1339,9 +1339,9 @@ static sl_status_t uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback_fun
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * scheduleid,
+    uint8_t scheduleid,
 
-    uint8_t * userid
+    uint16_t userid
 
 ) {
   uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback_count++;
@@ -1367,13 +1367,13 @@ static sl_status_t uic_mqtt_dotdot_door_lock_set_year_day_schedule_callback_func
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * scheduleid,
+    uint8_t scheduleid,
 
-    uint8_t * userid,
+    uint16_t userid,
 
-    int32_t local_start_time,
+    uint32_t local_start_time,
 
-    int32_t local_end_time
+    uint32_t local_end_time
 
 ) {
   uic_mqtt_dotdot_door_lock_set_year_day_schedule_callback_count++;
@@ -1399,9 +1399,9 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback_func
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * scheduleid,
+    uint8_t scheduleid,
 
-    uint8_t * userid
+    uint16_t userid
 
 ) {
   uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback_count++;
@@ -1414,15 +1414,15 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_year_day_schedule_response_call
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int8_t scheduleid,
+    uint8_t scheduleid,
 
-    int16_t userid,
+    uint16_t userid,
 
     zclStatus status,
 
-    int32_t local_start_time,
+    uint32_t local_start_time,
 
-    int32_t local_end_time
+    uint32_t local_end_time
 
 ) {
   uic_mqtt_dotdot_door_lock_get_year_day_schedule_response_callback_count++;
@@ -1435,9 +1435,9 @@ static sl_status_t uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback_fu
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * scheduleid,
+    uint8_t scheduleid,
 
-    uint8_t * userid
+    uint16_t userid
 
 ) {
   uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback_count++;
@@ -1463,11 +1463,11 @@ static sl_status_t uic_mqtt_dotdot_door_lock_set_holiday_schedule_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * holiday_scheduleid,
+    uint8_t holiday_scheduleid,
 
-    int32_t local_start_time,
+    uint32_t local_start_time,
 
-    int32_t local_end_time,
+    uint32_t local_end_time,
 
     DrlkOperMode operating_mode_during_holiday
 
@@ -1495,7 +1495,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * holiday_scheduleid
+    uint8_t holiday_scheduleid
 
 ) {
   uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback_count++;
@@ -1508,13 +1508,13 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_holiday_schedule_response_callb
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int8_t holiday_scheduleid,
+    uint8_t holiday_scheduleid,
 
     zclStatus status,
 
-    int32_t local_start_time,
+    uint32_t local_start_time,
 
-    int32_t local_end_time,
+    uint32_t local_end_time,
 
     DrlkOperMode operating_mode_during_holiday
 
@@ -1529,7 +1529,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback_fun
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * holiday_scheduleid
+    uint8_t holiday_scheduleid
 
 ) {
   uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback_count++;
@@ -1555,7 +1555,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_set_user_type_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * userid,
+    uint16_t userid,
 
     DrlkUserType user_type
 
@@ -1583,7 +1583,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_user_type_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * userid
+    uint16_t userid
 
 ) {
   uic_mqtt_dotdot_door_lock_get_user_type_callback_count++;
@@ -1596,7 +1596,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_user_type_response_callback_fun
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t userid,
+    uint16_t userid,
 
     DrlkUserType user_type
 
@@ -1611,13 +1611,13 @@ static sl_status_t uic_mqtt_dotdot_door_lock_set_rfid_code_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * userid,
+    uint16_t userid,
 
     DrlkSettableUserStatus user_status,
 
     DrlkUserType user_type,
 
-    uint8_t rfid_code
+    const char* rfid_code
 
 ) {
   uic_mqtt_dotdot_door_lock_set_rfid_code_callback_count++;
@@ -1643,7 +1643,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_rfid_code_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * userid
+    uint16_t userid
 
 ) {
   uic_mqtt_dotdot_door_lock_get_rfid_code_callback_count++;
@@ -1656,13 +1656,13 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_fun
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t userid,
+    uint16_t userid,
 
     DrlkUserStatus user_status,
 
     DrlkUserType user_type,
 
-    uint8_t rfid_code
+    const char* rfid_code
 
 ) {
   uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_count++;
@@ -1675,7 +1675,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t * userid
+    uint16_t userid
 
 ) {
   uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_count++;
@@ -1727,11 +1727,11 @@ static sl_status_t uic_mqtt_dotdot_door_lock_set_user_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     DataOperationTypeEnum operation_type,
 
-    int16_t user_index,
+    uint16_t user_index,
 
     const char* user_name,
 
-    int32_t user_uniqueid,
+    uint32_t user_uniqueid,
 
     DrlkSettableUserStatus user_status,
 
@@ -1750,7 +1750,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_get_user_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t user_index
+    uint16_t user_index
 
 ) {
   uic_mqtt_dotdot_door_lock_get_user_callback_count++;
@@ -1774,7 +1774,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_clear_user_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t user_index
+    uint16_t user_index
 
 ) {
   uic_mqtt_dotdot_door_lock_clear_user_callback_count++;
@@ -1791,11 +1791,11 @@ static sl_status_t uic_mqtt_dotdot_door_lock_operating_event_notification_callba
 
     OperatingEventNotificationOperationEventCode operation_event_code,
 
-    int16_t userid,
+    uint16_t userid,
 
-    uint8_t pin,
+    const char* pin,
 
-    int32_t local_time,
+    uint32_t local_time,
 
     const char* data
 
@@ -1814,15 +1814,15 @@ static sl_status_t uic_mqtt_dotdot_door_lock_programming_event_notification_call
 
     ProgrammingEventNotificationProgramEventCode program_event_code,
 
-    int16_t userid,
+    uint16_t userid,
 
-    uint8_t pin,
+    const char* pin,
 
     DrlkUserType user_type,
 
     DrlkUserStatus user_status,
 
-    int32_t local_time,
+    uint32_t local_time,
 
     const char* data
 
@@ -1841,9 +1841,9 @@ static sl_status_t uic_mqtt_dotdot_door_lock_set_credential_callback_func(
 
     CredentialStruct credential,
 
-    uint8_t credential_data,
+    const char* credential_data,
 
-    int16_t user_index,
+    uint16_t user_index,
 
     DrlkSettableUserStatus user_status,
 
@@ -1908,7 +1908,7 @@ static sl_status_t uic_mqtt_dotdot_door_lock_unbolt_door_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t pin_code
+    const char* pin_code
 
 ) {
   uic_mqtt_dotdot_door_lock_unbolt_door_callback_count++;
@@ -1954,7 +1954,7 @@ static sl_status_t uic_mqtt_dotdot_window_covering_go_to_lift_value_callback_fun
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t lift_value
+    uint16_t lift_value
 
 ) {
   uic_mqtt_dotdot_window_covering_go_to_lift_value_callback_count++;
@@ -1967,7 +1967,7 @@ static sl_status_t uic_mqtt_dotdot_window_covering_go_to_lift_percentage_callbac
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int8_t percentage_lift_value
+    uint8_t percentage_lift_value
 
 ) {
   uic_mqtt_dotdot_window_covering_go_to_lift_percentage_callback_count++;
@@ -1980,7 +1980,7 @@ static sl_status_t uic_mqtt_dotdot_window_covering_go_to_tilt_value_callback_fun
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t tilt_value
+    uint16_t tilt_value
 
 ) {
   uic_mqtt_dotdot_window_covering_go_to_tilt_value_callback_count++;
@@ -1993,7 +1993,7 @@ static sl_status_t uic_mqtt_dotdot_window_covering_go_to_tilt_percentage_callbac
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int8_t percentage_tilt_value
+    uint8_t percentage_tilt_value
 
 ) {
   uic_mqtt_dotdot_window_covering_go_to_tilt_percentage_callback_count++;
@@ -2006,7 +2006,7 @@ static sl_status_t uic_mqtt_dotdot_barrier_control_go_to_percent_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int8_t percent_open
+    uint8_t percent_open
 
 ) {
   uic_mqtt_dotdot_barrier_control_go_to_percent_callback_count++;
@@ -2085,17 +2085,17 @@ static sl_status_t uic_mqtt_dotdot_thermostat_get_relay_status_log_response_call
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t time_of_day,
+    uint16_t time_of_day,
 
     uint8_t relay_status,
 
     int16_t local_temperature,
 
-    int8_t humidity_percentage,
+    uint8_t humidity_percentage,
 
     int16_t set_point,
 
-    int16_t unread_entries
+    uint16_t unread_entries
 
 ) {
   uic_mqtt_dotdot_thermostat_get_relay_status_log_response_callback_count++;
@@ -2145,11 +2145,11 @@ static sl_status_t uic_mqtt_dotdot_color_control_move_to_hue_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int8_t hue,
+    uint8_t hue,
 
     CCDirection direction,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -2168,7 +2168,7 @@ static sl_status_t uic_mqtt_dotdot_color_control_move_hue_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     CCMoveMode move_mode,
 
-    int8_t rate,
+    uint8_t rate,
 
     uint8_t options_mask,
 
@@ -2187,9 +2187,9 @@ static sl_status_t uic_mqtt_dotdot_color_control_step_hue_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     CCStepMode step_mode,
 
-    int8_t step_size,
+    uint8_t step_size,
 
-    int8_t transition_time,
+    uint8_t transition_time,
 
     uint8_t options_mask,
 
@@ -2206,9 +2206,9 @@ static sl_status_t uic_mqtt_dotdot_color_control_move_to_saturation_callback_fun
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int8_t saturation,
+    uint8_t saturation,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -2227,7 +2227,7 @@ static sl_status_t uic_mqtt_dotdot_color_control_move_saturation_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     CCMoveMode move_mode,
 
-    int8_t rate,
+    uint8_t rate,
 
     uint8_t options_mask,
 
@@ -2246,9 +2246,9 @@ static sl_status_t uic_mqtt_dotdot_color_control_step_saturation_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     CCStepMode step_mode,
 
-    int8_t step_size,
+    uint8_t step_size,
 
-    int8_t transition_time,
+    uint8_t transition_time,
 
     uint8_t options_mask,
 
@@ -2265,11 +2265,11 @@ static sl_status_t uic_mqtt_dotdot_color_control_move_to_hue_and_saturation_call
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int8_t hue,
+    uint8_t hue,
 
-    int8_t saturation,
+    uint8_t saturation,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -2286,11 +2286,11 @@ static sl_status_t uic_mqtt_dotdot_color_control_move_to_color_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t colorx,
+    uint16_t colorx,
 
-    int16_t colory,
+    uint16_t colory,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -2330,7 +2330,7 @@ static sl_status_t uic_mqtt_dotdot_color_control_step_color_callback_func(
 
     int16_t stepy,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -2347,9 +2347,9 @@ static sl_status_t uic_mqtt_dotdot_color_control_move_to_color_temperature_callb
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t color_temperature_mireds,
+    uint16_t color_temperature_mireds,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -2366,11 +2366,11 @@ static sl_status_t uic_mqtt_dotdot_color_control_enhanced_move_to_hue_callback_f
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t enhanced_hue,
+    uint16_t enhanced_hue,
 
     CCDirection direction,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -2389,7 +2389,7 @@ static sl_status_t uic_mqtt_dotdot_color_control_enhanced_move_hue_callback_func
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     CCMoveMode move_mode,
 
-    int16_t rate,
+    uint16_t rate,
 
     uint8_t options_mask,
 
@@ -2408,9 +2408,9 @@ static sl_status_t uic_mqtt_dotdot_color_control_enhanced_step_hue_callback_func
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     CCStepMode step_mode,
 
-    int16_t step_size,
+    uint16_t step_size,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -2427,11 +2427,11 @@ static sl_status_t uic_mqtt_dotdot_color_control_enhanced_move_to_hue_and_satura
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t enhanced_hue,
+    uint16_t enhanced_hue,
 
-    int8_t saturation,
+    uint8_t saturation,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -2454,9 +2454,9 @@ static sl_status_t uic_mqtt_dotdot_color_control_color_loop_set_callback_func(
 
     CCColorLoopDirection direction,
 
-    int16_t time,
+    uint16_t time,
 
-    int16_t start_hue,
+    uint16_t start_hue,
 
     uint8_t options_mask,
 
@@ -2490,11 +2490,11 @@ static sl_status_t uic_mqtt_dotdot_color_control_move_color_temperature_callback
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     CCMoveMode move_mode,
 
-    int16_t rate,
+    uint16_t rate,
 
-    uint8_t * color_temperature_minimum_mireds,
+    uint16_t color_temperature_minimum_mireds,
 
-    uint8_t * color_temperature_maximum_mireds,
+    uint16_t color_temperature_maximum_mireds,
 
     uint8_t options_mask,
 
@@ -2513,13 +2513,13 @@ static sl_status_t uic_mqtt_dotdot_color_control_step_color_temperature_callback
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     CCStepMode step_mode,
 
-    int16_t step_size,
+    uint16_t step_size,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
-    uint8_t * color_temperature_minimum_mireds,
+    uint16_t color_temperature_minimum_mireds,
 
-    uint8_t * color_temperature_maximum_mireds,
+    uint16_t color_temperature_maximum_mireds,
 
     uint8_t options_mask,
 
@@ -2538,7 +2538,7 @@ static sl_status_t uic_mqtt_dotdot_ias_zone_zone_enroll_response_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     ZoneEnrollResponseEnrollResponseCode enroll_response_code,
 
-    int8_t zoneid
+    uint8_t zoneid
 
 ) {
   uic_mqtt_dotdot_ias_zone_zone_enroll_response_callback_count++;
@@ -2555,9 +2555,9 @@ static sl_status_t uic_mqtt_dotdot_ias_zone_zone_status_change_notification_call
 
     uint8_t extended_status,
 
-    int8_t zoneid,
+    uint8_t zoneid,
 
-    int16_t delay
+    uint16_t delay
 
 ) {
   uic_mqtt_dotdot_ias_zone_zone_status_change_notification_callback_count++;
@@ -2583,7 +2583,7 @@ static sl_status_t uic_mqtt_dotdot_ias_zone_zone_enroll_request_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     IasZoneType zone_type,
 
-    int16_t manufacturer_code
+    uint16_t manufacturer_code
 
 ) {
   uic_mqtt_dotdot_ias_zone_zone_enroll_request_callback_count++;
@@ -2596,9 +2596,9 @@ static sl_status_t uic_mqtt_dotdot_ias_zone_initiate_test_mode_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int8_t test_mode_duration,
+    uint8_t test_mode_duration,
 
-    int8_t current_zone_sensitivity_level
+    uint8_t current_zone_sensitivity_level
 
 ) {
   uic_mqtt_dotdot_ias_zone_initiate_test_mode_callback_count++;
@@ -2613,9 +2613,9 @@ static sl_status_t uic_mqtt_dotdot_iaswd_start_warning_callback_func(
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     uint8_t siren_configuration,
 
-    int16_t warning_duration,
+    uint16_t warning_duration,
 
-    int8_t strobe_duty_cycle,
+    uint8_t strobe_duty_cycle,
 
     IaswdLevel strobe_level
 
@@ -2643,14 +2643,14 @@ static sl_status_t uic_mqtt_dotdot_electrical_measurement_get_profile_info_respo
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int8_t profile_count,
+    uint8_t profile_count,
 
     ProfileIntervalPeriod profile_interval_period,
 
-    int8_t max_number_of_intervals,
+    uint8_t max_number_of_intervals,
 
     uint8_t list_of_attributes_count,
-    const uint8_t *list_of_attributes
+    const uint16_t *list_of_attributes
 
 ) {
   uic_mqtt_dotdot_electrical_measurement_get_profile_info_response_callback_count++;
@@ -2674,18 +2674,18 @@ static sl_status_t uic_mqtt_dotdot_electrical_measurement_get_measurement_profil
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t start_time,
+    uint32_t start_time,
 
     GetMeasurementProfileResponseStatus status,
 
     ProfileIntervalPeriod profile_interval_period,
 
-    int8_t number_of_intervals_delivered,
+    uint8_t number_of_intervals_delivered,
 
-    uint8_t attribute_id,
+    uint16_t attribute_id,
 
     uint8_t intervals_count,
-    const int8_t *intervals
+    const uint8_t *intervals
 
 ) {
   uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_response_callback_count++;
@@ -2698,11 +2698,11 @@ static sl_status_t uic_mqtt_dotdot_electrical_measurement_get_measurement_profil
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    uint8_t attributeid,
+    uint16_t attributeid,
 
-    uint8_t start_time,
+    uint32_t start_time,
 
-    int8_t number_of_intervals
+    uint8_t number_of_intervals
 
 ) {
   uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_callback_count++;
@@ -2721,13 +2721,13 @@ static sl_status_t uic_mqtt_dotdot_protocol_controller_rf_telemetry_tx_report_ca
 
     bool transmission_successful,
 
-    int16_t transmission_time_ms,
+    uint16_t transmission_time_ms,
 
     int8_t tx_powerd_bm,
 
-    int8_t tx_channel,
+    uint8_t tx_channel,
 
-    int8_t routing_attempts,
+    uint8_t routing_attempts,
 
     bool route_changed,
 
@@ -2743,7 +2743,7 @@ static sl_status_t uic_mqtt_dotdot_protocol_controller_rf_telemetry_tx_report_ca
 
     int8_t ackrssi,
 
-    int8_t ack_channel,
+    uint8_t ack_channel,
 
     const char* last_route_failed_link_functionalunid,
 
@@ -2836,7 +2836,7 @@ static sl_status_t uic_mqtt_dotdot_binding_bind_callback_func(
 
     const char* destination_unid,
 
-    int8_t destination_ep
+    uint8_t destination_ep
 
 ) {
   uic_mqtt_dotdot_binding_bind_callback_count++;
@@ -2853,7 +2853,7 @@ static sl_status_t uic_mqtt_dotdot_binding_unbind_callback_func(
 
     const char* destination_unid,
 
-    int8_t destination_ep
+    uint8_t destination_ep
 
 ) {
   uic_mqtt_dotdot_binding_unbind_callback_count++;
@@ -2911,7 +2911,7 @@ static sl_status_t uic_mqtt_dotdot_configuration_parameters_discover_parameter_c
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t parameter_id
+    uint16_t parameter_id
 
 ) {
   uic_mqtt_dotdot_configuration_parameters_discover_parameter_callback_count++;
@@ -2935,7 +2935,7 @@ static sl_status_t uic_mqtt_dotdot_configuration_parameters_set_parameter_callba
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t parameter_id,
+    uint16_t parameter_id,
 
     int64_t value
 
@@ -2950,9 +2950,9 @@ static sl_status_t uic_mqtt_dotdot_configuration_parameters_discover_parameter_r
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t first_parameter_id,
+    uint16_t first_parameter_id,
 
-    int16_t last_parameter_id
+    uint16_t last_parameter_id
 
 ) {
   uic_mqtt_dotdot_configuration_parameters_discover_parameter_range_callback_count++;
@@ -2965,7 +2965,7 @@ static sl_status_t uic_mqtt_dotdot_user_credential_add_user_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     UserTypeEnum user_type,
 
@@ -2975,7 +2975,7 @@ static sl_status_t uic_mqtt_dotdot_user_credential_add_user_callback_func(
 
     const char* user_name,
 
-    int16_t expiring_timeout_minutes,
+    uint16_t expiring_timeout_minutes,
 
     UserNameEncodingType user_name_encoding
 
@@ -2990,7 +2990,7 @@ static sl_status_t uic_mqtt_dotdot_user_credential_modify_user_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     UserTypeEnum user_type,
 
@@ -3000,7 +3000,7 @@ static sl_status_t uic_mqtt_dotdot_user_credential_modify_user_callback_func(
 
     const char* user_name,
 
-    int16_t expiring_timeout_minutes,
+    uint16_t expiring_timeout_minutes,
 
     UserNameEncodingType user_name_encoding
 
@@ -3015,7 +3015,7 @@ static sl_status_t uic_mqtt_dotdot_user_credential_delete_user_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t user_uniqueid
+    uint16_t user_uniqueid
 
 ) {
   uic_mqtt_dotdot_user_credential_delete_user_callback_count++;
@@ -3028,11 +3028,11 @@ static sl_status_t uic_mqtt_dotdot_user_credential_add_credential_callback_func(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     CredType credential_type,
 
-    int16_t credential_slot,
+    uint16_t credential_slot,
 
     const char* credential_data
 
@@ -3047,11 +3047,11 @@ static sl_status_t uic_mqtt_dotdot_user_credential_modify_credential_callback_fu
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     CredType credential_type,
 
-    int16_t credential_slot,
+    uint16_t credential_slot,
 
     const char* credential_data
 
@@ -3066,11 +3066,11 @@ static sl_status_t uic_mqtt_dotdot_user_credential_delete_credential_callback_fu
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     CredType credential_type,
 
-    int16_t credential_slot
+    uint16_t credential_slot
 
 ) {
   uic_mqtt_dotdot_user_credential_delete_credential_callback_count++;
@@ -3118,7 +3118,7 @@ static sl_status_t uic_mqtt_dotdot_user_credential_delete_all_credentials_for_us
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t user_uniqueid
+    uint16_t user_uniqueid
 
 ) {
   uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_callback_count++;
@@ -3131,7 +3131,7 @@ static sl_status_t uic_mqtt_dotdot_user_credential_delete_all_credentials_for_us
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     CredType credential_type
 
@@ -3146,13 +3146,13 @@ static sl_status_t uic_mqtt_dotdot_user_credential_credential_learn_start_add_ca
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     CredType credential_type,
 
-    int16_t credential_slot,
+    uint16_t credential_slot,
 
-    int8_t credential_learn_timeout
+    uint8_t credential_learn_timeout
 
 ) {
   uic_mqtt_dotdot_user_credential_credential_learn_start_add_callback_count++;
@@ -3165,13 +3165,13 @@ static sl_status_t uic_mqtt_dotdot_user_credential_credential_learn_start_modify
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     CredType credential_type,
 
-    int16_t credential_slot,
+    uint16_t credential_slot,
 
-    int8_t credential_learn_timeout
+    uint8_t credential_learn_timeout
 
 ) {
   uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_count++;
@@ -3197,13 +3197,13 @@ static sl_status_t uic_mqtt_dotdot_user_credential_credential_association_callba
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     CredType credential_type,
 
-    int16_t source_user_uniqueid,
+    uint16_t source_user_uniqueid,
 
-    int16_t source_credential_slot,
+    uint16_t source_credential_slot,
 
-    int16_t destination_user_uniqueid,
+    uint16_t destination_user_uniqueid,
 
-    int16_t destination_credential_slot
+    uint16_t destination_credential_slot
 
 ) {
   uic_mqtt_dotdot_user_credential_credential_association_callback_count++;
@@ -3216,7 +3216,7 @@ static sl_status_t uic_mqtt_dotdot_user_credential_get_user_checksum_callback_fu
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t callback_type,
-    int16_t user_uniqueid
+    uint16_t user_uniqueid
 
 ) {
   uic_mqtt_dotdot_user_credential_get_user_checksum_callback_count++;
@@ -3327,9 +3327,9 @@ static sl_status_t uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callback_
     uic_mqtt_dotdot_callback_call_type_t callback_type,
     SetpointType type,
 
-    int8_t precision,
+    uint8_t precision,
 
-    int8_t scale,
+    uint8_t scale,
 
     int32_t value
 

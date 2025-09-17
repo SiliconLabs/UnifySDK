@@ -831,6 +831,15 @@ typedef enum {
 #define DOTDOT_NAME_AND_LOCATION_LOCATION_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
 // Definitions for cluster: ConfigurationParameters
 #define DOTDOT_CONFIGURATION_PARAMETERS_CONFIGURATION_PARAMETERS_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
+// Definitions for cluster: UserCredential
+#define DOTDOT_USER_CREDENTIAL_SUPPORTED_USER_UNIQUE_IDENTIFIERS_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
+#define DOTDOT_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_RULES_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
+#define DOTDOT_USER_CREDENTIAL_SUPPORTED_CREDENTIAL_TYPES_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x2)
+#define DOTDOT_USER_CREDENTIAL_SUPPORTED_USER_TYPES_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x3)
+#define DOTDOT_USER_CREDENTIAL_SUPPORT_CREDENTIAL_CHECKSUM_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x4)
+#define DOTDOT_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x5)
+#define DOTDOT_USER_CREDENTIAL_SUPPORT_ADMIN_PIN_CODE_DEACTIVATION_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x6)
+#define DOTDOT_USER_CREDENTIAL_ADMIN_PIN_CODE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x7)
 // Definitions for cluster: AoXLocator
 #define DOTDOT_AOX_LOCATOR_REPORTING_MODE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
 #define DOTDOT_AOX_LOCATOR_POSITION_AND_ORIENTATION_VALID_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x2)

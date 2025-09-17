@@ -48,28 +48,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_basic_attribute_zcl_version_callback_t)(
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t zcl_version
+  uint8_t zcl_version
 );
 typedef sl_status_t (*uic_mqtt_dotdot_basic_attribute_application_version_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t application_version
+  uint8_t application_version
 );
 typedef sl_status_t (*uic_mqtt_dotdot_basic_attribute_stack_version_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t stack_version
+  uint8_t stack_version
 );
 typedef sl_status_t (*uic_mqtt_dotdot_basic_attribute_hw_version_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t hw_version
+  uint8_t hw_version
 );
 typedef sl_status_t (*uic_mqtt_dotdot_basic_attribute_manufacturer_name_callback_t)(
   dotdot_unid_t unid,
@@ -118,7 +118,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_basic_attribute_product_code_callback_t)(
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t product_code
+  const char* product_code
 );
 typedef sl_status_t (*uic_mqtt_dotdot_basic_attribute_producturl_callback_t)(
   dotdot_unid_t unid,
@@ -196,14 +196,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_mains_voltag
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t mains_voltage
+  uint16_t mains_voltage
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_mains_frequency_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t mains_frequency
+  uint8_t mains_frequency
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_mains_alarm_mask_callback_t)(
   dotdot_unid_t unid,
@@ -217,35 +217,35 @@ typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_mains_voltag
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t mains_voltage_min_threshold
+  uint16_t mains_voltage_min_threshold
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_mains_voltage_max_threshold_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t mains_voltage_max_threshold
+  uint16_t mains_voltage_max_threshold
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_mains_voltage_dwell_trip_point_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t mains_voltage_dwell_trip_point
+  uint16_t mains_voltage_dwell_trip_point
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery_voltage_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery_voltage
+  uint8_t battery_voltage
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery_percentage_remaining_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery_percentage_remaining
+  uint8_t battery_percentage_remaining
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery_manufacturer_callback_t)(
   dotdot_unid_t unid,
@@ -266,21 +266,21 @@ typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_batterya_hr_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t batterya_hr_rating
+  uint16_t batterya_hr_rating
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery_quantity_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery_quantity
+  uint8_t battery_quantity
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery_rated_voltage_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery_rated_voltage
+  uint8_t battery_rated_voltage
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery_alarm_mask_callback_t)(
   dotdot_unid_t unid,
@@ -294,56 +294,56 @@ typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery_volt
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery_voltage_min_threshold
+  uint8_t battery_voltage_min_threshold
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery_voltage_threshold1_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery_voltage_threshold1
+  uint8_t battery_voltage_threshold1
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery_voltage_threshold2_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery_voltage_threshold2
+  uint8_t battery_voltage_threshold2
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery_voltage_threshold3_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery_voltage_threshold3
+  uint8_t battery_voltage_threshold3
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery_percentage_min_threshold_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery_percentage_min_threshold
+  uint8_t battery_percentage_min_threshold
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery_percentage_threshold1_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery_percentage_threshold1
+  uint8_t battery_percentage_threshold1
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery_percentage_threshold2_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery_percentage_threshold2
+  uint8_t battery_percentage_threshold2
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery_percentage_threshold3_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery_percentage_threshold3
+  uint8_t battery_percentage_threshold3
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery_alarm_state_callback_t)(
   dotdot_unid_t unid,
@@ -357,14 +357,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2_vol
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery2_voltage
+  uint8_t battery2_voltage
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2_percentage_remaining_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery2_percentage_remaining
+  uint8_t battery2_percentage_remaining
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2_manufacturer_callback_t)(
   dotdot_unid_t unid,
@@ -385,21 +385,21 @@ typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2a_hr
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t battery2a_hr_rating
+  uint16_t battery2a_hr_rating
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2_quantity_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery2_quantity
+  uint8_t battery2_quantity
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2_rated_voltage_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery2_rated_voltage
+  uint8_t battery2_rated_voltage
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2_alarm_mask_callback_t)(
   dotdot_unid_t unid,
@@ -413,56 +413,56 @@ typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2_vol
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery2_voltage_min_threshold
+  uint8_t battery2_voltage_min_threshold
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2_voltage_threshold1_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery2_voltage_threshold1
+  uint8_t battery2_voltage_threshold1
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2_voltage_threshold2_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery2_voltage_threshold2
+  uint8_t battery2_voltage_threshold2
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2_voltage_threshold3_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery2_voltage_threshold3
+  uint8_t battery2_voltage_threshold3
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2_percentage_min_threshold_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery2_percentage_min_threshold
+  uint8_t battery2_percentage_min_threshold
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2_percentage_threshold1_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery2_percentage_threshold1
+  uint8_t battery2_percentage_threshold1
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2_percentage_threshold2_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery2_percentage_threshold2
+  uint8_t battery2_percentage_threshold2
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2_percentage_threshold3_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery2_percentage_threshold3
+  uint8_t battery2_percentage_threshold3
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery2_alarm_state_callback_t)(
   dotdot_unid_t unid,
@@ -476,14 +476,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3_vol
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery3_voltage
+  uint8_t battery3_voltage
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3_percentage_remaining_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery3_percentage_remaining
+  uint8_t battery3_percentage_remaining
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3_manufacturer_callback_t)(
   dotdot_unid_t unid,
@@ -504,21 +504,21 @@ typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3a_hr
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t battery3a_hr_rating
+  uint16_t battery3a_hr_rating
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3_quantity_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery3_quantity
+  uint8_t battery3_quantity
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3_rated_voltage_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery3_rated_voltage
+  uint8_t battery3_rated_voltage
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3_alarm_mask_callback_t)(
   dotdot_unid_t unid,
@@ -532,56 +532,56 @@ typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3_vol
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery3_voltage_min_threshold
+  uint8_t battery3_voltage_min_threshold
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3_voltage_threshold1_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery3_voltage_threshold1
+  uint8_t battery3_voltage_threshold1
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3_voltage_threshold2_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery3_voltage_threshold2
+  uint8_t battery3_voltage_threshold2
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3_voltage_threshold3_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery3_voltage_threshold3
+  uint8_t battery3_voltage_threshold3
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3_percentage_min_threshold_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery3_percentage_min_threshold
+  uint8_t battery3_percentage_min_threshold
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3_percentage_threshold1_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery3_percentage_threshold1
+  uint8_t battery3_percentage_threshold1
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3_percentage_threshold2_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery3_percentage_threshold2
+  uint8_t battery3_percentage_threshold2
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3_percentage_threshold3_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t battery3_percentage_threshold3
+  uint8_t battery3_percentage_threshold3
 );
 typedef sl_status_t (*uic_mqtt_dotdot_power_configuration_attribute_battery3_alarm_state_callback_t)(
   dotdot_unid_t unid,
@@ -617,7 +617,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_device_temperature_configuration_attribute
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t over_temp_total_dwell
+  uint16_t over_temp_total_dwell
 );
 typedef sl_status_t (*uic_mqtt_dotdot_device_temperature_configuration_attribute_device_temp_alarm_mask_callback_t)(
   dotdot_unid_t unid,
@@ -645,14 +645,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_device_temperature_configuration_attribute
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t low_temp_dwell_trip_point
+  uint32_t low_temp_dwell_trip_point
 );
 typedef sl_status_t (*uic_mqtt_dotdot_device_temperature_configuration_attribute_high_temp_dwell_trip_point_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t high_temp_dwell_trip_point
+  uint32_t high_temp_dwell_trip_point
 );
 // Callback types used by the identify cluster
 typedef sl_status_t (*uic_mqtt_dotdot_identify_attribute_identify_time_callback_t)(
@@ -660,7 +660,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_identify_attribute_identify_time_callback_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t identify_time
+  uint16_t identify_time
 );
 // Callback types used by the groups cluster
 typedef sl_status_t (*uic_mqtt_dotdot_groups_attribute_name_support_callback_t)(
@@ -676,21 +676,21 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_attribute_scene_count_callback_t)(
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t scene_count
+  uint8_t scene_count
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_attribute_current_scene_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t current_scene
+  uint8_t current_scene
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_attribute_current_group_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t * current_group
+  uint16_t current_group
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_attribute_scene_valid_callback_t)(
   dotdot_unid_t unid,
@@ -741,14 +741,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_on_off_attribute_on_time_callback_t)(
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t on_time
+  uint16_t on_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_on_off_attribute_off_wait_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t off_wait_time
+  uint16_t off_wait_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_on_off_attribute_start_up_on_off_callback_t)(
   dotdot_unid_t unid,
@@ -763,49 +763,49 @@ typedef sl_status_t (*uic_mqtt_dotdot_level_attribute_current_level_callback_t)(
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t current_level
+  uint8_t current_level
 );
 typedef sl_status_t (*uic_mqtt_dotdot_level_attribute_remaining_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t remaining_time
+  uint16_t remaining_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_level_attribute_min_level_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t min_level
+  uint8_t min_level
 );
 typedef sl_status_t (*uic_mqtt_dotdot_level_attribute_max_level_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t max_level
+  uint8_t max_level
 );
 typedef sl_status_t (*uic_mqtt_dotdot_level_attribute_current_frequency_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t current_frequency
+  uint16_t current_frequency
 );
 typedef sl_status_t (*uic_mqtt_dotdot_level_attribute_min_frequency_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t min_frequency
+  uint16_t min_frequency
 );
 typedef sl_status_t (*uic_mqtt_dotdot_level_attribute_max_frequency_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t max_frequency
+  uint16_t max_frequency
 );
 typedef sl_status_t (*uic_mqtt_dotdot_level_attribute_options_callback_t)(
   dotdot_unid_t unid,
@@ -819,42 +819,42 @@ typedef sl_status_t (*uic_mqtt_dotdot_level_attribute_on_off_transition_time_cal
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t on_off_transition_time
+  uint16_t on_off_transition_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_level_attribute_on_level_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t on_level
+  uint8_t on_level
 );
 typedef sl_status_t (*uic_mqtt_dotdot_level_attribute_on_transition_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t on_transition_time
+  uint16_t on_transition_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_level_attribute_off_transition_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t off_transition_time
+  uint16_t off_transition_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_level_attribute_default_move_rate_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t default_move_rate
+  uint16_t default_move_rate
 );
 typedef sl_status_t (*uic_mqtt_dotdot_level_attribute_start_up_current_level_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t start_up_current_level
+  uint8_t start_up_current_level
 );
 // Callback types used by the alarms cluster
 typedef sl_status_t (*uic_mqtt_dotdot_alarms_attribute_alarm_count_callback_t)(
@@ -862,7 +862,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_alarms_attribute_alarm_count_callback_t)(
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t alarm_count
+  uint16_t alarm_count
 );
 // Callback types used by the time cluster
 typedef sl_status_t (*uic_mqtt_dotdot_time_attribute_time_callback_t)(
@@ -870,7 +870,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_time_attribute_time_callback_t)(
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t time
+  uint32_t time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_time_attribute_time_status_callback_t)(
   dotdot_unid_t unid,
@@ -891,14 +891,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_time_attribute_dst_start_callback_t)(
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t dst_start
+  uint32_t dst_start
 );
 typedef sl_status_t (*uic_mqtt_dotdot_time_attribute_dst_end_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t dst_end
+  uint32_t dst_end
 );
 typedef sl_status_t (*uic_mqtt_dotdot_time_attribute_dst_shift_callback_t)(
   dotdot_unid_t unid,
@@ -912,28 +912,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_time_attribute_standard_time_callback_t)(
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t standard_time
+  uint32_t standard_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_time_attribute_local_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t local_time
+  uint32_t local_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_time_attribute_last_set_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t last_set_time
+  uint32_t last_set_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_time_attribute_valid_until_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t valid_until_time
+  uint32_t valid_until_time
 );
 // Callback types used by the poll_control cluster
 typedef sl_status_t (*uic_mqtt_dotdot_poll_control_attribute_check_in_interval_callback_t)(
@@ -941,49 +941,49 @@ typedef sl_status_t (*uic_mqtt_dotdot_poll_control_attribute_check_in_interval_c
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t check_in_interval
+  uint32_t check_in_interval
 );
 typedef sl_status_t (*uic_mqtt_dotdot_poll_control_attribute_long_poll_interval_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t long_poll_interval
+  uint32_t long_poll_interval
 );
 typedef sl_status_t (*uic_mqtt_dotdot_poll_control_attribute_short_poll_interval_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t short_poll_interval
+  uint16_t short_poll_interval
 );
 typedef sl_status_t (*uic_mqtt_dotdot_poll_control_attribute_fast_poll_timeout_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t fast_poll_timeout
+  uint16_t fast_poll_timeout
 );
 typedef sl_status_t (*uic_mqtt_dotdot_poll_control_attribute_check_in_interval_min_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t check_in_interval_min
+  uint32_t check_in_interval_min
 );
 typedef sl_status_t (*uic_mqtt_dotdot_poll_control_attribute_long_poll_interval_min_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t long_poll_interval_min
+  uint32_t long_poll_interval_min
 );
 typedef sl_status_t (*uic_mqtt_dotdot_poll_control_attribute_fast_poll_timeout_max_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t fast_poll_timeout_max
+  uint16_t fast_poll_timeout_max
 );
 // Callback types used by the shade_configuration cluster
 typedef sl_status_t (*uic_mqtt_dotdot_shade_configuration_attribute_physical_closed_limit_callback_t)(
@@ -991,14 +991,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_shade_configuration_attribute_physical_clo
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t physical_closed_limit
+  uint16_t physical_closed_limit
 );
 typedef sl_status_t (*uic_mqtt_dotdot_shade_configuration_attribute_motor_step_size_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t motor_step_size
+  uint8_t motor_step_size
 );
 typedef sl_status_t (*uic_mqtt_dotdot_shade_configuration_attribute_status_callback_t)(
   dotdot_unid_t unid,
@@ -1012,7 +1012,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_shade_configuration_attribute_closed_limit
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t closed_limit
+  uint16_t closed_limit
 );
 typedef sl_status_t (*uic_mqtt_dotdot_shade_configuration_attribute_mode_callback_t)(
   dotdot_unid_t unid,
@@ -1055,98 +1055,98 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_door_open_events_callb
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t door_open_events
+  uint32_t door_open_events
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_door_closed_events_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t door_closed_events
+  uint32_t door_closed_events
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_open_period_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t open_period
+  uint16_t open_period
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_of_log_records_supported_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t number_of_log_records_supported
+  uint16_t number_of_log_records_supported
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_of_total_users_supported_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t number_of_total_users_supported
+  uint16_t number_of_total_users_supported
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_of_pin_users_supported_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t number_of_pin_users_supported
+  uint16_t number_of_pin_users_supported
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_of_rfid_users_supported_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t number_of_rfid_users_supported
+  uint16_t number_of_rfid_users_supported
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_of_week_day_schedules_supported_per_user_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t number_of_week_day_schedules_supported_per_user
+  uint8_t number_of_week_day_schedules_supported_per_user
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_of_year_day_schedules_supported_per_user_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t number_of_year_day_schedules_supported_per_user
+  uint8_t number_of_year_day_schedules_supported_per_user
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_of_holiday_schedules_supported_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t number_of_holiday_schedules_supported
+  uint8_t number_of_holiday_schedules_supported
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_max_pin_code_length_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t max_pin_code_length
+  uint8_t max_pin_code_length
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_min_pin_code_length_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t min_pin_code_length
+  uint8_t min_pin_code_length
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_max_rfid_code_length_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t max_rfid_code_length
+  uint8_t max_rfid_code_length
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_min_rfid_code_length_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t min_rfid_code_length
+  uint8_t min_rfid_code_length
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_credential_rules_support_callback_t)(
   dotdot_unid_t unid,
@@ -1160,7 +1160,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_number_of_credentials_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t number_of_credentials_supported_per_user
+  uint8_t number_of_credentials_supported_per_user
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_enable_logging_callback_t)(
   dotdot_unid_t unid,
@@ -1181,21 +1181,21 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_led_settings_callback_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t led_settings
+  uint8_t led_settings
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_auto_relock_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t auto_relock_time
+  uint32_t auto_relock_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_sound_volume_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t sound_volume
+  uint8_t sound_volume
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_operating_mode_callback_t)(
   dotdot_unid_t unid,
@@ -1258,14 +1258,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_wrong_code_entry_limit
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t wrong_code_entry_limit
+  uint8_t wrong_code_entry_limit
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_user_code_temporary_disable_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t user_code_temporary_disable_time
+  uint8_t user_code_temporary_disable_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_send_pin_over_the_air_callback_t)(
   dotdot_unid_t unid,
@@ -1293,7 +1293,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_expiring_user_timeout_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t expiring_user_timeout
+  uint16_t expiring_user_timeout
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_attribute_alarm_mask_callback_t)(
   dotdot_unid_t unid,
@@ -1371,42 +1371,42 @@ typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_physical_closed_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t physical_closed_limit_lift
+  uint16_t physical_closed_limit_lift
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_physical_closed_limit_tilt_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t physical_closed_limit_tilt
+  uint16_t physical_closed_limit_tilt
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_current_position_lift_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t current_position_lift
+  uint16_t current_position_lift
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_current_position_tilt_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t current_position_tilt
+  uint16_t current_position_tilt
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_number_of_actuations_lift_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t number_of_actuations_lift
+  uint16_t number_of_actuations_lift
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_number_of_actuations_tilt_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t number_of_actuations_tilt
+  uint16_t number_of_actuations_tilt
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_config_or_status_callback_t)(
   dotdot_unid_t unid,
@@ -1420,63 +1420,63 @@ typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_current_position
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t current_position_lift_percentage
+  uint8_t current_position_lift_percentage
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_current_position_tilt_percentage_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t current_position_tilt_percentage
+  uint8_t current_position_tilt_percentage
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_installed_open_limit_lift_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t installed_open_limit_lift
+  uint16_t installed_open_limit_lift
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_installed_closed_limit_lift_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t installed_closed_limit_lift
+  uint16_t installed_closed_limit_lift
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_installed_open_limit_tilt_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t installed_open_limit_tilt
+  uint16_t installed_open_limit_tilt
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_installed_closed_limit_tilt_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t installed_closed_limit_tilt
+  uint16_t installed_closed_limit_tilt
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_velocity_lift_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t velocity_lift
+  uint16_t velocity_lift
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_acceleration_time_lift_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t acceleration_time_lift
+  uint16_t acceleration_time_lift
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_deceleration_time_lift_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t deceleration_time_lift
+  uint16_t deceleration_time_lift
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_mode_callback_t)(
   dotdot_unid_t unid,
@@ -1490,14 +1490,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_intermediate_set
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t intermediate_setpoints_lift
+  const char* intermediate_setpoints_lift
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_attribute_intermediate_setpoints_tilt_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t intermediate_setpoints_tilt
+  const char* intermediate_setpoints_tilt
 );
 // Callback types used by the barrier_control cluster
 typedef sl_status_t (*uic_mqtt_dotdot_barrier_control_attribute_moving_state_callback_t)(
@@ -1526,49 +1526,49 @@ typedef sl_status_t (*uic_mqtt_dotdot_barrier_control_attribute_open_events_call
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t open_events
+  uint16_t open_events
 );
 typedef sl_status_t (*uic_mqtt_dotdot_barrier_control_attribute_close_events_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t close_events
+  uint16_t close_events
 );
 typedef sl_status_t (*uic_mqtt_dotdot_barrier_control_attribute_command_open_events_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t command_open_events
+  uint16_t command_open_events
 );
 typedef sl_status_t (*uic_mqtt_dotdot_barrier_control_attribute_command_close_events_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t command_close_events
+  uint16_t command_close_events
 );
 typedef sl_status_t (*uic_mqtt_dotdot_barrier_control_attribute_open_period_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t open_period
+  uint16_t open_period
 );
 typedef sl_status_t (*uic_mqtt_dotdot_barrier_control_attribute_close_period_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t close_period
+  uint16_t close_period
 );
 typedef sl_status_t (*uic_mqtt_dotdot_barrier_control_attribute_barrier_position_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t barrier_position
+  uint8_t barrier_position
 );
 // Callback types used by the pump_configuration_and_control cluster
 typedef sl_status_t (*uic_mqtt_dotdot_pump_configuration_and_control_attribute_max_pressure_callback_t)(
@@ -1583,14 +1583,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_pump_configuration_and_control_attribute_m
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t max_speed
+  uint16_t max_speed
 );
 typedef sl_status_t (*uic_mqtt_dotdot_pump_configuration_and_control_attribute_max_flow_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t max_flow
+  uint16_t max_flow
 );
 typedef sl_status_t (*uic_mqtt_dotdot_pump_configuration_and_control_attribute_min_const_pressure_callback_t)(
   dotdot_unid_t unid,
@@ -1625,28 +1625,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_pump_configuration_and_control_attribute_m
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t min_const_speed
+  uint16_t min_const_speed
 );
 typedef sl_status_t (*uic_mqtt_dotdot_pump_configuration_and_control_attribute_max_const_speed_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t max_const_speed
+  uint16_t max_const_speed
 );
 typedef sl_status_t (*uic_mqtt_dotdot_pump_configuration_and_control_attribute_min_const_flow_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t min_const_flow
+  uint16_t min_const_flow
 );
 typedef sl_status_t (*uic_mqtt_dotdot_pump_configuration_and_control_attribute_max_const_flow_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t max_const_flow
+  uint16_t max_const_flow
 );
 typedef sl_status_t (*uic_mqtt_dotdot_pump_configuration_and_control_attribute_min_const_temp_callback_t)(
   dotdot_unid_t unid,
@@ -1695,28 +1695,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_pump_configuration_and_control_attribute_s
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t speed
+  uint16_t speed
 );
 typedef sl_status_t (*uic_mqtt_dotdot_pump_configuration_and_control_attribute_lifetime_running_hours_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t lifetime_running_hours
+  uint32_t lifetime_running_hours
 );
 typedef sl_status_t (*uic_mqtt_dotdot_pump_configuration_and_control_attribute_power_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t power
+  uint32_t power
 );
 typedef sl_status_t (*uic_mqtt_dotdot_pump_configuration_and_control_attribute_lifetime_energy_consumed_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t lifetime_energy_consumed
+  uint32_t lifetime_energy_consumed
 );
 typedef sl_status_t (*uic_mqtt_dotdot_pump_configuration_and_control_attribute_operation_mode_callback_t)(
   dotdot_unid_t unid,
@@ -1794,14 +1794,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_pi_cooling_demand_cal
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t pi_cooling_demand
+  uint8_t pi_cooling_demand
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_pi_heating_demand_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t pi_heating_demand
+  uint8_t pi_heating_demand
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_hvac_system_type_configuration_callback_t)(
   dotdot_unid_t unid,
@@ -1927,14 +1927,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_number_of_weekly_tran
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t number_of_weekly_transitions
+  uint8_t number_of_weekly_transitions
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_number_of_daily_transitions_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t number_of_daily_transitions
+  uint8_t number_of_daily_transitions
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_temperature_setpoint_hold_callback_t)(
   dotdot_unid_t unid,
@@ -1948,7 +1948,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_temperature_setpoint_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t temperature_setpoint_hold_duration
+  uint16_t temperature_setpoint_hold_duration
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_thermostat_programming_operation_mode_callback_t)(
   dotdot_unid_t unid,
@@ -1983,56 +1983,56 @@ typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_setpoint_change_sourc
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t setpoint_change_source_timestamp
+  uint32_t setpoint_change_source_timestamp
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_occupied_setback_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t occupied_setback
+  uint8_t occupied_setback
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_occupied_setback_min_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t occupied_setback_min
+  uint8_t occupied_setback_min
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_occupied_setback_max_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t occupied_setback_max
+  uint8_t occupied_setback_max
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_unoccupied_setback_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t unoccupied_setback
+  uint8_t unoccupied_setback
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_unoccupied_setback_min_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t unoccupied_setback_min
+  uint8_t unoccupied_setback_min
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_unoccupied_setback_max_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t unoccupied_setback_max
+  uint8_t unoccupied_setback_max
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_emergency_heat_delta_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t emergency_heat_delta
+  uint8_t emergency_heat_delta
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_ac_type_callback_t)(
   dotdot_unid_t unid,
@@ -2046,7 +2046,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_ac_capacity_callback_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t ac_capacity
+  uint16_t ac_capacity
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_attribute_ac_refrigerant_type_callback_t)(
   dotdot_unid_t unid,
@@ -2111,21 +2111,21 @@ typedef sl_status_t (*uic_mqtt_dotdot_dehumidification_control_attribute_relativ
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t relative_humidity
+  uint8_t relative_humidity
 );
 typedef sl_status_t (*uic_mqtt_dotdot_dehumidification_control_attribute_dehumidification_cooling_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t dehumidification_cooling
+  uint8_t dehumidification_cooling
 );
 typedef sl_status_t (*uic_mqtt_dotdot_dehumidification_control_attribute_rh_dehumidification_setpoint_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t rh_dehumidification_setpoint
+  uint8_t rh_dehumidification_setpoint
 );
 typedef sl_status_t (*uic_mqtt_dotdot_dehumidification_control_attribute_relative_humidity_mode_callback_t)(
   dotdot_unid_t unid,
@@ -2146,14 +2146,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_dehumidification_control_attribute_dehumid
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t dehumidification_hysteresis
+  uint8_t dehumidification_hysteresis
 );
 typedef sl_status_t (*uic_mqtt_dotdot_dehumidification_control_attribute_dehumidification_max_cool_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t dehumidification_max_cool
+  uint8_t dehumidification_max_cool
 );
 typedef sl_status_t (*uic_mqtt_dotdot_dehumidification_control_attribute_relative_humidity_display_callback_t)(
   dotdot_unid_t unid,
@@ -2190,35 +2190,35 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_current_hue_callba
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t current_hue
+  uint8_t current_hue
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_current_saturation_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t current_saturation
+  uint8_t current_saturation
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_remaining_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t remaining_time
+  uint16_t remaining_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_currentx_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t currentx
+  uint16_t currentx
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_currenty_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t currenty
+  uint16_t currenty
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_drift_compensation_callback_t)(
   dotdot_unid_t unid,
@@ -2239,7 +2239,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_temperature_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t color_temperature_mireds
+  uint16_t color_temperature_mireds
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_mode_callback_t)(
   dotdot_unid_t unid,
@@ -2260,217 +2260,217 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_number_of_primarie
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t number_of_primaries
+  uint8_t number_of_primaries
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary1x_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t primary1x
+  uint16_t primary1x
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary1y_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t primary1y
+  uint16_t primary1y
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary1_intensity_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t primary1_intensity
+  uint8_t primary1_intensity
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary2x_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t primary2x
+  uint16_t primary2x
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary2y_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t primary2y
+  uint16_t primary2y
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary2_intensity_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t primary2_intensity
+  uint8_t primary2_intensity
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary3x_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t primary3x
+  uint16_t primary3x
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary3y_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t primary3y
+  uint16_t primary3y
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary3_intensity_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t primary3_intensity
+  uint8_t primary3_intensity
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary4x_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t primary4x
+  uint16_t primary4x
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary4y_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t primary4y
+  uint16_t primary4y
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary4_intensity_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t primary4_intensity
+  uint8_t primary4_intensity
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary5x_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t primary5x
+  uint16_t primary5x
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary5y_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t primary5y
+  uint16_t primary5y
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary5_intensity_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t primary5_intensity
+  uint8_t primary5_intensity
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary6x_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t primary6x
+  uint16_t primary6x
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary6y_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t primary6y
+  uint16_t primary6y
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_primary6_intensity_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t primary6_intensity
+  uint8_t primary6_intensity
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_white_pointx_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t white_pointx
+  uint16_t white_pointx
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_white_pointy_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t white_pointy
+  uint16_t white_pointy
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_pointrx_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t color_pointrx
+  uint16_t color_pointrx
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_pointry_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t color_pointry
+  uint16_t color_pointry
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_pointr_intensity_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t color_pointr_intensity
+  uint8_t color_pointr_intensity
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_pointgx_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t color_pointgx
+  uint16_t color_pointgx
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_pointgy_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t color_pointgy
+  uint16_t color_pointgy
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_pointg_intensity_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t color_pointg_intensity
+  uint8_t color_pointg_intensity
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_pointbx_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t color_pointbx
+  uint16_t color_pointbx
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_pointby_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t color_pointby
+  uint16_t color_pointby
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_pointb_intensity_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t color_pointb_intensity
+  uint8_t color_pointb_intensity
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_enhanced_current_hue_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t enhanced_current_hue
+  uint16_t enhanced_current_hue
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_enhanced_color_mode_callback_t)(
   dotdot_unid_t unid,
@@ -2484,35 +2484,35 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_loop_active_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t color_loop_active
+  uint8_t color_loop_active
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_loop_direction_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t color_loop_direction
+  uint8_t color_loop_direction
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_loop_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t color_loop_time
+  uint16_t color_loop_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_loop_start_enhanced_hue_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t color_loop_start_enhanced_hue
+  uint16_t color_loop_start_enhanced_hue
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_loop_stored_enhanced_hue_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t color_loop_stored_enhanced_hue
+  uint16_t color_loop_stored_enhanced_hue
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_capabilities_callback_t)(
   dotdot_unid_t unid,
@@ -2526,28 +2526,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_temp_physica
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t color_temp_physical_min_mireds
+  uint16_t color_temp_physical_min_mireds
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_color_temp_physical_max_mireds_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t color_temp_physical_max_mireds
+  uint16_t color_temp_physical_max_mireds
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_couple_color_temp_to_level_min_mireds_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t couple_color_temp_to_level_min_mireds
+  uint16_t couple_color_temp_to_level_min_mireds
 );
 typedef sl_status_t (*uic_mqtt_dotdot_color_control_attribute_start_up_color_temperature_mireds_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t start_up_color_temperature_mireds
+  uint16_t start_up_color_temperature_mireds
 );
 // Callback types used by the ballast_configuration cluster
 typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_physical_min_level_callback_t)(
@@ -2555,14 +2555,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_physical_m
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t physical_min_level
+  uint8_t physical_min_level
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_physical_max_level_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t physical_max_level
+  uint8_t physical_max_level
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_ballast_status_callback_t)(
   dotdot_unid_t unid,
@@ -2576,49 +2576,49 @@ typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_min_level_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t min_level
+  uint8_t min_level
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_max_level_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t max_level
+  uint8_t max_level
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_power_on_level_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t power_on_level
+  uint8_t power_on_level
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_power_on_fade_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t power_on_fade_time
+  uint16_t power_on_fade_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_intrinsic_ballast_factor_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t intrinsic_ballast_factor
+  uint8_t intrinsic_ballast_factor
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_ballast_factor_adjustment_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t ballast_factor_adjustment
+  uint8_t ballast_factor_adjustment
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_lamp_quantity_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t lamp_quantity
+  uint8_t lamp_quantity
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_lamp_type_callback_t)(
   dotdot_unid_t unid,
@@ -2639,14 +2639,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_lamp_rated
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t lamp_rated_hours
+  uint32_t lamp_rated_hours
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_lamp_burn_hours_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t lamp_burn_hours
+  uint32_t lamp_burn_hours
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_lamp_alarm_mode_callback_t)(
   dotdot_unid_t unid,
@@ -2660,7 +2660,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_ballast_configuration_attribute_lamp_burn_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t lamp_burn_hours_trip_point
+  uint32_t lamp_burn_hours_trip_point
 );
 // Callback types used by the illuminance_measurement cluster
 typedef sl_status_t (*uic_mqtt_dotdot_illuminance_measurement_attribute_measured_value_callback_t)(
@@ -2668,28 +2668,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_illuminance_measurement_attribute_measured
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t measured_value
+  uint16_t measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_illuminance_measurement_attribute_min_measured_value_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t min_measured_value
+  uint16_t min_measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_illuminance_measurement_attribute_max_measured_value_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t max_measured_value
+  uint16_t max_measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_illuminance_measurement_attribute_tolerance_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t tolerance
+  uint16_t tolerance
 );
 typedef sl_status_t (*uic_mqtt_dotdot_illuminance_measurement_attribute_light_sensor_type_callback_t)(
   dotdot_unid_t unid,
@@ -2718,7 +2718,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_illuminance_level_sensing_attribute_illumi
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t illuminance_target_level
+  uint16_t illuminance_target_level
 );
 // Callback types used by the temperature_measurement cluster
 typedef sl_status_t (*uic_mqtt_dotdot_temperature_measurement_attribute_measured_value_callback_t)(
@@ -2747,7 +2747,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_temperature_measurement_attribute_toleranc
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t tolerance
+  uint16_t tolerance
 );
 // Callback types used by the pressure_measurement cluster
 typedef sl_status_t (*uic_mqtt_dotdot_pressure_measurement_attribute_measured_value_callback_t)(
@@ -2776,7 +2776,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_pressure_measurement_attribute_tolerance_c
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t tolerance
+  uint16_t tolerance
 );
 typedef sl_status_t (*uic_mqtt_dotdot_pressure_measurement_attribute_scaled_value_callback_t)(
   dotdot_unid_t unid,
@@ -2804,7 +2804,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_pressure_measurement_attribute_scaled_tole
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t scaled_tolerance
+  uint16_t scaled_tolerance
 );
 typedef sl_status_t (*uic_mqtt_dotdot_pressure_measurement_attribute_scale_callback_t)(
   dotdot_unid_t unid,
@@ -2819,28 +2819,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_flow_measurement_attribute_measured_value_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t measured_value
+  uint16_t measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_flow_measurement_attribute_min_measured_value_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t min_measured_value
+  uint16_t min_measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_flow_measurement_attribute_max_measured_value_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t max_measured_value
+  uint16_t max_measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_flow_measurement_attribute_tolerance_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t tolerance
+  uint16_t tolerance
 );
 // Callback types used by the relativity_humidity cluster
 typedef sl_status_t (*uic_mqtt_dotdot_relativity_humidity_attribute_measured_value_callback_t)(
@@ -2848,28 +2848,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_relativity_humidity_attribute_measured_val
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t measured_value
+  uint16_t measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_relativity_humidity_attribute_min_measured_value_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t min_measured_value
+  uint16_t min_measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_relativity_humidity_attribute_max_measured_value_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t max_measured_value
+  uint16_t max_measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_relativity_humidity_attribute_tolerance_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t tolerance
+  uint16_t tolerance
 );
 // Callback types used by the occupancy_sensing cluster
 typedef sl_status_t (*uic_mqtt_dotdot_occupancy_sensing_attribute_occupancy_callback_t)(
@@ -2898,63 +2898,63 @@ typedef sl_status_t (*uic_mqtt_dotdot_occupancy_sensing_attribute_pir_occupied_t
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t pir_occupied_to_unoccupied_delay
+  uint16_t pir_occupied_to_unoccupied_delay
 );
 typedef sl_status_t (*uic_mqtt_dotdot_occupancy_sensing_attribute_pir_unoccupied_to_occupied_delay_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t pir_unoccupied_to_occupied_delay
+  uint16_t pir_unoccupied_to_occupied_delay
 );
 typedef sl_status_t (*uic_mqtt_dotdot_occupancy_sensing_attribute_pir_unoccupied_to_occupied_threshold_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t pir_unoccupied_to_occupied_threshold
+  uint8_t pir_unoccupied_to_occupied_threshold
 );
 typedef sl_status_t (*uic_mqtt_dotdot_occupancy_sensing_attribute_ultrasonic_occupied_to_unoccupied_delay_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t ultrasonic_occupied_to_unoccupied_delay
+  uint16_t ultrasonic_occupied_to_unoccupied_delay
 );
 typedef sl_status_t (*uic_mqtt_dotdot_occupancy_sensing_attribute_ultrasonic_unoccupied_to_occupied_delay_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t ultrasonic_unoccupied_to_occupied_delay
+  uint16_t ultrasonic_unoccupied_to_occupied_delay
 );
 typedef sl_status_t (*uic_mqtt_dotdot_occupancy_sensing_attribute_ultrasonic_unoccupied_to_occupied_threshold_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t ultrasonic_unoccupied_to_occupied_threshold
+  uint8_t ultrasonic_unoccupied_to_occupied_threshold
 );
 typedef sl_status_t (*uic_mqtt_dotdot_occupancy_sensing_attribute_physical_contact_occupied_to_unoccupied_delay_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t physical_contact_occupied_to_unoccupied_delay
+  uint16_t physical_contact_occupied_to_unoccupied_delay
 );
 typedef sl_status_t (*uic_mqtt_dotdot_occupancy_sensing_attribute_physical_contact_unoccupied_to_occupied_delay_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t physical_contact_unoccupied_to_occupied_delay
+  uint16_t physical_contact_unoccupied_to_occupied_delay
 );
 typedef sl_status_t (*uic_mqtt_dotdot_occupancy_sensing_attribute_physical_contact_unoccupied_to_occupied_threshold_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t physical_contact_unoccupied_to_occupied_threshold
+  uint8_t physical_contact_unoccupied_to_occupied_threshold
 );
 // Callback types used by the soil_moisture cluster
 typedef sl_status_t (*uic_mqtt_dotdot_soil_moisture_attribute_measured_value_callback_t)(
@@ -2962,28 +2962,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_soil_moisture_attribute_measured_value_cal
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t measured_value
+  uint16_t measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_soil_moisture_attribute_min_measured_value_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t min_measured_value
+  uint16_t min_measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_soil_moisture_attribute_max_measured_value_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t max_measured_value
+  uint16_t max_measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_soil_moisture_attribute_tolerance_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t tolerance
+  uint16_t tolerance
 );
 // Callback types used by the ph_measurement cluster
 typedef sl_status_t (*uic_mqtt_dotdot_ph_measurement_attribute_measured_value_callback_t)(
@@ -2991,28 +2991,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_ph_measurement_attribute_measured_value_ca
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t measured_value
+  uint16_t measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ph_measurement_attribute_min_measured_value_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t min_measured_value
+  uint16_t min_measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ph_measurement_attribute_max_measured_value_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t max_measured_value
+  uint16_t max_measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ph_measurement_attribute_tolerance_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t tolerance
+  uint16_t tolerance
 );
 // Callback types used by the electrical_conductivity_measurement cluster
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_conductivity_measurement_attribute_measured_value_callback_t)(
@@ -3020,28 +3020,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_conductivity_measurement_attrib
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t measured_value
+  uint16_t measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_conductivity_measurement_attribute_min_measured_value_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t min_measured_value
+  uint16_t min_measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_conductivity_measurement_attribute_max_measured_value_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t max_measured_value
+  uint16_t max_measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_conductivity_measurement_attribute_tolerance_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t tolerance
+  uint16_t tolerance
 );
 // Callback types used by the wind_speed_measurement cluster
 typedef sl_status_t (*uic_mqtt_dotdot_wind_speed_measurement_attribute_measured_value_callback_t)(
@@ -3049,28 +3049,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_wind_speed_measurement_attribute_measured_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t measured_value
+  uint16_t measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_wind_speed_measurement_attribute_min_measured_value_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t min_measured_value
+  uint16_t min_measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_wind_speed_measurement_attribute_max_measured_value_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t max_measured_value
+  uint16_t max_measured_value
 );
 typedef sl_status_t (*uic_mqtt_dotdot_wind_speed_measurement_attribute_tolerance_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t tolerance
+  uint16_t tolerance
 );
 // Callback types used by the carbon_monoxide cluster
 typedef sl_status_t (*uic_mqtt_dotdot_carbon_monoxide_attribute_measured_value_callback_t)(
@@ -3193,21 +3193,21 @@ typedef sl_status_t (*uic_mqtt_dotdot_ias_zone_attribute_zoneid_callback_t)(
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t zoneid
+  uint8_t zoneid
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ias_zone_attribute_number_of_zone_sensitivity_levels_supported_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t number_of_zone_sensitivity_levels_supported
+  uint8_t number_of_zone_sensitivity_levels_supported
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ias_zone_attribute_current_zone_sensitivity_level_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t current_zone_sensitivity_level
+  uint8_t current_zone_sensitivity_level
 );
 // Callback types used by the iaswd cluster
 typedef sl_status_t (*uic_mqtt_dotdot_iaswd_attribute_max_duration_callback_t)(
@@ -3215,7 +3215,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_iaswd_attribute_max_duration_callback_t)(
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t max_duration
+  uint16_t max_duration
 );
 // Callback types used by the metering cluster
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_current_summation_delivered_callback_t)(
@@ -3223,21 +3223,21 @@ typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_current_summation_deliv
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int64_t current_summation_delivered
+  uint64_t current_summation_delivered
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_current_summation_received_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int64_t current_summation_received
+  uint64_t current_summation_received
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_current_max_demand_delivered_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int64_t current_max_demand_delivered
+  uint64_t current_max_demand_delivered
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_current_max_demand_received_callback_t)(
   dotdot_unid_t unid,
@@ -3258,28 +3258,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_reading_snap_shot_time_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t reading_snap_shot_time
+  uint32_t reading_snap_shot_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_current_max_demand_delivered_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t current_max_demand_delivered_time
+  uint32_t current_max_demand_delivered_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_current_max_demand_received_time_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  uint8_t current_max_demand_received_time
+  uint32_t current_max_demand_received_time
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_default_update_period_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t default_update_period
+  uint8_t default_update_period
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_supply_status_callback_t)(
   dotdot_unid_t unid,
@@ -3293,14 +3293,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_current_inlet_energy_ca
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int64_t current_inlet_energy_carrier_summation
+  uint64_t current_inlet_energy_carrier_summation
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_current_outlet_energy_carrier_summation_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int64_t current_outlet_energy_carrier_summation
+  uint64_t current_outlet_energy_carrier_summation
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_inlet_temperature_callback_t)(
   dotdot_unid_t unid,
@@ -3328,14 +3328,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_multiplier_callback_t)(
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t multiplier
+  uint32_t multiplier
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_divisor_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t divisor
+  uint32_t divisor
 );
 typedef sl_status_t (*uic_mqtt_dotdot_metering_attribute_summation_formatting_callback_t)(
   dotdot_unid_t unid,
@@ -3476,70 +3476,70 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_dc_voltag
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t dc_voltage_multiplier
+  uint16_t dc_voltage_multiplier
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_dc_voltage_divisor_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t dc_voltage_divisor
+  uint16_t dc_voltage_divisor
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_dc_current_multiplier_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t dc_current_multiplier
+  uint16_t dc_current_multiplier
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_dc_current_divisor_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t dc_current_divisor
+  uint16_t dc_current_divisor
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_dc_power_multiplier_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t dc_power_multiplier
+  uint16_t dc_power_multiplier
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_dc_power_divisor_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t dc_power_divisor
+  uint16_t dc_power_divisor
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_ac_frequency_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t ac_frequency
+  uint16_t ac_frequency
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_ac_frequency_min_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t ac_frequency_min
+  uint16_t ac_frequency_min
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_ac_frequency_max_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t ac_frequency_max
+  uint16_t ac_frequency_max
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_neutral_current_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t neutral_current
+  uint16_t neutral_current
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_total_active_power_callback_t)(
   dotdot_unid_t unid,
@@ -3560,7 +3560,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_total_app
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t total_apparent_power
+  uint32_t total_apparent_power
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_measured1st_harmonic_current_callback_t)(
   dotdot_unid_t unid,
@@ -3651,28 +3651,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_ac_freque
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t ac_frequency_multiplier
+  uint16_t ac_frequency_multiplier
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_ac_frequency_divisor_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t ac_frequency_divisor
+  uint16_t ac_frequency_divisor
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_power_multiplier_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t power_multiplier
+  uint32_t power_multiplier
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_power_divisor_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t power_divisor
+  uint32_t power_divisor
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_harmonic_current_multiplier_callback_t)(
   dotdot_unid_t unid,
@@ -3693,7 +3693,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_line_curr
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t line_current
+  uint16_t line_current
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_active_current_callback_t)(
   dotdot_unid_t unid,
@@ -3714,42 +3714,42 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_volta
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_voltage
+  uint16_t rms_voltage
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_min_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_voltage_min
+  uint16_t rms_voltage_min
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_max_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_voltage_max
+  uint16_t rms_voltage_max
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_current_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_current
+  uint16_t rms_current
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_current_min_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_current_min
+  uint16_t rms_current_min
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_current_max_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_current_max
+  uint16_t rms_current_max
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_active_power_callback_t)(
   dotdot_unid_t unid,
@@ -3784,7 +3784,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_apparent_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t apparent_power
+  uint16_t apparent_power
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_callback_t)(
   dotdot_unid_t unid,
@@ -3798,91 +3798,91 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_r
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t average_rms_voltage_measurement_period
+  uint16_t average_rms_voltage_measurement_period
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t average_rms_over_voltage_counter
+  uint16_t average_rms_over_voltage_counter
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t average_rms_under_voltage_counter
+  uint16_t average_rms_under_voltage_counter
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_extreme_over_voltage_period
+  uint16_t rms_extreme_over_voltage_period
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_under_voltage_period_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_extreme_under_voltage_period
+  uint16_t rms_extreme_under_voltage_period
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_sag_period_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_voltage_sag_period
+  uint16_t rms_voltage_sag_period
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_swell_period_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_voltage_swell_period
+  uint16_t rms_voltage_swell_period
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_ac_voltage_multiplier_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t ac_voltage_multiplier
+  uint16_t ac_voltage_multiplier
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_ac_voltage_divisor_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t ac_voltage_divisor
+  uint16_t ac_voltage_divisor
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_ac_current_multiplier_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t ac_current_multiplier
+  uint16_t ac_current_multiplier
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_ac_current_divisor_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t ac_current_divisor
+  uint16_t ac_current_divisor
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_ac_power_multiplier_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t ac_power_multiplier
+  uint16_t ac_power_multiplier
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_ac_power_divisor_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t ac_power_divisor
+  uint16_t ac_power_divisor
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_dc_overload_alarms_mask_callback_t)(
   dotdot_unid_t unid,
@@ -3987,7 +3987,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_line_curr
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t line_current_phb
+  uint16_t line_current_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_active_current_phb_callback_t)(
   dotdot_unid_t unid,
@@ -4008,42 +4008,42 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_volta
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_voltage_phb
+  uint16_t rms_voltage_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_min_phb_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_voltage_min_phb
+  uint16_t rms_voltage_min_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_max_phb_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_voltage_max_phb
+  uint16_t rms_voltage_max_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_current_phb_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_current_phb
+  uint16_t rms_current_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_current_min_phb_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_current_min_phb
+  uint16_t rms_current_min_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_current_max_phb_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_current_max_phb
+  uint16_t rms_current_max_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_active_power_phb_callback_t)(
   dotdot_unid_t unid,
@@ -4078,7 +4078,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_apparent_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t apparent_power_phb
+  uint16_t apparent_power_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_phb_callback_t)(
   dotdot_unid_t unid,
@@ -4092,56 +4092,56 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_r
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t average_rms_voltage_measurement_period_phb
+  uint16_t average_rms_voltage_measurement_period_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phb_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t average_rms_over_voltage_counter_phb
+  uint16_t average_rms_over_voltage_counter_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phb_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t average_rms_under_voltage_counter_phb
+  uint16_t average_rms_under_voltage_counter_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_phb_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_extreme_over_voltage_period_phb
+  uint16_t rms_extreme_over_voltage_period_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_under_voltage_period_phb_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_extreme_under_voltage_period_phb
+  uint16_t rms_extreme_under_voltage_period_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_sag_period_phb_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_voltage_sag_period_phb
+  uint16_t rms_voltage_sag_period_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_swell_period_phb_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_voltage_swell_period_phb
+  uint16_t rms_voltage_swell_period_phb
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_line_current_phc_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t line_current_phc
+  uint16_t line_current_phc
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_active_current_phc_callback_t)(
   dotdot_unid_t unid,
@@ -4162,42 +4162,42 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_volta
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_voltage_phc
+  uint16_t rms_voltage_phc
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_min_phc_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_voltage_min_phc
+  uint16_t rms_voltage_min_phc
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_max_phc_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_voltage_max_phc
+  uint16_t rms_voltage_max_phc
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_current_phc_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_current_phc
+  uint16_t rms_current_phc
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_current_min_phc_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_current_min_phc
+  uint16_t rms_current_min_phc
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_current_max_phc_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_current_max_phc
+  uint16_t rms_current_max_phc
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_active_power_phc_callback_t)(
   dotdot_unid_t unid,
@@ -4232,7 +4232,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_apparent_
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t apparent_power_phc
+  uint16_t apparent_power_phc
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_power_factor_phc_callback_t)(
   dotdot_unid_t unid,
@@ -4246,49 +4246,49 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_r
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t average_rms_voltage_measurement_period_phc
+  uint16_t average_rms_voltage_measurement_period_phc
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_over_voltage_counter_phc_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t average_rms_over_voltage_counter_phc
+  uint16_t average_rms_over_voltage_counter_phc
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_average_rms_under_voltage_counter_phc_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t average_rms_under_voltage_counter_phc
+  uint16_t average_rms_under_voltage_counter_phc
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_over_voltage_period_phc_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_extreme_over_voltage_period_phc
+  uint16_t rms_extreme_over_voltage_period_phc
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_extreme_under_voltage_period_phc_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_extreme_under_voltage_period_phc
+  uint16_t rms_extreme_under_voltage_period_phc
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_sag_period_phc_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_voltage_sag_period_phc
+  uint16_t rms_voltage_sag_period_phc
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_attribute_rms_voltage_swell_period_phc_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t rms_voltage_swell_period_phc
+  uint16_t rms_voltage_swell_period_phc
 );
 // Callback types used by the diagnostics cluster
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_number_of_resets_callback_t)(
@@ -4296,217 +4296,217 @@ typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_number_of_resets_cal
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t number_of_resets
+  uint16_t number_of_resets
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_persistent_memory_writes_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t persistent_memory_writes
+  uint16_t persistent_memory_writes
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_mac_rx_bcast_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t mac_rx_bcast
+  uint32_t mac_rx_bcast
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_mac_tx_bcast_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t mac_tx_bcast
+  uint32_t mac_tx_bcast
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_mac_rx_ucast_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t mac_rx_ucast
+  uint32_t mac_rx_ucast
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_mac_tx_ucast_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t mac_tx_ucast
+  uint32_t mac_tx_ucast
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_mac_tx_ucast_retry_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t mac_tx_ucast_retry
+  uint16_t mac_tx_ucast_retry
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_mac_tx_ucast_fail_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t mac_tx_ucast_fail
+  uint16_t mac_tx_ucast_fail
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_aps_rx_bcast_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t aps_rx_bcast
+  uint16_t aps_rx_bcast
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_aps_tx_bcast_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t aps_tx_bcast
+  uint16_t aps_tx_bcast
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_aps_rx_ucast_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t aps_rx_ucast
+  uint16_t aps_rx_ucast
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_aps_tx_ucast_success_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t aps_tx_ucast_success
+  uint16_t aps_tx_ucast_success
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_aps_tx_ucast_retry_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t aps_tx_ucast_retry
+  uint16_t aps_tx_ucast_retry
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_aps_tx_ucast_fail_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t aps_tx_ucast_fail
+  uint16_t aps_tx_ucast_fail
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_route_disc_initiated_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t route_disc_initiated
+  uint16_t route_disc_initiated
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_neighbor_added_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t neighbor_added
+  uint16_t neighbor_added
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_neighbor_removed_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t neighbor_removed
+  uint16_t neighbor_removed
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_neighbor_stale_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t neighbor_stale
+  uint16_t neighbor_stale
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_join_indication_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t join_indication
+  uint16_t join_indication
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_child_moved_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t child_moved
+  uint16_t child_moved
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_nwkfc_failure_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t nwkfc_failure
+  uint16_t nwkfc_failure
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_apsfc_failure_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t apsfc_failure
+  uint16_t apsfc_failure
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_aps_unauthorized_key_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t aps_unauthorized_key
+  uint16_t aps_unauthorized_key
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_nwk_decrypt_failures_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t nwk_decrypt_failures
+  uint16_t nwk_decrypt_failures
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_aps_decrypt_failures_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t aps_decrypt_failures
+  uint16_t aps_decrypt_failures
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_packet_buffer_allocate_failures_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t packet_buffer_allocate_failures
+  uint16_t packet_buffer_allocate_failures
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_relayed_ucast_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t relayed_ucast
+  uint16_t relayed_ucast
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_phy_to_mac_queue_limit_reached_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t phy_to_mac_queue_limit_reached
+  uint16_t phy_to_mac_queue_limit_reached
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_packet_validate_drop_count_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t packet_validate_drop_count
+  uint16_t packet_validate_drop_count
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_average_mac_retry_per_aps_message_sent_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t average_mac_retry_per_aps_message_sent
+  uint16_t average_mac_retry_per_aps_message_sent
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_last_messagelqi_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t last_messagelqi
+  uint8_t last_messagelqi
 );
 typedef sl_status_t (*uic_mqtt_dotdot_diagnostics_attribute_last_messagerssi_callback_t)(
   dotdot_unid_t unid,
@@ -4537,7 +4537,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_state_attribute_endpoint_id_list_callback_
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
   size_t endpoint_id_list_count,
-  const int8_t* endpoint_id_list
+  const uint8_t* endpoint_id_list
 );
 typedef sl_status_t (*uic_mqtt_dotdot_state_attribute_network_status_callback_t)(
   dotdot_unid_t unid,
@@ -4558,7 +4558,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_state_attribute_maximum_command_delay_call
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t maximum_command_delay
+  uint32_t maximum_command_delay
 );
 typedef sl_status_t (*uic_mqtt_dotdot_state_attribute_network_list_callback_t)(
   dotdot_unid_t unid,
@@ -4598,7 +4598,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_system_metrics_attribute_reporting_interva
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t reporting_interval_seconds
+  uint32_t reporting_interval_seconds
 );
 typedef sl_status_t (*uic_mqtt_dotdot_system_metrics_attribute_cpu_usage_percent_callback_t)(
   dotdot_unid_t unid,
@@ -4740,7 +4740,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_system_metrics_attribute_uptime_minutes_ca
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int64_t uptime_minutes
+  uint64_t uptime_minutes
 );
 typedef sl_status_t (*uic_mqtt_dotdot_system_metrics_attribute_current_temperature_celcius_callback_t)(
   dotdot_unid_t unid,
@@ -4789,7 +4789,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_system_metrics_attribute_system_interrupts
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int64_t system_interrupts
+  uint64_t system_interrupts
 );
 // Callback types used by the application_monitoring cluster
 typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_application_name_callback_t)(
@@ -4826,14 +4826,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_uptime_mi
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int64_t uptime_minutes
+  uint64_t uptime_minutes
 );
 typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_process_id_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int64_t process_id
+  uint64_t process_id
 );
 typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_hostname_callback_t)(
   dotdot_unid_t unid,
@@ -4868,28 +4868,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_mqtt_stat
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t mqtt_statistics_reporting_interval_seconds
+  uint32_t mqtt_statistics_reporting_interval_seconds
 );
 typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_mqtt_messages_sent_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int64_t mqtt_messages_sent
+  uint64_t mqtt_messages_sent
 );
 typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_mqtt_messages_received_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int64_t mqtt_messages_received
+  uint64_t mqtt_messages_received
 );
 typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_mqtt_subscription_count_callback_t)(
   dotdot_unid_t unid,
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int64_t mqtt_subscription_count
+  uint64_t mqtt_subscription_count
 );
 typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_mqtt_average_delivery_time_seconds_callback_t)(
   dotdot_unid_t unid,
@@ -4917,7 +4917,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_applicati
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int32_t application_statistics_reporting_interval_seconds
+  uint32_t application_statistics_reporting_interval_seconds
 );
 typedef sl_status_t (*uic_mqtt_dotdot_application_monitoring_attribute_application_cpu_usage_percent_callback_t)(
   dotdot_unid_t unid,
@@ -4984,7 +4984,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_user_credential_attribute_supported_user_u
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int16_t supported_user_unique_identifiers
+  uint16_t supported_user_unique_identifiers
 );
 typedef sl_status_t (*uic_mqtt_dotdot_user_credential_attribute_supported_credential_rules_callback_t)(
   dotdot_unid_t unid,
@@ -5158,7 +5158,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_humidifie
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t humidifier_setpoint_precision
+  uint8_t humidifier_setpoint_precision
 );
 typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidifier_setpoint_min_callback_t)(
   dotdot_unid_t unid,
@@ -5193,7 +5193,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_dehumidif
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t dehumidifier_setpoint_precision
+  uint8_t dehumidifier_setpoint_precision
 );
 typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setpoint_min_callback_t)(
   dotdot_unid_t unid,
@@ -5228,7 +5228,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_attribute_auto_setp
   dotdot_endpoint_id_t endpoint,
   bool unretained,
   uic_mqtt_dotdot_attribute_update_type_t update_type,
-  int8_t auto_setpoint_precision
+  uint8_t auto_setpoint_precision
 );
 
 #ifdef __cplusplus

@@ -111,17 +111,17 @@ typedef sl_status_t (*uic_mqtt_dotdot_basic_reset_to_factory_defaults_callback_t
 );
 
 typedef struct {
-  int8_t zcl_version;
-  int8_t application_version;
-  int8_t stack_version;
-  int8_t hw_version;
+  uint8_t zcl_version;
+  uint8_t application_version;
+  uint8_t stack_version;
+  uint8_t hw_version;
   const char* manufacturer_name;
   const char* model_identifier;
   const char* date_code;
   uint8_t power_source;
   uint8_t generic_device_class;
   uint8_t generic_device_type;
-  uint8_t product_code;
+  const char* product_code;
   const char* producturl;
   const char* manufacturer_version_details;
   const char* serial_number;
@@ -277,7 +277,7 @@ void uic_mqtt_dotdot_clear_basic_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_basic_zcl_version_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -307,7 +307,7 @@ sl_status_t uic_mqtt_dotdot_basic_zcl_version_unretain(
  */
 sl_status_t uic_mqtt_dotdot_basic_application_version_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -337,7 +337,7 @@ sl_status_t uic_mqtt_dotdot_basic_application_version_unretain(
  */
 sl_status_t uic_mqtt_dotdot_basic_stack_version_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -367,7 +367,7 @@ sl_status_t uic_mqtt_dotdot_basic_stack_version_unretain(
  */
 sl_status_t uic_mqtt_dotdot_basic_hw_version_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -577,7 +577,7 @@ sl_status_t uic_mqtt_dotdot_basic_generic_device_type_unretain(
  */
 sl_status_t uic_mqtt_dotdot_basic_product_code_publish(
   const char *base_topic,
-  uint8_t value,
+  const char* value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -942,62 +942,62 @@ void uic_mqtt_dotdot_basic_publish_empty_supported_commands(
 // Callback types used by the power_configuration cluster
 
 typedef struct {
-  int16_t mains_voltage;
-  int8_t mains_frequency;
+  uint16_t mains_voltage;
+  uint8_t mains_frequency;
   uint8_t mains_alarm_mask;
-  int16_t mains_voltage_min_threshold;
-  int16_t mains_voltage_max_threshold;
-  int16_t mains_voltage_dwell_trip_point;
-  int8_t battery_voltage;
-  int8_t battery_percentage_remaining;
+  uint16_t mains_voltage_min_threshold;
+  uint16_t mains_voltage_max_threshold;
+  uint16_t mains_voltage_dwell_trip_point;
+  uint8_t battery_voltage;
+  uint8_t battery_percentage_remaining;
   const char* battery_manufacturer;
   uint8_t battery_size;
-  int16_t batterya_hr_rating;
-  int8_t battery_quantity;
-  int8_t battery_rated_voltage;
+  uint16_t batterya_hr_rating;
+  uint8_t battery_quantity;
+  uint8_t battery_rated_voltage;
   uint8_t battery_alarm_mask;
-  int8_t battery_voltage_min_threshold;
-  int8_t battery_voltage_threshold1;
-  int8_t battery_voltage_threshold2;
-  int8_t battery_voltage_threshold3;
-  int8_t battery_percentage_min_threshold;
-  int8_t battery_percentage_threshold1;
-  int8_t battery_percentage_threshold2;
-  int8_t battery_percentage_threshold3;
+  uint8_t battery_voltage_min_threshold;
+  uint8_t battery_voltage_threshold1;
+  uint8_t battery_voltage_threshold2;
+  uint8_t battery_voltage_threshold3;
+  uint8_t battery_percentage_min_threshold;
+  uint8_t battery_percentage_threshold1;
+  uint8_t battery_percentage_threshold2;
+  uint8_t battery_percentage_threshold3;
   uint32_t battery_alarm_state;
-  int8_t battery2_voltage;
-  int8_t battery2_percentage_remaining;
+  uint8_t battery2_voltage;
+  uint8_t battery2_percentage_remaining;
   const char* battery2_manufacturer;
   uint8_t battery2_size;
-  int16_t battery2a_hr_rating;
-  int8_t battery2_quantity;
-  int8_t battery2_rated_voltage;
+  uint16_t battery2a_hr_rating;
+  uint8_t battery2_quantity;
+  uint8_t battery2_rated_voltage;
   uint8_t battery2_alarm_mask;
-  int8_t battery2_voltage_min_threshold;
-  int8_t battery2_voltage_threshold1;
-  int8_t battery2_voltage_threshold2;
-  int8_t battery2_voltage_threshold3;
-  int8_t battery2_percentage_min_threshold;
-  int8_t battery2_percentage_threshold1;
-  int8_t battery2_percentage_threshold2;
-  int8_t battery2_percentage_threshold3;
+  uint8_t battery2_voltage_min_threshold;
+  uint8_t battery2_voltage_threshold1;
+  uint8_t battery2_voltage_threshold2;
+  uint8_t battery2_voltage_threshold3;
+  uint8_t battery2_percentage_min_threshold;
+  uint8_t battery2_percentage_threshold1;
+  uint8_t battery2_percentage_threshold2;
+  uint8_t battery2_percentage_threshold3;
   uint32_t battery2_alarm_state;
-  int8_t battery3_voltage;
-  int8_t battery3_percentage_remaining;
+  uint8_t battery3_voltage;
+  uint8_t battery3_percentage_remaining;
   const char* battery3_manufacturer;
   uint8_t battery3_size;
-  int16_t battery3a_hr_rating;
-  int8_t battery3_quantity;
-  int8_t battery3_rated_voltage;
+  uint16_t battery3a_hr_rating;
+  uint8_t battery3_quantity;
+  uint8_t battery3_rated_voltage;
   uint8_t battery3_alarm_mask;
-  int8_t battery3_voltage_min_threshold;
-  int8_t battery3_voltage_threshold1;
-  int8_t battery3_voltage_threshold2;
-  int8_t battery3_voltage_threshold3;
-  int8_t battery3_percentage_min_threshold;
-  int8_t battery3_percentage_threshold1;
-  int8_t battery3_percentage_threshold2;
-  int8_t battery3_percentage_threshold3;
+  uint8_t battery3_voltage_min_threshold;
+  uint8_t battery3_voltage_threshold1;
+  uint8_t battery3_voltage_threshold2;
+  uint8_t battery3_voltage_threshold3;
+  uint8_t battery3_percentage_min_threshold;
+  uint8_t battery3_percentage_threshold1;
+  uint8_t battery3_percentage_threshold2;
+  uint8_t battery3_percentage_threshold3;
   uint32_t battery3_alarm_state;
 } uic_mqtt_dotdot_power_configuration_state_t;
 
@@ -1140,7 +1140,7 @@ void uic_mqtt_dotdot_clear_power_configuration_force_read_attributes_callbacks()
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1170,7 +1170,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_mains_frequency_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1230,7 +1230,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_mains_alarm_mask_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_min_threshold_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1260,7 +1260,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_min_threshold_unre
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_max_threshold_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1290,7 +1290,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_max_threshold_unre
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_dwell_trip_point_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1320,7 +1320,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_mains_voltage_dwell_trip_point_u
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1350,7 +1350,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_remaining_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1440,7 +1440,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_size_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_batterya_hr_rating_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1470,7 +1470,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_batterya_hr_rating_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_quantity_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1500,7 +1500,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_quantity_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_rated_voltage_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1560,7 +1560,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_alarm_mask_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_min_threshold_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1590,7 +1590,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_min_threshold_un
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_threshold1_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1620,7 +1620,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_threshold1_unret
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_threshold2_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1650,7 +1650,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_threshold2_unret
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_threshold3_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1680,7 +1680,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_voltage_threshold3_unret
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_min_threshold_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1710,7 +1710,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_min_threshold
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_threshold1_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1740,7 +1740,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_threshold1_un
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_threshold2_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1770,7 +1770,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_threshold2_un
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery_percentage_threshold3_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1830,7 +1830,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery_alarm_state_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1860,7 +1860,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_remaining_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1950,7 +1950,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_size_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2a_hr_rating_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -1980,7 +1980,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2a_hr_rating_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_quantity_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2010,7 +2010,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_quantity_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_rated_voltage_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2070,7 +2070,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_alarm_mask_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_min_threshold_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2100,7 +2100,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_min_threshold_u
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold1_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2130,7 +2130,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold1_unre
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold2_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2160,7 +2160,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold2_unre
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold3_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2190,7 +2190,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_voltage_threshold3_unre
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_min_threshold_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2220,7 +2220,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_min_threshol
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold1_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2250,7 +2250,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold1_u
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold2_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2280,7 +2280,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold2_u
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery2_percentage_threshold3_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2340,7 +2340,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery2_alarm_state_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2370,7 +2370,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_remaining_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2460,7 +2460,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_size_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3a_hr_rating_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2490,7 +2490,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3a_hr_rating_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_quantity_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2520,7 +2520,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_quantity_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_rated_voltage_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2580,7 +2580,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_alarm_mask_unretain(
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_min_threshold_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2610,7 +2610,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_min_threshold_u
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold1_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2640,7 +2640,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold1_unre
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold2_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2670,7 +2670,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold2_unre
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold3_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2700,7 +2700,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_voltage_threshold3_unre
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_min_threshold_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2730,7 +2730,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_min_threshol
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold1_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2760,7 +2760,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold1_u
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold2_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2790,7 +2790,7 @@ sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold2_u
  */
 sl_status_t uic_mqtt_dotdot_power_configuration_battery3_percentage_threshold3_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -2888,12 +2888,12 @@ typedef struct {
   int16_t current_temperature;
   int16_t min_temp_experienced;
   int16_t max_temp_experienced;
-  int16_t over_temp_total_dwell;
+  uint16_t over_temp_total_dwell;
   uint8_t device_temp_alarm_mask;
   int16_t low_temp_threshold;
   int16_t high_temp_threshold;
-  int32_t low_temp_dwell_trip_point;
-  int32_t high_temp_dwell_trip_point;
+  uint32_t low_temp_dwell_trip_point;
+  uint32_t high_temp_dwell_trip_point;
 } uic_mqtt_dotdot_device_temperature_configuration_state_t;
 
 typedef struct {
@@ -3077,7 +3077,7 @@ sl_status_t uic_mqtt_dotdot_device_temperature_configuration_max_temp_experience
  */
 sl_status_t uic_mqtt_dotdot_device_temperature_configuration_over_temp_total_dwell_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -3197,7 +3197,7 @@ sl_status_t uic_mqtt_dotdot_device_temperature_configuration_high_temp_threshold
  */
 sl_status_t uic_mqtt_dotdot_device_temperature_configuration_low_temp_dwell_trip_point_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -3227,7 +3227,7 @@ sl_status_t uic_mqtt_dotdot_device_temperature_configuration_low_temp_dwell_trip
  */
 sl_status_t uic_mqtt_dotdot_device_temperature_configuration_high_temp_dwell_trip_point_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -3294,14 +3294,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_identify_identify_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t identify_time
+    uint16_t identify_time
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_identify_identify_query_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t timeout
+    uint16_t timeout
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_identify_identify_query_callback_t)(
@@ -3320,7 +3320,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_identify_trigger_effect_callback_t)(
 );
 
 typedef struct {
-  int16_t identify_time;
+  uint16_t identify_time;
 } uic_mqtt_dotdot_identify_state_t;
 
 typedef struct {
@@ -3347,14 +3347,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_identify_force_read_attributes_callback_t)
  * @brief Command fields for Identify/Identify
  */
 typedef struct {
-  int16_t identify_time;
+  uint16_t identify_time;
 } uic_mqtt_dotdot_identify_command_identify_fields_t;
 
 /**
  * @brief Command fields for Identify/IdentifyQueryResponse
  */
 typedef struct {
-  int16_t timeout;
+  uint16_t timeout;
 } uic_mqtt_dotdot_identify_command_identify_query_response_fields_t;
 
 /**
@@ -3589,7 +3589,7 @@ void uic_mqtt_dotdot_clear_identify_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_identify_identify_time_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -3656,7 +3656,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_groups_add_group_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t group_id,
+    uint16_t group_id,
 
     const char* group_name
 
@@ -3667,14 +3667,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_groups_add_group_response_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     uint8_t status,
 
-    int16_t group_id
+    uint16_t group_id
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_groups_view_group_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t group_id
+    uint16_t group_id
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_groups_view_group_response_callback_t)(
@@ -3683,7 +3683,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_groups_view_group_response_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     uint8_t status,
 
-    int16_t group_id,
+    uint16_t group_id,
 
     const char* group_name
 
@@ -3693,24 +3693,24 @@ typedef sl_status_t (*uic_mqtt_dotdot_groups_get_group_membership_callback_t)(
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
     uint8_t group_list_count,
-    const int16_t *group_list
+    const uint16_t *group_list
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_groups_get_group_membership_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int8_t capacity,
+    uint8_t capacity,
 
     uint8_t group_list_count,
-    const int16_t *group_list
+    const uint16_t *group_list
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_groups_remove_group_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t group_id
+    uint16_t group_id
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_groups_remove_group_response_callback_t)(
@@ -3719,7 +3719,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_groups_remove_group_response_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     uint8_t status,
 
-    int16_t group_id
+    uint16_t group_id
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_groups_remove_all_groups_callback_t)(
@@ -3731,7 +3731,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_groups_add_group_if_identifying_callback_t
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t group_id,
+    uint16_t group_id,
 
     const char* group_name
 
@@ -3765,7 +3765,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_groups_force_read_attributes_callback_t)(
  * @brief Command fields for Groups/AddGroup
  */
 typedef struct {
-  int16_t group_id;
+  uint16_t group_id;
 
   const char* group_name;
 } uic_mqtt_dotdot_groups_command_add_group_fields_t;
@@ -3776,14 +3776,14 @@ typedef struct {
 typedef struct {
   uint8_t status;
 
-  int16_t group_id;
+  uint16_t group_id;
 } uic_mqtt_dotdot_groups_command_add_group_response_fields_t;
 
 /**
  * @brief Command fields for Groups/ViewGroup
  */
 typedef struct {
-  int16_t group_id;
+  uint16_t group_id;
 } uic_mqtt_dotdot_groups_command_view_group_fields_t;
 
 /**
@@ -3792,7 +3792,7 @@ typedef struct {
 typedef struct {
   uint8_t status;
 
-  int16_t group_id;
+  uint16_t group_id;
 
   const char* group_name;
 } uic_mqtt_dotdot_groups_command_view_group_response_fields_t;
@@ -3802,24 +3802,24 @@ typedef struct {
  */
 typedef struct {
   uint8_t group_list_count;
-  const int16_t *group_list;
+  const uint16_t *group_list;
 } uic_mqtt_dotdot_groups_command_get_group_membership_fields_t;
 
 /**
  * @brief Command fields for Groups/GetGroupMembershipResponse
  */
 typedef struct {
-  int8_t capacity;
+  uint8_t capacity;
 
   uint8_t group_list_count;
-  const int16_t *group_list;
+  const uint16_t *group_list;
 } uic_mqtt_dotdot_groups_command_get_group_membership_response_fields_t;
 
 /**
  * @brief Command fields for Groups/RemoveGroup
  */
 typedef struct {
-  int16_t group_id;
+  uint16_t group_id;
 } uic_mqtt_dotdot_groups_command_remove_group_fields_t;
 
 /**
@@ -3828,14 +3828,14 @@ typedef struct {
 typedef struct {
   uint8_t status;
 
-  int16_t group_id;
+  uint16_t group_id;
 } uic_mqtt_dotdot_groups_command_remove_group_response_fields_t;
 
 /**
  * @brief Command fields for Groups/AddGroupIfIdentifying
  */
 typedef struct {
-  int16_t group_id;
+  uint16_t group_id;
 
   const char* group_name;
 } uic_mqtt_dotdot_groups_command_add_group_if_identifying_fields_t;
@@ -4370,18 +4370,18 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_add_scene_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid,
+    uint8_t sceneid,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
-    uint8_t * scene_name,
+    const char* scene_name,
 
     uint8_t extension_field_sets_count,
     const SExtensionFieldSetList *extension_field_sets,
 
-    int8_t transition_time100ms
+    uint8_t transition_time100ms
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_add_scene_response_callback_t)(
@@ -4390,18 +4390,18 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_add_scene_response_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_view_scene_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_view_scene_response_callback_t)(
@@ -4410,13 +4410,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_view_scene_response_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid,
+    uint8_t sceneid,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
-    uint8_t * scene_name,
+    const char* scene_name,
 
     uint8_t extension_field_sets_count,
     const SExtensionFieldSetList *extension_field_sets
@@ -4426,9 +4426,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_remove_scene_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_remove_scene_response_callback_t)(
@@ -4437,16 +4437,16 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_remove_scene_response_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_remove_all_scenes_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * groupid
+    uint16_t groupid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback_t)(
@@ -4455,16 +4455,16 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_remove_all_scenes_response_callback
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    uint8_t * groupid
+    uint16_t groupid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_store_scene_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_store_scene_response_callback_t)(
@@ -4473,27 +4473,27 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_store_scene_response_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_recall_scene_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid,
+    uint8_t sceneid,
 
-    int16_t transition_time
+    uint16_t transition_time
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_get_scene_membership_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * groupid
+    uint16_t groupid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_get_scene_membership_response_callback_t)(
@@ -4502,25 +4502,25 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_get_scene_membership_response_callb
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    int8_t capacity,
+    uint8_t capacity,
 
-    uint8_t * groupid,
+    uint16_t groupid,
 
     uint8_t scene_list_count,
-    const int8_t *scene_list
+    const uint8_t *scene_list
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_enhanced_add_scene_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid,
+    uint8_t sceneid,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
-    uint8_t * scene_name,
+    const char* scene_name,
 
     uint8_t extension_field_sets_count,
     const SExtensionFieldSetList *extension_field_sets
@@ -4532,18 +4532,18 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_enhanced_add_scene_response_callbac
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_enhanced_view_scene_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid
+    uint8_t sceneid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_enhanced_view_scene_response_callback_t)(
@@ -4552,13 +4552,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_enhanced_view_scene_response_callba
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    uint8_t * groupid,
+    uint16_t groupid,
 
-    int8_t sceneid,
+    uint8_t sceneid,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
-    uint8_t * scene_name,
+    const char* scene_name,
 
     uint8_t extension_field_sets_count,
     const SExtensionFieldSetList *extension_field_sets
@@ -4570,13 +4570,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_copy_scene_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     uint8_t mode,
 
-    uint8_t * group_identifier_from,
+    uint16_t group_identifier_from,
 
-    int8_t scene_identifier_from,
+    uint8_t scene_identifier_from,
 
-    uint8_t * group_identifier_to,
+    uint16_t group_identifier_to,
 
-    int8_t scene_identifier_to
+    uint8_t scene_identifier_to
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_scenes_copy_scene_response_callback_t)(
@@ -4585,16 +4585,16 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_copy_scene_response_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     zclStatus status,
 
-    uint8_t * group_identifier_from,
+    uint16_t group_identifier_from,
 
-    int8_t scene_identifier_from
+    uint8_t scene_identifier_from
 
 );
 
 typedef struct {
-  int8_t scene_count;
-  int8_t current_scene;
-  uint8_t * current_group;
+  uint8_t scene_count;
+  uint8_t current_scene;
+  uint16_t current_group;
   bool scene_valid;
   uint8_t name_support;
   uint64_t last_configured_by;
@@ -4632,18 +4632,18 @@ typedef sl_status_t (*uic_mqtt_dotdot_scenes_force_read_attributes_callback_t)(
  * @brief Command fields for Scenes/AddScene
  */
 typedef struct {
-  uint8_t * groupid;
+  uint16_t groupid;
 
-  int8_t sceneid;
+  uint8_t sceneid;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
-  uint8_t * scene_name;
+  const char* scene_name;
 
   uint8_t extension_field_sets_count;
   const SExtensionFieldSetList *extension_field_sets;
 
-  int8_t transition_time100ms;
+  uint8_t transition_time100ms;
 } uic_mqtt_dotdot_scenes_command_add_scene_fields_t;
 
 /**
@@ -4652,18 +4652,18 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  uint8_t * groupid;
+  uint16_t groupid;
 
-  int8_t sceneid;
+  uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_add_scene_response_fields_t;
 
 /**
  * @brief Command fields for Scenes/ViewScene
  */
 typedef struct {
-  uint8_t * groupid;
+  uint16_t groupid;
 
-  int8_t sceneid;
+  uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_view_scene_fields_t;
 
 /**
@@ -4672,13 +4672,13 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  uint8_t * groupid;
+  uint16_t groupid;
 
-  int8_t sceneid;
+  uint8_t sceneid;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
-  uint8_t * scene_name;
+  const char* scene_name;
 
   uint8_t extension_field_sets_count;
   const SExtensionFieldSetList *extension_field_sets;
@@ -4688,9 +4688,9 @@ typedef struct {
  * @brief Command fields for Scenes/RemoveScene
  */
 typedef struct {
-  uint8_t * groupid;
+  uint16_t groupid;
 
-  int8_t sceneid;
+  uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_remove_scene_fields_t;
 
 /**
@@ -4699,16 +4699,16 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  uint8_t * groupid;
+  uint16_t groupid;
 
-  int8_t sceneid;
+  uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_remove_scene_response_fields_t;
 
 /**
  * @brief Command fields for Scenes/RemoveAllScenes
  */
 typedef struct {
-  uint8_t * groupid;
+  uint16_t groupid;
 } uic_mqtt_dotdot_scenes_command_remove_all_scenes_fields_t;
 
 /**
@@ -4717,16 +4717,16 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  uint8_t * groupid;
+  uint16_t groupid;
 } uic_mqtt_dotdot_scenes_command_remove_all_scenes_response_fields_t;
 
 /**
  * @brief Command fields for Scenes/StoreScene
  */
 typedef struct {
-  uint8_t * groupid;
+  uint16_t groupid;
 
-  int8_t sceneid;
+  uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_store_scene_fields_t;
 
 /**
@@ -4735,27 +4735,27 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  uint8_t * groupid;
+  uint16_t groupid;
 
-  int8_t sceneid;
+  uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_store_scene_response_fields_t;
 
 /**
  * @brief Command fields for Scenes/RecallScene
  */
 typedef struct {
-  uint8_t * groupid;
+  uint16_t groupid;
 
-  int8_t sceneid;
+  uint8_t sceneid;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 } uic_mqtt_dotdot_scenes_command_recall_scene_fields_t;
 
 /**
  * @brief Command fields for Scenes/GetSceneMembership
  */
 typedef struct {
-  uint8_t * groupid;
+  uint16_t groupid;
 } uic_mqtt_dotdot_scenes_command_get_scene_membership_fields_t;
 
 /**
@@ -4764,25 +4764,25 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  int8_t capacity;
+  uint8_t capacity;
 
-  uint8_t * groupid;
+  uint16_t groupid;
 
   uint8_t scene_list_count;
-  const int8_t *scene_list;
+  const uint8_t *scene_list;
 } uic_mqtt_dotdot_scenes_command_get_scene_membership_response_fields_t;
 
 /**
  * @brief Command fields for Scenes/EnhancedAddScene
  */
 typedef struct {
-  uint8_t * groupid;
+  uint16_t groupid;
 
-  int8_t sceneid;
+  uint8_t sceneid;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
-  uint8_t * scene_name;
+  const char* scene_name;
 
   uint8_t extension_field_sets_count;
   const SExtensionFieldSetList *extension_field_sets;
@@ -4794,18 +4794,18 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  uint8_t * groupid;
+  uint16_t groupid;
 
-  int8_t sceneid;
+  uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_enhanced_add_scene_response_fields_t;
 
 /**
  * @brief Command fields for Scenes/EnhancedViewScene
  */
 typedef struct {
-  uint8_t * groupid;
+  uint16_t groupid;
 
-  int8_t sceneid;
+  uint8_t sceneid;
 } uic_mqtt_dotdot_scenes_command_enhanced_view_scene_fields_t;
 
 /**
@@ -4814,13 +4814,13 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  uint8_t * groupid;
+  uint16_t groupid;
 
-  int8_t sceneid;
+  uint8_t sceneid;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
-  uint8_t * scene_name;
+  const char* scene_name;
 
   uint8_t extension_field_sets_count;
   const SExtensionFieldSetList *extension_field_sets;
@@ -4832,13 +4832,13 @@ typedef struct {
 typedef struct {
   uint8_t mode;
 
-  uint8_t * group_identifier_from;
+  uint16_t group_identifier_from;
 
-  int8_t scene_identifier_from;
+  uint8_t scene_identifier_from;
 
-  uint8_t * group_identifier_to;
+  uint16_t group_identifier_to;
 
-  int8_t scene_identifier_to;
+  uint8_t scene_identifier_to;
 } uic_mqtt_dotdot_scenes_command_copy_scene_fields_t;
 
 /**
@@ -4847,9 +4847,9 @@ typedef struct {
 typedef struct {
   zclStatus status;
 
-  uint8_t * group_identifier_from;
+  uint16_t group_identifier_from;
 
-  int8_t scene_identifier_from;
+  uint8_t scene_identifier_from;
 } uic_mqtt_dotdot_scenes_command_copy_scene_response_fields_t;
 
 
@@ -5675,7 +5675,7 @@ void uic_mqtt_dotdot_clear_scenes_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_scenes_scene_count_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -5705,7 +5705,7 @@ sl_status_t uic_mqtt_dotdot_scenes_scene_count_unretain(
  */
 sl_status_t uic_mqtt_dotdot_scenes_current_scene_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -5735,7 +5735,7 @@ sl_status_t uic_mqtt_dotdot_scenes_current_scene_unretain(
  */
 sl_status_t uic_mqtt_dotdot_scenes_current_group_publish(
   const char *base_topic,
-  uint8_t * value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -5941,7 +5941,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_on_off_off_with_effect_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     OffWithEffectEffectIdentifier effect_identifier,
 
-    int8_t effect_variant
+    uint8_t effect_variant
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_on_off_on_with_recall_global_scene_callback_t)(
@@ -5955,17 +5955,17 @@ typedef sl_status_t (*uic_mqtt_dotdot_on_off_on_with_timed_off_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     uint8_t on_off_control,
 
-    int16_t on_time,
+    uint16_t on_time,
 
-    int16_t off_wait_time
+    uint16_t off_wait_time
 
 );
 
 typedef struct {
   bool on_off;
   bool global_scene_control;
-  int16_t on_time;
-  int16_t off_wait_time;
+  uint16_t on_time;
+  uint16_t off_wait_time;
   uint8_t start_up_on_off;
 } uic_mqtt_dotdot_on_off_state_t;
 
@@ -5999,7 +5999,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_on_off_force_read_attributes_callback_t)(
 typedef struct {
   OffWithEffectEffectIdentifier effect_identifier;
 
-  int8_t effect_variant;
+  uint8_t effect_variant;
 } uic_mqtt_dotdot_on_off_command_off_with_effect_fields_t;
 
 /**
@@ -6008,9 +6008,9 @@ typedef struct {
 typedef struct {
   uint8_t on_off_control;
 
-  int16_t on_time;
+  uint16_t on_time;
 
-  int16_t off_wait_time;
+  uint16_t off_wait_time;
 } uic_mqtt_dotdot_on_off_command_on_with_timed_off_fields_t;
 
 
@@ -6376,7 +6376,7 @@ sl_status_t uic_mqtt_dotdot_on_off_global_scene_control_unretain(
  */
 sl_status_t uic_mqtt_dotdot_on_off_on_time_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -6406,7 +6406,7 @@ sl_status_t uic_mqtt_dotdot_on_off_on_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_on_off_off_wait_time_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -6503,9 +6503,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_level_move_to_level_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int8_t level,
+    uint8_t level,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -6518,7 +6518,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_level_move_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     MoveStepMode move_mode,
 
-    int8_t rate,
+    uint8_t rate,
 
     uint8_t options_mask,
 
@@ -6531,9 +6531,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_level_step_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     MoveStepMode step_mode,
 
-    int8_t step_size,
+    uint8_t step_size,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -6553,9 +6553,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_level_move_to_level_with_on_off_callback_t
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int8_t level,
+    uint8_t level,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -6568,7 +6568,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_level_move_with_on_off_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     MoveStepMode move_mode,
 
-    int8_t rate,
+    uint8_t rate,
 
     uint8_t options_mask,
 
@@ -6581,9 +6581,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_level_step_with_on_off_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     MoveStepMode step_mode,
 
-    int8_t step_size,
+    uint8_t step_size,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -6603,25 +6603,25 @@ typedef sl_status_t (*uic_mqtt_dotdot_level_move_to_closest_frequency_callback_t
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t frequency
+    uint16_t frequency
 
 );
 
 typedef struct {
-  int8_t current_level;
-  int16_t remaining_time;
-  int8_t min_level;
-  int8_t max_level;
-  int16_t current_frequency;
-  int16_t min_frequency;
-  int16_t max_frequency;
+  uint8_t current_level;
+  uint16_t remaining_time;
+  uint8_t min_level;
+  uint8_t max_level;
+  uint16_t current_frequency;
+  uint16_t min_frequency;
+  uint16_t max_frequency;
   uint8_t options;
-  int16_t on_off_transition_time;
-  int8_t on_level;
-  int16_t on_transition_time;
-  int16_t off_transition_time;
-  int16_t default_move_rate;
-  int8_t start_up_current_level;
+  uint16_t on_off_transition_time;
+  uint8_t on_level;
+  uint16_t on_transition_time;
+  uint16_t off_transition_time;
+  uint16_t default_move_rate;
+  uint8_t start_up_current_level;
 } uic_mqtt_dotdot_level_state_t;
 
 typedef struct {
@@ -6661,9 +6661,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_level_force_read_attributes_callback_t)(
  * @brief Command fields for Level/MoveToLevel
  */
 typedef struct {
-  int8_t level;
+  uint8_t level;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
   uint8_t options_mask;
 
@@ -6676,7 +6676,7 @@ typedef struct {
 typedef struct {
   MoveStepMode move_mode;
 
-  int8_t rate;
+  uint8_t rate;
 
   uint8_t options_mask;
 
@@ -6689,9 +6689,9 @@ typedef struct {
 typedef struct {
   MoveStepMode step_mode;
 
-  int8_t step_size;
+  uint8_t step_size;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
   uint8_t options_mask;
 
@@ -6711,9 +6711,9 @@ typedef struct {
  * @brief Command fields for Level/MoveToLevelWithOnOff
  */
 typedef struct {
-  int8_t level;
+  uint8_t level;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
   uint8_t options_mask;
 
@@ -6726,7 +6726,7 @@ typedef struct {
 typedef struct {
   MoveStepMode move_mode;
 
-  int8_t rate;
+  uint8_t rate;
 
   uint8_t options_mask;
 
@@ -6739,9 +6739,9 @@ typedef struct {
 typedef struct {
   MoveStepMode step_mode;
 
-  int8_t step_size;
+  uint8_t step_size;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
   uint8_t options_mask;
 
@@ -6761,7 +6761,7 @@ typedef struct {
  * @brief Command fields for Level/MoveToClosestFrequency
  */
 typedef struct {
-  int16_t frequency;
+  uint16_t frequency;
 } uic_mqtt_dotdot_level_command_move_to_closest_frequency_fields_t;
 
 
@@ -7187,7 +7187,7 @@ void uic_mqtt_dotdot_clear_level_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_level_current_level_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -7217,7 +7217,7 @@ sl_status_t uic_mqtt_dotdot_level_current_level_unretain(
  */
 sl_status_t uic_mqtt_dotdot_level_remaining_time_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -7247,7 +7247,7 @@ sl_status_t uic_mqtt_dotdot_level_remaining_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_level_min_level_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -7277,7 +7277,7 @@ sl_status_t uic_mqtt_dotdot_level_min_level_unretain(
  */
 sl_status_t uic_mqtt_dotdot_level_max_level_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -7307,7 +7307,7 @@ sl_status_t uic_mqtt_dotdot_level_max_level_unretain(
  */
 sl_status_t uic_mqtt_dotdot_level_current_frequency_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -7337,7 +7337,7 @@ sl_status_t uic_mqtt_dotdot_level_current_frequency_unretain(
  */
 sl_status_t uic_mqtt_dotdot_level_min_frequency_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -7367,7 +7367,7 @@ sl_status_t uic_mqtt_dotdot_level_min_frequency_unretain(
  */
 sl_status_t uic_mqtt_dotdot_level_max_frequency_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -7427,7 +7427,7 @@ sl_status_t uic_mqtt_dotdot_level_options_unretain(
  */
 sl_status_t uic_mqtt_dotdot_level_on_off_transition_time_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -7457,7 +7457,7 @@ sl_status_t uic_mqtt_dotdot_level_on_off_transition_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_level_on_level_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -7487,7 +7487,7 @@ sl_status_t uic_mqtt_dotdot_level_on_level_unretain(
  */
 sl_status_t uic_mqtt_dotdot_level_on_transition_time_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -7517,7 +7517,7 @@ sl_status_t uic_mqtt_dotdot_level_on_transition_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_level_off_transition_time_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -7547,7 +7547,7 @@ sl_status_t uic_mqtt_dotdot_level_off_transition_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_level_default_move_rate_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -7577,7 +7577,7 @@ sl_status_t uic_mqtt_dotdot_level_default_move_rate_unretain(
  */
 sl_status_t uic_mqtt_dotdot_level_start_up_current_level_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -7646,7 +7646,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_alarms_reset_alarm_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     uint8_t alarm_code,
 
-    uint8_t cluster_identifier
+    uint16_t cluster_identifier
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_alarms_alarm_callback_t)(
@@ -7655,7 +7655,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_alarms_alarm_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     uint8_t alarm_code,
 
-    uint8_t cluster_identifier
+    uint16_t cluster_identifier
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_alarms_reset_all_alarms_callback_t)(
@@ -7671,9 +7671,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_alarms_get_alarm_response_callback_t)(
 
     uint8_t alarm_code,
 
-    uint8_t cluster_identifier,
+    uint16_t cluster_identifier,
 
-    int32_t time_stamp
+    uint32_t time_stamp
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_alarms_get_alarm_callback_t)(
@@ -7688,7 +7688,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_alarms_reset_alarm_log_callback_t)(
 );
 
 typedef struct {
-  int16_t alarm_count;
+  uint16_t alarm_count;
 } uic_mqtt_dotdot_alarms_state_t;
 
 typedef struct {
@@ -7717,7 +7717,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_alarms_force_read_attributes_callback_t)(
 typedef struct {
   uint8_t alarm_code;
 
-  uint8_t cluster_identifier;
+  uint16_t cluster_identifier;
 } uic_mqtt_dotdot_alarms_command_reset_alarm_fields_t;
 
 /**
@@ -7726,7 +7726,7 @@ typedef struct {
 typedef struct {
   uint8_t alarm_code;
 
-  uint8_t cluster_identifier;
+  uint16_t cluster_identifier;
 } uic_mqtt_dotdot_alarms_command_alarm_fields_t;
 
 /**
@@ -7737,9 +7737,9 @@ typedef struct {
 
   uint8_t alarm_code;
 
-  uint8_t cluster_identifier;
+  uint16_t cluster_identifier;
 
-  int32_t time_stamp;
+  uint32_t time_stamp;
 } uic_mqtt_dotdot_alarms_command_get_alarm_response_fields_t;
 
 
@@ -8045,7 +8045,7 @@ void uic_mqtt_dotdot_clear_alarms_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_alarms_alarm_count_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -8110,16 +8110,16 @@ void uic_mqtt_dotdot_alarms_publish_empty_supported_commands(
 // Callback types used by the time cluster
 
 typedef struct {
-  uint8_t time;
+  uint32_t time;
   uint8_t time_status;
   int32_t time_zone;
-  int32_t dst_start;
-  int32_t dst_end;
+  uint32_t dst_start;
+  uint32_t dst_end;
   int32_t dst_shift;
-  int32_t standard_time;
-  int32_t local_time;
-  uint8_t last_set_time;
-  uint8_t valid_until_time;
+  uint32_t standard_time;
+  uint32_t local_time;
+  uint32_t last_set_time;
+  uint32_t valid_until_time;
 } uic_mqtt_dotdot_time_state_t;
 
 typedef struct {
@@ -8214,7 +8214,7 @@ void uic_mqtt_dotdot_clear_time_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_time_time_publish(
   const char *base_topic,
-  uint8_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -8304,7 +8304,7 @@ sl_status_t uic_mqtt_dotdot_time_time_zone_unretain(
  */
 sl_status_t uic_mqtt_dotdot_time_dst_start_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -8334,7 +8334,7 @@ sl_status_t uic_mqtt_dotdot_time_dst_start_unretain(
  */
 sl_status_t uic_mqtt_dotdot_time_dst_end_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -8394,7 +8394,7 @@ sl_status_t uic_mqtt_dotdot_time_dst_shift_unretain(
  */
 sl_status_t uic_mqtt_dotdot_time_standard_time_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -8424,7 +8424,7 @@ sl_status_t uic_mqtt_dotdot_time_standard_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_time_local_time_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -8454,7 +8454,7 @@ sl_status_t uic_mqtt_dotdot_time_local_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_time_last_set_time_publish(
   const char *base_topic,
-  uint8_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -8484,7 +8484,7 @@ sl_status_t uic_mqtt_dotdot_time_last_set_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_time_valid_until_time_publish(
   const char *base_topic,
-  uint8_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -8558,7 +8558,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_poll_control_check_in_response_callback_t)
     uic_mqtt_dotdot_callback_call_type_t call_type,
     bool start_fast_polling,
 
-    int16_t fast_poll_timeout
+    uint16_t fast_poll_timeout
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_poll_control_fast_poll_stop_callback_t)(
@@ -8570,25 +8570,25 @@ typedef sl_status_t (*uic_mqtt_dotdot_poll_control_set_long_poll_interval_callba
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int32_t new_long_poll_interval
+    uint32_t new_long_poll_interval
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_poll_control_set_short_poll_interval_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t new_short_poll_interval
+    uint16_t new_short_poll_interval
 
 );
 
 typedef struct {
-  int32_t check_in_interval;
-  int32_t long_poll_interval;
-  int16_t short_poll_interval;
-  int16_t fast_poll_timeout;
-  int32_t check_in_interval_min;
-  int32_t long_poll_interval_min;
-  int16_t fast_poll_timeout_max;
+  uint32_t check_in_interval;
+  uint32_t long_poll_interval;
+  uint16_t short_poll_interval;
+  uint16_t fast_poll_timeout;
+  uint32_t check_in_interval_min;
+  uint32_t long_poll_interval_min;
+  uint16_t fast_poll_timeout_max;
 } uic_mqtt_dotdot_poll_control_state_t;
 
 typedef struct {
@@ -8623,21 +8623,21 @@ typedef sl_status_t (*uic_mqtt_dotdot_poll_control_force_read_attributes_callbac
 typedef struct {
   bool start_fast_polling;
 
-  int16_t fast_poll_timeout;
+  uint16_t fast_poll_timeout;
 } uic_mqtt_dotdot_poll_control_command_check_in_response_fields_t;
 
 /**
  * @brief Command fields for PollControl/SetLongPollInterval
  */
 typedef struct {
-  int32_t new_long_poll_interval;
+  uint32_t new_long_poll_interval;
 } uic_mqtt_dotdot_poll_control_command_set_long_poll_interval_fields_t;
 
 /**
  * @brief Command fields for PollControl/SetShortPollInterval
  */
 typedef struct {
-  int16_t new_short_poll_interval;
+  uint16_t new_short_poll_interval;
 } uic_mqtt_dotdot_poll_control_command_set_short_poll_interval_fields_t;
 
 
@@ -8903,7 +8903,7 @@ void uic_mqtt_dotdot_clear_poll_control_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_poll_control_check_in_interval_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -8933,7 +8933,7 @@ sl_status_t uic_mqtt_dotdot_poll_control_check_in_interval_unretain(
  */
 sl_status_t uic_mqtt_dotdot_poll_control_long_poll_interval_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -8963,7 +8963,7 @@ sl_status_t uic_mqtt_dotdot_poll_control_long_poll_interval_unretain(
  */
 sl_status_t uic_mqtt_dotdot_poll_control_short_poll_interval_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -8993,7 +8993,7 @@ sl_status_t uic_mqtt_dotdot_poll_control_short_poll_interval_unretain(
  */
 sl_status_t uic_mqtt_dotdot_poll_control_fast_poll_timeout_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -9023,7 +9023,7 @@ sl_status_t uic_mqtt_dotdot_poll_control_fast_poll_timeout_unretain(
  */
 sl_status_t uic_mqtt_dotdot_poll_control_check_in_interval_min_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -9053,7 +9053,7 @@ sl_status_t uic_mqtt_dotdot_poll_control_check_in_interval_min_unretain(
  */
 sl_status_t uic_mqtt_dotdot_poll_control_long_poll_interval_min_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -9083,7 +9083,7 @@ sl_status_t uic_mqtt_dotdot_poll_control_long_poll_interval_min_unretain(
  */
 sl_status_t uic_mqtt_dotdot_poll_control_fast_poll_timeout_max_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -9148,10 +9148,10 @@ void uic_mqtt_dotdot_poll_control_publish_empty_supported_commands(
 // Callback types used by the shade_configuration cluster
 
 typedef struct {
-  int16_t physical_closed_limit;
-  int8_t motor_step_size;
+  uint16_t physical_closed_limit;
+  uint8_t motor_step_size;
   uint8_t status;
-  int16_t closed_limit;
+  uint16_t closed_limit;
   uint8_t mode;
 } uic_mqtt_dotdot_shade_configuration_state_t;
 
@@ -9242,7 +9242,7 @@ void uic_mqtt_dotdot_clear_shade_configuration_force_read_attributes_callbacks()
  */
 sl_status_t uic_mqtt_dotdot_shade_configuration_physical_closed_limit_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -9272,7 +9272,7 @@ sl_status_t uic_mqtt_dotdot_shade_configuration_physical_closed_limit_unretain(
  */
 sl_status_t uic_mqtt_dotdot_shade_configuration_motor_step_size_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -9332,7 +9332,7 @@ sl_status_t uic_mqtt_dotdot_shade_configuration_status_unretain(
  */
 sl_status_t uic_mqtt_dotdot_shade_configuration_closed_limit_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -9429,7 +9429,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_lock_door_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t pin_or_rfid_code
+    const char* pin_or_rfid_code
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_lock_door_response_callback_t)(
@@ -9443,7 +9443,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_unlock_door_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t pin_or_rfid_code
+    const char* pin_or_rfid_code
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_unlock_door_response_callback_t)(
@@ -9457,7 +9457,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_toggle_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t pin_or_rfid_code
+    const char* pin_or_rfid_code
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_toggle_response_callback_t)(
@@ -9471,9 +9471,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_unlock_with_timeout_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t timeout_in_seconds,
+    uint16_t timeout_in_seconds,
 
-    uint8_t pin_or_rfid_code
+    const char* pin_or_rfid_code
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_unlock_with_timeout_response_callback_t)(
@@ -9487,39 +9487,39 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_log_record_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t log_index
+    uint16_t log_index
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_log_record_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t log_entryid,
+    uint16_t log_entryid,
 
-    int32_t timestamp,
+    uint32_t timestamp,
 
     GetLogRecordResponseEventType event_type,
 
     DrlkOperEventSource source_operation_event,
 
-    int8_t event_id_or_alarm_code,
+    uint8_t event_id_or_alarm_code,
 
-    int16_t userid,
+    uint16_t userid,
 
-    uint8_t pin
+    const char* pin
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_pin_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * userid,
+    uint16_t userid,
 
     DrlkSettableUserStatus user_status,
 
     DrlkUserType user_type,
 
-    uint8_t pin
+    const char* pin
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_pin_code_response_callback_t)(
@@ -9533,27 +9533,27 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_pin_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_pin_code_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t userid,
+    uint16_t userid,
 
     DrlkUserStatus user_status,
 
     DrlkUserType user_type,
 
-    uint8_t code
+    const char* code
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_pin_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_pin_code_response_callback_t)(
@@ -9579,7 +9579,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_user_status_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * userid,
+    uint16_t userid,
 
     DrlkSettableUserStatus user_status
 
@@ -9595,14 +9595,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_user_status_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_user_status_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t userid,
+    uint16_t userid,
 
     DrlkUserStatus user_status
 
@@ -9611,19 +9611,19 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_weekday_schedule_callback_t)
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * scheduleid,
+    uint8_t scheduleid,
 
-    uint8_t * userid,
+    uint16_t userid,
 
     uint8_t days_mask,
 
-    int8_t start_hour,
+    uint8_t start_hour,
 
-    int8_t start_minute,
+    uint8_t start_minute,
 
-    int8_t end_hour,
+    uint8_t end_hour,
 
-    int8_t end_minute
+    uint8_t end_minute
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_weekday_schedule_response_callback_t)(
@@ -9637,39 +9637,39 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_weekday_schedule_callback_t)
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * scheduleid,
+    uint8_t scheduleid,
 
-    uint8_t * userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_weekday_schedule_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int8_t scheduleid,
+    uint8_t scheduleid,
 
-    int16_t userid,
+    uint16_t userid,
 
     zclStatus status,
 
     uint8_t days_mask,
 
-    int8_t start_hour,
+    uint8_t start_hour,
 
-    int8_t start_minute,
+    uint8_t start_minute,
 
-    int8_t end_hour,
+    uint8_t end_hour,
 
-    int8_t end_minute
+    uint8_t end_minute
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_weekday_schedule_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * scheduleid,
+    uint8_t scheduleid,
 
-    uint8_t * userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_weekday_schedule_response_callback_t)(
@@ -9683,13 +9683,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_year_day_schedule_callback_t
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * scheduleid,
+    uint8_t scheduleid,
 
-    uint8_t * userid,
+    uint16_t userid,
 
-    int32_t local_start_time,
+    uint32_t local_start_time,
 
-    int32_t local_end_time
+    uint32_t local_end_time
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_year_day_schedule_response_callback_t)(
@@ -9703,33 +9703,33 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_year_day_schedule_callback_t
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * scheduleid,
+    uint8_t scheduleid,
 
-    uint8_t * userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_year_day_schedule_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int8_t scheduleid,
+    uint8_t scheduleid,
 
-    int16_t userid,
+    uint16_t userid,
 
     zclStatus status,
 
-    int32_t local_start_time,
+    uint32_t local_start_time,
 
-    int32_t local_end_time
+    uint32_t local_end_time
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_year_day_schedule_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * scheduleid,
+    uint8_t scheduleid,
 
-    uint8_t * userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_year_day_schedule_response_callback_t)(
@@ -9743,11 +9743,11 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_holiday_schedule_callback_t)
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * holiday_scheduleid,
+    uint8_t holiday_scheduleid,
 
-    int32_t local_start_time,
+    uint32_t local_start_time,
 
-    int32_t local_end_time,
+    uint32_t local_end_time,
 
     DrlkOperMode operating_mode_during_holiday
 
@@ -9763,20 +9763,20 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_holiday_schedule_callback_t)
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * holiday_scheduleid
+    uint8_t holiday_scheduleid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_holiday_schedule_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int8_t holiday_scheduleid,
+    uint8_t holiday_scheduleid,
 
     zclStatus status,
 
-    int32_t local_start_time,
+    uint32_t local_start_time,
 
-    int32_t local_end_time,
+    uint32_t local_end_time,
 
     DrlkOperMode operating_mode_during_holiday
 
@@ -9785,7 +9785,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_holiday_schedule_callback_
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * holiday_scheduleid
+    uint8_t holiday_scheduleid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_holiday_schedule_response_callback_t)(
@@ -9799,7 +9799,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_user_type_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * userid,
+    uint16_t userid,
 
     DrlkUserType user_type
 
@@ -9815,14 +9815,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_user_type_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_user_type_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t userid,
+    uint16_t userid,
 
     DrlkUserType user_type
 
@@ -9831,13 +9831,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_rfid_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * userid,
+    uint16_t userid,
 
     DrlkSettableUserStatus user_status,
 
     DrlkUserType user_type,
 
-    uint8_t rfid_code
+    const char* rfid_code
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_rfid_code_response_callback_t)(
@@ -9851,27 +9851,27 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_rfid_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_rfid_code_response_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t userid,
+    uint16_t userid,
 
     DrlkUserStatus user_status,
 
     DrlkUserType user_type,
 
-    uint8_t rfid_code
+    const char* rfid_code
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_rfid_code_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t * userid
+    uint16_t userid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_rfid_code_response_callback_t)(
@@ -9899,11 +9899,11 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_user_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     DataOperationTypeEnum operation_type,
 
-    int16_t user_index,
+    uint16_t user_index,
 
     const char* user_name,
 
-    int32_t user_uniqueid,
+    uint32_t user_uniqueid,
 
     DrlkSettableUserStatus user_status,
 
@@ -9916,7 +9916,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_user_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t user_index
+    uint16_t user_index
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_get_user_response_callback_t)(
@@ -9928,7 +9928,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_clear_user_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t user_index
+    uint16_t user_index
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_door_lock_operating_event_notification_callback_t)(
@@ -9939,11 +9939,11 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_operating_event_notification_cal
 
     OperatingEventNotificationOperationEventCode operation_event_code,
 
-    int16_t userid,
+    uint16_t userid,
 
-    uint8_t pin,
+    const char* pin,
 
-    int32_t local_time,
+    uint32_t local_time,
 
     const char* data
 
@@ -9956,15 +9956,15 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_programming_event_notification_c
 
     ProgrammingEventNotificationProgramEventCode program_event_code,
 
-    int16_t userid,
+    uint16_t userid,
 
-    uint8_t pin,
+    const char* pin,
 
     DrlkUserType user_type,
 
     DrlkUserStatus user_status,
 
-    int32_t local_time,
+    uint32_t local_time,
 
     const char* data
 
@@ -9977,9 +9977,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_set_credential_callback_t)(
 
     CredentialStruct credential,
 
-    uint8_t credential_data,
+    const char* credential_data,
 
-    int16_t user_index,
+    uint16_t user_index,
 
     DrlkSettableUserStatus user_status,
 
@@ -10014,7 +10014,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_unbolt_door_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t pin_code
+    const char* pin_code
 
 );
 
@@ -10023,27 +10023,27 @@ typedef struct {
   uint8_t lock_type;
   bool actuator_enabled;
   uint8_t door_state;
-  int32_t door_open_events;
-  int32_t door_closed_events;
-  int16_t open_period;
-  int16_t number_of_log_records_supported;
-  int16_t number_of_total_users_supported;
-  int16_t number_of_pin_users_supported;
-  int16_t number_of_rfid_users_supported;
-  int8_t number_of_week_day_schedules_supported_per_user;
-  int8_t number_of_year_day_schedules_supported_per_user;
-  int8_t number_of_holiday_schedules_supported;
-  int8_t max_pin_code_length;
-  int8_t min_pin_code_length;
-  int8_t max_rfid_code_length;
-  int8_t min_rfid_code_length;
+  uint32_t door_open_events;
+  uint32_t door_closed_events;
+  uint16_t open_period;
+  uint16_t number_of_log_records_supported;
+  uint16_t number_of_total_users_supported;
+  uint16_t number_of_pin_users_supported;
+  uint16_t number_of_rfid_users_supported;
+  uint8_t number_of_week_day_schedules_supported_per_user;
+  uint8_t number_of_year_day_schedules_supported_per_user;
+  uint8_t number_of_holiday_schedules_supported;
+  uint8_t max_pin_code_length;
+  uint8_t min_pin_code_length;
+  uint8_t max_rfid_code_length;
+  uint8_t min_rfid_code_length;
   uint8_t credential_rules_support;
-  int8_t number_of_credentials_supported_per_user;
+  uint8_t number_of_credentials_supported_per_user;
   bool enable_logging;
   const char* language;
-  int8_t led_settings;
-  int32_t auto_relock_time;
-  int8_t sound_volume;
+  uint8_t led_settings;
+  uint32_t auto_relock_time;
+  uint8_t sound_volume;
   uint8_t operating_mode;
   uint16_t supported_operating_modes;
   uint16_t default_configuration_register;
@@ -10052,12 +10052,12 @@ typedef struct {
   bool enable_inside_statusled;
   bool enable_privacy_mode_button;
   uint8_t local_programming_features;
-  int8_t wrong_code_entry_limit;
-  int8_t user_code_temporary_disable_time;
+  uint8_t wrong_code_entry_limit;
+  uint8_t user_code_temporary_disable_time;
   bool send_pin_over_the_air;
   bool require_pi_nfor_rf_operation;
   uint8_t security_level;
-  int16_t expiring_user_timeout;
+  uint16_t expiring_user_timeout;
   uint16_t alarm_mask;
   uint16_t keypad_operation_event_mask;
   uint16_t rf_operation_event_mask;
@@ -10140,7 +10140,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_door_lock_force_read_attributes_callback_t
  * @brief Command fields for DoorLock/LockDoor
  */
 typedef struct {
-  uint8_t pin_or_rfid_code;
+  const char* pin_or_rfid_code;
 } uic_mqtt_dotdot_door_lock_command_lock_door_fields_t;
 
 /**
@@ -10154,7 +10154,7 @@ typedef struct {
  * @brief Command fields for DoorLock/UnlockDoor
  */
 typedef struct {
-  uint8_t pin_or_rfid_code;
+  const char* pin_or_rfid_code;
 } uic_mqtt_dotdot_door_lock_command_unlock_door_fields_t;
 
 /**
@@ -10168,7 +10168,7 @@ typedef struct {
  * @brief Command fields for DoorLock/Toggle
  */
 typedef struct {
-  uint8_t pin_or_rfid_code;
+  const char* pin_or_rfid_code;
 } uic_mqtt_dotdot_door_lock_command_toggle_fields_t;
 
 /**
@@ -10182,9 +10182,9 @@ typedef struct {
  * @brief Command fields for DoorLock/UnlockWithTimeout
  */
 typedef struct {
-  int16_t timeout_in_seconds;
+  uint16_t timeout_in_seconds;
 
-  uint8_t pin_or_rfid_code;
+  const char* pin_or_rfid_code;
 } uic_mqtt_dotdot_door_lock_command_unlock_with_timeout_fields_t;
 
 /**
@@ -10198,39 +10198,39 @@ typedef struct {
  * @brief Command fields for DoorLock/GetLogRecord
  */
 typedef struct {
-  int16_t log_index;
+  uint16_t log_index;
 } uic_mqtt_dotdot_door_lock_command_get_log_record_fields_t;
 
 /**
  * @brief Command fields for DoorLock/GetLogRecordResponse
  */
 typedef struct {
-  int16_t log_entryid;
+  uint16_t log_entryid;
 
-  int32_t timestamp;
+  uint32_t timestamp;
 
   GetLogRecordResponseEventType event_type;
 
   DrlkOperEventSource source_operation_event;
 
-  int8_t event_id_or_alarm_code;
+  uint8_t event_id_or_alarm_code;
 
-  int16_t userid;
+  uint16_t userid;
 
-  uint8_t pin;
+  const char* pin;
 } uic_mqtt_dotdot_door_lock_command_get_log_record_response_fields_t;
 
 /**
  * @brief Command fields for DoorLock/SetPINCode
  */
 typedef struct {
-  uint8_t * userid;
+  uint16_t userid;
 
   DrlkSettableUserStatus user_status;
 
   DrlkUserType user_type;
 
-  uint8_t pin;
+  const char* pin;
 } uic_mqtt_dotdot_door_lock_command_set_pin_code_fields_t;
 
 /**
@@ -10244,27 +10244,27 @@ typedef struct {
  * @brief Command fields for DoorLock/GetPINCode
  */
 typedef struct {
-  uint8_t * userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_get_pin_code_fields_t;
 
 /**
  * @brief Command fields for DoorLock/GetPINCodeResponse
  */
 typedef struct {
-  int16_t userid;
+  uint16_t userid;
 
   DrlkUserStatus user_status;
 
   DrlkUserType user_type;
 
-  uint8_t code;
+  const char* code;
 } uic_mqtt_dotdot_door_lock_command_get_pin_code_response_fields_t;
 
 /**
  * @brief Command fields for DoorLock/ClearPINCode
  */
 typedef struct {
-  uint8_t * userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_clear_pin_code_fields_t;
 
 /**
@@ -10285,7 +10285,7 @@ typedef struct {
  * @brief Command fields for DoorLock/SetUserStatus
  */
 typedef struct {
-  uint8_t * userid;
+  uint16_t userid;
 
   DrlkSettableUserStatus user_status;
 } uic_mqtt_dotdot_door_lock_command_set_user_status_fields_t;
@@ -10301,14 +10301,14 @@ typedef struct {
  * @brief Command fields for DoorLock/GetUserStatus
  */
 typedef struct {
-  uint8_t * userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_get_user_status_fields_t;
 
 /**
  * @brief Command fields for DoorLock/GetUserStatusResponse
  */
 typedef struct {
-  int16_t userid;
+  uint16_t userid;
 
   DrlkUserStatus user_status;
 } uic_mqtt_dotdot_door_lock_command_get_user_status_response_fields_t;
@@ -10317,19 +10317,19 @@ typedef struct {
  * @brief Command fields for DoorLock/SetWeekdaySchedule
  */
 typedef struct {
-  uint8_t * scheduleid;
+  uint8_t scheduleid;
 
-  uint8_t * userid;
+  uint16_t userid;
 
   uint8_t days_mask;
 
-  int8_t start_hour;
+  uint8_t start_hour;
 
-  int8_t start_minute;
+  uint8_t start_minute;
 
-  int8_t end_hour;
+  uint8_t end_hour;
 
-  int8_t end_minute;
+  uint8_t end_minute;
 } uic_mqtt_dotdot_door_lock_command_set_weekday_schedule_fields_t;
 
 /**
@@ -10343,39 +10343,39 @@ typedef struct {
  * @brief Command fields for DoorLock/GetWeekdaySchedule
  */
 typedef struct {
-  uint8_t * scheduleid;
+  uint8_t scheduleid;
 
-  uint8_t * userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_get_weekday_schedule_fields_t;
 
 /**
  * @brief Command fields for DoorLock/GetWeekdayScheduleResponse
  */
 typedef struct {
-  int8_t scheduleid;
+  uint8_t scheduleid;
 
-  int16_t userid;
+  uint16_t userid;
 
   zclStatus status;
 
   uint8_t days_mask;
 
-  int8_t start_hour;
+  uint8_t start_hour;
 
-  int8_t start_minute;
+  uint8_t start_minute;
 
-  int8_t end_hour;
+  uint8_t end_hour;
 
-  int8_t end_minute;
+  uint8_t end_minute;
 } uic_mqtt_dotdot_door_lock_command_get_weekday_schedule_response_fields_t;
 
 /**
  * @brief Command fields for DoorLock/ClearWeekdaySchedule
  */
 typedef struct {
-  uint8_t * scheduleid;
+  uint8_t scheduleid;
 
-  uint8_t * userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_clear_weekday_schedule_fields_t;
 
 /**
@@ -10389,13 +10389,13 @@ typedef struct {
  * @brief Command fields for DoorLock/SetYearDaySchedule
  */
 typedef struct {
-  uint8_t * scheduleid;
+  uint8_t scheduleid;
 
-  uint8_t * userid;
+  uint16_t userid;
 
-  int32_t local_start_time;
+  uint32_t local_start_time;
 
-  int32_t local_end_time;
+  uint32_t local_end_time;
 } uic_mqtt_dotdot_door_lock_command_set_year_day_schedule_fields_t;
 
 /**
@@ -10409,33 +10409,33 @@ typedef struct {
  * @brief Command fields for DoorLock/GetYearDaySchedule
  */
 typedef struct {
-  uint8_t * scheduleid;
+  uint8_t scheduleid;
 
-  uint8_t * userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_get_year_day_schedule_fields_t;
 
 /**
  * @brief Command fields for DoorLock/GetYearDayScheduleResponse
  */
 typedef struct {
-  int8_t scheduleid;
+  uint8_t scheduleid;
 
-  int16_t userid;
+  uint16_t userid;
 
   zclStatus status;
 
-  int32_t local_start_time;
+  uint32_t local_start_time;
 
-  int32_t local_end_time;
+  uint32_t local_end_time;
 } uic_mqtt_dotdot_door_lock_command_get_year_day_schedule_response_fields_t;
 
 /**
  * @brief Command fields for DoorLock/ClearYearDaySchedule
  */
 typedef struct {
-  uint8_t * scheduleid;
+  uint8_t scheduleid;
 
-  uint8_t * userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_clear_year_day_schedule_fields_t;
 
 /**
@@ -10449,11 +10449,11 @@ typedef struct {
  * @brief Command fields for DoorLock/SetHolidaySchedule
  */
 typedef struct {
-  uint8_t * holiday_scheduleid;
+  uint8_t holiday_scheduleid;
 
-  int32_t local_start_time;
+  uint32_t local_start_time;
 
-  int32_t local_end_time;
+  uint32_t local_end_time;
 
   DrlkOperMode operating_mode_during_holiday;
 } uic_mqtt_dotdot_door_lock_command_set_holiday_schedule_fields_t;
@@ -10469,20 +10469,20 @@ typedef struct {
  * @brief Command fields for DoorLock/GetHolidaySchedule
  */
 typedef struct {
-  uint8_t * holiday_scheduleid;
+  uint8_t holiday_scheduleid;
 } uic_mqtt_dotdot_door_lock_command_get_holiday_schedule_fields_t;
 
 /**
  * @brief Command fields for DoorLock/GetHolidayScheduleResponse
  */
 typedef struct {
-  int8_t holiday_scheduleid;
+  uint8_t holiday_scheduleid;
 
   zclStatus status;
 
-  int32_t local_start_time;
+  uint32_t local_start_time;
 
-  int32_t local_end_time;
+  uint32_t local_end_time;
 
   DrlkOperMode operating_mode_during_holiday;
 } uic_mqtt_dotdot_door_lock_command_get_holiday_schedule_response_fields_t;
@@ -10491,7 +10491,7 @@ typedef struct {
  * @brief Command fields for DoorLock/ClearHolidaySchedule
  */
 typedef struct {
-  uint8_t * holiday_scheduleid;
+  uint8_t holiday_scheduleid;
 } uic_mqtt_dotdot_door_lock_command_clear_holiday_schedule_fields_t;
 
 /**
@@ -10505,7 +10505,7 @@ typedef struct {
  * @brief Command fields for DoorLock/SetUserType
  */
 typedef struct {
-  uint8_t * userid;
+  uint16_t userid;
 
   DrlkUserType user_type;
 } uic_mqtt_dotdot_door_lock_command_set_user_type_fields_t;
@@ -10521,14 +10521,14 @@ typedef struct {
  * @brief Command fields for DoorLock/GetUserType
  */
 typedef struct {
-  uint8_t * userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_get_user_type_fields_t;
 
 /**
  * @brief Command fields for DoorLock/GetUserTypeResponse
  */
 typedef struct {
-  int16_t userid;
+  uint16_t userid;
 
   DrlkUserType user_type;
 } uic_mqtt_dotdot_door_lock_command_get_user_type_response_fields_t;
@@ -10537,13 +10537,13 @@ typedef struct {
  * @brief Command fields for DoorLock/SetRFIDCode
  */
 typedef struct {
-  uint8_t * userid;
+  uint16_t userid;
 
   DrlkSettableUserStatus user_status;
 
   DrlkUserType user_type;
 
-  uint8_t rfid_code;
+  const char* rfid_code;
 } uic_mqtt_dotdot_door_lock_command_set_rfid_code_fields_t;
 
 /**
@@ -10557,27 +10557,27 @@ typedef struct {
  * @brief Command fields for DoorLock/GetRFIDCode
  */
 typedef struct {
-  uint8_t * userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_get_rfid_code_fields_t;
 
 /**
  * @brief Command fields for DoorLock/GetRFIDCodeResponse
  */
 typedef struct {
-  int16_t userid;
+  uint16_t userid;
 
   DrlkUserStatus user_status;
 
   DrlkUserType user_type;
 
-  uint8_t rfid_code;
+  const char* rfid_code;
 } uic_mqtt_dotdot_door_lock_command_get_rfid_code_response_fields_t;
 
 /**
  * @brief Command fields for DoorLock/ClearRFIDCode
  */
 typedef struct {
-  uint8_t * userid;
+  uint16_t userid;
 } uic_mqtt_dotdot_door_lock_command_clear_rfid_code_fields_t;
 
 /**
@@ -10600,11 +10600,11 @@ typedef struct {
 typedef struct {
   DataOperationTypeEnum operation_type;
 
-  int16_t user_index;
+  uint16_t user_index;
 
   const char* user_name;
 
-  int32_t user_uniqueid;
+  uint32_t user_uniqueid;
 
   DrlkSettableUserStatus user_status;
 
@@ -10617,14 +10617,14 @@ typedef struct {
  * @brief Command fields for DoorLock/GetUser
  */
 typedef struct {
-  int16_t user_index;
+  uint16_t user_index;
 } uic_mqtt_dotdot_door_lock_command_get_user_fields_t;
 
 /**
  * @brief Command fields for DoorLock/ClearUser
  */
 typedef struct {
-  int16_t user_index;
+  uint16_t user_index;
 } uic_mqtt_dotdot_door_lock_command_clear_user_fields_t;
 
 /**
@@ -10635,11 +10635,11 @@ typedef struct {
 
   OperatingEventNotificationOperationEventCode operation_event_code;
 
-  int16_t userid;
+  uint16_t userid;
 
-  uint8_t pin;
+  const char* pin;
 
-  int32_t local_time;
+  uint32_t local_time;
 
   const char* data;
 } uic_mqtt_dotdot_door_lock_command_operating_event_notification_fields_t;
@@ -10652,15 +10652,15 @@ typedef struct {
 
   ProgrammingEventNotificationProgramEventCode program_event_code;
 
-  int16_t userid;
+  uint16_t userid;
 
-  uint8_t pin;
+  const char* pin;
 
   DrlkUserType user_type;
 
   DrlkUserStatus user_status;
 
-  int32_t local_time;
+  uint32_t local_time;
 
   const char* data;
 } uic_mqtt_dotdot_door_lock_command_programming_event_notification_fields_t;
@@ -10673,9 +10673,9 @@ typedef struct {
 
   CredentialStruct credential;
 
-  uint8_t credential_data;
+  const char* credential_data;
 
-  int16_t user_index;
+  uint16_t user_index;
 
   DrlkSettableUserStatus user_status;
 
@@ -10700,7 +10700,7 @@ typedef struct {
  * @brief Command fields for DoorLock/UnboltDoor
  */
 typedef struct {
-  uint8_t pin_code;
+  const char* pin_code;
 } uic_mqtt_dotdot_door_lock_command_unbolt_door_fields_t;
 
 
@@ -13446,7 +13446,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_door_state_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_door_open_events_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -13476,7 +13476,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_door_open_events_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_door_closed_events_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -13506,7 +13506,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_door_closed_events_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_open_period_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -13536,7 +13536,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_open_period_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_log_records_supported_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -13566,7 +13566,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_log_records_supported_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_total_users_supported_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -13596,7 +13596,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_total_users_supported_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_pin_users_supported_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -13626,7 +13626,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_pin_users_supported_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_rfid_users_supported_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -13656,7 +13656,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_rfid_users_supported_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_week_day_schedules_supported_per_user_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -13686,7 +13686,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_week_day_schedules_supported_per
  */
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_year_day_schedules_supported_per_user_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -13716,7 +13716,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_year_day_schedules_supported_per
  */
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_holiday_schedules_supported_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -13746,7 +13746,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_number_of_holiday_schedules_supported_unre
  */
 sl_status_t uic_mqtt_dotdot_door_lock_max_pin_code_length_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -13776,7 +13776,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_max_pin_code_length_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_min_pin_code_length_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -13806,7 +13806,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_min_pin_code_length_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_max_rfid_code_length_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -13836,7 +13836,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_max_rfid_code_length_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_min_rfid_code_length_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -13896,7 +13896,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_credential_rules_support_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_number_of_credentials_supported_per_user_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -13986,7 +13986,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_language_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_led_settings_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -14016,7 +14016,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_led_settings_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_auto_relock_time_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -14046,7 +14046,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_auto_relock_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_sound_volume_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -14316,7 +14316,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_local_programming_features_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_wrong_code_entry_limit_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -14346,7 +14346,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_wrong_code_entry_limit_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_user_code_temporary_disable_time_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -14466,7 +14466,7 @@ sl_status_t uic_mqtt_dotdot_door_lock_security_level_unretain(
  */
 sl_status_t uic_mqtt_dotdot_door_lock_expiring_user_timeout_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -14818,52 +14818,52 @@ typedef sl_status_t (*uic_mqtt_dotdot_window_covering_go_to_lift_value_callback_
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t lift_value
+    uint16_t lift_value
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_go_to_lift_percentage_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int8_t percentage_lift_value
+    uint8_t percentage_lift_value
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_go_to_tilt_value_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t tilt_value
+    uint16_t tilt_value
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_window_covering_go_to_tilt_percentage_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int8_t percentage_tilt_value
+    uint8_t percentage_tilt_value
 
 );
 
 typedef struct {
   uint8_t window_covering_type;
-  int16_t physical_closed_limit_lift;
-  int16_t physical_closed_limit_tilt;
-  int16_t current_position_lift;
-  int16_t current_position_tilt;
-  int16_t number_of_actuations_lift;
-  int16_t number_of_actuations_tilt;
+  uint16_t physical_closed_limit_lift;
+  uint16_t physical_closed_limit_tilt;
+  uint16_t current_position_lift;
+  uint16_t current_position_tilt;
+  uint16_t number_of_actuations_lift;
+  uint16_t number_of_actuations_tilt;
   uint8_t config_or_status;
-  int8_t current_position_lift_percentage;
-  int8_t current_position_tilt_percentage;
-  int16_t installed_open_limit_lift;
-  int16_t installed_closed_limit_lift;
-  int16_t installed_open_limit_tilt;
-  int16_t installed_closed_limit_tilt;
-  int16_t velocity_lift;
-  int16_t acceleration_time_lift;
-  int16_t deceleration_time_lift;
+  uint8_t current_position_lift_percentage;
+  uint8_t current_position_tilt_percentage;
+  uint16_t installed_open_limit_lift;
+  uint16_t installed_closed_limit_lift;
+  uint16_t installed_open_limit_tilt;
+  uint16_t installed_closed_limit_tilt;
+  uint16_t velocity_lift;
+  uint16_t acceleration_time_lift;
+  uint16_t deceleration_time_lift;
   uint8_t mode;
-  uint8_t intermediate_setpoints_lift;
-  uint8_t intermediate_setpoints_tilt;
+  const char* intermediate_setpoints_lift;
+  const char* intermediate_setpoints_tilt;
 } uic_mqtt_dotdot_window_covering_state_t;
 
 typedef struct {
@@ -14909,28 +14909,28 @@ typedef sl_status_t (*uic_mqtt_dotdot_window_covering_force_read_attributes_call
  * @brief Command fields for WindowCovering/GoToLiftValue
  */
 typedef struct {
-  int16_t lift_value;
+  uint16_t lift_value;
 } uic_mqtt_dotdot_window_covering_command_go_to_lift_value_fields_t;
 
 /**
  * @brief Command fields for WindowCovering/GoToLiftPercentage
  */
 typedef struct {
-  int8_t percentage_lift_value;
+  uint8_t percentage_lift_value;
 } uic_mqtt_dotdot_window_covering_command_go_to_lift_percentage_fields_t;
 
 /**
  * @brief Command fields for WindowCovering/GoToTiltValue
  */
 typedef struct {
-  int16_t tilt_value;
+  uint16_t tilt_value;
 } uic_mqtt_dotdot_window_covering_command_go_to_tilt_value_fields_t;
 
 /**
  * @brief Command fields for WindowCovering/GoToTiltPercentage
  */
 typedef struct {
-  int8_t percentage_tilt_value;
+  uint8_t percentage_tilt_value;
 } uic_mqtt_dotdot_window_covering_command_go_to_tilt_percentage_fields_t;
 
 
@@ -15306,7 +15306,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_window_covering_type_unretain(
  */
 sl_status_t uic_mqtt_dotdot_window_covering_physical_closed_limit_lift_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15336,7 +15336,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_physical_closed_limit_lift_unretain(
  */
 sl_status_t uic_mqtt_dotdot_window_covering_physical_closed_limit_tilt_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15366,7 +15366,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_physical_closed_limit_tilt_unretain(
  */
 sl_status_t uic_mqtt_dotdot_window_covering_current_position_lift_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15396,7 +15396,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_current_position_lift_unretain(
  */
 sl_status_t uic_mqtt_dotdot_window_covering_current_position_tilt_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15426,7 +15426,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_current_position_tilt_unretain(
  */
 sl_status_t uic_mqtt_dotdot_window_covering_number_of_actuations_lift_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15456,7 +15456,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_number_of_actuations_lift_unretain(
  */
 sl_status_t uic_mqtt_dotdot_window_covering_number_of_actuations_tilt_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15516,7 +15516,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_config_or_status_unretain(
  */
 sl_status_t uic_mqtt_dotdot_window_covering_current_position_lift_percentage_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15546,7 +15546,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_current_position_lift_percentage_unr
  */
 sl_status_t uic_mqtt_dotdot_window_covering_current_position_tilt_percentage_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15576,7 +15576,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_current_position_tilt_percentage_unr
  */
 sl_status_t uic_mqtt_dotdot_window_covering_installed_open_limit_lift_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15606,7 +15606,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_installed_open_limit_lift_unretain(
  */
 sl_status_t uic_mqtt_dotdot_window_covering_installed_closed_limit_lift_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15636,7 +15636,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_installed_closed_limit_lift_unretain
  */
 sl_status_t uic_mqtt_dotdot_window_covering_installed_open_limit_tilt_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15666,7 +15666,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_installed_open_limit_tilt_unretain(
  */
 sl_status_t uic_mqtt_dotdot_window_covering_installed_closed_limit_tilt_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15696,7 +15696,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_installed_closed_limit_tilt_unretain
  */
 sl_status_t uic_mqtt_dotdot_window_covering_velocity_lift_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15726,7 +15726,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_velocity_lift_unretain(
  */
 sl_status_t uic_mqtt_dotdot_window_covering_acceleration_time_lift_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15756,7 +15756,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_acceleration_time_lift_unretain(
  */
 sl_status_t uic_mqtt_dotdot_window_covering_deceleration_time_lift_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15816,7 +15816,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_mode_unretain(
  */
 sl_status_t uic_mqtt_dotdot_window_covering_intermediate_setpoints_lift_publish(
   const char *base_topic,
-  uint8_t value,
+  const char* value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15846,7 +15846,7 @@ sl_status_t uic_mqtt_dotdot_window_covering_intermediate_setpoints_lift_unretain
  */
 sl_status_t uic_mqtt_dotdot_window_covering_intermediate_setpoints_tilt_publish(
   const char *base_topic,
-  uint8_t value,
+  const char* value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -15913,7 +15913,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_barrier_control_go_to_percent_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int8_t percent_open
+    uint8_t percent_open
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_barrier_control_stop_callback_t)(
@@ -15926,13 +15926,13 @@ typedef struct {
   uint8_t moving_state;
   uint16_t safety_status;
   uint8_t capabilities;
-  int16_t open_events;
-  int16_t close_events;
-  int16_t command_open_events;
-  int16_t command_close_events;
-  int16_t open_period;
-  int16_t close_period;
-  int8_t barrier_position;
+  uint16_t open_events;
+  uint16_t close_events;
+  uint16_t command_open_events;
+  uint16_t command_close_events;
+  uint16_t open_period;
+  uint16_t close_period;
+  uint8_t barrier_position;
 } uic_mqtt_dotdot_barrier_control_state_t;
 
 typedef struct {
@@ -15968,7 +15968,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_barrier_control_force_read_attributes_call
  * @brief Command fields for BarrierControl/GoToPercent
  */
 typedef struct {
-  int8_t percent_open;
+  uint8_t percent_open;
 } uic_mqtt_dotdot_barrier_control_command_go_to_percent_fields_t;
 
 
@@ -16204,7 +16204,7 @@ sl_status_t uic_mqtt_dotdot_barrier_control_capabilities_unretain(
  */
 sl_status_t uic_mqtt_dotdot_barrier_control_open_events_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -16234,7 +16234,7 @@ sl_status_t uic_mqtt_dotdot_barrier_control_open_events_unretain(
  */
 sl_status_t uic_mqtt_dotdot_barrier_control_close_events_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -16264,7 +16264,7 @@ sl_status_t uic_mqtt_dotdot_barrier_control_close_events_unretain(
  */
 sl_status_t uic_mqtt_dotdot_barrier_control_command_open_events_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -16294,7 +16294,7 @@ sl_status_t uic_mqtt_dotdot_barrier_control_command_open_events_unretain(
  */
 sl_status_t uic_mqtt_dotdot_barrier_control_command_close_events_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -16324,7 +16324,7 @@ sl_status_t uic_mqtt_dotdot_barrier_control_command_close_events_unretain(
  */
 sl_status_t uic_mqtt_dotdot_barrier_control_open_period_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -16354,7 +16354,7 @@ sl_status_t uic_mqtt_dotdot_barrier_control_open_period_unretain(
  */
 sl_status_t uic_mqtt_dotdot_barrier_control_close_period_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -16384,7 +16384,7 @@ sl_status_t uic_mqtt_dotdot_barrier_control_close_period_unretain(
  */
 sl_status_t uic_mqtt_dotdot_barrier_control_barrier_position_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -16450,26 +16450,26 @@ void uic_mqtt_dotdot_barrier_control_publish_empty_supported_commands(
 
 typedef struct {
   int16_t max_pressure;
-  int16_t max_speed;
-  int16_t max_flow;
+  uint16_t max_speed;
+  uint16_t max_flow;
   int16_t min_const_pressure;
   int16_t max_const_pressure;
   int16_t min_comp_pressure;
   int16_t max_comp_pressure;
-  int16_t min_const_speed;
-  int16_t max_const_speed;
-  int16_t min_const_flow;
-  int16_t max_const_flow;
+  uint16_t min_const_speed;
+  uint16_t max_const_speed;
+  uint16_t min_const_flow;
+  uint16_t max_const_flow;
   int16_t min_const_temp;
   int16_t max_const_temp;
   uint16_t pump_status;
   uint8_t effective_operation_mode;
   uint8_t effective_control_mode;
   int16_t capacity;
-  int16_t speed;
-  int32_t lifetime_running_hours;
-  int32_t power;
-  int32_t lifetime_energy_consumed;
+  uint16_t speed;
+  uint32_t lifetime_running_hours;
+  uint32_t power;
+  uint32_t lifetime_energy_consumed;
   uint8_t operation_mode;
   uint8_t control_mode;
   uint16_t alarm_mask;
@@ -16611,7 +16611,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_pressure_unretain
  */
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_speed_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -16641,7 +16641,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_speed_unretain(
  */
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_flow_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -16791,7 +16791,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_comp_pressure_unr
  */
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_min_const_speed_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -16821,7 +16821,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_min_const_speed_unret
  */
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_const_speed_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -16851,7 +16851,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_const_speed_unret
  */
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_min_const_flow_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -16881,7 +16881,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_min_const_flow_unreta
  */
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_max_const_flow_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -17091,7 +17091,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_capacity_unretain(
  */
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_speed_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -17121,7 +17121,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_speed_unretain(
  */
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_lifetime_running_hours_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -17151,7 +17151,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_lifetime_running_hour
  */
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_power_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -17181,7 +17181,7 @@ sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_power_unretain(
  */
 sl_status_t uic_mqtt_dotdot_pump_configuration_and_control_lifetime_energy_consumed_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -17375,17 +17375,17 @@ typedef sl_status_t (*uic_mqtt_dotdot_thermostat_get_relay_status_log_response_c
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t time_of_day,
+    uint16_t time_of_day,
 
     uint8_t relay_status,
 
     int16_t local_temperature,
 
-    int8_t humidity_percentage,
+    uint8_t humidity_percentage,
 
     int16_t set_point,
 
-    int16_t unread_entries
+    uint16_t unread_entries
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_thermostat_get_weekly_schedule_callback_t)(
@@ -17416,8 +17416,8 @@ typedef struct {
   int16_t abs_max_heat_setpoint_limit;
   int16_t abs_min_cool_setpoint_limit;
   int16_t abs_max_cool_setpoint_limit;
-  int8_t pi_cooling_demand;
-  int8_t pi_heating_demand;
+  uint8_t pi_cooling_demand;
+  uint8_t pi_heating_demand;
   uint8_t hvac_system_type_configuration;
   int8_t local_temperature_calibration;
   int16_t occupied_cooling_setpoint;
@@ -17435,24 +17435,24 @@ typedef struct {
   uint8_t alarm_mask;
   uint8_t thermostat_running_mode;
   uint8_t start_of_week;
-  int8_t number_of_weekly_transitions;
-  int8_t number_of_daily_transitions;
+  uint8_t number_of_weekly_transitions;
+  uint8_t number_of_daily_transitions;
   uint8_t temperature_setpoint_hold;
-  int16_t temperature_setpoint_hold_duration;
+  uint16_t temperature_setpoint_hold_duration;
   uint8_t thermostat_programming_operation_mode;
   uint16_t thermostat_running_state;
   uint8_t setpoint_change_source;
   int16_t setpoint_change_amount;
-  uint8_t setpoint_change_source_timestamp;
-  int8_t occupied_setback;
-  int8_t occupied_setback_min;
-  int8_t occupied_setback_max;
-  int8_t unoccupied_setback;
-  int8_t unoccupied_setback_min;
-  int8_t unoccupied_setback_max;
-  int8_t emergency_heat_delta;
+  uint32_t setpoint_change_source_timestamp;
+  uint8_t occupied_setback;
+  uint8_t occupied_setback_min;
+  uint8_t occupied_setback_max;
+  uint8_t unoccupied_setback;
+  uint8_t unoccupied_setback_min;
+  uint8_t unoccupied_setback_max;
+  uint8_t emergency_heat_delta;
   uint8_t ac_type;
-  int16_t ac_capacity;
+  uint16_t ac_capacity;
   uint8_t ac_refrigerant_type;
   uint8_t ac_compressor_type;
   uint32_t ac_error_code;
@@ -17571,17 +17571,17 @@ typedef struct {
  * @brief Command fields for Thermostat/GetRelayStatusLogResponse
  */
 typedef struct {
-  int16_t time_of_day;
+  uint16_t time_of_day;
 
   uint8_t relay_status;
 
   int16_t local_temperature;
 
-  int8_t humidity_percentage;
+  uint8_t humidity_percentage;
 
   int16_t set_point;
 
-  int16_t unread_entries;
+  uint16_t unread_entries;
 } uic_mqtt_dotdot_thermostat_command_get_relay_status_log_response_fields_t;
 
 /**
@@ -18146,7 +18146,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_abs_max_cool_setpoint_limit_unretain(
  */
 sl_status_t uic_mqtt_dotdot_thermostat_pi_cooling_demand_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -18176,7 +18176,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_pi_cooling_demand_unretain(
  */
 sl_status_t uic_mqtt_dotdot_thermostat_pi_heating_demand_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -18716,7 +18716,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_start_of_week_unretain(
  */
 sl_status_t uic_mqtt_dotdot_thermostat_number_of_weekly_transitions_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -18746,7 +18746,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_number_of_weekly_transitions_unretain(
  */
 sl_status_t uic_mqtt_dotdot_thermostat_number_of_daily_transitions_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -18806,7 +18806,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_temperature_setpoint_hold_unretain(
  */
 sl_status_t uic_mqtt_dotdot_thermostat_temperature_setpoint_hold_duration_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -18956,7 +18956,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_setpoint_change_amount_unretain(
  */
 sl_status_t uic_mqtt_dotdot_thermostat_setpoint_change_source_timestamp_publish(
   const char *base_topic,
-  uint8_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -18986,7 +18986,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_setpoint_change_source_timestamp_unretain
  */
 sl_status_t uic_mqtt_dotdot_thermostat_occupied_setback_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -19016,7 +19016,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_occupied_setback_unretain(
  */
 sl_status_t uic_mqtt_dotdot_thermostat_occupied_setback_min_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -19046,7 +19046,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_occupied_setback_min_unretain(
  */
 sl_status_t uic_mqtt_dotdot_thermostat_occupied_setback_max_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -19076,7 +19076,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_occupied_setback_max_unretain(
  */
 sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_setback_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -19106,7 +19106,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_setback_unretain(
  */
 sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_setback_min_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -19136,7 +19136,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_setback_min_unretain(
  */
 sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_setback_max_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -19166,7 +19166,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_unoccupied_setback_max_unretain(
  */
 sl_status_t uic_mqtt_dotdot_thermostat_emergency_heat_delta_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -19226,7 +19226,7 @@ sl_status_t uic_mqtt_dotdot_thermostat_ac_type_unretain(
  */
 sl_status_t uic_mqtt_dotdot_thermostat_ac_capacity_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -19654,13 +19654,13 @@ void uic_mqtt_dotdot_fan_control_publish_empty_supported_commands(
 // Callback types used by the dehumidification_control cluster
 
 typedef struct {
-  int8_t relative_humidity;
-  int8_t dehumidification_cooling;
-  int8_t rh_dehumidification_setpoint;
+  uint8_t relative_humidity;
+  uint8_t dehumidification_cooling;
+  uint8_t rh_dehumidification_setpoint;
   uint8_t relative_humidity_mode;
   uint8_t dehumidification_lockout;
-  int8_t dehumidification_hysteresis;
-  int8_t dehumidification_max_cool;
+  uint8_t dehumidification_hysteresis;
+  uint8_t dehumidification_max_cool;
   uint8_t relative_humidity_display;
 } uic_mqtt_dotdot_dehumidification_control_state_t;
 
@@ -19754,7 +19754,7 @@ void uic_mqtt_dotdot_clear_dehumidification_control_force_read_attributes_callba
  */
 sl_status_t uic_mqtt_dotdot_dehumidification_control_relative_humidity_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -19784,7 +19784,7 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_relative_humidity_unretain(
  */
 sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_cooling_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -19814,7 +19814,7 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_cooling_un
  */
 sl_status_t uic_mqtt_dotdot_dehumidification_control_rh_dehumidification_setpoint_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -19904,7 +19904,7 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_lockout_un
  */
 sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_hysteresis_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -19934,7 +19934,7 @@ sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_hysteresis
  */
 sl_status_t uic_mqtt_dotdot_dehumidification_control_dehumidification_max_cool_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -20246,11 +20246,11 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_move_to_hue_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int8_t hue,
+    uint8_t hue,
 
     CCDirection direction,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -20263,7 +20263,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_move_hue_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     CCMoveMode move_mode,
 
-    int8_t rate,
+    uint8_t rate,
 
     uint8_t options_mask,
 
@@ -20276,9 +20276,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_step_hue_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     CCStepMode step_mode,
 
-    int8_t step_size,
+    uint8_t step_size,
 
-    int8_t transition_time,
+    uint8_t transition_time,
 
     uint8_t options_mask,
 
@@ -20289,9 +20289,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_move_to_saturation_callback_
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int8_t saturation,
+    uint8_t saturation,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -20304,7 +20304,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_move_saturation_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     CCMoveMode move_mode,
 
-    int8_t rate,
+    uint8_t rate,
 
     uint8_t options_mask,
 
@@ -20317,9 +20317,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_step_saturation_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     CCStepMode step_mode,
 
-    int8_t step_size,
+    uint8_t step_size,
 
-    int8_t transition_time,
+    uint8_t transition_time,
 
     uint8_t options_mask,
 
@@ -20330,11 +20330,11 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_move_to_hue_and_saturation_c
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int8_t hue,
+    uint8_t hue,
 
-    int8_t saturation,
+    uint8_t saturation,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -20345,11 +20345,11 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_move_to_color_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t colorx,
+    uint16_t colorx,
 
-    int16_t colory,
+    uint16_t colory,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -20377,7 +20377,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_step_color_callback_t)(
 
     int16_t stepy,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -20388,9 +20388,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_move_to_color_temperature_ca
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t color_temperature_mireds,
+    uint16_t color_temperature_mireds,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -20401,11 +20401,11 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_enhanced_move_to_hue_callbac
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t enhanced_hue,
+    uint16_t enhanced_hue,
 
     CCDirection direction,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -20418,7 +20418,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_enhanced_move_hue_callback_t
     uic_mqtt_dotdot_callback_call_type_t call_type,
     CCMoveMode move_mode,
 
-    int16_t rate,
+    uint16_t rate,
 
     uint8_t options_mask,
 
@@ -20431,9 +20431,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_enhanced_step_hue_callback_t
     uic_mqtt_dotdot_callback_call_type_t call_type,
     CCStepMode step_mode,
 
-    int16_t step_size,
+    uint16_t step_size,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -20444,11 +20444,11 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_enhanced_move_to_hue_and_sat
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t enhanced_hue,
+    uint16_t enhanced_hue,
 
-    int8_t saturation,
+    uint8_t saturation,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
     uint8_t options_mask,
 
@@ -20465,9 +20465,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_color_loop_set_callback_t)(
 
     CCColorLoopDirection direction,
 
-    int16_t time,
+    uint16_t time,
 
-    int16_t start_hue,
+    uint16_t start_hue,
 
     uint8_t options_mask,
 
@@ -20489,11 +20489,11 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_move_color_temperature_callb
     uic_mqtt_dotdot_callback_call_type_t call_type,
     CCMoveMode move_mode,
 
-    int16_t rate,
+    uint16_t rate,
 
-    uint8_t * color_temperature_minimum_mireds,
+    uint16_t color_temperature_minimum_mireds,
 
-    uint8_t * color_temperature_maximum_mireds,
+    uint16_t color_temperature_maximum_mireds,
 
     uint8_t options_mask,
 
@@ -20506,13 +20506,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_step_color_temperature_callb
     uic_mqtt_dotdot_callback_call_type_t call_type,
     CCStepMode step_mode,
 
-    int16_t step_size,
+    uint16_t step_size,
 
-    int16_t transition_time,
+    uint16_t transition_time,
 
-    uint8_t * color_temperature_minimum_mireds,
+    uint16_t color_temperature_minimum_mireds,
 
-    uint8_t * color_temperature_maximum_mireds,
+    uint16_t color_temperature_maximum_mireds,
 
     uint8_t options_mask,
 
@@ -20521,58 +20521,58 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_step_color_temperature_callb
 );
 
 typedef struct {
-  int8_t current_hue;
-  int8_t current_saturation;
-  int16_t remaining_time;
-  int16_t currentx;
-  int16_t currenty;
+  uint8_t current_hue;
+  uint8_t current_saturation;
+  uint16_t remaining_time;
+  uint16_t currentx;
+  uint16_t currenty;
   uint8_t drift_compensation;
   const char* compensation_text;
-  int16_t color_temperature_mireds;
+  uint16_t color_temperature_mireds;
   uint8_t color_mode;
   uint8_t options;
-  int8_t number_of_primaries;
-  int16_t primary1x;
-  int16_t primary1y;
-  int8_t primary1_intensity;
-  int16_t primary2x;
-  int16_t primary2y;
-  int8_t primary2_intensity;
-  int16_t primary3x;
-  int16_t primary3y;
-  int8_t primary3_intensity;
-  int16_t primary4x;
-  int16_t primary4y;
-  int8_t primary4_intensity;
-  int16_t primary5x;
-  int16_t primary5y;
-  int8_t primary5_intensity;
-  int16_t primary6x;
-  int16_t primary6y;
-  int8_t primary6_intensity;
-  int16_t white_pointx;
-  int16_t white_pointy;
-  int16_t color_pointrx;
-  int16_t color_pointry;
-  int8_t color_pointr_intensity;
-  int16_t color_pointgx;
-  int16_t color_pointgy;
-  int8_t color_pointg_intensity;
-  int16_t color_pointbx;
-  int16_t color_pointby;
-  int8_t color_pointb_intensity;
-  int16_t enhanced_current_hue;
+  uint8_t number_of_primaries;
+  uint16_t primary1x;
+  uint16_t primary1y;
+  uint8_t primary1_intensity;
+  uint16_t primary2x;
+  uint16_t primary2y;
+  uint8_t primary2_intensity;
+  uint16_t primary3x;
+  uint16_t primary3y;
+  uint8_t primary3_intensity;
+  uint16_t primary4x;
+  uint16_t primary4y;
+  uint8_t primary4_intensity;
+  uint16_t primary5x;
+  uint16_t primary5y;
+  uint8_t primary5_intensity;
+  uint16_t primary6x;
+  uint16_t primary6y;
+  uint8_t primary6_intensity;
+  uint16_t white_pointx;
+  uint16_t white_pointy;
+  uint16_t color_pointrx;
+  uint16_t color_pointry;
+  uint8_t color_pointr_intensity;
+  uint16_t color_pointgx;
+  uint16_t color_pointgy;
+  uint8_t color_pointg_intensity;
+  uint16_t color_pointbx;
+  uint16_t color_pointby;
+  uint8_t color_pointb_intensity;
+  uint16_t enhanced_current_hue;
   uint8_t enhanced_color_mode;
-  int8_t color_loop_active;
-  int8_t color_loop_direction;
-  int16_t color_loop_time;
-  int16_t color_loop_start_enhanced_hue;
-  int16_t color_loop_stored_enhanced_hue;
+  uint8_t color_loop_active;
+  uint8_t color_loop_direction;
+  uint16_t color_loop_time;
+  uint16_t color_loop_start_enhanced_hue;
+  uint16_t color_loop_stored_enhanced_hue;
   uint16_t color_capabilities;
-  int16_t color_temp_physical_min_mireds;
-  int16_t color_temp_physical_max_mireds;
-  int16_t couple_color_temp_to_level_min_mireds;
-  int16_t start_up_color_temperature_mireds;
+  uint16_t color_temp_physical_min_mireds;
+  uint16_t color_temp_physical_max_mireds;
+  uint16_t couple_color_temp_to_level_min_mireds;
+  uint16_t start_up_color_temperature_mireds;
 } uic_mqtt_dotdot_color_control_state_t;
 
 typedef struct {
@@ -20650,11 +20650,11 @@ typedef sl_status_t (*uic_mqtt_dotdot_color_control_force_read_attributes_callba
  * @brief Command fields for ColorControl/MoveToHue
  */
 typedef struct {
-  int8_t hue;
+  uint8_t hue;
 
   CCDirection direction;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
   uint8_t options_mask;
 
@@ -20667,7 +20667,7 @@ typedef struct {
 typedef struct {
   CCMoveMode move_mode;
 
-  int8_t rate;
+  uint8_t rate;
 
   uint8_t options_mask;
 
@@ -20680,9 +20680,9 @@ typedef struct {
 typedef struct {
   CCStepMode step_mode;
 
-  int8_t step_size;
+  uint8_t step_size;
 
-  int8_t transition_time;
+  uint8_t transition_time;
 
   uint8_t options_mask;
 
@@ -20693,9 +20693,9 @@ typedef struct {
  * @brief Command fields for ColorControl/MoveToSaturation
  */
 typedef struct {
-  int8_t saturation;
+  uint8_t saturation;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
   uint8_t options_mask;
 
@@ -20708,7 +20708,7 @@ typedef struct {
 typedef struct {
   CCMoveMode move_mode;
 
-  int8_t rate;
+  uint8_t rate;
 
   uint8_t options_mask;
 
@@ -20721,9 +20721,9 @@ typedef struct {
 typedef struct {
   CCStepMode step_mode;
 
-  int8_t step_size;
+  uint8_t step_size;
 
-  int8_t transition_time;
+  uint8_t transition_time;
 
   uint8_t options_mask;
 
@@ -20734,11 +20734,11 @@ typedef struct {
  * @brief Command fields for ColorControl/MoveToHueAndSaturation
  */
 typedef struct {
-  int8_t hue;
+  uint8_t hue;
 
-  int8_t saturation;
+  uint8_t saturation;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
   uint8_t options_mask;
 
@@ -20749,11 +20749,11 @@ typedef struct {
  * @brief Command fields for ColorControl/MoveToColor
  */
 typedef struct {
-  int16_t colorx;
+  uint16_t colorx;
 
-  int16_t colory;
+  uint16_t colory;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
   uint8_t options_mask;
 
@@ -20781,7 +20781,7 @@ typedef struct {
 
   int16_t stepy;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
   uint8_t options_mask;
 
@@ -20792,9 +20792,9 @@ typedef struct {
  * @brief Command fields for ColorControl/MoveToColorTemperature
  */
 typedef struct {
-  int16_t color_temperature_mireds;
+  uint16_t color_temperature_mireds;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
   uint8_t options_mask;
 
@@ -20805,11 +20805,11 @@ typedef struct {
  * @brief Command fields for ColorControl/EnhancedMoveToHue
  */
 typedef struct {
-  int16_t enhanced_hue;
+  uint16_t enhanced_hue;
 
   CCDirection direction;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
   uint8_t options_mask;
 
@@ -20822,7 +20822,7 @@ typedef struct {
 typedef struct {
   CCMoveMode move_mode;
 
-  int16_t rate;
+  uint16_t rate;
 
   uint8_t options_mask;
 
@@ -20835,9 +20835,9 @@ typedef struct {
 typedef struct {
   CCStepMode step_mode;
 
-  int16_t step_size;
+  uint16_t step_size;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
   uint8_t options_mask;
 
@@ -20848,11 +20848,11 @@ typedef struct {
  * @brief Command fields for ColorControl/EnhancedMoveToHueAndSaturation
  */
 typedef struct {
-  int16_t enhanced_hue;
+  uint16_t enhanced_hue;
 
-  int8_t saturation;
+  uint8_t saturation;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
   uint8_t options_mask;
 
@@ -20869,9 +20869,9 @@ typedef struct {
 
   CCColorLoopDirection direction;
 
-  int16_t time;
+  uint16_t time;
 
-  int16_t start_hue;
+  uint16_t start_hue;
 
   uint8_t options_mask;
 
@@ -20893,11 +20893,11 @@ typedef struct {
 typedef struct {
   CCMoveMode move_mode;
 
-  int16_t rate;
+  uint16_t rate;
 
-  uint8_t * color_temperature_minimum_mireds;
+  uint16_t color_temperature_minimum_mireds;
 
-  uint8_t * color_temperature_maximum_mireds;
+  uint16_t color_temperature_maximum_mireds;
 
   uint8_t options_mask;
 
@@ -20910,13 +20910,13 @@ typedef struct {
 typedef struct {
   CCStepMode step_mode;
 
-  int16_t step_size;
+  uint16_t step_size;
 
-  int16_t transition_time;
+  uint16_t transition_time;
 
-  uint8_t * color_temperature_minimum_mireds;
+  uint16_t color_temperature_minimum_mireds;
 
-  uint8_t * color_temperature_maximum_mireds;
+  uint16_t color_temperature_maximum_mireds;
 
   uint8_t options_mask;
 
@@ -21746,7 +21746,7 @@ void uic_mqtt_dotdot_clear_color_control_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_color_control_current_hue_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -21776,7 +21776,7 @@ sl_status_t uic_mqtt_dotdot_color_control_current_hue_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_current_saturation_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -21806,7 +21806,7 @@ sl_status_t uic_mqtt_dotdot_color_control_current_saturation_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_remaining_time_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -21836,7 +21836,7 @@ sl_status_t uic_mqtt_dotdot_color_control_remaining_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_currentx_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -21866,7 +21866,7 @@ sl_status_t uic_mqtt_dotdot_color_control_currentx_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_currenty_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -21956,7 +21956,7 @@ sl_status_t uic_mqtt_dotdot_color_control_compensation_text_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_temperature_mireds_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22046,7 +22046,7 @@ sl_status_t uic_mqtt_dotdot_color_control_options_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_number_of_primaries_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22076,7 +22076,7 @@ sl_status_t uic_mqtt_dotdot_color_control_number_of_primaries_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary1x_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22106,7 +22106,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary1x_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary1y_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22136,7 +22136,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary1y_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary1_intensity_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22166,7 +22166,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary1_intensity_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary2x_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22196,7 +22196,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary2x_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary2y_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22226,7 +22226,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary2y_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary2_intensity_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22256,7 +22256,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary2_intensity_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary3x_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22286,7 +22286,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary3x_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary3y_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22316,7 +22316,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary3y_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary3_intensity_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22346,7 +22346,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary3_intensity_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary4x_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22376,7 +22376,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary4x_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary4y_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22406,7 +22406,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary4y_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary4_intensity_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22436,7 +22436,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary4_intensity_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary5x_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22466,7 +22466,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary5x_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary5y_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22496,7 +22496,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary5y_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary5_intensity_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22526,7 +22526,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary5_intensity_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary6x_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22556,7 +22556,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary6x_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary6y_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22586,7 +22586,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary6y_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_primary6_intensity_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22616,7 +22616,7 @@ sl_status_t uic_mqtt_dotdot_color_control_primary6_intensity_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_white_pointx_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22646,7 +22646,7 @@ sl_status_t uic_mqtt_dotdot_color_control_white_pointx_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_white_pointy_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22676,7 +22676,7 @@ sl_status_t uic_mqtt_dotdot_color_control_white_pointy_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_pointrx_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22706,7 +22706,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointrx_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_pointry_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22736,7 +22736,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointry_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_pointr_intensity_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22766,7 +22766,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointr_intensity_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_pointgx_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22796,7 +22796,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointgx_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_pointgy_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22826,7 +22826,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointgy_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_pointg_intensity_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22856,7 +22856,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointg_intensity_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_pointbx_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22886,7 +22886,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointbx_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_pointby_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22916,7 +22916,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointby_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_pointb_intensity_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -22946,7 +22946,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_pointb_intensity_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_enhanced_current_hue_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23006,7 +23006,7 @@ sl_status_t uic_mqtt_dotdot_color_control_enhanced_color_mode_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_loop_active_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23036,7 +23036,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_active_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_loop_direction_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23066,7 +23066,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_direction_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_loop_time_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23096,7 +23096,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_loop_start_enhanced_hue_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23126,7 +23126,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_loop_start_enhanced_hue_unretain
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_loop_stored_enhanced_hue_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23186,7 +23186,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_capabilities_unretain(
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_temp_physical_min_mireds_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23216,7 +23216,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_temp_physical_min_mireds_unretai
  */
 sl_status_t uic_mqtt_dotdot_color_control_color_temp_physical_max_mireds_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23246,7 +23246,7 @@ sl_status_t uic_mqtt_dotdot_color_control_color_temp_physical_max_mireds_unretai
  */
 sl_status_t uic_mqtt_dotdot_color_control_couple_color_temp_to_level_min_mireds_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23276,7 +23276,7 @@ sl_status_t uic_mqtt_dotdot_color_control_couple_color_temp_to_level_min_mireds_
  */
 sl_status_t uic_mqtt_dotdot_color_control_start_up_color_temperature_mireds_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23341,22 +23341,22 @@ void uic_mqtt_dotdot_color_control_publish_empty_supported_commands(
 // Callback types used by the ballast_configuration cluster
 
 typedef struct {
-  int8_t physical_min_level;
-  int8_t physical_max_level;
+  uint8_t physical_min_level;
+  uint8_t physical_max_level;
   uint8_t ballast_status;
-  int8_t min_level;
-  int8_t max_level;
-  int8_t power_on_level;
-  int16_t power_on_fade_time;
-  int8_t intrinsic_ballast_factor;
-  int8_t ballast_factor_adjustment;
-  int8_t lamp_quantity;
+  uint8_t min_level;
+  uint8_t max_level;
+  uint8_t power_on_level;
+  uint16_t power_on_fade_time;
+  uint8_t intrinsic_ballast_factor;
+  uint8_t ballast_factor_adjustment;
+  uint8_t lamp_quantity;
   const char* lamp_type;
   const char* lamp_manufacturer;
-  int32_t lamp_rated_hours;
-  int32_t lamp_burn_hours;
+  uint32_t lamp_rated_hours;
+  uint32_t lamp_burn_hours;
   uint8_t lamp_alarm_mode;
-  int32_t lamp_burn_hours_trip_point;
+  uint32_t lamp_burn_hours_trip_point;
 } uic_mqtt_dotdot_ballast_configuration_state_t;
 
 typedef struct {
@@ -23457,7 +23457,7 @@ void uic_mqtt_dotdot_clear_ballast_configuration_force_read_attributes_callbacks
  */
 sl_status_t uic_mqtt_dotdot_ballast_configuration_physical_min_level_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23487,7 +23487,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_physical_min_level_unretain(
  */
 sl_status_t uic_mqtt_dotdot_ballast_configuration_physical_max_level_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23547,7 +23547,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_ballast_status_unretain(
  */
 sl_status_t uic_mqtt_dotdot_ballast_configuration_min_level_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23577,7 +23577,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_min_level_unretain(
  */
 sl_status_t uic_mqtt_dotdot_ballast_configuration_max_level_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23607,7 +23607,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_max_level_unretain(
  */
 sl_status_t uic_mqtt_dotdot_ballast_configuration_power_on_level_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23637,7 +23637,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_power_on_level_unretain(
  */
 sl_status_t uic_mqtt_dotdot_ballast_configuration_power_on_fade_time_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23667,7 +23667,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_power_on_fade_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_ballast_configuration_intrinsic_ballast_factor_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23697,7 +23697,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_intrinsic_ballast_factor_unret
  */
 sl_status_t uic_mqtt_dotdot_ballast_configuration_ballast_factor_adjustment_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23727,7 +23727,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_ballast_factor_adjustment_unre
  */
 sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_quantity_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23817,7 +23817,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_manufacturer_unretain(
  */
 sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_rated_hours_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23847,7 +23847,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_rated_hours_unretain(
  */
 sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_burn_hours_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23907,7 +23907,7 @@ sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_alarm_mode_unretain(
  */
 sl_status_t uic_mqtt_dotdot_ballast_configuration_lamp_burn_hours_trip_point_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -23972,10 +23972,10 @@ void uic_mqtt_dotdot_ballast_configuration_publish_empty_supported_commands(
 // Callback types used by the illuminance_measurement cluster
 
 typedef struct {
-  int16_t measured_value;
-  int16_t min_measured_value;
-  int16_t max_measured_value;
-  int16_t tolerance;
+  uint16_t measured_value;
+  uint16_t min_measured_value;
+  uint16_t max_measured_value;
+  uint16_t tolerance;
   uint8_t light_sensor_type;
 } uic_mqtt_dotdot_illuminance_measurement_state_t;
 
@@ -24066,7 +24066,7 @@ void uic_mqtt_dotdot_clear_illuminance_measurement_force_read_attributes_callbac
  */
 sl_status_t uic_mqtt_dotdot_illuminance_measurement_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -24096,7 +24096,7 @@ sl_status_t uic_mqtt_dotdot_illuminance_measurement_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_illuminance_measurement_min_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -24126,7 +24126,7 @@ sl_status_t uic_mqtt_dotdot_illuminance_measurement_min_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_illuminance_measurement_max_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -24156,7 +24156,7 @@ sl_status_t uic_mqtt_dotdot_illuminance_measurement_max_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_illuminance_measurement_tolerance_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -24253,7 +24253,7 @@ void uic_mqtt_dotdot_illuminance_measurement_publish_empty_supported_commands(
 typedef struct {
   uint8_t level_status;
   uint8_t light_sensor_type;
-  int16_t illuminance_target_level;
+  uint16_t illuminance_target_level;
 } uic_mqtt_dotdot_illuminance_level_sensing_state_t;
 
 typedef struct {
@@ -24401,7 +24401,7 @@ sl_status_t uic_mqtt_dotdot_illuminance_level_sensing_light_sensor_type_unretain
  */
 sl_status_t uic_mqtt_dotdot_illuminance_level_sensing_illuminance_target_level_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -24469,7 +24469,7 @@ typedef struct {
   int16_t measured_value;
   int16_t min_measured_value;
   int16_t max_measured_value;
-  int16_t tolerance;
+  uint16_t tolerance;
 } uic_mqtt_dotdot_temperature_measurement_state_t;
 
 typedef struct {
@@ -24648,7 +24648,7 @@ sl_status_t uic_mqtt_dotdot_temperature_measurement_max_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_temperature_measurement_tolerance_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -24716,11 +24716,11 @@ typedef struct {
   int16_t measured_value;
   int16_t min_measured_value;
   int16_t max_measured_value;
-  int16_t tolerance;
+  uint16_t tolerance;
   int16_t scaled_value;
   int16_t min_scaled_value;
   int16_t max_scaled_value;
-  int16_t scaled_tolerance;
+  uint16_t scaled_tolerance;
   int8_t scale;
 } uic_mqtt_dotdot_pressure_measurement_state_t;
 
@@ -24905,7 +24905,7 @@ sl_status_t uic_mqtt_dotdot_pressure_measurement_max_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_pressure_measurement_tolerance_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25025,7 +25025,7 @@ sl_status_t uic_mqtt_dotdot_pressure_measurement_max_scaled_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_pressure_measurement_scaled_tolerance_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25120,10 +25120,10 @@ void uic_mqtt_dotdot_pressure_measurement_publish_empty_supported_commands(
 // Callback types used by the flow_measurement cluster
 
 typedef struct {
-  int16_t measured_value;
-  int16_t min_measured_value;
-  int16_t max_measured_value;
-  int16_t tolerance;
+  uint16_t measured_value;
+  uint16_t min_measured_value;
+  uint16_t max_measured_value;
+  uint16_t tolerance;
 } uic_mqtt_dotdot_flow_measurement_state_t;
 
 typedef struct {
@@ -25212,7 +25212,7 @@ void uic_mqtt_dotdot_clear_flow_measurement_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_flow_measurement_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25242,7 +25242,7 @@ sl_status_t uic_mqtt_dotdot_flow_measurement_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_flow_measurement_min_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25272,7 +25272,7 @@ sl_status_t uic_mqtt_dotdot_flow_measurement_min_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_flow_measurement_max_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25302,7 +25302,7 @@ sl_status_t uic_mqtt_dotdot_flow_measurement_max_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_flow_measurement_tolerance_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25367,10 +25367,10 @@ void uic_mqtt_dotdot_flow_measurement_publish_empty_supported_commands(
 // Callback types used by the relativity_humidity cluster
 
 typedef struct {
-  int16_t measured_value;
-  int16_t min_measured_value;
-  int16_t max_measured_value;
-  int16_t tolerance;
+  uint16_t measured_value;
+  uint16_t min_measured_value;
+  uint16_t max_measured_value;
+  uint16_t tolerance;
 } uic_mqtt_dotdot_relativity_humidity_state_t;
 
 typedef struct {
@@ -25459,7 +25459,7 @@ void uic_mqtt_dotdot_clear_relativity_humidity_force_read_attributes_callbacks()
  */
 sl_status_t uic_mqtt_dotdot_relativity_humidity_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25489,7 +25489,7 @@ sl_status_t uic_mqtt_dotdot_relativity_humidity_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_relativity_humidity_min_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25519,7 +25519,7 @@ sl_status_t uic_mqtt_dotdot_relativity_humidity_min_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_relativity_humidity_max_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25549,7 +25549,7 @@ sl_status_t uic_mqtt_dotdot_relativity_humidity_max_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_relativity_humidity_tolerance_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25617,15 +25617,15 @@ typedef struct {
   uint8_t occupancy;
   uint8_t occupancy_sensor_type;
   uint8_t occupancy_sensor_type_bitmap;
-  int16_t pir_occupied_to_unoccupied_delay;
-  int16_t pir_unoccupied_to_occupied_delay;
-  int8_t pir_unoccupied_to_occupied_threshold;
-  int16_t ultrasonic_occupied_to_unoccupied_delay;
-  int16_t ultrasonic_unoccupied_to_occupied_delay;
-  int8_t ultrasonic_unoccupied_to_occupied_threshold;
-  int16_t physical_contact_occupied_to_unoccupied_delay;
-  int16_t physical_contact_unoccupied_to_occupied_delay;
-  int8_t physical_contact_unoccupied_to_occupied_threshold;
+  uint16_t pir_occupied_to_unoccupied_delay;
+  uint16_t pir_unoccupied_to_occupied_delay;
+  uint8_t pir_unoccupied_to_occupied_threshold;
+  uint16_t ultrasonic_occupied_to_unoccupied_delay;
+  uint16_t ultrasonic_unoccupied_to_occupied_delay;
+  uint8_t ultrasonic_unoccupied_to_occupied_threshold;
+  uint16_t physical_contact_occupied_to_unoccupied_delay;
+  uint16_t physical_contact_unoccupied_to_occupied_delay;
+  uint8_t physical_contact_unoccupied_to_occupied_threshold;
 } uic_mqtt_dotdot_occupancy_sensing_state_t;
 
 typedef struct {
@@ -25812,7 +25812,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_occupancy_sensor_type_bitmap_unret
  */
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_pir_occupied_to_unoccupied_delay_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25842,7 +25842,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_pir_occupied_to_unoccupied_delay_u
  */
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_pir_unoccupied_to_occupied_delay_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25872,7 +25872,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_pir_unoccupied_to_occupied_delay_u
  */
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_pir_unoccupied_to_occupied_threshold_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25902,7 +25902,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_pir_unoccupied_to_occupied_thresho
  */
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_ultrasonic_occupied_to_unoccupied_delay_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25932,7 +25932,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_ultrasonic_occupied_to_unoccupied_
  */
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_delay_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25962,7 +25962,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_
  */
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_threshold_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -25992,7 +25992,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_ultrasonic_unoccupied_to_occupied_
  */
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_physical_contact_occupied_to_unoccupied_delay_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26022,7 +26022,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_physical_contact_occupied_to_unocc
  */
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_delay_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26052,7 +26052,7 @@ sl_status_t uic_mqtt_dotdot_occupancy_sensing_physical_contact_unoccupied_to_occ
  */
 sl_status_t uic_mqtt_dotdot_occupancy_sensing_physical_contact_unoccupied_to_occupied_threshold_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26117,10 +26117,10 @@ void uic_mqtt_dotdot_occupancy_sensing_publish_empty_supported_commands(
 // Callback types used by the soil_moisture cluster
 
 typedef struct {
-  int16_t measured_value;
-  int16_t min_measured_value;
-  int16_t max_measured_value;
-  int16_t tolerance;
+  uint16_t measured_value;
+  uint16_t min_measured_value;
+  uint16_t max_measured_value;
+  uint16_t tolerance;
 } uic_mqtt_dotdot_soil_moisture_state_t;
 
 typedef struct {
@@ -26209,7 +26209,7 @@ void uic_mqtt_dotdot_clear_soil_moisture_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_soil_moisture_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26239,7 +26239,7 @@ sl_status_t uic_mqtt_dotdot_soil_moisture_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_soil_moisture_min_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26269,7 +26269,7 @@ sl_status_t uic_mqtt_dotdot_soil_moisture_min_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_soil_moisture_max_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26299,7 +26299,7 @@ sl_status_t uic_mqtt_dotdot_soil_moisture_max_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_soil_moisture_tolerance_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26364,10 +26364,10 @@ void uic_mqtt_dotdot_soil_moisture_publish_empty_supported_commands(
 // Callback types used by the ph_measurement cluster
 
 typedef struct {
-  int16_t measured_value;
-  int16_t min_measured_value;
-  int16_t max_measured_value;
-  int16_t tolerance;
+  uint16_t measured_value;
+  uint16_t min_measured_value;
+  uint16_t max_measured_value;
+  uint16_t tolerance;
 } uic_mqtt_dotdot_ph_measurement_state_t;
 
 typedef struct {
@@ -26456,7 +26456,7 @@ void uic_mqtt_dotdot_clear_ph_measurement_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_ph_measurement_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26486,7 +26486,7 @@ sl_status_t uic_mqtt_dotdot_ph_measurement_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_ph_measurement_min_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26516,7 +26516,7 @@ sl_status_t uic_mqtt_dotdot_ph_measurement_min_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_ph_measurement_max_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26546,7 +26546,7 @@ sl_status_t uic_mqtt_dotdot_ph_measurement_max_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_ph_measurement_tolerance_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26611,10 +26611,10 @@ void uic_mqtt_dotdot_ph_measurement_publish_empty_supported_commands(
 // Callback types used by the electrical_conductivity_measurement cluster
 
 typedef struct {
-  int16_t measured_value;
-  int16_t min_measured_value;
-  int16_t max_measured_value;
-  int16_t tolerance;
+  uint16_t measured_value;
+  uint16_t min_measured_value;
+  uint16_t max_measured_value;
+  uint16_t tolerance;
 } uic_mqtt_dotdot_electrical_conductivity_measurement_state_t;
 
 typedef struct {
@@ -26703,7 +26703,7 @@ void uic_mqtt_dotdot_clear_electrical_conductivity_measurement_force_read_attrib
  */
 sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26733,7 +26733,7 @@ sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_measured_value_u
  */
 sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_min_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26763,7 +26763,7 @@ sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_min_measured_val
  */
 sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_max_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26793,7 +26793,7 @@ sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_max_measured_val
  */
 sl_status_t uic_mqtt_dotdot_electrical_conductivity_measurement_tolerance_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26858,10 +26858,10 @@ void uic_mqtt_dotdot_electrical_conductivity_measurement_publish_empty_supported
 // Callback types used by the wind_speed_measurement cluster
 
 typedef struct {
-  int16_t measured_value;
-  int16_t min_measured_value;
-  int16_t max_measured_value;
-  int16_t tolerance;
+  uint16_t measured_value;
+  uint16_t min_measured_value;
+  uint16_t max_measured_value;
+  uint16_t tolerance;
 } uic_mqtt_dotdot_wind_speed_measurement_state_t;
 
 typedef struct {
@@ -26950,7 +26950,7 @@ void uic_mqtt_dotdot_clear_wind_speed_measurement_force_read_attributes_callback
  */
 sl_status_t uic_mqtt_dotdot_wind_speed_measurement_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -26980,7 +26980,7 @@ sl_status_t uic_mqtt_dotdot_wind_speed_measurement_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_wind_speed_measurement_min_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -27010,7 +27010,7 @@ sl_status_t uic_mqtt_dotdot_wind_speed_measurement_min_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_wind_speed_measurement_max_measured_value_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -27040,7 +27040,7 @@ sl_status_t uic_mqtt_dotdot_wind_speed_measurement_max_measured_value_unretain(
  */
 sl_status_t uic_mqtt_dotdot_wind_speed_measurement_tolerance_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -27850,7 +27850,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_ias_zone_zone_enroll_response_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     ZoneEnrollResponseEnrollResponseCode enroll_response_code,
 
-    int8_t zoneid
+    uint8_t zoneid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ias_zone_zone_status_change_notification_callback_t)(
@@ -27861,9 +27861,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_ias_zone_zone_status_change_notification_c
 
     uint8_t extended_status,
 
-    int8_t zoneid,
+    uint8_t zoneid,
 
-    int16_t delay
+    uint16_t delay
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ias_zone_initiate_normal_operation_mode_callback_t)(
@@ -27877,16 +27877,16 @@ typedef sl_status_t (*uic_mqtt_dotdot_ias_zone_zone_enroll_request_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     IasZoneType zone_type,
 
-    int16_t manufacturer_code
+    uint16_t manufacturer_code
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_ias_zone_initiate_test_mode_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int8_t test_mode_duration,
+    uint8_t test_mode_duration,
 
-    int8_t current_zone_sensitivity_level
+    uint8_t current_zone_sensitivity_level
 
 );
 
@@ -27895,9 +27895,9 @@ typedef struct {
   uint8_t zone_type;
   uint16_t zone_status;
   uint64_t iascie_address;
-  int8_t zoneid;
-  int8_t number_of_zone_sensitivity_levels_supported;
-  int8_t current_zone_sensitivity_level;
+  uint8_t zoneid;
+  uint8_t number_of_zone_sensitivity_levels_supported;
+  uint8_t current_zone_sensitivity_level;
 } uic_mqtt_dotdot_ias_zone_state_t;
 
 typedef struct {
@@ -27932,7 +27932,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_ias_zone_force_read_attributes_callback_t)
 typedef struct {
   ZoneEnrollResponseEnrollResponseCode enroll_response_code;
 
-  int8_t zoneid;
+  uint8_t zoneid;
 } uic_mqtt_dotdot_ias_zone_command_zone_enroll_response_fields_t;
 
 /**
@@ -27943,9 +27943,9 @@ typedef struct {
 
   uint8_t extended_status;
 
-  int8_t zoneid;
+  uint8_t zoneid;
 
-  int16_t delay;
+  uint16_t delay;
 } uic_mqtt_dotdot_ias_zone_command_zone_status_change_notification_fields_t;
 
 /**
@@ -27954,16 +27954,16 @@ typedef struct {
 typedef struct {
   IasZoneType zone_type;
 
-  int16_t manufacturer_code;
+  uint16_t manufacturer_code;
 } uic_mqtt_dotdot_ias_zone_command_zone_enroll_request_fields_t;
 
 /**
  * @brief Command fields for IASZone/InitiateTestMode
  */
 typedef struct {
-  int8_t test_mode_duration;
+  uint8_t test_mode_duration;
 
-  int8_t current_zone_sensitivity_level;
+  uint8_t current_zone_sensitivity_level;
 } uic_mqtt_dotdot_ias_zone_command_initiate_test_mode_fields_t;
 
 
@@ -28349,7 +28349,7 @@ sl_status_t uic_mqtt_dotdot_ias_zone_iascie_address_unretain(
  */
 sl_status_t uic_mqtt_dotdot_ias_zone_zoneid_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -28379,7 +28379,7 @@ sl_status_t uic_mqtt_dotdot_ias_zone_zoneid_unretain(
  */
 sl_status_t uic_mqtt_dotdot_ias_zone_number_of_zone_sensitivity_levels_supported_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -28409,7 +28409,7 @@ sl_status_t uic_mqtt_dotdot_ias_zone_number_of_zone_sensitivity_levels_supported
  */
 sl_status_t uic_mqtt_dotdot_ias_zone_current_zone_sensitivity_level_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -28478,9 +28478,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_iaswd_start_warning_callback_t)(
     uic_mqtt_dotdot_callback_call_type_t call_type,
     uint8_t siren_configuration,
 
-    int16_t warning_duration,
+    uint16_t warning_duration,
 
-    int8_t strobe_duty_cycle,
+    uint8_t strobe_duty_cycle,
 
     IaswdLevel strobe_level
 
@@ -28494,7 +28494,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_iaswd_squawk_callback_t)(
 );
 
 typedef struct {
-  int16_t max_duration;
+  uint16_t max_duration;
 } uic_mqtt_dotdot_iaswd_state_t;
 
 typedef struct {
@@ -28523,9 +28523,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_iaswd_force_read_attributes_callback_t)(
 typedef struct {
   uint8_t siren_configuration;
 
-  int16_t warning_duration;
+  uint16_t warning_duration;
 
-  int8_t strobe_duty_cycle;
+  uint8_t strobe_duty_cycle;
 
   IaswdLevel strobe_level;
 } uic_mqtt_dotdot_iaswd_command_start_warning_fields_t;
@@ -28680,7 +28680,7 @@ void uic_mqtt_dotdot_clear_iaswd_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_iaswd_max_duration_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -28745,23 +28745,23 @@ void uic_mqtt_dotdot_iaswd_publish_empty_supported_commands(
 // Callback types used by the metering cluster
 
 typedef struct {
-  int64_t current_summation_delivered;
-  int64_t current_summation_received;
-  int64_t current_max_demand_delivered;
+  uint64_t current_summation_delivered;
+  uint64_t current_summation_received;
+  uint64_t current_max_demand_delivered;
   int8_t current_max_demand_received;
   int8_t power_factor;
-  uint8_t reading_snap_shot_time;
-  uint8_t current_max_demand_delivered_time;
-  uint8_t current_max_demand_received_time;
-  int8_t default_update_period;
+  uint32_t reading_snap_shot_time;
+  uint32_t current_max_demand_delivered_time;
+  uint32_t current_max_demand_received_time;
+  uint8_t default_update_period;
   uint8_t supply_status;
-  int64_t current_inlet_energy_carrier_summation;
-  int64_t current_outlet_energy_carrier_summation;
+  uint64_t current_inlet_energy_carrier_summation;
+  uint64_t current_outlet_energy_carrier_summation;
   int32_t inlet_temperature;
   int32_t outlet_temperature;
   uint8_t unitof_measure;
-  int32_t multiplier;
-  int32_t divisor;
+  uint32_t multiplier;
+  uint32_t divisor;
   uint8_t summation_formatting;
   uint8_t demand_formatting;
   uint8_t historical_consumption_formatting;
@@ -28881,7 +28881,7 @@ void uic_mqtt_dotdot_clear_metering_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_metering_current_summation_delivered_publish(
   const char *base_topic,
-  int64_t value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -28911,7 +28911,7 @@ sl_status_t uic_mqtt_dotdot_metering_current_summation_delivered_unretain(
  */
 sl_status_t uic_mqtt_dotdot_metering_current_summation_received_publish(
   const char *base_topic,
-  int64_t value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -28941,7 +28941,7 @@ sl_status_t uic_mqtt_dotdot_metering_current_summation_received_unretain(
  */
 sl_status_t uic_mqtt_dotdot_metering_current_max_demand_delivered_publish(
   const char *base_topic,
-  int64_t value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -29031,7 +29031,7 @@ sl_status_t uic_mqtt_dotdot_metering_power_factor_unretain(
  */
 sl_status_t uic_mqtt_dotdot_metering_reading_snap_shot_time_publish(
   const char *base_topic,
-  uint8_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -29061,7 +29061,7 @@ sl_status_t uic_mqtt_dotdot_metering_reading_snap_shot_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_metering_current_max_demand_delivered_time_publish(
   const char *base_topic,
-  uint8_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -29091,7 +29091,7 @@ sl_status_t uic_mqtt_dotdot_metering_current_max_demand_delivered_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_metering_current_max_demand_received_time_publish(
   const char *base_topic,
-  uint8_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -29121,7 +29121,7 @@ sl_status_t uic_mqtt_dotdot_metering_current_max_demand_received_time_unretain(
  */
 sl_status_t uic_mqtt_dotdot_metering_default_update_period_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -29181,7 +29181,7 @@ sl_status_t uic_mqtt_dotdot_metering_supply_status_unretain(
  */
 sl_status_t uic_mqtt_dotdot_metering_current_inlet_energy_carrier_summation_publish(
   const char *base_topic,
-  int64_t value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -29211,7 +29211,7 @@ sl_status_t uic_mqtt_dotdot_metering_current_inlet_energy_carrier_summation_unre
  */
 sl_status_t uic_mqtt_dotdot_metering_current_outlet_energy_carrier_summation_publish(
   const char *base_topic,
-  int64_t value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -29331,7 +29331,7 @@ sl_status_t uic_mqtt_dotdot_metering_unitof_measure_unretain(
  */
 sl_status_t uic_mqtt_dotdot_metering_multiplier_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -29361,7 +29361,7 @@ sl_status_t uic_mqtt_dotdot_metering_multiplier_unretain(
  */
 sl_status_t uic_mqtt_dotdot_metering_divisor_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -29698,14 +29698,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_get_profile_info_re
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int8_t profile_count,
+    uint8_t profile_count,
 
     ProfileIntervalPeriod profile_interval_period,
 
-    int8_t max_number_of_intervals,
+    uint8_t max_number_of_intervals,
 
     uint8_t list_of_attributes_count,
-    const uint8_t *list_of_attributes
+    const uint16_t *list_of_attributes
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_get_profile_info_callback_t)(
@@ -29717,29 +29717,29 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_get_measurement_pro
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t start_time,
+    uint32_t start_time,
 
     GetMeasurementProfileResponseStatus status,
 
     ProfileIntervalPeriod profile_interval_period,
 
-    int8_t number_of_intervals_delivered,
+    uint8_t number_of_intervals_delivered,
 
-    uint8_t attribute_id,
+    uint16_t attribute_id,
 
     uint8_t intervals_count,
-    const int8_t *intervals
+    const uint8_t *intervals
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_get_measurement_profile_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    uint8_t attributeid,
+    uint16_t attributeid,
 
-    uint8_t start_time,
+    uint32_t start_time,
 
-    int8_t number_of_intervals
+    uint8_t number_of_intervals
 
 );
 
@@ -29754,19 +29754,19 @@ typedef struct {
   int16_t dc_power;
   int16_t dc_power_min;
   int16_t dc_power_max;
-  int16_t dc_voltage_multiplier;
-  int16_t dc_voltage_divisor;
-  int16_t dc_current_multiplier;
-  int16_t dc_current_divisor;
-  int16_t dc_power_multiplier;
-  int16_t dc_power_divisor;
-  int16_t ac_frequency;
-  int16_t ac_frequency_min;
-  int16_t ac_frequency_max;
-  int16_t neutral_current;
+  uint16_t dc_voltage_multiplier;
+  uint16_t dc_voltage_divisor;
+  uint16_t dc_current_multiplier;
+  uint16_t dc_current_divisor;
+  uint16_t dc_power_multiplier;
+  uint16_t dc_power_divisor;
+  uint16_t ac_frequency;
+  uint16_t ac_frequency_min;
+  uint16_t ac_frequency_max;
+  uint16_t neutral_current;
   int32_t total_active_power;
   int32_t total_reactive_power;
-  int32_t total_apparent_power;
+  uint32_t total_apparent_power;
   int16_t measured1st_harmonic_current;
   int16_t measured3rd_harmonic_current;
   int16_t measured5th_harmonic_current;
@@ -29779,40 +29779,40 @@ typedef struct {
   int16_t measured_phase7th_harmonic_current;
   int16_t measured_phase9th_harmonic_current;
   int16_t measured_phase11th_harmonic_current;
-  int16_t ac_frequency_multiplier;
-  int16_t ac_frequency_divisor;
-  int32_t power_multiplier;
-  int32_t power_divisor;
+  uint16_t ac_frequency_multiplier;
+  uint16_t ac_frequency_divisor;
+  uint32_t power_multiplier;
+  uint32_t power_divisor;
   int8_t harmonic_current_multiplier;
   int8_t phase_harmonic_current_multiplier;
-  int16_t line_current;
+  uint16_t line_current;
   int16_t active_current;
   int16_t reactive_current;
-  int16_t rms_voltage;
-  int16_t rms_voltage_min;
-  int16_t rms_voltage_max;
-  int16_t rms_current;
-  int16_t rms_current_min;
-  int16_t rms_current_max;
+  uint16_t rms_voltage;
+  uint16_t rms_voltage_min;
+  uint16_t rms_voltage_max;
+  uint16_t rms_current;
+  uint16_t rms_current_min;
+  uint16_t rms_current_max;
   int16_t active_power;
   int16_t active_power_min;
   int16_t active_power_max;
   int16_t reactive_power;
-  int16_t apparent_power;
+  uint16_t apparent_power;
   int8_t power_factor;
-  int16_t average_rms_voltage_measurement_period;
-  int16_t average_rms_over_voltage_counter;
-  int16_t average_rms_under_voltage_counter;
-  int16_t rms_extreme_over_voltage_period;
-  int16_t rms_extreme_under_voltage_period;
-  int16_t rms_voltage_sag_period;
-  int16_t rms_voltage_swell_period;
-  int16_t ac_voltage_multiplier;
-  int16_t ac_voltage_divisor;
-  int16_t ac_current_multiplier;
-  int16_t ac_current_divisor;
-  int16_t ac_power_multiplier;
-  int16_t ac_power_divisor;
+  uint16_t average_rms_voltage_measurement_period;
+  uint16_t average_rms_over_voltage_counter;
+  uint16_t average_rms_under_voltage_counter;
+  uint16_t rms_extreme_over_voltage_period;
+  uint16_t rms_extreme_under_voltage_period;
+  uint16_t rms_voltage_sag_period;
+  uint16_t rms_voltage_swell_period;
+  uint16_t ac_voltage_multiplier;
+  uint16_t ac_voltage_divisor;
+  uint16_t ac_current_multiplier;
+  uint16_t ac_current_divisor;
+  uint16_t ac_power_multiplier;
+  uint16_t ac_power_divisor;
   uint8_t dc_overload_alarms_mask;
   int16_t dc_voltage_overload;
   int16_t dc_current_overload;
@@ -29827,50 +29827,50 @@ typedef struct {
   int16_t rms_extreme_under_voltage;
   int16_t rms_voltage_sag;
   int16_t rms_voltage_swell;
-  int16_t line_current_phb;
+  uint16_t line_current_phb;
   int16_t active_current_phb;
   int16_t reactive_current_phb;
-  int16_t rms_voltage_phb;
-  int16_t rms_voltage_min_phb;
-  int16_t rms_voltage_max_phb;
-  int16_t rms_current_phb;
-  int16_t rms_current_min_phb;
-  int16_t rms_current_max_phb;
+  uint16_t rms_voltage_phb;
+  uint16_t rms_voltage_min_phb;
+  uint16_t rms_voltage_max_phb;
+  uint16_t rms_current_phb;
+  uint16_t rms_current_min_phb;
+  uint16_t rms_current_max_phb;
   int16_t active_power_phb;
   int16_t active_power_min_phb;
   int16_t active_power_max_phb;
   int16_t reactive_power_phb;
-  int16_t apparent_power_phb;
+  uint16_t apparent_power_phb;
   int8_t power_factor_phb;
-  int16_t average_rms_voltage_measurement_period_phb;
-  int16_t average_rms_over_voltage_counter_phb;
-  int16_t average_rms_under_voltage_counter_phb;
-  int16_t rms_extreme_over_voltage_period_phb;
-  int16_t rms_extreme_under_voltage_period_phb;
-  int16_t rms_voltage_sag_period_phb;
-  int16_t rms_voltage_swell_period_phb;
-  int16_t line_current_phc;
+  uint16_t average_rms_voltage_measurement_period_phb;
+  uint16_t average_rms_over_voltage_counter_phb;
+  uint16_t average_rms_under_voltage_counter_phb;
+  uint16_t rms_extreme_over_voltage_period_phb;
+  uint16_t rms_extreme_under_voltage_period_phb;
+  uint16_t rms_voltage_sag_period_phb;
+  uint16_t rms_voltage_swell_period_phb;
+  uint16_t line_current_phc;
   int16_t active_current_phc;
   int16_t reactive_current_phc;
-  int16_t rms_voltage_phc;
-  int16_t rms_voltage_min_phc;
-  int16_t rms_voltage_max_phc;
-  int16_t rms_current_phc;
-  int16_t rms_current_min_phc;
-  int16_t rms_current_max_phc;
+  uint16_t rms_voltage_phc;
+  uint16_t rms_voltage_min_phc;
+  uint16_t rms_voltage_max_phc;
+  uint16_t rms_current_phc;
+  uint16_t rms_current_min_phc;
+  uint16_t rms_current_max_phc;
   int16_t active_power_phc;
   int16_t active_power_min_phc;
   int16_t active_power_max_phc;
   int16_t reactive_power_phc;
-  int16_t apparent_power_phc;
+  uint16_t apparent_power_phc;
   int8_t power_factor_phc;
-  int16_t average_rms_voltage_measurement_period_phc;
-  int16_t average_rms_over_voltage_counter_phc;
-  int16_t average_rms_under_voltage_counter_phc;
-  int16_t rms_extreme_over_voltage_period_phc;
-  int16_t rms_extreme_under_voltage_period_phc;
-  int16_t rms_voltage_sag_period_phc;
-  int16_t rms_voltage_swell_period_phc;
+  uint16_t average_rms_voltage_measurement_period_phc;
+  uint16_t average_rms_over_voltage_counter_phc;
+  uint16_t average_rms_under_voltage_counter_phc;
+  uint16_t rms_extreme_over_voltage_period_phc;
+  uint16_t rms_extreme_under_voltage_period_phc;
+  uint16_t rms_voltage_sag_period_phc;
+  uint16_t rms_voltage_swell_period_phc;
 } uic_mqtt_dotdot_electrical_measurement_state_t;
 
 typedef struct {
@@ -30023,43 +30023,43 @@ typedef sl_status_t (*uic_mqtt_dotdot_electrical_measurement_force_read_attribut
  * @brief Command fields for ElectricalMeasurement/GetProfileInfoResponse
  */
 typedef struct {
-  int8_t profile_count;
+  uint8_t profile_count;
 
   ProfileIntervalPeriod profile_interval_period;
 
-  int8_t max_number_of_intervals;
+  uint8_t max_number_of_intervals;
 
   uint8_t list_of_attributes_count;
-  const uint8_t *list_of_attributes;
+  const uint16_t *list_of_attributes;
 } uic_mqtt_dotdot_electrical_measurement_command_get_profile_info_response_fields_t;
 
 /**
  * @brief Command fields for ElectricalMeasurement/GetMeasurementProfileResponse
  */
 typedef struct {
-  uint8_t start_time;
+  uint32_t start_time;
 
   GetMeasurementProfileResponseStatus status;
 
   ProfileIntervalPeriod profile_interval_period;
 
-  int8_t number_of_intervals_delivered;
+  uint8_t number_of_intervals_delivered;
 
-  uint8_t attribute_id;
+  uint16_t attribute_id;
 
   uint8_t intervals_count;
-  const int8_t *intervals;
+  const uint8_t *intervals;
 } uic_mqtt_dotdot_electrical_measurement_command_get_measurement_profile_response_fields_t;
 
 /**
  * @brief Command fields for ElectricalMeasurement/GetMeasurementProfile
  */
 typedef struct {
-  uint8_t attributeid;
+  uint16_t attributeid;
 
-  uint8_t start_time;
+  uint32_t start_time;
 
-  int8_t number_of_intervals;
+  uint8_t number_of_intervals;
 } uic_mqtt_dotdot_electrical_measurement_command_get_measurement_profile_fields_t;
 
 
@@ -30585,7 +30585,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_power_max_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_voltage_multiplier_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -30615,7 +30615,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_voltage_multiplier_unretai
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_voltage_divisor_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -30645,7 +30645,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_voltage_divisor_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_current_multiplier_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -30675,7 +30675,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_current_multiplier_unretai
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_current_divisor_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -30705,7 +30705,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_current_divisor_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_power_multiplier_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -30735,7 +30735,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_power_multiplier_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_power_divisor_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -30765,7 +30765,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_dc_power_divisor_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -30795,7 +30795,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_min_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -30825,7 +30825,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_min_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_max_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -30855,7 +30855,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_max_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_neutral_current_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -30945,7 +30945,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_total_reactive_power_unretain
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_total_apparent_power_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -31335,7 +31335,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_measured_phase11th_harmonic_c
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_multiplier_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -31365,7 +31365,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_multiplier_unret
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_divisor_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -31395,7 +31395,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_frequency_divisor_unretain
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_power_multiplier_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -31425,7 +31425,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_multiplier_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_power_divisor_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -31515,7 +31515,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_phase_harmonic_current_multip
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_line_current_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -31605,7 +31605,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_current_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -31635,7 +31635,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -31665,7 +31665,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -31695,7 +31695,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -31725,7 +31725,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_min_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -31755,7 +31755,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_min_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_max_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -31905,7 +31905,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_power_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_apparent_power_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -31965,7 +31965,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_factor_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -31995,7 +31995,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measureme
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32025,7 +32025,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_coun
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32055,7 +32055,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_cou
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_period_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32085,7 +32085,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_peri
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_period_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32115,7 +32115,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_per
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32145,7 +32145,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_unreta
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32175,7 +32175,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_unre
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_voltage_multiplier_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32205,7 +32205,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_voltage_multiplier_unretai
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_voltage_divisor_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32235,7 +32235,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_voltage_divisor_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_current_multiplier_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32265,7 +32265,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_current_multiplier_unretai
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_current_divisor_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32295,7 +32295,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_current_divisor_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_power_multiplier_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32325,7 +32325,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_power_multiplier_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_ac_power_divisor_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32775,7 +32775,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_line_current_phb_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32865,7 +32865,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_current_phb_unretain
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_phb_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32895,7 +32895,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_phb_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phb_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32925,7 +32925,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phb_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phb_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32955,7 +32955,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phb_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_phb_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -32985,7 +32985,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_phb_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_min_phb_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33015,7 +33015,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_min_phb_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_max_phb_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33165,7 +33165,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_power_phb_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_apparent_power_phb_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33225,7 +33225,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_factor_phb_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phb_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33255,7 +33255,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measureme
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phb_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33285,7 +33285,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_coun
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phb_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33315,7 +33315,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_cou
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_period_phb_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33345,7 +33345,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_peri
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_period_phb_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33375,7 +33375,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_per
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phb_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33405,7 +33405,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phb_un
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_phb_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33435,7 +33435,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_phb_
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_line_current_phc_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33525,7 +33525,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_current_phc_unretain
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_phc_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33555,7 +33555,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_phc_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phc_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33585,7 +33585,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_min_phc_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phc_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33615,7 +33615,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_max_phc_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_phc_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33645,7 +33645,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_phc_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_min_phc_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33675,7 +33675,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_min_phc_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_current_max_phc_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33825,7 +33825,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_reactive_power_phc_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_apparent_power_phc_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33885,7 +33885,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_power_factor_phc_unretain(
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measurement_period_phc_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33915,7 +33915,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_voltage_measureme
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_counter_phc_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33945,7 +33945,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_over_voltage_coun
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_counter_phc_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -33975,7 +33975,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_average_rms_under_voltage_cou
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_period_phc_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34005,7 +34005,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_over_voltage_peri
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_period_phc_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34035,7 +34035,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_extreme_under_voltage_per
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phc_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34065,7 +34065,7 @@ sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_sag_period_phc_un
  */
 sl_status_t uic_mqtt_dotdot_electrical_measurement_rms_voltage_swell_period_phc_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34130,37 +34130,37 @@ void uic_mqtt_dotdot_electrical_measurement_publish_empty_supported_commands(
 // Callback types used by the diagnostics cluster
 
 typedef struct {
-  int16_t number_of_resets;
-  int16_t persistent_memory_writes;
-  int32_t mac_rx_bcast;
-  int32_t mac_tx_bcast;
-  int32_t mac_rx_ucast;
-  int32_t mac_tx_ucast;
-  int16_t mac_tx_ucast_retry;
-  int16_t mac_tx_ucast_fail;
-  int16_t aps_rx_bcast;
-  int16_t aps_tx_bcast;
-  int16_t aps_rx_ucast;
-  int16_t aps_tx_ucast_success;
-  int16_t aps_tx_ucast_retry;
-  int16_t aps_tx_ucast_fail;
-  int16_t route_disc_initiated;
-  int16_t neighbor_added;
-  int16_t neighbor_removed;
-  int16_t neighbor_stale;
-  int16_t join_indication;
-  int16_t child_moved;
-  int16_t nwkfc_failure;
-  int16_t apsfc_failure;
-  int16_t aps_unauthorized_key;
-  int16_t nwk_decrypt_failures;
-  int16_t aps_decrypt_failures;
-  int16_t packet_buffer_allocate_failures;
-  int16_t relayed_ucast;
-  int16_t phy_to_mac_queue_limit_reached;
-  int16_t packet_validate_drop_count;
-  int16_t average_mac_retry_per_aps_message_sent;
-  int8_t last_messagelqi;
+  uint16_t number_of_resets;
+  uint16_t persistent_memory_writes;
+  uint32_t mac_rx_bcast;
+  uint32_t mac_tx_bcast;
+  uint32_t mac_rx_ucast;
+  uint32_t mac_tx_ucast;
+  uint16_t mac_tx_ucast_retry;
+  uint16_t mac_tx_ucast_fail;
+  uint16_t aps_rx_bcast;
+  uint16_t aps_tx_bcast;
+  uint16_t aps_rx_ucast;
+  uint16_t aps_tx_ucast_success;
+  uint16_t aps_tx_ucast_retry;
+  uint16_t aps_tx_ucast_fail;
+  uint16_t route_disc_initiated;
+  uint16_t neighbor_added;
+  uint16_t neighbor_removed;
+  uint16_t neighbor_stale;
+  uint16_t join_indication;
+  uint16_t child_moved;
+  uint16_t nwkfc_failure;
+  uint16_t apsfc_failure;
+  uint16_t aps_unauthorized_key;
+  uint16_t nwk_decrypt_failures;
+  uint16_t aps_decrypt_failures;
+  uint16_t packet_buffer_allocate_failures;
+  uint16_t relayed_ucast;
+  uint16_t phy_to_mac_queue_limit_reached;
+  uint16_t packet_validate_drop_count;
+  uint16_t average_mac_retry_per_aps_message_sent;
+  uint8_t last_messagelqi;
   int8_t last_messagerssi;
 } uic_mqtt_dotdot_diagnostics_state_t;
 
@@ -34278,7 +34278,7 @@ void uic_mqtt_dotdot_clear_diagnostics_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_number_of_resets_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34308,7 +34308,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_number_of_resets_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_persistent_memory_writes_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34338,7 +34338,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_persistent_memory_writes_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_mac_rx_bcast_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34368,7 +34368,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_rx_bcast_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_bcast_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34398,7 +34398,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_bcast_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_mac_rx_ucast_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34428,7 +34428,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_rx_ucast_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_ucast_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34458,7 +34458,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_ucast_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_ucast_retry_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34488,7 +34488,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_ucast_retry_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_ucast_fail_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34518,7 +34518,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_mac_tx_ucast_fail_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_rx_bcast_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34548,7 +34548,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_rx_bcast_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_bcast_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34578,7 +34578,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_bcast_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_rx_ucast_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34608,7 +34608,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_rx_ucast_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_ucast_success_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34638,7 +34638,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_ucast_success_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_ucast_retry_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34668,7 +34668,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_ucast_retry_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_ucast_fail_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34698,7 +34698,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_tx_ucast_fail_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_route_disc_initiated_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34728,7 +34728,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_route_disc_initiated_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_neighbor_added_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34758,7 +34758,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_neighbor_added_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_neighbor_removed_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34788,7 +34788,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_neighbor_removed_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_neighbor_stale_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34818,7 +34818,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_neighbor_stale_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_join_indication_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34848,7 +34848,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_join_indication_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_child_moved_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34878,7 +34878,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_child_moved_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_nwkfc_failure_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34908,7 +34908,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_nwkfc_failure_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_apsfc_failure_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34938,7 +34938,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_apsfc_failure_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_unauthorized_key_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34968,7 +34968,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_unauthorized_key_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_nwk_decrypt_failures_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -34998,7 +34998,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_nwk_decrypt_failures_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_aps_decrypt_failures_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -35028,7 +35028,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_aps_decrypt_failures_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_packet_buffer_allocate_failures_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -35058,7 +35058,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_packet_buffer_allocate_failures_unretain
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_relayed_ucast_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -35088,7 +35088,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_relayed_ucast_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_phy_to_mac_queue_limit_reached_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -35118,7 +35118,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_phy_to_mac_queue_limit_reached_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_packet_validate_drop_count_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -35148,7 +35148,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_packet_validate_drop_count_unretain(
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_average_mac_retry_per_aps_message_sent_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -35178,7 +35178,7 @@ sl_status_t uic_mqtt_dotdot_diagnostics_average_mac_retry_per_aps_message_sent_u
  */
 sl_status_t uic_mqtt_dotdot_diagnostics_last_messagelqi_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -35281,13 +35281,13 @@ typedef sl_status_t (*uic_mqtt_dotdot_protocol_controller_rf_telemetry_tx_report
 
     bool transmission_successful,
 
-    int16_t transmission_time_ms,
+    uint16_t transmission_time_ms,
 
     int8_t tx_powerd_bm,
 
-    int8_t tx_channel,
+    uint8_t tx_channel,
 
-    int8_t routing_attempts,
+    uint8_t routing_attempts,
 
     bool route_changed,
 
@@ -35303,7 +35303,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_protocol_controller_rf_telemetry_tx_report
 
     int8_t ackrssi,
 
-    int8_t ack_channel,
+    uint8_t ack_channel,
 
     const char* last_route_failed_link_functionalunid,
 
@@ -35353,13 +35353,13 @@ typedef struct {
 
   bool transmission_successful;
 
-  int16_t transmission_time_ms;
+  uint16_t transmission_time_ms;
 
   int8_t tx_powerd_bm;
 
-  int8_t tx_channel;
+  uint8_t tx_channel;
 
-  int8_t routing_attempts;
+  uint8_t routing_attempts;
 
   bool route_changed;
 
@@ -35375,7 +35375,7 @@ typedef struct {
 
   int8_t ackrssi;
 
-  int8_t ack_channel;
+  uint8_t ack_channel;
 
   const char* last_route_failed_link_functionalunid;
 
@@ -35617,10 +35617,10 @@ typedef sl_status_t (*uic_mqtt_dotdot_state_enable_nls_callback_t)(
 
 typedef struct {
   size_t endpoint_id_list_count;
-  const int8_t* endpoint_id_list;
+  const uint8_t* endpoint_id_list;
   uint8_t network_status;
   uint8_t security;
-  int32_t maximum_command_delay;
+  uint32_t maximum_command_delay;
   size_t network_list_count;
   const char** network_list;
 } uic_mqtt_dotdot_state_state_t;
@@ -35954,7 +35954,7 @@ void uic_mqtt_dotdot_clear_state_force_read_attributes_callbacks();
 sl_status_t uic_mqtt_dotdot_state_endpoint_id_list_publish(
   const char *base_topic,
   size_t value_count,
-  const int8_t* value,
+  const uint8_t* value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -36044,7 +36044,7 @@ sl_status_t uic_mqtt_dotdot_state_security_unretain(
  */
 sl_status_t uic_mqtt_dotdot_state_maximum_command_delay_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -36147,7 +36147,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_binding_bind_callback_t)(
 
     const char* destination_unid,
 
-    int8_t destination_ep
+    uint8_t destination_ep
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_binding_unbind_callback_t)(
@@ -36158,7 +36158,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_binding_unbind_callback_t)(
 
     const char* destination_unid,
 
-    int8_t destination_ep
+    uint8_t destination_ep
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_binding_bind_to_protocol_controller_callback_t)(
@@ -36214,7 +36214,7 @@ typedef struct {
 
   const char* destination_unid;
 
-  int8_t destination_ep;
+  uint8_t destination_ep;
 } uic_mqtt_dotdot_binding_command_bind_fields_t;
 
 /**
@@ -36225,7 +36225,7 @@ typedef struct {
 
   const char* destination_unid;
 
-  int8_t destination_ep;
+  uint8_t destination_ep;
 } uic_mqtt_dotdot_binding_command_unbind_fields_t;
 
 /**
@@ -36594,7 +36594,7 @@ void uic_mqtt_dotdot_binding_publish_empty_supported_commands(
 // Callback types used by the system_metrics cluster
 
 typedef struct {
-  int32_t reporting_interval_seconds;
+  uint32_t reporting_interval_seconds;
   size_t cpu_usage_percent_count;
   const double* cpu_usage_percent;
   size_t cpu_frequencym_hz_count;
@@ -36622,14 +36622,14 @@ typedef struct {
   const WirelessNetworkInterfaceData* wireless_network_interfaces_data;
   const char* hostname;
   const char* fqdn;
-  int64_t uptime_minutes;
+  uint64_t uptime_minutes;
   double current_temperature_celcius;
   double average_temperature_celcius;
   double min_temperature_celcius;
   double max_temperature_celcius;
   bool power_plugged;
   double battery_percentage;
-  int64_t system_interrupts;
+  uint64_t system_interrupts;
 } uic_mqtt_dotdot_system_metrics_state_t;
 
 typedef struct {
@@ -36741,7 +36741,7 @@ void uic_mqtt_dotdot_clear_system_metrics_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_system_metrics_reporting_interval_seconds_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -37329,7 +37329,7 @@ sl_status_t uic_mqtt_dotdot_system_metrics_fqdn_unretain(
  */
 sl_status_t uic_mqtt_dotdot_system_metrics_uptime_minutes_publish(
   const char *base_topic,
-  int64_t value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -37539,7 +37539,7 @@ sl_status_t uic_mqtt_dotdot_system_metrics_battery_percentage_unretain(
  */
 sl_status_t uic_mqtt_dotdot_system_metrics_system_interrupts_publish(
   const char *base_topic,
-  int64_t value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -37622,20 +37622,20 @@ typedef struct {
   bool application_connected;
   size_t application_mqtt_topics_count;
   const char** application_mqtt_topics;
-  int64_t uptime_minutes;
-  int64_t process_id;
+  uint64_t uptime_minutes;
+  uint64_t process_id;
   const char* hostname;
   const char* fqdn;
   bool mqtt_logging_enabled;
   uint8_t mqtt_logging_level;
-  int32_t mqtt_statistics_reporting_interval_seconds;
-  int64_t mqtt_messages_sent;
-  int64_t mqtt_messages_received;
-  int64_t mqtt_subscription_count;
+  uint32_t mqtt_statistics_reporting_interval_seconds;
+  uint64_t mqtt_messages_sent;
+  uint64_t mqtt_messages_received;
+  uint64_t mqtt_subscription_count;
   double mqtt_average_delivery_time_seconds;
   double mqtt_min_delivery_time_seconds;
   double mqtt_max_delivery_time_seconds;
-  int32_t application_statistics_reporting_interval_seconds;
+  uint32_t application_statistics_reporting_interval_seconds;
   double application_cpu_usage_percent;
   double application_cpu_average_usage_percent;
   double application_cpu_min_usage_percent;
@@ -37923,7 +37923,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_application_mqtt_topics_unret
  */
 sl_status_t uic_mqtt_dotdot_application_monitoring_uptime_minutes_publish(
   const char *base_topic,
-  int64_t value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -37953,7 +37953,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_uptime_minutes_unretain(
  */
 sl_status_t uic_mqtt_dotdot_application_monitoring_process_id_publish(
   const char *base_topic,
-  int64_t value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -38103,7 +38103,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_logging_level_unretain(
  */
 sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_statistics_reporting_interval_seconds_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -38133,7 +38133,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_statistics_reporting_int
  */
 sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_messages_sent_publish(
   const char *base_topic,
-  int64_t value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -38163,7 +38163,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_messages_sent_unretain(
  */
 sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_messages_received_publish(
   const char *base_topic,
-  int64_t value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -38193,7 +38193,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_messages_received_unreta
  */
 sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_subscription_count_publish(
   const char *base_topic,
-  int64_t value,
+  uint64_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -38313,7 +38313,7 @@ sl_status_t uic_mqtt_dotdot_application_monitoring_mqtt_max_delivery_time_second
  */
 sl_status_t uic_mqtt_dotdot_application_monitoring_application_statistics_reporting_interval_seconds_publish(
   const char *base_topic,
-  int32_t value,
+  uint32_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -38713,7 +38713,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_configuration_parameters_discover_paramete
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t parameter_id
+    uint16_t parameter_id
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_configuration_parameters_default_reset_all_parameters_callback_t)(
@@ -38725,7 +38725,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_configuration_parameters_set_parameter_cal
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t parameter_id,
+    uint16_t parameter_id,
 
     int64_t value
 
@@ -38734,9 +38734,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_configuration_parameters_discover_paramete
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t first_parameter_id,
+    uint16_t first_parameter_id,
 
-    int16_t last_parameter_id
+    uint16_t last_parameter_id
 
 );
 
@@ -38769,14 +38769,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_configuration_parameters_force_read_attrib
  * @brief Command fields for ConfigurationParameters/DiscoverParameter
  */
 typedef struct {
-  int16_t parameter_id;
+  uint16_t parameter_id;
 } uic_mqtt_dotdot_configuration_parameters_command_discover_parameter_fields_t;
 
 /**
  * @brief Command fields for ConfigurationParameters/SetParameter
  */
 typedef struct {
-  int16_t parameter_id;
+  uint16_t parameter_id;
 
   int64_t value;
 } uic_mqtt_dotdot_configuration_parameters_command_set_parameter_fields_t;
@@ -38785,9 +38785,9 @@ typedef struct {
  * @brief Command fields for ConfigurationParameters/DiscoverParameterRange
  */
 typedef struct {
-  int16_t first_parameter_id;
+  uint16_t first_parameter_id;
 
-  int16_t last_parameter_id;
+  uint16_t last_parameter_id;
 } uic_mqtt_dotdot_configuration_parameters_command_discover_parameter_range_fields_t;
 
 
@@ -39082,7 +39082,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_user_credential_add_user_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     UserTypeEnum user_type,
 
@@ -39092,7 +39092,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_user_credential_add_user_callback_t)(
 
     const char* user_name,
 
-    int16_t expiring_timeout_minutes,
+    uint16_t expiring_timeout_minutes,
 
     UserNameEncodingType user_name_encoding
 
@@ -39101,7 +39101,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_user_credential_modify_user_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     UserTypeEnum user_type,
 
@@ -39111,7 +39111,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_user_credential_modify_user_callback_t)(
 
     const char* user_name,
 
-    int16_t expiring_timeout_minutes,
+    uint16_t expiring_timeout_minutes,
 
     UserNameEncodingType user_name_encoding
 
@@ -39120,18 +39120,18 @@ typedef sl_status_t (*uic_mqtt_dotdot_user_credential_delete_user_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t user_uniqueid
+    uint16_t user_uniqueid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_user_credential_add_credential_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     CredType credential_type,
 
-    int16_t credential_slot,
+    uint16_t credential_slot,
 
     const char* credential_data
 
@@ -39140,11 +39140,11 @@ typedef sl_status_t (*uic_mqtt_dotdot_user_credential_modify_credential_callback
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     CredType credential_type,
 
-    int16_t credential_slot,
+    uint16_t credential_slot,
 
     const char* credential_data
 
@@ -39153,11 +39153,11 @@ typedef sl_status_t (*uic_mqtt_dotdot_user_credential_delete_credential_callback
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     CredType credential_type,
 
-    int16_t credential_slot
+    uint16_t credential_slot
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_user_credential_delete_all_users_callback_t)(
@@ -39181,14 +39181,14 @@ typedef sl_status_t (*uic_mqtt_dotdot_user_credential_delete_all_credentials_for
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t user_uniqueid
+    uint16_t user_uniqueid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_user_credential_delete_all_credentials_for_user_by_type_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     CredType credential_type
 
@@ -39197,26 +39197,26 @@ typedef sl_status_t (*uic_mqtt_dotdot_user_credential_credential_learn_start_add
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     CredType credential_type,
 
-    int16_t credential_slot,
+    uint16_t credential_slot,
 
-    int8_t credential_learn_timeout
+    uint8_t credential_learn_timeout
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_user_credential_credential_learn_start_modify_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t user_uniqueid,
+    uint16_t user_uniqueid,
 
     CredType credential_type,
 
-    int16_t credential_slot,
+    uint16_t credential_slot,
 
-    int8_t credential_learn_timeout
+    uint8_t credential_learn_timeout
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_user_credential_credential_learn_stop_callback_t)(
@@ -39230,20 +39230,20 @@ typedef sl_status_t (*uic_mqtt_dotdot_user_credential_credential_association_cal
     uic_mqtt_dotdot_callback_call_type_t call_type,
     CredType credential_type,
 
-    int16_t source_user_uniqueid,
+    uint16_t source_user_uniqueid,
 
-    int16_t source_credential_slot,
+    uint16_t source_credential_slot,
 
-    int16_t destination_user_uniqueid,
+    uint16_t destination_user_uniqueid,
 
-    int16_t destination_credential_slot
+    uint16_t destination_credential_slot
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_user_credential_get_user_checksum_callback_t)(
     dotdot_unid_t unid,
     dotdot_endpoint_id_t endpoint,
     uic_mqtt_dotdot_callback_call_type_t call_type,
-    int16_t user_uniqueid
+    uint16_t user_uniqueid
 
 );
 typedef sl_status_t (*uic_mqtt_dotdot_user_credential_get_credential_checksum_callback_t)(
@@ -39272,7 +39272,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_user_credential_deactivate_admin_pin_code_
 );
 
 typedef struct {
-  int16_t supported_user_unique_identifiers;
+  uint16_t supported_user_unique_identifiers;
   uint8_t supported_credential_rules;
   uint16_t supported_credential_types;
   uint16_t supported_user_types;
@@ -39313,7 +39313,7 @@ typedef sl_status_t (*uic_mqtt_dotdot_user_credential_force_read_attributes_call
  * @brief Command fields for UserCredential/AddUser
  */
 typedef struct {
-  int16_t user_uniqueid;
+  uint16_t user_uniqueid;
 
   UserTypeEnum user_type;
 
@@ -39323,7 +39323,7 @@ typedef struct {
 
   const char* user_name;
 
-  int16_t expiring_timeout_minutes;
+  uint16_t expiring_timeout_minutes;
 
   UserNameEncodingType user_name_encoding;
 } uic_mqtt_dotdot_user_credential_command_add_user_fields_t;
@@ -39332,7 +39332,7 @@ typedef struct {
  * @brief Command fields for UserCredential/ModifyUser
  */
 typedef struct {
-  int16_t user_uniqueid;
+  uint16_t user_uniqueid;
 
   UserTypeEnum user_type;
 
@@ -39342,7 +39342,7 @@ typedef struct {
 
   const char* user_name;
 
-  int16_t expiring_timeout_minutes;
+  uint16_t expiring_timeout_minutes;
 
   UserNameEncodingType user_name_encoding;
 } uic_mqtt_dotdot_user_credential_command_modify_user_fields_t;
@@ -39351,18 +39351,18 @@ typedef struct {
  * @brief Command fields for UserCredential/DeleteUser
  */
 typedef struct {
-  int16_t user_uniqueid;
+  uint16_t user_uniqueid;
 } uic_mqtt_dotdot_user_credential_command_delete_user_fields_t;
 
 /**
  * @brief Command fields for UserCredential/AddCredential
  */
 typedef struct {
-  int16_t user_uniqueid;
+  uint16_t user_uniqueid;
 
   CredType credential_type;
 
-  int16_t credential_slot;
+  uint16_t credential_slot;
 
   const char* credential_data;
 } uic_mqtt_dotdot_user_credential_command_add_credential_fields_t;
@@ -39371,11 +39371,11 @@ typedef struct {
  * @brief Command fields for UserCredential/ModifyCredential
  */
 typedef struct {
-  int16_t user_uniqueid;
+  uint16_t user_uniqueid;
 
   CredType credential_type;
 
-  int16_t credential_slot;
+  uint16_t credential_slot;
 
   const char* credential_data;
 } uic_mqtt_dotdot_user_credential_command_modify_credential_fields_t;
@@ -39384,11 +39384,11 @@ typedef struct {
  * @brief Command fields for UserCredential/DeleteCredential
  */
 typedef struct {
-  int16_t user_uniqueid;
+  uint16_t user_uniqueid;
 
   CredType credential_type;
 
-  int16_t credential_slot;
+  uint16_t credential_slot;
 } uic_mqtt_dotdot_user_credential_command_delete_credential_fields_t;
 
 /**
@@ -39402,14 +39402,14 @@ typedef struct {
  * @brief Command fields for UserCredential/DeleteAllCredentialsForUser
  */
 typedef struct {
-  int16_t user_uniqueid;
+  uint16_t user_uniqueid;
 } uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_fields_t;
 
 /**
  * @brief Command fields for UserCredential/DeleteAllCredentialsForUserByType
  */
 typedef struct {
-  int16_t user_uniqueid;
+  uint16_t user_uniqueid;
 
   CredType credential_type;
 } uic_mqtt_dotdot_user_credential_command_delete_all_credentials_for_user_by_type_fields_t;
@@ -39418,26 +39418,26 @@ typedef struct {
  * @brief Command fields for UserCredential/CredentialLearnStartAdd
  */
 typedef struct {
-  int16_t user_uniqueid;
+  uint16_t user_uniqueid;
 
   CredType credential_type;
 
-  int16_t credential_slot;
+  uint16_t credential_slot;
 
-  int8_t credential_learn_timeout;
+  uint8_t credential_learn_timeout;
 } uic_mqtt_dotdot_user_credential_command_credential_learn_start_add_fields_t;
 
 /**
  * @brief Command fields for UserCredential/CredentialLearnStartModify
  */
 typedef struct {
-  int16_t user_uniqueid;
+  uint16_t user_uniqueid;
 
   CredType credential_type;
 
-  int16_t credential_slot;
+  uint16_t credential_slot;
 
-  int8_t credential_learn_timeout;
+  uint8_t credential_learn_timeout;
 } uic_mqtt_dotdot_user_credential_command_credential_learn_start_modify_fields_t;
 
 /**
@@ -39446,20 +39446,20 @@ typedef struct {
 typedef struct {
   CredType credential_type;
 
-  int16_t source_user_uniqueid;
+  uint16_t source_user_uniqueid;
 
-  int16_t source_credential_slot;
+  uint16_t source_credential_slot;
 
-  int16_t destination_user_uniqueid;
+  uint16_t destination_user_uniqueid;
 
-  int16_t destination_credential_slot;
+  uint16_t destination_credential_slot;
 } uic_mqtt_dotdot_user_credential_command_credential_association_fields_t;
 
 /**
  * @brief Command fields for UserCredential/GetUserChecksum
  */
 typedef struct {
-  int16_t user_uniqueid;
+  uint16_t user_uniqueid;
 } uic_mqtt_dotdot_user_credential_command_get_user_checksum_fields_t;
 
 /**
@@ -40339,7 +40339,7 @@ void uic_mqtt_dotdot_clear_user_credential_force_read_attributes_callbacks();
  */
 sl_status_t uic_mqtt_dotdot_user_credential_supported_user_unique_identifiers_publish(
   const char *base_topic,
-  int16_t value,
+  uint16_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -41504,9 +41504,9 @@ typedef sl_status_t (*uic_mqtt_dotdot_unify_humidity_control_setpoint_set_callba
     uic_mqtt_dotdot_callback_call_type_t call_type,
     SetpointType type,
 
-    int8_t precision,
+    uint8_t precision,
 
-    int8_t scale,
+    uint8_t scale,
 
     int32_t value
 
@@ -41521,17 +41521,17 @@ typedef struct {
   int32_t humidifier_setpoint_max;
   int32_t humidifier_setpoint;
   uint8_t humidifier_setpoint_scale;
-  int8_t humidifier_setpoint_precision;
+  uint8_t humidifier_setpoint_precision;
   int32_t dehumidifier_setpoint_min;
   int32_t dehumidifier_setpoint_max;
   int32_t dehumidifier_setpoint;
   uint8_t dehumidifier_setpoint_scale;
-  int8_t dehumidifier_setpoint_precision;
+  uint8_t dehumidifier_setpoint_precision;
   int32_t auto_setpoint_min;
   int32_t auto_setpoint_max;
   int32_t auto_setpoint;
   uint8_t auto_setpoint_scale;
-  int8_t auto_setpoint_precision;
+  uint8_t auto_setpoint_precision;
 } uic_mqtt_dotdot_unify_humidity_control_state_t;
 
 typedef struct {
@@ -41585,9 +41585,9 @@ typedef struct {
 typedef struct {
   SetpointType type;
 
-  int8_t precision;
+  uint8_t precision;
 
-  int8_t scale;
+  uint8_t scale;
 
   int32_t value;
 } uic_mqtt_dotdot_unify_humidity_control_command_setpoint_set_fields_t;
@@ -41975,7 +41975,7 @@ sl_status_t uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_scale_unr
  */
 sl_status_t uic_mqtt_dotdot_unify_humidity_control_humidifier_setpoint_precision_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -42125,7 +42125,7 @@ sl_status_t uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_scale_u
  */
 sl_status_t uic_mqtt_dotdot_unify_humidity_control_dehumidifier_setpoint_precision_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 
@@ -42275,7 +42275,7 @@ sl_status_t uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_scale_unretain(
  */
 sl_status_t uic_mqtt_dotdot_unify_humidity_control_auto_setpoint_precision_publish(
   const char *base_topic,
-  int8_t value,
+  uint8_t value,
   uic_mqtt_dotdot_attribute_publish_type_t publish_type
 );
 

@@ -135,7 +135,7 @@ static void uic_mqtt_dotdot_on_basic_zcl_version_attribute_update(
   }
 
 
-  int8_t zcl_version = {};
+  uint8_t zcl_version = {};
 
   nlohmann::json json_payload;
   try {
@@ -148,7 +148,7 @@ static void uic_mqtt_dotdot_on_basic_zcl_version_attribute_update(
         return;
       }
 // Start parsing value
-      zcl_version = json_payload.at("value").get<int8_t>();
+      zcl_version = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -211,7 +211,7 @@ static void uic_mqtt_dotdot_on_basic_application_version_attribute_update(
   }
 
 
-  int8_t application_version = {};
+  uint8_t application_version = {};
 
   nlohmann::json json_payload;
   try {
@@ -224,7 +224,7 @@ static void uic_mqtt_dotdot_on_basic_application_version_attribute_update(
         return;
       }
 // Start parsing value
-      application_version = json_payload.at("value").get<int8_t>();
+      application_version = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -287,7 +287,7 @@ static void uic_mqtt_dotdot_on_basic_stack_version_attribute_update(
   }
 
 
-  int8_t stack_version = {};
+  uint8_t stack_version = {};
 
   nlohmann::json json_payload;
   try {
@@ -300,7 +300,7 @@ static void uic_mqtt_dotdot_on_basic_stack_version_attribute_update(
         return;
       }
 // Start parsing value
-      stack_version = json_payload.at("value").get<int8_t>();
+      stack_version = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -363,7 +363,7 @@ static void uic_mqtt_dotdot_on_basic_hw_version_attribute_update(
   }
 
 
-  int8_t hw_version = {};
+  uint8_t hw_version = {};
 
   nlohmann::json json_payload;
   try {
@@ -376,7 +376,7 @@ static void uic_mqtt_dotdot_on_basic_hw_version_attribute_update(
         return;
       }
 // Start parsing value
-      hw_version = json_payload.at("value").get<int8_t>();
+      hw_version = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -919,7 +919,7 @@ static void uic_mqtt_dotdot_on_basic_product_code_attribute_update(
   }
 
 
-  uint8_t product_code = {};
+  const char* product_code = {};
 
   nlohmann::json json_payload;
   try {
@@ -2015,7 +2015,7 @@ static void uic_mqtt_dotdot_on_power_configuration_mains_voltage_attribute_updat
   }
 
 
-  int16_t mains_voltage = {};
+  uint16_t mains_voltage = {};
 
   nlohmann::json json_payload;
   try {
@@ -2028,7 +2028,7 @@ static void uic_mqtt_dotdot_on_power_configuration_mains_voltage_attribute_updat
         return;
       }
 // Start parsing value
-      mains_voltage = json_payload.at("value").get<int16_t>();
+      mains_voltage = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -2091,7 +2091,7 @@ static void uic_mqtt_dotdot_on_power_configuration_mains_frequency_attribute_upd
   }
 
 
-  int8_t mains_frequency = {};
+  uint8_t mains_frequency = {};
 
   nlohmann::json json_payload;
   try {
@@ -2104,7 +2104,7 @@ static void uic_mqtt_dotdot_on_power_configuration_mains_frequency_attribute_upd
         return;
       }
 // Start parsing value
-      mains_frequency = json_payload.at("value").get<int8_t>();
+      mains_frequency = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -2243,7 +2243,7 @@ static void uic_mqtt_dotdot_on_power_configuration_mains_voltage_min_threshold_a
   }
 
 
-  int16_t mains_voltage_min_threshold = {};
+  uint16_t mains_voltage_min_threshold = {};
 
   nlohmann::json json_payload;
   try {
@@ -2256,7 +2256,7 @@ static void uic_mqtt_dotdot_on_power_configuration_mains_voltage_min_threshold_a
         return;
       }
 // Start parsing value
-      mains_voltage_min_threshold = json_payload.at("value").get<int16_t>();
+      mains_voltage_min_threshold = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -2319,7 +2319,7 @@ static void uic_mqtt_dotdot_on_power_configuration_mains_voltage_max_threshold_a
   }
 
 
-  int16_t mains_voltage_max_threshold = {};
+  uint16_t mains_voltage_max_threshold = {};
 
   nlohmann::json json_payload;
   try {
@@ -2332,7 +2332,7 @@ static void uic_mqtt_dotdot_on_power_configuration_mains_voltage_max_threshold_a
         return;
       }
 // Start parsing value
-      mains_voltage_max_threshold = json_payload.at("value").get<int16_t>();
+      mains_voltage_max_threshold = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -2395,7 +2395,7 @@ static void uic_mqtt_dotdot_on_power_configuration_mains_voltage_dwell_trip_poin
   }
 
 
-  int16_t mains_voltage_dwell_trip_point = {};
+  uint16_t mains_voltage_dwell_trip_point = {};
 
   nlohmann::json json_payload;
   try {
@@ -2408,7 +2408,7 @@ static void uic_mqtt_dotdot_on_power_configuration_mains_voltage_dwell_trip_poin
         return;
       }
 // Start parsing value
-      mains_voltage_dwell_trip_point = json_payload.at("value").get<int16_t>();
+      mains_voltage_dwell_trip_point = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -2471,7 +2471,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_voltage_attribute_upd
   }
 
 
-  int8_t battery_voltage = {};
+  uint8_t battery_voltage = {};
 
   nlohmann::json json_payload;
   try {
@@ -2484,7 +2484,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_voltage_attribute_upd
         return;
       }
 // Start parsing value
-      battery_voltage = json_payload.at("value").get<int8_t>();
+      battery_voltage = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -2547,7 +2547,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_percentage_remaining_
   }
 
 
-  int8_t battery_percentage_remaining = {};
+  uint8_t battery_percentage_remaining = {};
 
   nlohmann::json json_payload;
   try {
@@ -2560,7 +2560,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_percentage_remaining_
         return;
       }
 // Start parsing value
-      battery_percentage_remaining = json_payload.at("value").get<int8_t>();
+      battery_percentage_remaining = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -2783,7 +2783,7 @@ static void uic_mqtt_dotdot_on_power_configuration_batterya_hr_rating_attribute_
   }
 
 
-  int16_t batterya_hr_rating = {};
+  uint16_t batterya_hr_rating = {};
 
   nlohmann::json json_payload;
   try {
@@ -2796,7 +2796,7 @@ static void uic_mqtt_dotdot_on_power_configuration_batterya_hr_rating_attribute_
         return;
       }
 // Start parsing value
-      batterya_hr_rating = json_payload.at("value").get<int16_t>();
+      batterya_hr_rating = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -2859,7 +2859,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_quantity_attribute_up
   }
 
 
-  int8_t battery_quantity = {};
+  uint8_t battery_quantity = {};
 
   nlohmann::json json_payload;
   try {
@@ -2872,7 +2872,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_quantity_attribute_up
         return;
       }
 // Start parsing value
-      battery_quantity = json_payload.at("value").get<int8_t>();
+      battery_quantity = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -2935,7 +2935,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_rated_voltage_attribu
   }
 
 
-  int8_t battery_rated_voltage = {};
+  uint8_t battery_rated_voltage = {};
 
   nlohmann::json json_payload;
   try {
@@ -2948,7 +2948,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_rated_voltage_attribu
         return;
       }
 // Start parsing value
-      battery_rated_voltage = json_payload.at("value").get<int8_t>();
+      battery_rated_voltage = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -3087,7 +3087,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_voltage_min_threshold
   }
 
 
-  int8_t battery_voltage_min_threshold = {};
+  uint8_t battery_voltage_min_threshold = {};
 
   nlohmann::json json_payload;
   try {
@@ -3100,7 +3100,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_voltage_min_threshold
         return;
       }
 // Start parsing value
-      battery_voltage_min_threshold = json_payload.at("value").get<int8_t>();
+      battery_voltage_min_threshold = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -3163,7 +3163,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_voltage_threshold1_at
   }
 
 
-  int8_t battery_voltage_threshold1 = {};
+  uint8_t battery_voltage_threshold1 = {};
 
   nlohmann::json json_payload;
   try {
@@ -3176,7 +3176,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_voltage_threshold1_at
         return;
       }
 // Start parsing value
-      battery_voltage_threshold1 = json_payload.at("value").get<int8_t>();
+      battery_voltage_threshold1 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -3239,7 +3239,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_voltage_threshold2_at
   }
 
 
-  int8_t battery_voltage_threshold2 = {};
+  uint8_t battery_voltage_threshold2 = {};
 
   nlohmann::json json_payload;
   try {
@@ -3252,7 +3252,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_voltage_threshold2_at
         return;
       }
 // Start parsing value
-      battery_voltage_threshold2 = json_payload.at("value").get<int8_t>();
+      battery_voltage_threshold2 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -3315,7 +3315,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_voltage_threshold3_at
   }
 
 
-  int8_t battery_voltage_threshold3 = {};
+  uint8_t battery_voltage_threshold3 = {};
 
   nlohmann::json json_payload;
   try {
@@ -3328,7 +3328,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_voltage_threshold3_at
         return;
       }
 // Start parsing value
-      battery_voltage_threshold3 = json_payload.at("value").get<int8_t>();
+      battery_voltage_threshold3 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -3391,7 +3391,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_percentage_min_thresh
   }
 
 
-  int8_t battery_percentage_min_threshold = {};
+  uint8_t battery_percentage_min_threshold = {};
 
   nlohmann::json json_payload;
   try {
@@ -3404,7 +3404,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_percentage_min_thresh
         return;
       }
 // Start parsing value
-      battery_percentage_min_threshold = json_payload.at("value").get<int8_t>();
+      battery_percentage_min_threshold = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -3467,7 +3467,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_percentage_threshold1
   }
 
 
-  int8_t battery_percentage_threshold1 = {};
+  uint8_t battery_percentage_threshold1 = {};
 
   nlohmann::json json_payload;
   try {
@@ -3480,7 +3480,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_percentage_threshold1
         return;
       }
 // Start parsing value
-      battery_percentage_threshold1 = json_payload.at("value").get<int8_t>();
+      battery_percentage_threshold1 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -3543,7 +3543,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_percentage_threshold2
   }
 
 
-  int8_t battery_percentage_threshold2 = {};
+  uint8_t battery_percentage_threshold2 = {};
 
   nlohmann::json json_payload;
   try {
@@ -3556,7 +3556,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_percentage_threshold2
         return;
       }
 // Start parsing value
-      battery_percentage_threshold2 = json_payload.at("value").get<int8_t>();
+      battery_percentage_threshold2 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -3619,7 +3619,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_percentage_threshold3
   }
 
 
-  int8_t battery_percentage_threshold3 = {};
+  uint8_t battery_percentage_threshold3 = {};
 
   nlohmann::json json_payload;
   try {
@@ -3632,7 +3632,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery_percentage_threshold3
         return;
       }
 // Start parsing value
-      battery_percentage_threshold3 = json_payload.at("value").get<int8_t>();
+      battery_percentage_threshold3 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -3771,7 +3771,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_voltage_attribute_up
   }
 
 
-  int8_t battery2_voltage = {};
+  uint8_t battery2_voltage = {};
 
   nlohmann::json json_payload;
   try {
@@ -3784,7 +3784,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_voltage_attribute_up
         return;
       }
 // Start parsing value
-      battery2_voltage = json_payload.at("value").get<int8_t>();
+      battery2_voltage = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -3847,7 +3847,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_percentage_remaining
   }
 
 
-  int8_t battery2_percentage_remaining = {};
+  uint8_t battery2_percentage_remaining = {};
 
   nlohmann::json json_payload;
   try {
@@ -3860,7 +3860,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_percentage_remaining
         return;
       }
 // Start parsing value
-      battery2_percentage_remaining = json_payload.at("value").get<int8_t>();
+      battery2_percentage_remaining = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -4083,7 +4083,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2a_hr_rating_attribute
   }
 
 
-  int16_t battery2a_hr_rating = {};
+  uint16_t battery2a_hr_rating = {};
 
   nlohmann::json json_payload;
   try {
@@ -4096,7 +4096,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2a_hr_rating_attribute
         return;
       }
 // Start parsing value
-      battery2a_hr_rating = json_payload.at("value").get<int16_t>();
+      battery2a_hr_rating = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -4159,7 +4159,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_quantity_attribute_u
   }
 
 
-  int8_t battery2_quantity = {};
+  uint8_t battery2_quantity = {};
 
   nlohmann::json json_payload;
   try {
@@ -4172,7 +4172,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_quantity_attribute_u
         return;
       }
 // Start parsing value
-      battery2_quantity = json_payload.at("value").get<int8_t>();
+      battery2_quantity = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -4235,7 +4235,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_rated_voltage_attrib
   }
 
 
-  int8_t battery2_rated_voltage = {};
+  uint8_t battery2_rated_voltage = {};
 
   nlohmann::json json_payload;
   try {
@@ -4248,7 +4248,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_rated_voltage_attrib
         return;
       }
 // Start parsing value
-      battery2_rated_voltage = json_payload.at("value").get<int8_t>();
+      battery2_rated_voltage = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -4387,7 +4387,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_voltage_min_threshol
   }
 
 
-  int8_t battery2_voltage_min_threshold = {};
+  uint8_t battery2_voltage_min_threshold = {};
 
   nlohmann::json json_payload;
   try {
@@ -4400,7 +4400,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_voltage_min_threshol
         return;
       }
 // Start parsing value
-      battery2_voltage_min_threshold = json_payload.at("value").get<int8_t>();
+      battery2_voltage_min_threshold = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -4463,7 +4463,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_voltage_threshold1_a
   }
 
 
-  int8_t battery2_voltage_threshold1 = {};
+  uint8_t battery2_voltage_threshold1 = {};
 
   nlohmann::json json_payload;
   try {
@@ -4476,7 +4476,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_voltage_threshold1_a
         return;
       }
 // Start parsing value
-      battery2_voltage_threshold1 = json_payload.at("value").get<int8_t>();
+      battery2_voltage_threshold1 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -4539,7 +4539,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_voltage_threshold2_a
   }
 
 
-  int8_t battery2_voltage_threshold2 = {};
+  uint8_t battery2_voltage_threshold2 = {};
 
   nlohmann::json json_payload;
   try {
@@ -4552,7 +4552,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_voltage_threshold2_a
         return;
       }
 // Start parsing value
-      battery2_voltage_threshold2 = json_payload.at("value").get<int8_t>();
+      battery2_voltage_threshold2 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -4615,7 +4615,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_voltage_threshold3_a
   }
 
 
-  int8_t battery2_voltage_threshold3 = {};
+  uint8_t battery2_voltage_threshold3 = {};
 
   nlohmann::json json_payload;
   try {
@@ -4628,7 +4628,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_voltage_threshold3_a
         return;
       }
 // Start parsing value
-      battery2_voltage_threshold3 = json_payload.at("value").get<int8_t>();
+      battery2_voltage_threshold3 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -4691,7 +4691,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_percentage_min_thres
   }
 
 
-  int8_t battery2_percentage_min_threshold = {};
+  uint8_t battery2_percentage_min_threshold = {};
 
   nlohmann::json json_payload;
   try {
@@ -4704,7 +4704,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_percentage_min_thres
         return;
       }
 // Start parsing value
-      battery2_percentage_min_threshold = json_payload.at("value").get<int8_t>();
+      battery2_percentage_min_threshold = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -4767,7 +4767,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_percentage_threshold
   }
 
 
-  int8_t battery2_percentage_threshold1 = {};
+  uint8_t battery2_percentage_threshold1 = {};
 
   nlohmann::json json_payload;
   try {
@@ -4780,7 +4780,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_percentage_threshold
         return;
       }
 // Start parsing value
-      battery2_percentage_threshold1 = json_payload.at("value").get<int8_t>();
+      battery2_percentage_threshold1 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -4843,7 +4843,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_percentage_threshold
   }
 
 
-  int8_t battery2_percentage_threshold2 = {};
+  uint8_t battery2_percentage_threshold2 = {};
 
   nlohmann::json json_payload;
   try {
@@ -4856,7 +4856,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_percentage_threshold
         return;
       }
 // Start parsing value
-      battery2_percentage_threshold2 = json_payload.at("value").get<int8_t>();
+      battery2_percentage_threshold2 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -4919,7 +4919,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_percentage_threshold
   }
 
 
-  int8_t battery2_percentage_threshold3 = {};
+  uint8_t battery2_percentage_threshold3 = {};
 
   nlohmann::json json_payload;
   try {
@@ -4932,7 +4932,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery2_percentage_threshold
         return;
       }
 // Start parsing value
-      battery2_percentage_threshold3 = json_payload.at("value").get<int8_t>();
+      battery2_percentage_threshold3 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -5071,7 +5071,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_voltage_attribute_up
   }
 
 
-  int8_t battery3_voltage = {};
+  uint8_t battery3_voltage = {};
 
   nlohmann::json json_payload;
   try {
@@ -5084,7 +5084,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_voltage_attribute_up
         return;
       }
 // Start parsing value
-      battery3_voltage = json_payload.at("value").get<int8_t>();
+      battery3_voltage = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -5147,7 +5147,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_percentage_remaining
   }
 
 
-  int8_t battery3_percentage_remaining = {};
+  uint8_t battery3_percentage_remaining = {};
 
   nlohmann::json json_payload;
   try {
@@ -5160,7 +5160,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_percentage_remaining
         return;
       }
 // Start parsing value
-      battery3_percentage_remaining = json_payload.at("value").get<int8_t>();
+      battery3_percentage_remaining = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -5383,7 +5383,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3a_hr_rating_attribute
   }
 
 
-  int16_t battery3a_hr_rating = {};
+  uint16_t battery3a_hr_rating = {};
 
   nlohmann::json json_payload;
   try {
@@ -5396,7 +5396,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3a_hr_rating_attribute
         return;
       }
 // Start parsing value
-      battery3a_hr_rating = json_payload.at("value").get<int16_t>();
+      battery3a_hr_rating = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -5459,7 +5459,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_quantity_attribute_u
   }
 
 
-  int8_t battery3_quantity = {};
+  uint8_t battery3_quantity = {};
 
   nlohmann::json json_payload;
   try {
@@ -5472,7 +5472,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_quantity_attribute_u
         return;
       }
 // Start parsing value
-      battery3_quantity = json_payload.at("value").get<int8_t>();
+      battery3_quantity = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -5535,7 +5535,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_rated_voltage_attrib
   }
 
 
-  int8_t battery3_rated_voltage = {};
+  uint8_t battery3_rated_voltage = {};
 
   nlohmann::json json_payload;
   try {
@@ -5548,7 +5548,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_rated_voltage_attrib
         return;
       }
 // Start parsing value
-      battery3_rated_voltage = json_payload.at("value").get<int8_t>();
+      battery3_rated_voltage = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -5687,7 +5687,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_voltage_min_threshol
   }
 
 
-  int8_t battery3_voltage_min_threshold = {};
+  uint8_t battery3_voltage_min_threshold = {};
 
   nlohmann::json json_payload;
   try {
@@ -5700,7 +5700,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_voltage_min_threshol
         return;
       }
 // Start parsing value
-      battery3_voltage_min_threshold = json_payload.at("value").get<int8_t>();
+      battery3_voltage_min_threshold = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -5763,7 +5763,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_voltage_threshold1_a
   }
 
 
-  int8_t battery3_voltage_threshold1 = {};
+  uint8_t battery3_voltage_threshold1 = {};
 
   nlohmann::json json_payload;
   try {
@@ -5776,7 +5776,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_voltage_threshold1_a
         return;
       }
 // Start parsing value
-      battery3_voltage_threshold1 = json_payload.at("value").get<int8_t>();
+      battery3_voltage_threshold1 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -5839,7 +5839,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_voltage_threshold2_a
   }
 
 
-  int8_t battery3_voltage_threshold2 = {};
+  uint8_t battery3_voltage_threshold2 = {};
 
   nlohmann::json json_payload;
   try {
@@ -5852,7 +5852,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_voltage_threshold2_a
         return;
       }
 // Start parsing value
-      battery3_voltage_threshold2 = json_payload.at("value").get<int8_t>();
+      battery3_voltage_threshold2 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -5915,7 +5915,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_voltage_threshold3_a
   }
 
 
-  int8_t battery3_voltage_threshold3 = {};
+  uint8_t battery3_voltage_threshold3 = {};
 
   nlohmann::json json_payload;
   try {
@@ -5928,7 +5928,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_voltage_threshold3_a
         return;
       }
 // Start parsing value
-      battery3_voltage_threshold3 = json_payload.at("value").get<int8_t>();
+      battery3_voltage_threshold3 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -5991,7 +5991,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_percentage_min_thres
   }
 
 
-  int8_t battery3_percentage_min_threshold = {};
+  uint8_t battery3_percentage_min_threshold = {};
 
   nlohmann::json json_payload;
   try {
@@ -6004,7 +6004,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_percentage_min_thres
         return;
       }
 // Start parsing value
-      battery3_percentage_min_threshold = json_payload.at("value").get<int8_t>();
+      battery3_percentage_min_threshold = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -6067,7 +6067,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_percentage_threshold
   }
 
 
-  int8_t battery3_percentage_threshold1 = {};
+  uint8_t battery3_percentage_threshold1 = {};
 
   nlohmann::json json_payload;
   try {
@@ -6080,7 +6080,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_percentage_threshold
         return;
       }
 // Start parsing value
-      battery3_percentage_threshold1 = json_payload.at("value").get<int8_t>();
+      battery3_percentage_threshold1 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -6143,7 +6143,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_percentage_threshold
   }
 
 
-  int8_t battery3_percentage_threshold2 = {};
+  uint8_t battery3_percentage_threshold2 = {};
 
   nlohmann::json json_payload;
   try {
@@ -6156,7 +6156,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_percentage_threshold
         return;
       }
 // Start parsing value
-      battery3_percentage_threshold2 = json_payload.at("value").get<int8_t>();
+      battery3_percentage_threshold2 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -6219,7 +6219,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_percentage_threshold
   }
 
 
-  int8_t battery3_percentage_threshold3 = {};
+  uint8_t battery3_percentage_threshold3 = {};
 
   nlohmann::json json_payload;
   try {
@@ -6232,7 +6232,7 @@ static void uic_mqtt_dotdot_on_power_configuration_battery3_percentage_threshold
         return;
       }
 // Start parsing value
-      battery3_percentage_threshold3 = json_payload.at("value").get<int8_t>();
+      battery3_percentage_threshold3 = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -7091,7 +7091,7 @@ static void uic_mqtt_dotdot_on_device_temperature_configuration_over_temp_total_
   }
 
 
-  int16_t over_temp_total_dwell = {};
+  uint16_t over_temp_total_dwell = {};
 
   nlohmann::json json_payload;
   try {
@@ -7104,7 +7104,7 @@ static void uic_mqtt_dotdot_on_device_temperature_configuration_over_temp_total_
         return;
       }
 // Start parsing value
-      over_temp_total_dwell = json_payload.at("value").get<int16_t>();
+      over_temp_total_dwell = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -7395,7 +7395,7 @@ static void uic_mqtt_dotdot_on_device_temperature_configuration_low_temp_dwell_t
   }
 
 
-  int32_t low_temp_dwell_trip_point = {};
+  uint32_t low_temp_dwell_trip_point = {};
 
   nlohmann::json json_payload;
   try {
@@ -7408,7 +7408,7 @@ static void uic_mqtt_dotdot_on_device_temperature_configuration_low_temp_dwell_t
         return;
       }
 // Start parsing value
-      low_temp_dwell_trip_point = json_payload.at("value").get<int32_t>();
+      low_temp_dwell_trip_point = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -7471,7 +7471,7 @@ static void uic_mqtt_dotdot_on_device_temperature_configuration_high_temp_dwell_
   }
 
 
-  int32_t high_temp_dwell_trip_point = {};
+  uint32_t high_temp_dwell_trip_point = {};
 
   nlohmann::json json_payload;
   try {
@@ -7484,7 +7484,7 @@ static void uic_mqtt_dotdot_on_device_temperature_configuration_high_temp_dwell_
         return;
       }
 // Start parsing value
-      high_temp_dwell_trip_point = json_payload.at("value").get<int32_t>();
+      high_temp_dwell_trip_point = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -7647,7 +7647,7 @@ static void uic_mqtt_dotdot_on_identify_identify_time_attribute_update(
   }
 
 
-  int16_t identify_time = {};
+  uint16_t identify_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -7660,7 +7660,7 @@ static void uic_mqtt_dotdot_on_identify_identify_time_attribute_update(
         return;
       }
 // Start parsing value
-      identify_time = json_payload.at("value").get<int16_t>();
+      identify_time = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -7877,7 +7877,7 @@ static void uic_mqtt_dotdot_on_scenes_scene_count_attribute_update(
   }
 
 
-  int8_t scene_count = {};
+  uint8_t scene_count = {};
 
   nlohmann::json json_payload;
   try {
@@ -7890,7 +7890,7 @@ static void uic_mqtt_dotdot_on_scenes_scene_count_attribute_update(
         return;
       }
 // Start parsing value
-      scene_count = json_payload.at("value").get<int8_t>();
+      scene_count = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -7953,7 +7953,7 @@ static void uic_mqtt_dotdot_on_scenes_current_scene_attribute_update(
   }
 
 
-  int8_t current_scene = {};
+  uint8_t current_scene = {};
 
   nlohmann::json json_payload;
   try {
@@ -7966,7 +7966,7 @@ static void uic_mqtt_dotdot_on_scenes_current_scene_attribute_update(
         return;
       }
 // Start parsing value
-      current_scene = json_payload.at("value").get<int8_t>();
+      current_scene = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -8029,7 +8029,7 @@ static void uic_mqtt_dotdot_on_scenes_current_group_attribute_update(
   }
 
 
-  uint8_t * current_group = {};
+  uint16_t current_group = {};
 
   nlohmann::json json_payload;
   try {
@@ -8042,7 +8042,7 @@ static void uic_mqtt_dotdot_on_scenes_current_group_attribute_update(
         return;
       }
 // Start parsing value
-      current_group = json_payload.at("value").get<uint8_t *>();
+      current_group = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -8350,11 +8350,11 @@ static void uic_mqtt_dotdot_on_scenes_scene_table_attribute_update(
       auto &scene_table_json = json_payload.at("value");
       for (size_t i = 0; i < scene_table_json.size(); i++) {
         SSceneTable element = {};
-        element.SceneID = scene_table_json.at(i).at("SceneID").get<int16_t>();
-        element.GroupID = scene_table_json.at(i).at("GroupID").get<int16_t>();
+        element.SceneID = scene_table_json.at(i).at("SceneID").get<uint16_t>();
+        element.GroupID = scene_table_json.at(i).at("GroupID").get<uint16_t>();
         element.SceneName = scene_table_json.at(i).at("SceneName").get_ptr<const std::string*>()->c_str();
-        element.TransitionTime = scene_table_json.at(i).at("TransitionTime").get<int16_t>();
-        element.TransitionTime100ms = scene_table_json.at(i).at("TransitionTime100ms").get<int8_t>();
+        element.TransitionTime = scene_table_json.at(i).at("TransitionTime").get<uint16_t>();
+        element.TransitionTime100ms = scene_table_json.at(i).at("TransitionTime100ms").get<uint8_t>();
         element.SceneTableExtensions = scene_table_json.at(i).at("SceneTableExtensions").get_ptr<const std::string*>()->c_str();
         scene_table.push_back(element);
       }
@@ -8663,7 +8663,7 @@ static void uic_mqtt_dotdot_on_on_off_on_time_attribute_update(
   }
 
 
-  int16_t on_time = {};
+  uint16_t on_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -8676,7 +8676,7 @@ static void uic_mqtt_dotdot_on_on_off_on_time_attribute_update(
         return;
       }
 // Start parsing value
-      on_time = json_payload.at("value").get<int16_t>();
+      on_time = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -8739,7 +8739,7 @@ static void uic_mqtt_dotdot_on_on_off_off_wait_time_attribute_update(
   }
 
 
-  int16_t off_wait_time = {};
+  uint16_t off_wait_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -8752,7 +8752,7 @@ static void uic_mqtt_dotdot_on_on_off_off_wait_time_attribute_update(
         return;
       }
 // Start parsing value
-      off_wait_time = json_payload.at("value").get<int16_t>();
+      off_wait_time = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -8980,7 +8980,7 @@ static void uic_mqtt_dotdot_on_level_current_level_attribute_update(
   }
 
 
-  int8_t current_level = {};
+  uint8_t current_level = {};
 
   nlohmann::json json_payload;
   try {
@@ -8993,7 +8993,7 @@ static void uic_mqtt_dotdot_on_level_current_level_attribute_update(
         return;
       }
 // Start parsing value
-      current_level = json_payload.at("value").get<int8_t>();
+      current_level = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -9056,7 +9056,7 @@ static void uic_mqtt_dotdot_on_level_remaining_time_attribute_update(
   }
 
 
-  int16_t remaining_time = {};
+  uint16_t remaining_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -9069,7 +9069,7 @@ static void uic_mqtt_dotdot_on_level_remaining_time_attribute_update(
         return;
       }
 // Start parsing value
-      remaining_time = json_payload.at("value").get<int16_t>();
+      remaining_time = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -9132,7 +9132,7 @@ static void uic_mqtt_dotdot_on_level_min_level_attribute_update(
   }
 
 
-  int8_t min_level = {};
+  uint8_t min_level = {};
 
   nlohmann::json json_payload;
   try {
@@ -9145,7 +9145,7 @@ static void uic_mqtt_dotdot_on_level_min_level_attribute_update(
         return;
       }
 // Start parsing value
-      min_level = json_payload.at("value").get<int8_t>();
+      min_level = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -9208,7 +9208,7 @@ static void uic_mqtt_dotdot_on_level_max_level_attribute_update(
   }
 
 
-  int8_t max_level = {};
+  uint8_t max_level = {};
 
   nlohmann::json json_payload;
   try {
@@ -9221,7 +9221,7 @@ static void uic_mqtt_dotdot_on_level_max_level_attribute_update(
         return;
       }
 // Start parsing value
-      max_level = json_payload.at("value").get<int8_t>();
+      max_level = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -9284,7 +9284,7 @@ static void uic_mqtt_dotdot_on_level_current_frequency_attribute_update(
   }
 
 
-  int16_t current_frequency = {};
+  uint16_t current_frequency = {};
 
   nlohmann::json json_payload;
   try {
@@ -9297,7 +9297,7 @@ static void uic_mqtt_dotdot_on_level_current_frequency_attribute_update(
         return;
       }
 // Start parsing value
-      current_frequency = json_payload.at("value").get<int16_t>();
+      current_frequency = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -9360,7 +9360,7 @@ static void uic_mqtt_dotdot_on_level_min_frequency_attribute_update(
   }
 
 
-  int16_t min_frequency = {};
+  uint16_t min_frequency = {};
 
   nlohmann::json json_payload;
   try {
@@ -9373,7 +9373,7 @@ static void uic_mqtt_dotdot_on_level_min_frequency_attribute_update(
         return;
       }
 // Start parsing value
-      min_frequency = json_payload.at("value").get<int16_t>();
+      min_frequency = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -9436,7 +9436,7 @@ static void uic_mqtt_dotdot_on_level_max_frequency_attribute_update(
   }
 
 
-  int16_t max_frequency = {};
+  uint16_t max_frequency = {};
 
   nlohmann::json json_payload;
   try {
@@ -9449,7 +9449,7 @@ static void uic_mqtt_dotdot_on_level_max_frequency_attribute_update(
         return;
       }
 // Start parsing value
-      max_frequency = json_payload.at("value").get<int16_t>();
+      max_frequency = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -9588,7 +9588,7 @@ static void uic_mqtt_dotdot_on_level_on_off_transition_time_attribute_update(
   }
 
 
-  int16_t on_off_transition_time = {};
+  uint16_t on_off_transition_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -9601,7 +9601,7 @@ static void uic_mqtt_dotdot_on_level_on_off_transition_time_attribute_update(
         return;
       }
 // Start parsing value
-      on_off_transition_time = json_payload.at("value").get<int16_t>();
+      on_off_transition_time = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -9664,7 +9664,7 @@ static void uic_mqtt_dotdot_on_level_on_level_attribute_update(
   }
 
 
-  int8_t on_level = {};
+  uint8_t on_level = {};
 
   nlohmann::json json_payload;
   try {
@@ -9677,7 +9677,7 @@ static void uic_mqtt_dotdot_on_level_on_level_attribute_update(
         return;
       }
 // Start parsing value
-      on_level = json_payload.at("value").get<int8_t>();
+      on_level = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -9740,7 +9740,7 @@ static void uic_mqtt_dotdot_on_level_on_transition_time_attribute_update(
   }
 
 
-  int16_t on_transition_time = {};
+  uint16_t on_transition_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -9753,7 +9753,7 @@ static void uic_mqtt_dotdot_on_level_on_transition_time_attribute_update(
         return;
       }
 // Start parsing value
-      on_transition_time = json_payload.at("value").get<int16_t>();
+      on_transition_time = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -9816,7 +9816,7 @@ static void uic_mqtt_dotdot_on_level_off_transition_time_attribute_update(
   }
 
 
-  int16_t off_transition_time = {};
+  uint16_t off_transition_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -9829,7 +9829,7 @@ static void uic_mqtt_dotdot_on_level_off_transition_time_attribute_update(
         return;
       }
 // Start parsing value
-      off_transition_time = json_payload.at("value").get<int16_t>();
+      off_transition_time = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -9892,7 +9892,7 @@ static void uic_mqtt_dotdot_on_level_default_move_rate_attribute_update(
   }
 
 
-  int16_t default_move_rate = {};
+  uint16_t default_move_rate = {};
 
   nlohmann::json json_payload;
   try {
@@ -9905,7 +9905,7 @@ static void uic_mqtt_dotdot_on_level_default_move_rate_attribute_update(
         return;
       }
 // Start parsing value
-      default_move_rate = json_payload.at("value").get<int16_t>();
+      default_move_rate = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -9968,7 +9968,7 @@ static void uic_mqtt_dotdot_on_level_start_up_current_level_attribute_update(
   }
 
 
-  int8_t start_up_current_level = {};
+  uint8_t start_up_current_level = {};
 
   nlohmann::json json_payload;
   try {
@@ -9981,7 +9981,7 @@ static void uic_mqtt_dotdot_on_level_start_up_current_level_attribute_update(
         return;
       }
 // Start parsing value
-      start_up_current_level = json_payload.at("value").get<int8_t>();
+      start_up_current_level = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -10184,7 +10184,7 @@ static void uic_mqtt_dotdot_on_alarms_alarm_count_attribute_update(
   }
 
 
-  int16_t alarm_count = {};
+  uint16_t alarm_count = {};
 
   nlohmann::json json_payload;
   try {
@@ -10197,7 +10197,7 @@ static void uic_mqtt_dotdot_on_alarms_alarm_count_attribute_update(
         return;
       }
 // Start parsing value
-      alarm_count = json_payload.at("value").get<int16_t>();
+      alarm_count = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -10305,7 +10305,7 @@ static void uic_mqtt_dotdot_on_time_time_attribute_update(
   }
 
 
-  uint8_t time = {};
+  uint32_t time = {};
 
   nlohmann::json json_payload;
   try {
@@ -10318,7 +10318,7 @@ static void uic_mqtt_dotdot_on_time_time_attribute_update(
         return;
       }
 // Start parsing value
-      time = json_payload.at("value").get<uint8_t>();
+      time = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -10533,7 +10533,7 @@ static void uic_mqtt_dotdot_on_time_dst_start_attribute_update(
   }
 
 
-  int32_t dst_start = {};
+  uint32_t dst_start = {};
 
   nlohmann::json json_payload;
   try {
@@ -10546,7 +10546,7 @@ static void uic_mqtt_dotdot_on_time_dst_start_attribute_update(
         return;
       }
 // Start parsing value
-      dst_start = json_payload.at("value").get<int32_t>();
+      dst_start = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -10609,7 +10609,7 @@ static void uic_mqtt_dotdot_on_time_dst_end_attribute_update(
   }
 
 
-  int32_t dst_end = {};
+  uint32_t dst_end = {};
 
   nlohmann::json json_payload;
   try {
@@ -10622,7 +10622,7 @@ static void uic_mqtt_dotdot_on_time_dst_end_attribute_update(
         return;
       }
 // Start parsing value
-      dst_end = json_payload.at("value").get<int32_t>();
+      dst_end = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -10761,7 +10761,7 @@ static void uic_mqtt_dotdot_on_time_standard_time_attribute_update(
   }
 
 
-  int32_t standard_time = {};
+  uint32_t standard_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -10774,7 +10774,7 @@ static void uic_mqtt_dotdot_on_time_standard_time_attribute_update(
         return;
       }
 // Start parsing value
-      standard_time = json_payload.at("value").get<int32_t>();
+      standard_time = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -10837,7 +10837,7 @@ static void uic_mqtt_dotdot_on_time_local_time_attribute_update(
   }
 
 
-  int32_t local_time = {};
+  uint32_t local_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -10850,7 +10850,7 @@ static void uic_mqtt_dotdot_on_time_local_time_attribute_update(
         return;
       }
 // Start parsing value
-      local_time = json_payload.at("value").get<int32_t>();
+      local_time = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -10913,7 +10913,7 @@ static void uic_mqtt_dotdot_on_time_last_set_time_attribute_update(
   }
 
 
-  uint8_t last_set_time = {};
+  uint32_t last_set_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -10926,7 +10926,7 @@ static void uic_mqtt_dotdot_on_time_last_set_time_attribute_update(
         return;
       }
 // Start parsing value
-      last_set_time = json_payload.at("value").get<uint8_t>();
+      last_set_time = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -10989,7 +10989,7 @@ static void uic_mqtt_dotdot_on_time_valid_until_time_attribute_update(
   }
 
 
-  uint8_t valid_until_time = {};
+  uint32_t valid_until_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -11002,7 +11002,7 @@ static void uic_mqtt_dotdot_on_time_valid_until_time_attribute_update(
         return;
       }
 // Start parsing value
-      valid_until_time = json_payload.at("value").get<uint8_t>();
+      valid_until_time = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -11179,7 +11179,7 @@ static void uic_mqtt_dotdot_on_poll_control_check_in_interval_attribute_update(
   }
 
 
-  int32_t check_in_interval = {};
+  uint32_t check_in_interval = {};
 
   nlohmann::json json_payload;
   try {
@@ -11192,7 +11192,7 @@ static void uic_mqtt_dotdot_on_poll_control_check_in_interval_attribute_update(
         return;
       }
 // Start parsing value
-      check_in_interval = json_payload.at("value").get<int32_t>();
+      check_in_interval = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -11255,7 +11255,7 @@ static void uic_mqtt_dotdot_on_poll_control_long_poll_interval_attribute_update(
   }
 
 
-  int32_t long_poll_interval = {};
+  uint32_t long_poll_interval = {};
 
   nlohmann::json json_payload;
   try {
@@ -11268,7 +11268,7 @@ static void uic_mqtt_dotdot_on_poll_control_long_poll_interval_attribute_update(
         return;
       }
 // Start parsing value
-      long_poll_interval = json_payload.at("value").get<int32_t>();
+      long_poll_interval = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -11331,7 +11331,7 @@ static void uic_mqtt_dotdot_on_poll_control_short_poll_interval_attribute_update
   }
 
 
-  int16_t short_poll_interval = {};
+  uint16_t short_poll_interval = {};
 
   nlohmann::json json_payload;
   try {
@@ -11344,7 +11344,7 @@ static void uic_mqtt_dotdot_on_poll_control_short_poll_interval_attribute_update
         return;
       }
 // Start parsing value
-      short_poll_interval = json_payload.at("value").get<int16_t>();
+      short_poll_interval = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -11407,7 +11407,7 @@ static void uic_mqtt_dotdot_on_poll_control_fast_poll_timeout_attribute_update(
   }
 
 
-  int16_t fast_poll_timeout = {};
+  uint16_t fast_poll_timeout = {};
 
   nlohmann::json json_payload;
   try {
@@ -11420,7 +11420,7 @@ static void uic_mqtt_dotdot_on_poll_control_fast_poll_timeout_attribute_update(
         return;
       }
 // Start parsing value
-      fast_poll_timeout = json_payload.at("value").get<int16_t>();
+      fast_poll_timeout = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -11483,7 +11483,7 @@ static void uic_mqtt_dotdot_on_poll_control_check_in_interval_min_attribute_upda
   }
 
 
-  int32_t check_in_interval_min = {};
+  uint32_t check_in_interval_min = {};
 
   nlohmann::json json_payload;
   try {
@@ -11496,7 +11496,7 @@ static void uic_mqtt_dotdot_on_poll_control_check_in_interval_min_attribute_upda
         return;
       }
 // Start parsing value
-      check_in_interval_min = json_payload.at("value").get<int32_t>();
+      check_in_interval_min = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -11559,7 +11559,7 @@ static void uic_mqtt_dotdot_on_poll_control_long_poll_interval_min_attribute_upd
   }
 
 
-  int32_t long_poll_interval_min = {};
+  uint32_t long_poll_interval_min = {};
 
   nlohmann::json json_payload;
   try {
@@ -11572,7 +11572,7 @@ static void uic_mqtt_dotdot_on_poll_control_long_poll_interval_min_attribute_upd
         return;
       }
 // Start parsing value
-      long_poll_interval_min = json_payload.at("value").get<int32_t>();
+      long_poll_interval_min = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -11635,7 +11635,7 @@ static void uic_mqtt_dotdot_on_poll_control_fast_poll_timeout_max_attribute_upda
   }
 
 
-  int16_t fast_poll_timeout_max = {};
+  uint16_t fast_poll_timeout_max = {};
 
   nlohmann::json json_payload;
   try {
@@ -11648,7 +11648,7 @@ static void uic_mqtt_dotdot_on_poll_control_fast_poll_timeout_max_attribute_upda
         return;
       }
 // Start parsing value
-      fast_poll_timeout_max = json_payload.at("value").get<int16_t>();
+      fast_poll_timeout_max = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -11799,7 +11799,7 @@ static void uic_mqtt_dotdot_on_shade_configuration_physical_closed_limit_attribu
   }
 
 
-  int16_t physical_closed_limit = {};
+  uint16_t physical_closed_limit = {};
 
   nlohmann::json json_payload;
   try {
@@ -11812,7 +11812,7 @@ static void uic_mqtt_dotdot_on_shade_configuration_physical_closed_limit_attribu
         return;
       }
 // Start parsing value
-      physical_closed_limit = json_payload.at("value").get<int16_t>();
+      physical_closed_limit = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -11875,7 +11875,7 @@ static void uic_mqtt_dotdot_on_shade_configuration_motor_step_size_attribute_upd
   }
 
 
-  int8_t motor_step_size = {};
+  uint8_t motor_step_size = {};
 
   nlohmann::json json_payload;
   try {
@@ -11888,7 +11888,7 @@ static void uic_mqtt_dotdot_on_shade_configuration_motor_step_size_attribute_upd
         return;
       }
 // Start parsing value
-      motor_step_size = json_payload.at("value").get<int8_t>();
+      motor_step_size = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -12027,7 +12027,7 @@ static void uic_mqtt_dotdot_on_shade_configuration_closed_limit_attribute_update
   }
 
 
-  int16_t closed_limit = {};
+  uint16_t closed_limit = {};
 
   nlohmann::json json_payload;
   try {
@@ -12040,7 +12040,7 @@ static void uic_mqtt_dotdot_on_shade_configuration_closed_limit_attribute_update
         return;
       }
 // Start parsing value
-      closed_limit = json_payload.at("value").get<int16_t>();
+      closed_limit = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -12630,7 +12630,7 @@ static void uic_mqtt_dotdot_on_door_lock_door_open_events_attribute_update(
   }
 
 
-  int32_t door_open_events = {};
+  uint32_t door_open_events = {};
 
   nlohmann::json json_payload;
   try {
@@ -12643,7 +12643,7 @@ static void uic_mqtt_dotdot_on_door_lock_door_open_events_attribute_update(
         return;
       }
 // Start parsing value
-      door_open_events = json_payload.at("value").get<int32_t>();
+      door_open_events = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -12706,7 +12706,7 @@ static void uic_mqtt_dotdot_on_door_lock_door_closed_events_attribute_update(
   }
 
 
-  int32_t door_closed_events = {};
+  uint32_t door_closed_events = {};
 
   nlohmann::json json_payload;
   try {
@@ -12719,7 +12719,7 @@ static void uic_mqtt_dotdot_on_door_lock_door_closed_events_attribute_update(
         return;
       }
 // Start parsing value
-      door_closed_events = json_payload.at("value").get<int32_t>();
+      door_closed_events = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -12782,7 +12782,7 @@ static void uic_mqtt_dotdot_on_door_lock_open_period_attribute_update(
   }
 
 
-  int16_t open_period = {};
+  uint16_t open_period = {};
 
   nlohmann::json json_payload;
   try {
@@ -12795,7 +12795,7 @@ static void uic_mqtt_dotdot_on_door_lock_open_period_attribute_update(
         return;
       }
 // Start parsing value
-      open_period = json_payload.at("value").get<int16_t>();
+      open_period = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -12858,7 +12858,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_log_records_supported_attribu
   }
 
 
-  int16_t number_of_log_records_supported = {};
+  uint16_t number_of_log_records_supported = {};
 
   nlohmann::json json_payload;
   try {
@@ -12871,7 +12871,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_log_records_supported_attribu
         return;
       }
 // Start parsing value
-      number_of_log_records_supported = json_payload.at("value").get<int16_t>();
+      number_of_log_records_supported = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -12934,7 +12934,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_total_users_supported_attribu
   }
 
 
-  int16_t number_of_total_users_supported = {};
+  uint16_t number_of_total_users_supported = {};
 
   nlohmann::json json_payload;
   try {
@@ -12947,7 +12947,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_total_users_supported_attribu
         return;
       }
 // Start parsing value
-      number_of_total_users_supported = json_payload.at("value").get<int16_t>();
+      number_of_total_users_supported = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -13010,7 +13010,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_pin_users_supported_attribute
   }
 
 
-  int16_t number_of_pin_users_supported = {};
+  uint16_t number_of_pin_users_supported = {};
 
   nlohmann::json json_payload;
   try {
@@ -13023,7 +13023,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_pin_users_supported_attribute
         return;
       }
 // Start parsing value
-      number_of_pin_users_supported = json_payload.at("value").get<int16_t>();
+      number_of_pin_users_supported = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -13086,7 +13086,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_rfid_users_supported_attribut
   }
 
 
-  int16_t number_of_rfid_users_supported = {};
+  uint16_t number_of_rfid_users_supported = {};
 
   nlohmann::json json_payload;
   try {
@@ -13099,7 +13099,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_rfid_users_supported_attribut
         return;
       }
 // Start parsing value
-      number_of_rfid_users_supported = json_payload.at("value").get<int16_t>();
+      number_of_rfid_users_supported = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -13162,7 +13162,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_week_day_schedules_supported_
   }
 
 
-  int8_t number_of_week_day_schedules_supported_per_user = {};
+  uint8_t number_of_week_day_schedules_supported_per_user = {};
 
   nlohmann::json json_payload;
   try {
@@ -13175,7 +13175,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_week_day_schedules_supported_
         return;
       }
 // Start parsing value
-      number_of_week_day_schedules_supported_per_user = json_payload.at("value").get<int8_t>();
+      number_of_week_day_schedules_supported_per_user = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -13238,7 +13238,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_year_day_schedules_supported_
   }
 
 
-  int8_t number_of_year_day_schedules_supported_per_user = {};
+  uint8_t number_of_year_day_schedules_supported_per_user = {};
 
   nlohmann::json json_payload;
   try {
@@ -13251,7 +13251,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_year_day_schedules_supported_
         return;
       }
 // Start parsing value
-      number_of_year_day_schedules_supported_per_user = json_payload.at("value").get<int8_t>();
+      number_of_year_day_schedules_supported_per_user = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -13314,7 +13314,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_holiday_schedules_supported_a
   }
 
 
-  int8_t number_of_holiday_schedules_supported = {};
+  uint8_t number_of_holiday_schedules_supported = {};
 
   nlohmann::json json_payload;
   try {
@@ -13327,7 +13327,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_holiday_schedules_supported_a
         return;
       }
 // Start parsing value
-      number_of_holiday_schedules_supported = json_payload.at("value").get<int8_t>();
+      number_of_holiday_schedules_supported = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -13390,7 +13390,7 @@ static void uic_mqtt_dotdot_on_door_lock_max_pin_code_length_attribute_update(
   }
 
 
-  int8_t max_pin_code_length = {};
+  uint8_t max_pin_code_length = {};
 
   nlohmann::json json_payload;
   try {
@@ -13403,7 +13403,7 @@ static void uic_mqtt_dotdot_on_door_lock_max_pin_code_length_attribute_update(
         return;
       }
 // Start parsing value
-      max_pin_code_length = json_payload.at("value").get<int8_t>();
+      max_pin_code_length = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -13466,7 +13466,7 @@ static void uic_mqtt_dotdot_on_door_lock_min_pin_code_length_attribute_update(
   }
 
 
-  int8_t min_pin_code_length = {};
+  uint8_t min_pin_code_length = {};
 
   nlohmann::json json_payload;
   try {
@@ -13479,7 +13479,7 @@ static void uic_mqtt_dotdot_on_door_lock_min_pin_code_length_attribute_update(
         return;
       }
 // Start parsing value
-      min_pin_code_length = json_payload.at("value").get<int8_t>();
+      min_pin_code_length = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -13542,7 +13542,7 @@ static void uic_mqtt_dotdot_on_door_lock_max_rfid_code_length_attribute_update(
   }
 
 
-  int8_t max_rfid_code_length = {};
+  uint8_t max_rfid_code_length = {};
 
   nlohmann::json json_payload;
   try {
@@ -13555,7 +13555,7 @@ static void uic_mqtt_dotdot_on_door_lock_max_rfid_code_length_attribute_update(
         return;
       }
 // Start parsing value
-      max_rfid_code_length = json_payload.at("value").get<int8_t>();
+      max_rfid_code_length = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -13618,7 +13618,7 @@ static void uic_mqtt_dotdot_on_door_lock_min_rfid_code_length_attribute_update(
   }
 
 
-  int8_t min_rfid_code_length = {};
+  uint8_t min_rfid_code_length = {};
 
   nlohmann::json json_payload;
   try {
@@ -13631,7 +13631,7 @@ static void uic_mqtt_dotdot_on_door_lock_min_rfid_code_length_attribute_update(
         return;
       }
 // Start parsing value
-      min_rfid_code_length = json_payload.at("value").get<int8_t>();
+      min_rfid_code_length = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -13770,7 +13770,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_credentials_supported_per_use
   }
 
 
-  int8_t number_of_credentials_supported_per_user = {};
+  uint8_t number_of_credentials_supported_per_user = {};
 
   nlohmann::json json_payload;
   try {
@@ -13783,7 +13783,7 @@ static void uic_mqtt_dotdot_on_door_lock_number_of_credentials_supported_per_use
         return;
       }
 // Start parsing value
-      number_of_credentials_supported_per_user = json_payload.at("value").get<int8_t>();
+      number_of_credentials_supported_per_user = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -13998,7 +13998,7 @@ static void uic_mqtt_dotdot_on_door_lock_led_settings_attribute_update(
   }
 
 
-  int8_t led_settings = {};
+  uint8_t led_settings = {};
 
   nlohmann::json json_payload;
   try {
@@ -14011,7 +14011,7 @@ static void uic_mqtt_dotdot_on_door_lock_led_settings_attribute_update(
         return;
       }
 // Start parsing value
-      led_settings = json_payload.at("value").get<int8_t>();
+      led_settings = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -14074,7 +14074,7 @@ static void uic_mqtt_dotdot_on_door_lock_auto_relock_time_attribute_update(
   }
 
 
-  int32_t auto_relock_time = {};
+  uint32_t auto_relock_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -14087,7 +14087,7 @@ static void uic_mqtt_dotdot_on_door_lock_auto_relock_time_attribute_update(
         return;
       }
 // Start parsing value
-      auto_relock_time = json_payload.at("value").get<int32_t>();
+      auto_relock_time = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -14150,7 +14150,7 @@ static void uic_mqtt_dotdot_on_door_lock_sound_volume_attribute_update(
   }
 
 
-  int8_t sound_volume = {};
+  uint8_t sound_volume = {};
 
   nlohmann::json json_payload;
   try {
@@ -14163,7 +14163,7 @@ static void uic_mqtt_dotdot_on_door_lock_sound_volume_attribute_update(
         return;
       }
 // Start parsing value
-      sound_volume = json_payload.at("value").get<int8_t>();
+      sound_volume = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -14842,7 +14842,7 @@ static void uic_mqtt_dotdot_on_door_lock_wrong_code_entry_limit_attribute_update
   }
 
 
-  int8_t wrong_code_entry_limit = {};
+  uint8_t wrong_code_entry_limit = {};
 
   nlohmann::json json_payload;
   try {
@@ -14855,7 +14855,7 @@ static void uic_mqtt_dotdot_on_door_lock_wrong_code_entry_limit_attribute_update
         return;
       }
 // Start parsing value
-      wrong_code_entry_limit = json_payload.at("value").get<int8_t>();
+      wrong_code_entry_limit = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -14918,7 +14918,7 @@ static void uic_mqtt_dotdot_on_door_lock_user_code_temporary_disable_time_attrib
   }
 
 
-  int8_t user_code_temporary_disable_time = {};
+  uint8_t user_code_temporary_disable_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -14931,7 +14931,7 @@ static void uic_mqtt_dotdot_on_door_lock_user_code_temporary_disable_time_attrib
         return;
       }
 // Start parsing value
-      user_code_temporary_disable_time = json_payload.at("value").get<int8_t>();
+      user_code_temporary_disable_time = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -15230,7 +15230,7 @@ static void uic_mqtt_dotdot_on_door_lock_expiring_user_timeout_attribute_update(
   }
 
 
-  int16_t expiring_user_timeout = {};
+  uint16_t expiring_user_timeout = {};
 
   nlohmann::json json_payload;
   try {
@@ -15243,7 +15243,7 @@ static void uic_mqtt_dotdot_on_door_lock_expiring_user_timeout_attribute_update(
         return;
       }
 // Start parsing value
-      expiring_user_timeout = json_payload.at("value").get<int16_t>();
+      expiring_user_timeout = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -16505,7 +16505,7 @@ static void uic_mqtt_dotdot_on_window_covering_physical_closed_limit_lift_attrib
   }
 
 
-  int16_t physical_closed_limit_lift = {};
+  uint16_t physical_closed_limit_lift = {};
 
   nlohmann::json json_payload;
   try {
@@ -16518,7 +16518,7 @@ static void uic_mqtt_dotdot_on_window_covering_physical_closed_limit_lift_attrib
         return;
       }
 // Start parsing value
-      physical_closed_limit_lift = json_payload.at("value").get<int16_t>();
+      physical_closed_limit_lift = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -16581,7 +16581,7 @@ static void uic_mqtt_dotdot_on_window_covering_physical_closed_limit_tilt_attrib
   }
 
 
-  int16_t physical_closed_limit_tilt = {};
+  uint16_t physical_closed_limit_tilt = {};
 
   nlohmann::json json_payload;
   try {
@@ -16594,7 +16594,7 @@ static void uic_mqtt_dotdot_on_window_covering_physical_closed_limit_tilt_attrib
         return;
       }
 // Start parsing value
-      physical_closed_limit_tilt = json_payload.at("value").get<int16_t>();
+      physical_closed_limit_tilt = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -16657,7 +16657,7 @@ static void uic_mqtt_dotdot_on_window_covering_current_position_lift_attribute_u
   }
 
 
-  int16_t current_position_lift = {};
+  uint16_t current_position_lift = {};
 
   nlohmann::json json_payload;
   try {
@@ -16670,7 +16670,7 @@ static void uic_mqtt_dotdot_on_window_covering_current_position_lift_attribute_u
         return;
       }
 // Start parsing value
-      current_position_lift = json_payload.at("value").get<int16_t>();
+      current_position_lift = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -16733,7 +16733,7 @@ static void uic_mqtt_dotdot_on_window_covering_current_position_tilt_attribute_u
   }
 
 
-  int16_t current_position_tilt = {};
+  uint16_t current_position_tilt = {};
 
   nlohmann::json json_payload;
   try {
@@ -16746,7 +16746,7 @@ static void uic_mqtt_dotdot_on_window_covering_current_position_tilt_attribute_u
         return;
       }
 // Start parsing value
-      current_position_tilt = json_payload.at("value").get<int16_t>();
+      current_position_tilt = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -16809,7 +16809,7 @@ static void uic_mqtt_dotdot_on_window_covering_number_of_actuations_lift_attribu
   }
 
 
-  int16_t number_of_actuations_lift = {};
+  uint16_t number_of_actuations_lift = {};
 
   nlohmann::json json_payload;
   try {
@@ -16822,7 +16822,7 @@ static void uic_mqtt_dotdot_on_window_covering_number_of_actuations_lift_attribu
         return;
       }
 // Start parsing value
-      number_of_actuations_lift = json_payload.at("value").get<int16_t>();
+      number_of_actuations_lift = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -16885,7 +16885,7 @@ static void uic_mqtt_dotdot_on_window_covering_number_of_actuations_tilt_attribu
   }
 
 
-  int16_t number_of_actuations_tilt = {};
+  uint16_t number_of_actuations_tilt = {};
 
   nlohmann::json json_payload;
   try {
@@ -16898,7 +16898,7 @@ static void uic_mqtt_dotdot_on_window_covering_number_of_actuations_tilt_attribu
         return;
       }
 // Start parsing value
-      number_of_actuations_tilt = json_payload.at("value").get<int16_t>();
+      number_of_actuations_tilt = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -17037,7 +17037,7 @@ static void uic_mqtt_dotdot_on_window_covering_current_position_lift_percentage_
   }
 
 
-  int8_t current_position_lift_percentage = {};
+  uint8_t current_position_lift_percentage = {};
 
   nlohmann::json json_payload;
   try {
@@ -17050,7 +17050,7 @@ static void uic_mqtt_dotdot_on_window_covering_current_position_lift_percentage_
         return;
       }
 // Start parsing value
-      current_position_lift_percentage = json_payload.at("value").get<int8_t>();
+      current_position_lift_percentage = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -17113,7 +17113,7 @@ static void uic_mqtt_dotdot_on_window_covering_current_position_tilt_percentage_
   }
 
 
-  int8_t current_position_tilt_percentage = {};
+  uint8_t current_position_tilt_percentage = {};
 
   nlohmann::json json_payload;
   try {
@@ -17126,7 +17126,7 @@ static void uic_mqtt_dotdot_on_window_covering_current_position_tilt_percentage_
         return;
       }
 // Start parsing value
-      current_position_tilt_percentage = json_payload.at("value").get<int8_t>();
+      current_position_tilt_percentage = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -17189,7 +17189,7 @@ static void uic_mqtt_dotdot_on_window_covering_installed_open_limit_lift_attribu
   }
 
 
-  int16_t installed_open_limit_lift = {};
+  uint16_t installed_open_limit_lift = {};
 
   nlohmann::json json_payload;
   try {
@@ -17202,7 +17202,7 @@ static void uic_mqtt_dotdot_on_window_covering_installed_open_limit_lift_attribu
         return;
       }
 // Start parsing value
-      installed_open_limit_lift = json_payload.at("value").get<int16_t>();
+      installed_open_limit_lift = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -17265,7 +17265,7 @@ static void uic_mqtt_dotdot_on_window_covering_installed_closed_limit_lift_attri
   }
 
 
-  int16_t installed_closed_limit_lift = {};
+  uint16_t installed_closed_limit_lift = {};
 
   nlohmann::json json_payload;
   try {
@@ -17278,7 +17278,7 @@ static void uic_mqtt_dotdot_on_window_covering_installed_closed_limit_lift_attri
         return;
       }
 // Start parsing value
-      installed_closed_limit_lift = json_payload.at("value").get<int16_t>();
+      installed_closed_limit_lift = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -17341,7 +17341,7 @@ static void uic_mqtt_dotdot_on_window_covering_installed_open_limit_tilt_attribu
   }
 
 
-  int16_t installed_open_limit_tilt = {};
+  uint16_t installed_open_limit_tilt = {};
 
   nlohmann::json json_payload;
   try {
@@ -17354,7 +17354,7 @@ static void uic_mqtt_dotdot_on_window_covering_installed_open_limit_tilt_attribu
         return;
       }
 // Start parsing value
-      installed_open_limit_tilt = json_payload.at("value").get<int16_t>();
+      installed_open_limit_tilt = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -17417,7 +17417,7 @@ static void uic_mqtt_dotdot_on_window_covering_installed_closed_limit_tilt_attri
   }
 
 
-  int16_t installed_closed_limit_tilt = {};
+  uint16_t installed_closed_limit_tilt = {};
 
   nlohmann::json json_payload;
   try {
@@ -17430,7 +17430,7 @@ static void uic_mqtt_dotdot_on_window_covering_installed_closed_limit_tilt_attri
         return;
       }
 // Start parsing value
-      installed_closed_limit_tilt = json_payload.at("value").get<int16_t>();
+      installed_closed_limit_tilt = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -17493,7 +17493,7 @@ static void uic_mqtt_dotdot_on_window_covering_velocity_lift_attribute_update(
   }
 
 
-  int16_t velocity_lift = {};
+  uint16_t velocity_lift = {};
 
   nlohmann::json json_payload;
   try {
@@ -17506,7 +17506,7 @@ static void uic_mqtt_dotdot_on_window_covering_velocity_lift_attribute_update(
         return;
       }
 // Start parsing value
-      velocity_lift = json_payload.at("value").get<int16_t>();
+      velocity_lift = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -17569,7 +17569,7 @@ static void uic_mqtt_dotdot_on_window_covering_acceleration_time_lift_attribute_
   }
 
 
-  int16_t acceleration_time_lift = {};
+  uint16_t acceleration_time_lift = {};
 
   nlohmann::json json_payload;
   try {
@@ -17582,7 +17582,7 @@ static void uic_mqtt_dotdot_on_window_covering_acceleration_time_lift_attribute_
         return;
       }
 // Start parsing value
-      acceleration_time_lift = json_payload.at("value").get<int16_t>();
+      acceleration_time_lift = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -17645,7 +17645,7 @@ static void uic_mqtt_dotdot_on_window_covering_deceleration_time_lift_attribute_
   }
 
 
-  int16_t deceleration_time_lift = {};
+  uint16_t deceleration_time_lift = {};
 
   nlohmann::json json_payload;
   try {
@@ -17658,7 +17658,7 @@ static void uic_mqtt_dotdot_on_window_covering_deceleration_time_lift_attribute_
         return;
       }
 // Start parsing value
-      deceleration_time_lift = json_payload.at("value").get<int16_t>();
+      deceleration_time_lift = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -17797,7 +17797,7 @@ static void uic_mqtt_dotdot_on_window_covering_intermediate_setpoints_lift_attri
   }
 
 
-  uint8_t intermediate_setpoints_lift = {};
+  const char* intermediate_setpoints_lift = {};
 
   nlohmann::json json_payload;
   try {
@@ -17873,7 +17873,7 @@ static void uic_mqtt_dotdot_on_window_covering_intermediate_setpoints_tilt_attri
   }
 
 
-  uint8_t intermediate_setpoints_tilt = {};
+  const char* intermediate_setpoints_tilt = {};
 
   nlohmann::json json_payload;
   try {
@@ -18382,7 +18382,7 @@ static void uic_mqtt_dotdot_on_barrier_control_open_events_attribute_update(
   }
 
 
-  int16_t open_events = {};
+  uint16_t open_events = {};
 
   nlohmann::json json_payload;
   try {
@@ -18395,7 +18395,7 @@ static void uic_mqtt_dotdot_on_barrier_control_open_events_attribute_update(
         return;
       }
 // Start parsing value
-      open_events = json_payload.at("value").get<int16_t>();
+      open_events = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -18458,7 +18458,7 @@ static void uic_mqtt_dotdot_on_barrier_control_close_events_attribute_update(
   }
 
 
-  int16_t close_events = {};
+  uint16_t close_events = {};
 
   nlohmann::json json_payload;
   try {
@@ -18471,7 +18471,7 @@ static void uic_mqtt_dotdot_on_barrier_control_close_events_attribute_update(
         return;
       }
 // Start parsing value
-      close_events = json_payload.at("value").get<int16_t>();
+      close_events = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -18534,7 +18534,7 @@ static void uic_mqtt_dotdot_on_barrier_control_command_open_events_attribute_upd
   }
 
 
-  int16_t command_open_events = {};
+  uint16_t command_open_events = {};
 
   nlohmann::json json_payload;
   try {
@@ -18547,7 +18547,7 @@ static void uic_mqtt_dotdot_on_barrier_control_command_open_events_attribute_upd
         return;
       }
 // Start parsing value
-      command_open_events = json_payload.at("value").get<int16_t>();
+      command_open_events = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -18610,7 +18610,7 @@ static void uic_mqtt_dotdot_on_barrier_control_command_close_events_attribute_up
   }
 
 
-  int16_t command_close_events = {};
+  uint16_t command_close_events = {};
 
   nlohmann::json json_payload;
   try {
@@ -18623,7 +18623,7 @@ static void uic_mqtt_dotdot_on_barrier_control_command_close_events_attribute_up
         return;
       }
 // Start parsing value
-      command_close_events = json_payload.at("value").get<int16_t>();
+      command_close_events = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -18686,7 +18686,7 @@ static void uic_mqtt_dotdot_on_barrier_control_open_period_attribute_update(
   }
 
 
-  int16_t open_period = {};
+  uint16_t open_period = {};
 
   nlohmann::json json_payload;
   try {
@@ -18699,7 +18699,7 @@ static void uic_mqtt_dotdot_on_barrier_control_open_period_attribute_update(
         return;
       }
 // Start parsing value
-      open_period = json_payload.at("value").get<int16_t>();
+      open_period = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -18762,7 +18762,7 @@ static void uic_mqtt_dotdot_on_barrier_control_close_period_attribute_update(
   }
 
 
-  int16_t close_period = {};
+  uint16_t close_period = {};
 
   nlohmann::json json_payload;
   try {
@@ -18775,7 +18775,7 @@ static void uic_mqtt_dotdot_on_barrier_control_close_period_attribute_update(
         return;
       }
 // Start parsing value
-      close_period = json_payload.at("value").get<int16_t>();
+      close_period = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -18838,7 +18838,7 @@ static void uic_mqtt_dotdot_on_barrier_control_barrier_position_attribute_update
   }
 
 
-  int8_t barrier_position = {};
+  uint8_t barrier_position = {};
 
   nlohmann::json json_payload;
   try {
@@ -18851,7 +18851,7 @@ static void uic_mqtt_dotdot_on_barrier_control_barrier_position_attribute_update
         return;
       }
 // Start parsing value
-      barrier_position = json_payload.at("value").get<int8_t>();
+      barrier_position = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -19121,7 +19121,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_max_speed_attribut
   }
 
 
-  int16_t max_speed = {};
+  uint16_t max_speed = {};
 
   nlohmann::json json_payload;
   try {
@@ -19134,7 +19134,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_max_speed_attribut
         return;
       }
 // Start parsing value
-      max_speed = json_payload.at("value").get<int16_t>();
+      max_speed = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -19197,7 +19197,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_max_flow_attribute
   }
 
 
-  int16_t max_flow = {};
+  uint16_t max_flow = {};
 
   nlohmann::json json_payload;
   try {
@@ -19210,7 +19210,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_max_flow_attribute
         return;
       }
 // Start parsing value
-      max_flow = json_payload.at("value").get<int16_t>();
+      max_flow = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -19577,7 +19577,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_min_const_speed_at
   }
 
 
-  int16_t min_const_speed = {};
+  uint16_t min_const_speed = {};
 
   nlohmann::json json_payload;
   try {
@@ -19590,7 +19590,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_min_const_speed_at
         return;
       }
 // Start parsing value
-      min_const_speed = json_payload.at("value").get<int16_t>();
+      min_const_speed = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -19653,7 +19653,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_max_const_speed_at
   }
 
 
-  int16_t max_const_speed = {};
+  uint16_t max_const_speed = {};
 
   nlohmann::json json_payload;
   try {
@@ -19666,7 +19666,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_max_const_speed_at
         return;
       }
 // Start parsing value
-      max_const_speed = json_payload.at("value").get<int16_t>();
+      max_const_speed = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -19729,7 +19729,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_min_const_flow_att
   }
 
 
-  int16_t min_const_flow = {};
+  uint16_t min_const_flow = {};
 
   nlohmann::json json_payload;
   try {
@@ -19742,7 +19742,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_min_const_flow_att
         return;
       }
 // Start parsing value
-      min_const_flow = json_payload.at("value").get<int16_t>();
+      min_const_flow = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -19805,7 +19805,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_max_const_flow_att
   }
 
 
-  int16_t max_const_flow = {};
+  uint16_t max_const_flow = {};
 
   nlohmann::json json_payload;
   try {
@@ -19818,7 +19818,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_max_const_flow_att
         return;
       }
 // Start parsing value
-      max_const_flow = json_payload.at("value").get<int16_t>();
+      max_const_flow = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -20353,7 +20353,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_speed_attribute_up
   }
 
 
-  int16_t speed = {};
+  uint16_t speed = {};
 
   nlohmann::json json_payload;
   try {
@@ -20366,7 +20366,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_speed_attribute_up
         return;
       }
 // Start parsing value
-      speed = json_payload.at("value").get<int16_t>();
+      speed = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -20429,7 +20429,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_lifetime_running_h
   }
 
 
-  int32_t lifetime_running_hours = {};
+  uint32_t lifetime_running_hours = {};
 
   nlohmann::json json_payload;
   try {
@@ -20442,7 +20442,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_lifetime_running_h
         return;
       }
 // Start parsing value
-      lifetime_running_hours = json_payload.at("value").get<int32_t>();
+      lifetime_running_hours = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -20505,7 +20505,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_power_attribute_up
   }
 
 
-  int32_t power = {};
+  uint32_t power = {};
 
   nlohmann::json json_payload;
   try {
@@ -20518,7 +20518,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_power_attribute_up
         return;
       }
 // Start parsing value
-      power = json_payload.at("value").get<int32_t>();
+      power = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -20581,7 +20581,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_lifetime_energy_co
   }
 
 
-  int32_t lifetime_energy_consumed = {};
+  uint32_t lifetime_energy_consumed = {};
 
   nlohmann::json json_payload;
   try {
@@ -20594,7 +20594,7 @@ static void uic_mqtt_dotdot_on_pump_configuration_and_control_lifetime_energy_co
         return;
       }
 // Start parsing value
-      lifetime_energy_consumed = json_payload.at("value").get<int32_t>();
+      lifetime_energy_consumed = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -21702,7 +21702,7 @@ static void uic_mqtt_dotdot_on_thermostat_pi_cooling_demand_attribute_update(
   }
 
 
-  int8_t pi_cooling_demand = {};
+  uint8_t pi_cooling_demand = {};
 
   nlohmann::json json_payload;
   try {
@@ -21715,7 +21715,7 @@ static void uic_mqtt_dotdot_on_thermostat_pi_cooling_demand_attribute_update(
         return;
       }
 // Start parsing value
-      pi_cooling_demand = json_payload.at("value").get<int8_t>();
+      pi_cooling_demand = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -21778,7 +21778,7 @@ static void uic_mqtt_dotdot_on_thermostat_pi_heating_demand_attribute_update(
   }
 
 
-  int8_t pi_heating_demand = {};
+  uint8_t pi_heating_demand = {};
 
   nlohmann::json json_payload;
   try {
@@ -21791,7 +21791,7 @@ static void uic_mqtt_dotdot_on_thermostat_pi_heating_demand_attribute_update(
         return;
       }
 // Start parsing value
-      pi_heating_demand = json_payload.at("value").get<int8_t>();
+      pi_heating_demand = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -23178,7 +23178,7 @@ static void uic_mqtt_dotdot_on_thermostat_number_of_weekly_transitions_attribute
   }
 
 
-  int8_t number_of_weekly_transitions = {};
+  uint8_t number_of_weekly_transitions = {};
 
   nlohmann::json json_payload;
   try {
@@ -23191,7 +23191,7 @@ static void uic_mqtt_dotdot_on_thermostat_number_of_weekly_transitions_attribute
         return;
       }
 // Start parsing value
-      number_of_weekly_transitions = json_payload.at("value").get<int8_t>();
+      number_of_weekly_transitions = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -23254,7 +23254,7 @@ static void uic_mqtt_dotdot_on_thermostat_number_of_daily_transitions_attribute_
   }
 
 
-  int8_t number_of_daily_transitions = {};
+  uint8_t number_of_daily_transitions = {};
 
   nlohmann::json json_payload;
   try {
@@ -23267,7 +23267,7 @@ static void uic_mqtt_dotdot_on_thermostat_number_of_daily_transitions_attribute_
         return;
       }
 // Start parsing value
-      number_of_daily_transitions = json_payload.at("value").get<int8_t>();
+      number_of_daily_transitions = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -23414,7 +23414,7 @@ static void uic_mqtt_dotdot_on_thermostat_temperature_setpoint_hold_duration_att
   }
 
 
-  int16_t temperature_setpoint_hold_duration = {};
+  uint16_t temperature_setpoint_hold_duration = {};
 
   nlohmann::json json_payload;
   try {
@@ -23427,7 +23427,7 @@ static void uic_mqtt_dotdot_on_thermostat_temperature_setpoint_hold_duration_att
         return;
       }
 // Start parsing value
-      temperature_setpoint_hold_duration = json_payload.at("value").get<int16_t>();
+      temperature_setpoint_hold_duration = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -23802,7 +23802,7 @@ static void uic_mqtt_dotdot_on_thermostat_setpoint_change_source_timestamp_attri
   }
 
 
-  uint8_t setpoint_change_source_timestamp = {};
+  uint32_t setpoint_change_source_timestamp = {};
 
   nlohmann::json json_payload;
   try {
@@ -23815,7 +23815,7 @@ static void uic_mqtt_dotdot_on_thermostat_setpoint_change_source_timestamp_attri
         return;
       }
 // Start parsing value
-      setpoint_change_source_timestamp = json_payload.at("value").get<uint8_t>();
+      setpoint_change_source_timestamp = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -23878,7 +23878,7 @@ static void uic_mqtt_dotdot_on_thermostat_occupied_setback_attribute_update(
   }
 
 
-  int8_t occupied_setback = {};
+  uint8_t occupied_setback = {};
 
   nlohmann::json json_payload;
   try {
@@ -23891,7 +23891,7 @@ static void uic_mqtt_dotdot_on_thermostat_occupied_setback_attribute_update(
         return;
       }
 // Start parsing value
-      occupied_setback = json_payload.at("value").get<int8_t>();
+      occupied_setback = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -23954,7 +23954,7 @@ static void uic_mqtt_dotdot_on_thermostat_occupied_setback_min_attribute_update(
   }
 
 
-  int8_t occupied_setback_min = {};
+  uint8_t occupied_setback_min = {};
 
   nlohmann::json json_payload;
   try {
@@ -23967,7 +23967,7 @@ static void uic_mqtt_dotdot_on_thermostat_occupied_setback_min_attribute_update(
         return;
       }
 // Start parsing value
-      occupied_setback_min = json_payload.at("value").get<int8_t>();
+      occupied_setback_min = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -24030,7 +24030,7 @@ static void uic_mqtt_dotdot_on_thermostat_occupied_setback_max_attribute_update(
   }
 
 
-  int8_t occupied_setback_max = {};
+  uint8_t occupied_setback_max = {};
 
   nlohmann::json json_payload;
   try {
@@ -24043,7 +24043,7 @@ static void uic_mqtt_dotdot_on_thermostat_occupied_setback_max_attribute_update(
         return;
       }
 // Start parsing value
-      occupied_setback_max = json_payload.at("value").get<int8_t>();
+      occupied_setback_max = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -24106,7 +24106,7 @@ static void uic_mqtt_dotdot_on_thermostat_unoccupied_setback_attribute_update(
   }
 
 
-  int8_t unoccupied_setback = {};
+  uint8_t unoccupied_setback = {};
 
   nlohmann::json json_payload;
   try {
@@ -24119,7 +24119,7 @@ static void uic_mqtt_dotdot_on_thermostat_unoccupied_setback_attribute_update(
         return;
       }
 // Start parsing value
-      unoccupied_setback = json_payload.at("value").get<int8_t>();
+      unoccupied_setback = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -24182,7 +24182,7 @@ static void uic_mqtt_dotdot_on_thermostat_unoccupied_setback_min_attribute_updat
   }
 
 
-  int8_t unoccupied_setback_min = {};
+  uint8_t unoccupied_setback_min = {};
 
   nlohmann::json json_payload;
   try {
@@ -24195,7 +24195,7 @@ static void uic_mqtt_dotdot_on_thermostat_unoccupied_setback_min_attribute_updat
         return;
       }
 // Start parsing value
-      unoccupied_setback_min = json_payload.at("value").get<int8_t>();
+      unoccupied_setback_min = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -24258,7 +24258,7 @@ static void uic_mqtt_dotdot_on_thermostat_unoccupied_setback_max_attribute_updat
   }
 
 
-  int8_t unoccupied_setback_max = {};
+  uint8_t unoccupied_setback_max = {};
 
   nlohmann::json json_payload;
   try {
@@ -24271,7 +24271,7 @@ static void uic_mqtt_dotdot_on_thermostat_unoccupied_setback_max_attribute_updat
         return;
       }
 // Start parsing value
-      unoccupied_setback_max = json_payload.at("value").get<int8_t>();
+      unoccupied_setback_max = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -24334,7 +24334,7 @@ static void uic_mqtt_dotdot_on_thermostat_emergency_heat_delta_attribute_update(
   }
 
 
-  int8_t emergency_heat_delta = {};
+  uint8_t emergency_heat_delta = {};
 
   nlohmann::json json_payload;
   try {
@@ -24347,7 +24347,7 @@ static void uic_mqtt_dotdot_on_thermostat_emergency_heat_delta_attribute_update(
         return;
       }
 // Start parsing value
-      emergency_heat_delta = json_payload.at("value").get<int8_t>();
+      emergency_heat_delta = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -24494,7 +24494,7 @@ static void uic_mqtt_dotdot_on_thermostat_ac_capacity_attribute_update(
   }
 
 
-  int16_t ac_capacity = {};
+  uint16_t ac_capacity = {};
 
   nlohmann::json json_payload;
   try {
@@ -24507,7 +24507,7 @@ static void uic_mqtt_dotdot_on_thermostat_ac_capacity_attribute_update(
         return;
       }
 // Start parsing value
-      ac_capacity = json_payload.at("value").get<int16_t>();
+      ac_capacity = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -25706,7 +25706,7 @@ static void uic_mqtt_dotdot_on_dehumidification_control_relative_humidity_attrib
   }
 
 
-  int8_t relative_humidity = {};
+  uint8_t relative_humidity = {};
 
   nlohmann::json json_payload;
   try {
@@ -25719,7 +25719,7 @@ static void uic_mqtt_dotdot_on_dehumidification_control_relative_humidity_attrib
         return;
       }
 // Start parsing value
-      relative_humidity = json_payload.at("value").get<int8_t>();
+      relative_humidity = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -25782,7 +25782,7 @@ static void uic_mqtt_dotdot_on_dehumidification_control_dehumidification_cooling
   }
 
 
-  int8_t dehumidification_cooling = {};
+  uint8_t dehumidification_cooling = {};
 
   nlohmann::json json_payload;
   try {
@@ -25795,7 +25795,7 @@ static void uic_mqtt_dotdot_on_dehumidification_control_dehumidification_cooling
         return;
       }
 // Start parsing value
-      dehumidification_cooling = json_payload.at("value").get<int8_t>();
+      dehumidification_cooling = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -25858,7 +25858,7 @@ static void uic_mqtt_dotdot_on_dehumidification_control_rh_dehumidification_setp
   }
 
 
-  int8_t rh_dehumidification_setpoint = {};
+  uint8_t rh_dehumidification_setpoint = {};
 
   nlohmann::json json_payload;
   try {
@@ -25871,7 +25871,7 @@ static void uic_mqtt_dotdot_on_dehumidification_control_rh_dehumidification_setp
         return;
       }
 // Start parsing value
-      rh_dehumidification_setpoint = json_payload.at("value").get<int8_t>();
+      rh_dehumidification_setpoint = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -26102,7 +26102,7 @@ static void uic_mqtt_dotdot_on_dehumidification_control_dehumidification_hystere
   }
 
 
-  int8_t dehumidification_hysteresis = {};
+  uint8_t dehumidification_hysteresis = {};
 
   nlohmann::json json_payload;
   try {
@@ -26115,7 +26115,7 @@ static void uic_mqtt_dotdot_on_dehumidification_control_dehumidification_hystere
         return;
       }
 // Start parsing value
-      dehumidification_hysteresis = json_payload.at("value").get<int8_t>();
+      dehumidification_hysteresis = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -26178,7 +26178,7 @@ static void uic_mqtt_dotdot_on_dehumidification_control_dehumidification_max_coo
   }
 
 
-  int8_t dehumidification_max_cool = {};
+  uint8_t dehumidification_max_cool = {};
 
   nlohmann::json json_payload;
   try {
@@ -26191,7 +26191,7 @@ static void uic_mqtt_dotdot_on_dehumidification_control_dehumidification_max_coo
         return;
       }
 // Start parsing value
-      dehumidification_max_cool = json_payload.at("value").get<int8_t>();
+      dehumidification_max_cool = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -26787,7 +26787,7 @@ static void uic_mqtt_dotdot_on_color_control_current_hue_attribute_update(
   }
 
 
-  int8_t current_hue = {};
+  uint8_t current_hue = {};
 
   nlohmann::json json_payload;
   try {
@@ -26800,7 +26800,7 @@ static void uic_mqtt_dotdot_on_color_control_current_hue_attribute_update(
         return;
       }
 // Start parsing value
-      current_hue = json_payload.at("value").get<int8_t>();
+      current_hue = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -26863,7 +26863,7 @@ static void uic_mqtt_dotdot_on_color_control_current_saturation_attribute_update
   }
 
 
-  int8_t current_saturation = {};
+  uint8_t current_saturation = {};
 
   nlohmann::json json_payload;
   try {
@@ -26876,7 +26876,7 @@ static void uic_mqtt_dotdot_on_color_control_current_saturation_attribute_update
         return;
       }
 // Start parsing value
-      current_saturation = json_payload.at("value").get<int8_t>();
+      current_saturation = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -26939,7 +26939,7 @@ static void uic_mqtt_dotdot_on_color_control_remaining_time_attribute_update(
   }
 
 
-  int16_t remaining_time = {};
+  uint16_t remaining_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -26952,7 +26952,7 @@ static void uic_mqtt_dotdot_on_color_control_remaining_time_attribute_update(
         return;
       }
 // Start parsing value
-      remaining_time = json_payload.at("value").get<int16_t>();
+      remaining_time = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -27015,7 +27015,7 @@ static void uic_mqtt_dotdot_on_color_control_currentx_attribute_update(
   }
 
 
-  int16_t currentx = {};
+  uint16_t currentx = {};
 
   nlohmann::json json_payload;
   try {
@@ -27028,7 +27028,7 @@ static void uic_mqtt_dotdot_on_color_control_currentx_attribute_update(
         return;
       }
 // Start parsing value
-      currentx = json_payload.at("value").get<int16_t>();
+      currentx = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -27091,7 +27091,7 @@ static void uic_mqtt_dotdot_on_color_control_currenty_attribute_update(
   }
 
 
-  int16_t currenty = {};
+  uint16_t currenty = {};
 
   nlohmann::json json_payload;
   try {
@@ -27104,7 +27104,7 @@ static void uic_mqtt_dotdot_on_color_control_currenty_attribute_update(
         return;
       }
 // Start parsing value
-      currenty = json_payload.at("value").get<int16_t>();
+      currenty = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -27327,7 +27327,7 @@ static void uic_mqtt_dotdot_on_color_control_color_temperature_mireds_attribute_
   }
 
 
-  int16_t color_temperature_mireds = {};
+  uint16_t color_temperature_mireds = {};
 
   nlohmann::json json_payload;
   try {
@@ -27340,7 +27340,7 @@ static void uic_mqtt_dotdot_on_color_control_color_temperature_mireds_attribute_
         return;
       }
 // Start parsing value
-      color_temperature_mireds = json_payload.at("value").get<int16_t>();
+      color_temperature_mireds = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -27563,7 +27563,7 @@ static void uic_mqtt_dotdot_on_color_control_number_of_primaries_attribute_updat
   }
 
 
-  int8_t number_of_primaries = {};
+  uint8_t number_of_primaries = {};
 
   nlohmann::json json_payload;
   try {
@@ -27576,7 +27576,7 @@ static void uic_mqtt_dotdot_on_color_control_number_of_primaries_attribute_updat
         return;
       }
 // Start parsing value
-      number_of_primaries = json_payload.at("value").get<int8_t>();
+      number_of_primaries = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -27639,7 +27639,7 @@ static void uic_mqtt_dotdot_on_color_control_primary1x_attribute_update(
   }
 
 
-  int16_t primary1x = {};
+  uint16_t primary1x = {};
 
   nlohmann::json json_payload;
   try {
@@ -27652,7 +27652,7 @@ static void uic_mqtt_dotdot_on_color_control_primary1x_attribute_update(
         return;
       }
 // Start parsing value
-      primary1x = json_payload.at("value").get<int16_t>();
+      primary1x = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -27715,7 +27715,7 @@ static void uic_mqtt_dotdot_on_color_control_primary1y_attribute_update(
   }
 
 
-  int16_t primary1y = {};
+  uint16_t primary1y = {};
 
   nlohmann::json json_payload;
   try {
@@ -27728,7 +27728,7 @@ static void uic_mqtt_dotdot_on_color_control_primary1y_attribute_update(
         return;
       }
 // Start parsing value
-      primary1y = json_payload.at("value").get<int16_t>();
+      primary1y = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -27791,7 +27791,7 @@ static void uic_mqtt_dotdot_on_color_control_primary1_intensity_attribute_update
   }
 
 
-  int8_t primary1_intensity = {};
+  uint8_t primary1_intensity = {};
 
   nlohmann::json json_payload;
   try {
@@ -27804,7 +27804,7 @@ static void uic_mqtt_dotdot_on_color_control_primary1_intensity_attribute_update
         return;
       }
 // Start parsing value
-      primary1_intensity = json_payload.at("value").get<int8_t>();
+      primary1_intensity = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -27867,7 +27867,7 @@ static void uic_mqtt_dotdot_on_color_control_primary2x_attribute_update(
   }
 
 
-  int16_t primary2x = {};
+  uint16_t primary2x = {};
 
   nlohmann::json json_payload;
   try {
@@ -27880,7 +27880,7 @@ static void uic_mqtt_dotdot_on_color_control_primary2x_attribute_update(
         return;
       }
 // Start parsing value
-      primary2x = json_payload.at("value").get<int16_t>();
+      primary2x = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -27943,7 +27943,7 @@ static void uic_mqtt_dotdot_on_color_control_primary2y_attribute_update(
   }
 
 
-  int16_t primary2y = {};
+  uint16_t primary2y = {};
 
   nlohmann::json json_payload;
   try {
@@ -27956,7 +27956,7 @@ static void uic_mqtt_dotdot_on_color_control_primary2y_attribute_update(
         return;
       }
 // Start parsing value
-      primary2y = json_payload.at("value").get<int16_t>();
+      primary2y = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -28019,7 +28019,7 @@ static void uic_mqtt_dotdot_on_color_control_primary2_intensity_attribute_update
   }
 
 
-  int8_t primary2_intensity = {};
+  uint8_t primary2_intensity = {};
 
   nlohmann::json json_payload;
   try {
@@ -28032,7 +28032,7 @@ static void uic_mqtt_dotdot_on_color_control_primary2_intensity_attribute_update
         return;
       }
 // Start parsing value
-      primary2_intensity = json_payload.at("value").get<int8_t>();
+      primary2_intensity = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -28095,7 +28095,7 @@ static void uic_mqtt_dotdot_on_color_control_primary3x_attribute_update(
   }
 
 
-  int16_t primary3x = {};
+  uint16_t primary3x = {};
 
   nlohmann::json json_payload;
   try {
@@ -28108,7 +28108,7 @@ static void uic_mqtt_dotdot_on_color_control_primary3x_attribute_update(
         return;
       }
 // Start parsing value
-      primary3x = json_payload.at("value").get<int16_t>();
+      primary3x = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -28171,7 +28171,7 @@ static void uic_mqtt_dotdot_on_color_control_primary3y_attribute_update(
   }
 
 
-  int16_t primary3y = {};
+  uint16_t primary3y = {};
 
   nlohmann::json json_payload;
   try {
@@ -28184,7 +28184,7 @@ static void uic_mqtt_dotdot_on_color_control_primary3y_attribute_update(
         return;
       }
 // Start parsing value
-      primary3y = json_payload.at("value").get<int16_t>();
+      primary3y = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -28247,7 +28247,7 @@ static void uic_mqtt_dotdot_on_color_control_primary3_intensity_attribute_update
   }
 
 
-  int8_t primary3_intensity = {};
+  uint8_t primary3_intensity = {};
 
   nlohmann::json json_payload;
   try {
@@ -28260,7 +28260,7 @@ static void uic_mqtt_dotdot_on_color_control_primary3_intensity_attribute_update
         return;
       }
 // Start parsing value
-      primary3_intensity = json_payload.at("value").get<int8_t>();
+      primary3_intensity = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -28323,7 +28323,7 @@ static void uic_mqtt_dotdot_on_color_control_primary4x_attribute_update(
   }
 
 
-  int16_t primary4x = {};
+  uint16_t primary4x = {};
 
   nlohmann::json json_payload;
   try {
@@ -28336,7 +28336,7 @@ static void uic_mqtt_dotdot_on_color_control_primary4x_attribute_update(
         return;
       }
 // Start parsing value
-      primary4x = json_payload.at("value").get<int16_t>();
+      primary4x = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -28399,7 +28399,7 @@ static void uic_mqtt_dotdot_on_color_control_primary4y_attribute_update(
   }
 
 
-  int16_t primary4y = {};
+  uint16_t primary4y = {};
 
   nlohmann::json json_payload;
   try {
@@ -28412,7 +28412,7 @@ static void uic_mqtt_dotdot_on_color_control_primary4y_attribute_update(
         return;
       }
 // Start parsing value
-      primary4y = json_payload.at("value").get<int16_t>();
+      primary4y = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -28475,7 +28475,7 @@ static void uic_mqtt_dotdot_on_color_control_primary4_intensity_attribute_update
   }
 
 
-  int8_t primary4_intensity = {};
+  uint8_t primary4_intensity = {};
 
   nlohmann::json json_payload;
   try {
@@ -28488,7 +28488,7 @@ static void uic_mqtt_dotdot_on_color_control_primary4_intensity_attribute_update
         return;
       }
 // Start parsing value
-      primary4_intensity = json_payload.at("value").get<int8_t>();
+      primary4_intensity = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -28551,7 +28551,7 @@ static void uic_mqtt_dotdot_on_color_control_primary5x_attribute_update(
   }
 
 
-  int16_t primary5x = {};
+  uint16_t primary5x = {};
 
   nlohmann::json json_payload;
   try {
@@ -28564,7 +28564,7 @@ static void uic_mqtt_dotdot_on_color_control_primary5x_attribute_update(
         return;
       }
 // Start parsing value
-      primary5x = json_payload.at("value").get<int16_t>();
+      primary5x = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -28627,7 +28627,7 @@ static void uic_mqtt_dotdot_on_color_control_primary5y_attribute_update(
   }
 
 
-  int16_t primary5y = {};
+  uint16_t primary5y = {};
 
   nlohmann::json json_payload;
   try {
@@ -28640,7 +28640,7 @@ static void uic_mqtt_dotdot_on_color_control_primary5y_attribute_update(
         return;
       }
 // Start parsing value
-      primary5y = json_payload.at("value").get<int16_t>();
+      primary5y = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -28703,7 +28703,7 @@ static void uic_mqtt_dotdot_on_color_control_primary5_intensity_attribute_update
   }
 
 
-  int8_t primary5_intensity = {};
+  uint8_t primary5_intensity = {};
 
   nlohmann::json json_payload;
   try {
@@ -28716,7 +28716,7 @@ static void uic_mqtt_dotdot_on_color_control_primary5_intensity_attribute_update
         return;
       }
 // Start parsing value
-      primary5_intensity = json_payload.at("value").get<int8_t>();
+      primary5_intensity = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -28779,7 +28779,7 @@ static void uic_mqtt_dotdot_on_color_control_primary6x_attribute_update(
   }
 
 
-  int16_t primary6x = {};
+  uint16_t primary6x = {};
 
   nlohmann::json json_payload;
   try {
@@ -28792,7 +28792,7 @@ static void uic_mqtt_dotdot_on_color_control_primary6x_attribute_update(
         return;
       }
 // Start parsing value
-      primary6x = json_payload.at("value").get<int16_t>();
+      primary6x = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -28855,7 +28855,7 @@ static void uic_mqtt_dotdot_on_color_control_primary6y_attribute_update(
   }
 
 
-  int16_t primary6y = {};
+  uint16_t primary6y = {};
 
   nlohmann::json json_payload;
   try {
@@ -28868,7 +28868,7 @@ static void uic_mqtt_dotdot_on_color_control_primary6y_attribute_update(
         return;
       }
 // Start parsing value
-      primary6y = json_payload.at("value").get<int16_t>();
+      primary6y = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -28931,7 +28931,7 @@ static void uic_mqtt_dotdot_on_color_control_primary6_intensity_attribute_update
   }
 
 
-  int8_t primary6_intensity = {};
+  uint8_t primary6_intensity = {};
 
   nlohmann::json json_payload;
   try {
@@ -28944,7 +28944,7 @@ static void uic_mqtt_dotdot_on_color_control_primary6_intensity_attribute_update
         return;
       }
 // Start parsing value
-      primary6_intensity = json_payload.at("value").get<int8_t>();
+      primary6_intensity = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -29007,7 +29007,7 @@ static void uic_mqtt_dotdot_on_color_control_white_pointx_attribute_update(
   }
 
 
-  int16_t white_pointx = {};
+  uint16_t white_pointx = {};
 
   nlohmann::json json_payload;
   try {
@@ -29020,7 +29020,7 @@ static void uic_mqtt_dotdot_on_color_control_white_pointx_attribute_update(
         return;
       }
 // Start parsing value
-      white_pointx = json_payload.at("value").get<int16_t>();
+      white_pointx = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -29083,7 +29083,7 @@ static void uic_mqtt_dotdot_on_color_control_white_pointy_attribute_update(
   }
 
 
-  int16_t white_pointy = {};
+  uint16_t white_pointy = {};
 
   nlohmann::json json_payload;
   try {
@@ -29096,7 +29096,7 @@ static void uic_mqtt_dotdot_on_color_control_white_pointy_attribute_update(
         return;
       }
 // Start parsing value
-      white_pointy = json_payload.at("value").get<int16_t>();
+      white_pointy = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -29159,7 +29159,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointrx_attribute_update(
   }
 
 
-  int16_t color_pointrx = {};
+  uint16_t color_pointrx = {};
 
   nlohmann::json json_payload;
   try {
@@ -29172,7 +29172,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointrx_attribute_update(
         return;
       }
 // Start parsing value
-      color_pointrx = json_payload.at("value").get<int16_t>();
+      color_pointrx = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -29235,7 +29235,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointry_attribute_update(
   }
 
 
-  int16_t color_pointry = {};
+  uint16_t color_pointry = {};
 
   nlohmann::json json_payload;
   try {
@@ -29248,7 +29248,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointry_attribute_update(
         return;
       }
 // Start parsing value
-      color_pointry = json_payload.at("value").get<int16_t>();
+      color_pointry = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -29311,7 +29311,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointr_intensity_attribute_up
   }
 
 
-  int8_t color_pointr_intensity = {};
+  uint8_t color_pointr_intensity = {};
 
   nlohmann::json json_payload;
   try {
@@ -29324,7 +29324,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointr_intensity_attribute_up
         return;
       }
 // Start parsing value
-      color_pointr_intensity = json_payload.at("value").get<int8_t>();
+      color_pointr_intensity = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -29387,7 +29387,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointgx_attribute_update(
   }
 
 
-  int16_t color_pointgx = {};
+  uint16_t color_pointgx = {};
 
   nlohmann::json json_payload;
   try {
@@ -29400,7 +29400,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointgx_attribute_update(
         return;
       }
 // Start parsing value
-      color_pointgx = json_payload.at("value").get<int16_t>();
+      color_pointgx = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -29463,7 +29463,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointgy_attribute_update(
   }
 
 
-  int16_t color_pointgy = {};
+  uint16_t color_pointgy = {};
 
   nlohmann::json json_payload;
   try {
@@ -29476,7 +29476,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointgy_attribute_update(
         return;
       }
 // Start parsing value
-      color_pointgy = json_payload.at("value").get<int16_t>();
+      color_pointgy = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -29539,7 +29539,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointg_intensity_attribute_up
   }
 
 
-  int8_t color_pointg_intensity = {};
+  uint8_t color_pointg_intensity = {};
 
   nlohmann::json json_payload;
   try {
@@ -29552,7 +29552,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointg_intensity_attribute_up
         return;
       }
 // Start parsing value
-      color_pointg_intensity = json_payload.at("value").get<int8_t>();
+      color_pointg_intensity = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -29615,7 +29615,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointbx_attribute_update(
   }
 
 
-  int16_t color_pointbx = {};
+  uint16_t color_pointbx = {};
 
   nlohmann::json json_payload;
   try {
@@ -29628,7 +29628,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointbx_attribute_update(
         return;
       }
 // Start parsing value
-      color_pointbx = json_payload.at("value").get<int16_t>();
+      color_pointbx = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -29691,7 +29691,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointby_attribute_update(
   }
 
 
-  int16_t color_pointby = {};
+  uint16_t color_pointby = {};
 
   nlohmann::json json_payload;
   try {
@@ -29704,7 +29704,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointby_attribute_update(
         return;
       }
 // Start parsing value
-      color_pointby = json_payload.at("value").get<int16_t>();
+      color_pointby = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -29767,7 +29767,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointb_intensity_attribute_up
   }
 
 
-  int8_t color_pointb_intensity = {};
+  uint8_t color_pointb_intensity = {};
 
   nlohmann::json json_payload;
   try {
@@ -29780,7 +29780,7 @@ static void uic_mqtt_dotdot_on_color_control_color_pointb_intensity_attribute_up
         return;
       }
 // Start parsing value
-      color_pointb_intensity = json_payload.at("value").get<int8_t>();
+      color_pointb_intensity = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -29843,7 +29843,7 @@ static void uic_mqtt_dotdot_on_color_control_enhanced_current_hue_attribute_upda
   }
 
 
-  int16_t enhanced_current_hue = {};
+  uint16_t enhanced_current_hue = {};
 
   nlohmann::json json_payload;
   try {
@@ -29856,7 +29856,7 @@ static void uic_mqtt_dotdot_on_color_control_enhanced_current_hue_attribute_upda
         return;
       }
 // Start parsing value
-      enhanced_current_hue = json_payload.at("value").get<int16_t>();
+      enhanced_current_hue = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -30003,7 +30003,7 @@ static void uic_mqtt_dotdot_on_color_control_color_loop_active_attribute_update(
   }
 
 
-  int8_t color_loop_active = {};
+  uint8_t color_loop_active = {};
 
   nlohmann::json json_payload;
   try {
@@ -30016,7 +30016,7 @@ static void uic_mqtt_dotdot_on_color_control_color_loop_active_attribute_update(
         return;
       }
 // Start parsing value
-      color_loop_active = json_payload.at("value").get<int8_t>();
+      color_loop_active = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -30079,7 +30079,7 @@ static void uic_mqtt_dotdot_on_color_control_color_loop_direction_attribute_upda
   }
 
 
-  int8_t color_loop_direction = {};
+  uint8_t color_loop_direction = {};
 
   nlohmann::json json_payload;
   try {
@@ -30092,7 +30092,7 @@ static void uic_mqtt_dotdot_on_color_control_color_loop_direction_attribute_upda
         return;
       }
 // Start parsing value
-      color_loop_direction = json_payload.at("value").get<int8_t>();
+      color_loop_direction = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -30155,7 +30155,7 @@ static void uic_mqtt_dotdot_on_color_control_color_loop_time_attribute_update(
   }
 
 
-  int16_t color_loop_time = {};
+  uint16_t color_loop_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -30168,7 +30168,7 @@ static void uic_mqtt_dotdot_on_color_control_color_loop_time_attribute_update(
         return;
       }
 // Start parsing value
-      color_loop_time = json_payload.at("value").get<int16_t>();
+      color_loop_time = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -30231,7 +30231,7 @@ static void uic_mqtt_dotdot_on_color_control_color_loop_start_enhanced_hue_attri
   }
 
 
-  int16_t color_loop_start_enhanced_hue = {};
+  uint16_t color_loop_start_enhanced_hue = {};
 
   nlohmann::json json_payload;
   try {
@@ -30244,7 +30244,7 @@ static void uic_mqtt_dotdot_on_color_control_color_loop_start_enhanced_hue_attri
         return;
       }
 // Start parsing value
-      color_loop_start_enhanced_hue = json_payload.at("value").get<int16_t>();
+      color_loop_start_enhanced_hue = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -30307,7 +30307,7 @@ static void uic_mqtt_dotdot_on_color_control_color_loop_stored_enhanced_hue_attr
   }
 
 
-  int16_t color_loop_stored_enhanced_hue = {};
+  uint16_t color_loop_stored_enhanced_hue = {};
 
   nlohmann::json json_payload;
   try {
@@ -30320,7 +30320,7 @@ static void uic_mqtt_dotdot_on_color_control_color_loop_stored_enhanced_hue_attr
         return;
       }
 // Start parsing value
-      color_loop_stored_enhanced_hue = json_payload.at("value").get<int16_t>();
+      color_loop_stored_enhanced_hue = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -30459,7 +30459,7 @@ static void uic_mqtt_dotdot_on_color_control_color_temp_physical_min_mireds_attr
   }
 
 
-  int16_t color_temp_physical_min_mireds = {};
+  uint16_t color_temp_physical_min_mireds = {};
 
   nlohmann::json json_payload;
   try {
@@ -30472,7 +30472,7 @@ static void uic_mqtt_dotdot_on_color_control_color_temp_physical_min_mireds_attr
         return;
       }
 // Start parsing value
-      color_temp_physical_min_mireds = json_payload.at("value").get<int16_t>();
+      color_temp_physical_min_mireds = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -30535,7 +30535,7 @@ static void uic_mqtt_dotdot_on_color_control_color_temp_physical_max_mireds_attr
   }
 
 
-  int16_t color_temp_physical_max_mireds = {};
+  uint16_t color_temp_physical_max_mireds = {};
 
   nlohmann::json json_payload;
   try {
@@ -30548,7 +30548,7 @@ static void uic_mqtt_dotdot_on_color_control_color_temp_physical_max_mireds_attr
         return;
       }
 // Start parsing value
-      color_temp_physical_max_mireds = json_payload.at("value").get<int16_t>();
+      color_temp_physical_max_mireds = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -30611,7 +30611,7 @@ static void uic_mqtt_dotdot_on_color_control_couple_color_temp_to_level_min_mire
   }
 
 
-  int16_t couple_color_temp_to_level_min_mireds = {};
+  uint16_t couple_color_temp_to_level_min_mireds = {};
 
   nlohmann::json json_payload;
   try {
@@ -30624,7 +30624,7 @@ static void uic_mqtt_dotdot_on_color_control_couple_color_temp_to_level_min_mire
         return;
       }
 // Start parsing value
-      couple_color_temp_to_level_min_mireds = json_payload.at("value").get<int16_t>();
+      couple_color_temp_to_level_min_mireds = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -30687,7 +30687,7 @@ static void uic_mqtt_dotdot_on_color_control_start_up_color_temperature_mireds_a
   }
 
 
-  int16_t start_up_color_temperature_mireds = {};
+  uint16_t start_up_color_temperature_mireds = {};
 
   nlohmann::json json_payload;
   try {
@@ -30700,7 +30700,7 @@ static void uic_mqtt_dotdot_on_color_control_start_up_color_temperature_mireds_a
         return;
       }
 // Start parsing value
-      start_up_color_temperature_mireds = json_payload.at("value").get<int16_t>();
+      start_up_color_temperature_mireds = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -31222,7 +31222,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_physical_min_level_attribut
   }
 
 
-  int8_t physical_min_level = {};
+  uint8_t physical_min_level = {};
 
   nlohmann::json json_payload;
   try {
@@ -31235,7 +31235,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_physical_min_level_attribut
         return;
       }
 // Start parsing value
-      physical_min_level = json_payload.at("value").get<int8_t>();
+      physical_min_level = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -31298,7 +31298,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_physical_max_level_attribut
   }
 
 
-  int8_t physical_max_level = {};
+  uint8_t physical_max_level = {};
 
   nlohmann::json json_payload;
   try {
@@ -31311,7 +31311,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_physical_max_level_attribut
         return;
       }
 // Start parsing value
-      physical_max_level = json_payload.at("value").get<int8_t>();
+      physical_max_level = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -31450,7 +31450,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_min_level_attribute_update(
   }
 
 
-  int8_t min_level = {};
+  uint8_t min_level = {};
 
   nlohmann::json json_payload;
   try {
@@ -31463,7 +31463,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_min_level_attribute_update(
         return;
       }
 // Start parsing value
-      min_level = json_payload.at("value").get<int8_t>();
+      min_level = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -31526,7 +31526,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_max_level_attribute_update(
   }
 
 
-  int8_t max_level = {};
+  uint8_t max_level = {};
 
   nlohmann::json json_payload;
   try {
@@ -31539,7 +31539,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_max_level_attribute_update(
         return;
       }
 // Start parsing value
-      max_level = json_payload.at("value").get<int8_t>();
+      max_level = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -31602,7 +31602,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_power_on_level_attribute_up
   }
 
 
-  int8_t power_on_level = {};
+  uint8_t power_on_level = {};
 
   nlohmann::json json_payload;
   try {
@@ -31615,7 +31615,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_power_on_level_attribute_up
         return;
       }
 // Start parsing value
-      power_on_level = json_payload.at("value").get<int8_t>();
+      power_on_level = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -31678,7 +31678,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_power_on_fade_time_attribut
   }
 
 
-  int16_t power_on_fade_time = {};
+  uint16_t power_on_fade_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -31691,7 +31691,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_power_on_fade_time_attribut
         return;
       }
 // Start parsing value
-      power_on_fade_time = json_payload.at("value").get<int16_t>();
+      power_on_fade_time = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -31754,7 +31754,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_intrinsic_ballast_factor_at
   }
 
 
-  int8_t intrinsic_ballast_factor = {};
+  uint8_t intrinsic_ballast_factor = {};
 
   nlohmann::json json_payload;
   try {
@@ -31767,7 +31767,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_intrinsic_ballast_factor_at
         return;
       }
 // Start parsing value
-      intrinsic_ballast_factor = json_payload.at("value").get<int8_t>();
+      intrinsic_ballast_factor = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -31830,7 +31830,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_ballast_factor_adjustment_a
   }
 
 
-  int8_t ballast_factor_adjustment = {};
+  uint8_t ballast_factor_adjustment = {};
 
   nlohmann::json json_payload;
   try {
@@ -31843,7 +31843,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_ballast_factor_adjustment_a
         return;
       }
 // Start parsing value
-      ballast_factor_adjustment = json_payload.at("value").get<int8_t>();
+      ballast_factor_adjustment = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -31906,7 +31906,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_lamp_quantity_attribute_upd
   }
 
 
-  int8_t lamp_quantity = {};
+  uint8_t lamp_quantity = {};
 
   nlohmann::json json_payload;
   try {
@@ -31919,7 +31919,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_lamp_quantity_attribute_upd
         return;
       }
 // Start parsing value
-      lamp_quantity = json_payload.at("value").get<int8_t>();
+      lamp_quantity = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -32134,7 +32134,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_lamp_rated_hours_attribute_
   }
 
 
-  int32_t lamp_rated_hours = {};
+  uint32_t lamp_rated_hours = {};
 
   nlohmann::json json_payload;
   try {
@@ -32147,7 +32147,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_lamp_rated_hours_attribute_
         return;
       }
 // Start parsing value
-      lamp_rated_hours = json_payload.at("value").get<int32_t>();
+      lamp_rated_hours = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -32210,7 +32210,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_lamp_burn_hours_attribute_u
   }
 
 
-  int32_t lamp_burn_hours = {};
+  uint32_t lamp_burn_hours = {};
 
   nlohmann::json json_payload;
   try {
@@ -32223,7 +32223,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_lamp_burn_hours_attribute_u
         return;
       }
 // Start parsing value
-      lamp_burn_hours = json_payload.at("value").get<int32_t>();
+      lamp_burn_hours = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -32362,7 +32362,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_lamp_burn_hours_trip_point_
   }
 
 
-  int32_t lamp_burn_hours_trip_point = {};
+  uint32_t lamp_burn_hours_trip_point = {};
 
   nlohmann::json json_payload;
   try {
@@ -32375,7 +32375,7 @@ static void uic_mqtt_dotdot_on_ballast_configuration_lamp_burn_hours_trip_point_
         return;
       }
 // Start parsing value
-      lamp_burn_hours_trip_point = json_payload.at("value").get<int32_t>();
+      lamp_burn_hours_trip_point = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -32598,7 +32598,7 @@ static void uic_mqtt_dotdot_on_illuminance_measurement_measured_value_attribute_
   }
 
 
-  int16_t measured_value = {};
+  uint16_t measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -32611,7 +32611,7 @@ static void uic_mqtt_dotdot_on_illuminance_measurement_measured_value_attribute_
         return;
       }
 // Start parsing value
-      measured_value = json_payload.at("value").get<int16_t>();
+      measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -32674,7 +32674,7 @@ static void uic_mqtt_dotdot_on_illuminance_measurement_min_measured_value_attrib
   }
 
 
-  int16_t min_measured_value = {};
+  uint16_t min_measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -32687,7 +32687,7 @@ static void uic_mqtt_dotdot_on_illuminance_measurement_min_measured_value_attrib
         return;
       }
 // Start parsing value
-      min_measured_value = json_payload.at("value").get<int16_t>();
+      min_measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -32750,7 +32750,7 @@ static void uic_mqtt_dotdot_on_illuminance_measurement_max_measured_value_attrib
   }
 
 
-  int16_t max_measured_value = {};
+  uint16_t max_measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -32763,7 +32763,7 @@ static void uic_mqtt_dotdot_on_illuminance_measurement_max_measured_value_attrib
         return;
       }
 // Start parsing value
-      max_measured_value = json_payload.at("value").get<int16_t>();
+      max_measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -32826,7 +32826,7 @@ static void uic_mqtt_dotdot_on_illuminance_measurement_tolerance_attribute_updat
   }
 
 
-  int16_t tolerance = {};
+  uint16_t tolerance = {};
 
   nlohmann::json json_payload;
   try {
@@ -32839,7 +32839,7 @@ static void uic_mqtt_dotdot_on_illuminance_measurement_tolerance_attribute_updat
         return;
       }
 // Start parsing value
-      tolerance = json_payload.at("value").get<int16_t>();
+      tolerance = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -33224,7 +33224,7 @@ static void uic_mqtt_dotdot_on_illuminance_level_sensing_illuminance_target_leve
   }
 
 
-  int16_t illuminance_target_level = {};
+  uint16_t illuminance_target_level = {};
 
   nlohmann::json json_payload;
   try {
@@ -33237,7 +33237,7 @@ static void uic_mqtt_dotdot_on_illuminance_level_sensing_illuminance_target_leve
         return;
       }
 // Start parsing value
-      illuminance_target_level = json_payload.at("value").get<int16_t>();
+      illuminance_target_level = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -33583,7 +33583,7 @@ static void uic_mqtt_dotdot_on_temperature_measurement_tolerance_attribute_updat
   }
 
 
-  int16_t tolerance = {};
+  uint16_t tolerance = {};
 
   nlohmann::json json_payload;
   try {
@@ -33596,7 +33596,7 @@ static void uic_mqtt_dotdot_on_temperature_measurement_tolerance_attribute_updat
         return;
       }
 // Start parsing value
-      tolerance = json_payload.at("value").get<int16_t>();
+      tolerance = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -33955,7 +33955,7 @@ static void uic_mqtt_dotdot_on_pressure_measurement_tolerance_attribute_update(
   }
 
 
-  int16_t tolerance = {};
+  uint16_t tolerance = {};
 
   nlohmann::json json_payload;
   try {
@@ -33968,7 +33968,7 @@ static void uic_mqtt_dotdot_on_pressure_measurement_tolerance_attribute_update(
         return;
       }
 // Start parsing value
-      tolerance = json_payload.at("value").get<int16_t>();
+      tolerance = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -34259,7 +34259,7 @@ static void uic_mqtt_dotdot_on_pressure_measurement_scaled_tolerance_attribute_u
   }
 
 
-  int16_t scaled_tolerance = {};
+  uint16_t scaled_tolerance = {};
 
   nlohmann::json json_payload;
   try {
@@ -34272,7 +34272,7 @@ static void uic_mqtt_dotdot_on_pressure_measurement_scaled_tolerance_attribute_u
         return;
       }
 // Start parsing value
-      scaled_tolerance = json_payload.at("value").get<int16_t>();
+      scaled_tolerance = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -34514,7 +34514,7 @@ static void uic_mqtt_dotdot_on_flow_measurement_measured_value_attribute_update(
   }
 
 
-  int16_t measured_value = {};
+  uint16_t measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -34527,7 +34527,7 @@ static void uic_mqtt_dotdot_on_flow_measurement_measured_value_attribute_update(
         return;
       }
 // Start parsing value
-      measured_value = json_payload.at("value").get<int16_t>();
+      measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -34590,7 +34590,7 @@ static void uic_mqtt_dotdot_on_flow_measurement_min_measured_value_attribute_upd
   }
 
 
-  int16_t min_measured_value = {};
+  uint16_t min_measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -34603,7 +34603,7 @@ static void uic_mqtt_dotdot_on_flow_measurement_min_measured_value_attribute_upd
         return;
       }
 // Start parsing value
-      min_measured_value = json_payload.at("value").get<int16_t>();
+      min_measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -34666,7 +34666,7 @@ static void uic_mqtt_dotdot_on_flow_measurement_max_measured_value_attribute_upd
   }
 
 
-  int16_t max_measured_value = {};
+  uint16_t max_measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -34679,7 +34679,7 @@ static void uic_mqtt_dotdot_on_flow_measurement_max_measured_value_attribute_upd
         return;
       }
 // Start parsing value
-      max_measured_value = json_payload.at("value").get<int16_t>();
+      max_measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -34742,7 +34742,7 @@ static void uic_mqtt_dotdot_on_flow_measurement_tolerance_attribute_update(
   }
 
 
-  int16_t tolerance = {};
+  uint16_t tolerance = {};
 
   nlohmann::json json_payload;
   try {
@@ -34755,7 +34755,7 @@ static void uic_mqtt_dotdot_on_flow_measurement_tolerance_attribute_update(
         return;
       }
 // Start parsing value
-      tolerance = json_payload.at("value").get<int16_t>();
+      tolerance = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -34881,7 +34881,7 @@ static void uic_mqtt_dotdot_on_relativity_humidity_measured_value_attribute_upda
   }
 
 
-  int16_t measured_value = {};
+  uint16_t measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -34894,7 +34894,7 @@ static void uic_mqtt_dotdot_on_relativity_humidity_measured_value_attribute_upda
         return;
       }
 // Start parsing value
-      measured_value = json_payload.at("value").get<int16_t>();
+      measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -34957,7 +34957,7 @@ static void uic_mqtt_dotdot_on_relativity_humidity_min_measured_value_attribute_
   }
 
 
-  int16_t min_measured_value = {};
+  uint16_t min_measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -34970,7 +34970,7 @@ static void uic_mqtt_dotdot_on_relativity_humidity_min_measured_value_attribute_
         return;
       }
 // Start parsing value
-      min_measured_value = json_payload.at("value").get<int16_t>();
+      min_measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -35033,7 +35033,7 @@ static void uic_mqtt_dotdot_on_relativity_humidity_max_measured_value_attribute_
   }
 
 
-  int16_t max_measured_value = {};
+  uint16_t max_measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -35046,7 +35046,7 @@ static void uic_mqtt_dotdot_on_relativity_humidity_max_measured_value_attribute_
         return;
       }
 // Start parsing value
-      max_measured_value = json_payload.at("value").get<int16_t>();
+      max_measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -35109,7 +35109,7 @@ static void uic_mqtt_dotdot_on_relativity_humidity_tolerance_attribute_update(
   }
 
 
-  int16_t tolerance = {};
+  uint16_t tolerance = {};
 
   nlohmann::json json_payload;
   try {
@@ -35122,7 +35122,7 @@ static void uic_mqtt_dotdot_on_relativity_humidity_tolerance_attribute_update(
         return;
       }
 // Start parsing value
-      tolerance = json_payload.at("value").get<int16_t>();
+      tolerance = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -35492,7 +35492,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_pir_occupied_to_unoccupied_dela
   }
 
 
-  int16_t pir_occupied_to_unoccupied_delay = {};
+  uint16_t pir_occupied_to_unoccupied_delay = {};
 
   nlohmann::json json_payload;
   try {
@@ -35505,7 +35505,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_pir_occupied_to_unoccupied_dela
         return;
       }
 // Start parsing value
-      pir_occupied_to_unoccupied_delay = json_payload.at("value").get<int16_t>();
+      pir_occupied_to_unoccupied_delay = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -35568,7 +35568,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_pir_unoccupied_to_occupied_dela
   }
 
 
-  int16_t pir_unoccupied_to_occupied_delay = {};
+  uint16_t pir_unoccupied_to_occupied_delay = {};
 
   nlohmann::json json_payload;
   try {
@@ -35581,7 +35581,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_pir_unoccupied_to_occupied_dela
         return;
       }
 // Start parsing value
-      pir_unoccupied_to_occupied_delay = json_payload.at("value").get<int16_t>();
+      pir_unoccupied_to_occupied_delay = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -35644,7 +35644,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_pir_unoccupied_to_occupied_thre
   }
 
 
-  int8_t pir_unoccupied_to_occupied_threshold = {};
+  uint8_t pir_unoccupied_to_occupied_threshold = {};
 
   nlohmann::json json_payload;
   try {
@@ -35657,7 +35657,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_pir_unoccupied_to_occupied_thre
         return;
       }
 // Start parsing value
-      pir_unoccupied_to_occupied_threshold = json_payload.at("value").get<int8_t>();
+      pir_unoccupied_to_occupied_threshold = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -35720,7 +35720,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_ultrasonic_occupied_to_unoccupi
   }
 
 
-  int16_t ultrasonic_occupied_to_unoccupied_delay = {};
+  uint16_t ultrasonic_occupied_to_unoccupied_delay = {};
 
   nlohmann::json json_payload;
   try {
@@ -35733,7 +35733,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_ultrasonic_occupied_to_unoccupi
         return;
       }
 // Start parsing value
-      ultrasonic_occupied_to_unoccupied_delay = json_payload.at("value").get<int16_t>();
+      ultrasonic_occupied_to_unoccupied_delay = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -35796,7 +35796,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_ultrasonic_unoccupied_to_occupi
   }
 
 
-  int16_t ultrasonic_unoccupied_to_occupied_delay = {};
+  uint16_t ultrasonic_unoccupied_to_occupied_delay = {};
 
   nlohmann::json json_payload;
   try {
@@ -35809,7 +35809,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_ultrasonic_unoccupied_to_occupi
         return;
       }
 // Start parsing value
-      ultrasonic_unoccupied_to_occupied_delay = json_payload.at("value").get<int16_t>();
+      ultrasonic_unoccupied_to_occupied_delay = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -35872,7 +35872,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_ultrasonic_unoccupied_to_occupi
   }
 
 
-  int8_t ultrasonic_unoccupied_to_occupied_threshold = {};
+  uint8_t ultrasonic_unoccupied_to_occupied_threshold = {};
 
   nlohmann::json json_payload;
   try {
@@ -35885,7 +35885,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_ultrasonic_unoccupied_to_occupi
         return;
       }
 // Start parsing value
-      ultrasonic_unoccupied_to_occupied_threshold = json_payload.at("value").get<int8_t>();
+      ultrasonic_unoccupied_to_occupied_threshold = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -35948,7 +35948,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_physical_contact_occupied_to_un
   }
 
 
-  int16_t physical_contact_occupied_to_unoccupied_delay = {};
+  uint16_t physical_contact_occupied_to_unoccupied_delay = {};
 
   nlohmann::json json_payload;
   try {
@@ -35961,7 +35961,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_physical_contact_occupied_to_un
         return;
       }
 // Start parsing value
-      physical_contact_occupied_to_unoccupied_delay = json_payload.at("value").get<int16_t>();
+      physical_contact_occupied_to_unoccupied_delay = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -36024,7 +36024,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_physical_contact_unoccupied_to_
   }
 
 
-  int16_t physical_contact_unoccupied_to_occupied_delay = {};
+  uint16_t physical_contact_unoccupied_to_occupied_delay = {};
 
   nlohmann::json json_payload;
   try {
@@ -36037,7 +36037,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_physical_contact_unoccupied_to_
         return;
       }
 // Start parsing value
-      physical_contact_unoccupied_to_occupied_delay = json_payload.at("value").get<int16_t>();
+      physical_contact_unoccupied_to_occupied_delay = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -36100,7 +36100,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_physical_contact_unoccupied_to_
   }
 
 
-  int8_t physical_contact_unoccupied_to_occupied_threshold = {};
+  uint8_t physical_contact_unoccupied_to_occupied_threshold = {};
 
   nlohmann::json json_payload;
   try {
@@ -36113,7 +36113,7 @@ static void uic_mqtt_dotdot_on_occupancy_sensing_physical_contact_unoccupied_to_
         return;
       }
 // Start parsing value
-      physical_contact_unoccupied_to_occupied_threshold = json_payload.at("value").get<int8_t>();
+      physical_contact_unoccupied_to_occupied_threshold = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -36303,7 +36303,7 @@ static void uic_mqtt_dotdot_on_soil_moisture_measured_value_attribute_update(
   }
 
 
-  int16_t measured_value = {};
+  uint16_t measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -36316,7 +36316,7 @@ static void uic_mqtt_dotdot_on_soil_moisture_measured_value_attribute_update(
         return;
       }
 // Start parsing value
-      measured_value = json_payload.at("value").get<int16_t>();
+      measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -36379,7 +36379,7 @@ static void uic_mqtt_dotdot_on_soil_moisture_min_measured_value_attribute_update
   }
 
 
-  int16_t min_measured_value = {};
+  uint16_t min_measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -36392,7 +36392,7 @@ static void uic_mqtt_dotdot_on_soil_moisture_min_measured_value_attribute_update
         return;
       }
 // Start parsing value
-      min_measured_value = json_payload.at("value").get<int16_t>();
+      min_measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -36455,7 +36455,7 @@ static void uic_mqtt_dotdot_on_soil_moisture_max_measured_value_attribute_update
   }
 
 
-  int16_t max_measured_value = {};
+  uint16_t max_measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -36468,7 +36468,7 @@ static void uic_mqtt_dotdot_on_soil_moisture_max_measured_value_attribute_update
         return;
       }
 // Start parsing value
-      max_measured_value = json_payload.at("value").get<int16_t>();
+      max_measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -36531,7 +36531,7 @@ static void uic_mqtt_dotdot_on_soil_moisture_tolerance_attribute_update(
   }
 
 
-  int16_t tolerance = {};
+  uint16_t tolerance = {};
 
   nlohmann::json json_payload;
   try {
@@ -36544,7 +36544,7 @@ static void uic_mqtt_dotdot_on_soil_moisture_tolerance_attribute_update(
         return;
       }
 // Start parsing value
-      tolerance = json_payload.at("value").get<int16_t>();
+      tolerance = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -36670,7 +36670,7 @@ static void uic_mqtt_dotdot_on_ph_measurement_measured_value_attribute_update(
   }
 
 
-  int16_t measured_value = {};
+  uint16_t measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -36683,7 +36683,7 @@ static void uic_mqtt_dotdot_on_ph_measurement_measured_value_attribute_update(
         return;
       }
 // Start parsing value
-      measured_value = json_payload.at("value").get<int16_t>();
+      measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -36746,7 +36746,7 @@ static void uic_mqtt_dotdot_on_ph_measurement_min_measured_value_attribute_updat
   }
 
 
-  int16_t min_measured_value = {};
+  uint16_t min_measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -36759,7 +36759,7 @@ static void uic_mqtt_dotdot_on_ph_measurement_min_measured_value_attribute_updat
         return;
       }
 // Start parsing value
-      min_measured_value = json_payload.at("value").get<int16_t>();
+      min_measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -36822,7 +36822,7 @@ static void uic_mqtt_dotdot_on_ph_measurement_max_measured_value_attribute_updat
   }
 
 
-  int16_t max_measured_value = {};
+  uint16_t max_measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -36835,7 +36835,7 @@ static void uic_mqtt_dotdot_on_ph_measurement_max_measured_value_attribute_updat
         return;
       }
 // Start parsing value
-      max_measured_value = json_payload.at("value").get<int16_t>();
+      max_measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -36898,7 +36898,7 @@ static void uic_mqtt_dotdot_on_ph_measurement_tolerance_attribute_update(
   }
 
 
-  int16_t tolerance = {};
+  uint16_t tolerance = {};
 
   nlohmann::json json_payload;
   try {
@@ -36911,7 +36911,7 @@ static void uic_mqtt_dotdot_on_ph_measurement_tolerance_attribute_update(
         return;
       }
 // Start parsing value
-      tolerance = json_payload.at("value").get<int16_t>();
+      tolerance = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -37037,7 +37037,7 @@ static void uic_mqtt_dotdot_on_electrical_conductivity_measurement_measured_valu
   }
 
 
-  int16_t measured_value = {};
+  uint16_t measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -37050,7 +37050,7 @@ static void uic_mqtt_dotdot_on_electrical_conductivity_measurement_measured_valu
         return;
       }
 // Start parsing value
-      measured_value = json_payload.at("value").get<int16_t>();
+      measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -37113,7 +37113,7 @@ static void uic_mqtt_dotdot_on_electrical_conductivity_measurement_min_measured_
   }
 
 
-  int16_t min_measured_value = {};
+  uint16_t min_measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -37126,7 +37126,7 @@ static void uic_mqtt_dotdot_on_electrical_conductivity_measurement_min_measured_
         return;
       }
 // Start parsing value
-      min_measured_value = json_payload.at("value").get<int16_t>();
+      min_measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -37189,7 +37189,7 @@ static void uic_mqtt_dotdot_on_electrical_conductivity_measurement_max_measured_
   }
 
 
-  int16_t max_measured_value = {};
+  uint16_t max_measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -37202,7 +37202,7 @@ static void uic_mqtt_dotdot_on_electrical_conductivity_measurement_max_measured_
         return;
       }
 // Start parsing value
-      max_measured_value = json_payload.at("value").get<int16_t>();
+      max_measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -37265,7 +37265,7 @@ static void uic_mqtt_dotdot_on_electrical_conductivity_measurement_tolerance_att
   }
 
 
-  int16_t tolerance = {};
+  uint16_t tolerance = {};
 
   nlohmann::json json_payload;
   try {
@@ -37278,7 +37278,7 @@ static void uic_mqtt_dotdot_on_electrical_conductivity_measurement_tolerance_att
         return;
       }
 // Start parsing value
-      tolerance = json_payload.at("value").get<int16_t>();
+      tolerance = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -37404,7 +37404,7 @@ static void uic_mqtt_dotdot_on_wind_speed_measurement_measured_value_attribute_u
   }
 
 
-  int16_t measured_value = {};
+  uint16_t measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -37417,7 +37417,7 @@ static void uic_mqtt_dotdot_on_wind_speed_measurement_measured_value_attribute_u
         return;
       }
 // Start parsing value
-      measured_value = json_payload.at("value").get<int16_t>();
+      measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -37480,7 +37480,7 @@ static void uic_mqtt_dotdot_on_wind_speed_measurement_min_measured_value_attribu
   }
 
 
-  int16_t min_measured_value = {};
+  uint16_t min_measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -37493,7 +37493,7 @@ static void uic_mqtt_dotdot_on_wind_speed_measurement_min_measured_value_attribu
         return;
       }
 // Start parsing value
-      min_measured_value = json_payload.at("value").get<int16_t>();
+      min_measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -37556,7 +37556,7 @@ static void uic_mqtt_dotdot_on_wind_speed_measurement_max_measured_value_attribu
   }
 
 
-  int16_t max_measured_value = {};
+  uint16_t max_measured_value = {};
 
   nlohmann::json json_payload;
   try {
@@ -37569,7 +37569,7 @@ static void uic_mqtt_dotdot_on_wind_speed_measurement_max_measured_value_attribu
         return;
       }
 // Start parsing value
-      max_measured_value = json_payload.at("value").get<int16_t>();
+      max_measured_value = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -37632,7 +37632,7 @@ static void uic_mqtt_dotdot_on_wind_speed_measurement_tolerance_attribute_update
   }
 
 
-  int16_t tolerance = {};
+  uint16_t tolerance = {};
 
   nlohmann::json json_payload;
   try {
@@ -37645,7 +37645,7 @@ static void uic_mqtt_dotdot_on_wind_speed_measurement_tolerance_attribute_update
         return;
       }
 // Start parsing value
-      tolerance = json_payload.at("value").get<int16_t>();
+      tolerance = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -39195,7 +39195,7 @@ static void uic_mqtt_dotdot_on_ias_zone_zoneid_attribute_update(
   }
 
 
-  int8_t zoneid = {};
+  uint8_t zoneid = {};
 
   nlohmann::json json_payload;
   try {
@@ -39208,7 +39208,7 @@ static void uic_mqtt_dotdot_on_ias_zone_zoneid_attribute_update(
         return;
       }
 // Start parsing value
-      zoneid = json_payload.at("value").get<int8_t>();
+      zoneid = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -39271,7 +39271,7 @@ static void uic_mqtt_dotdot_on_ias_zone_number_of_zone_sensitivity_levels_suppor
   }
 
 
-  int8_t number_of_zone_sensitivity_levels_supported = {};
+  uint8_t number_of_zone_sensitivity_levels_supported = {};
 
   nlohmann::json json_payload;
   try {
@@ -39284,7 +39284,7 @@ static void uic_mqtt_dotdot_on_ias_zone_number_of_zone_sensitivity_levels_suppor
         return;
       }
 // Start parsing value
-      number_of_zone_sensitivity_levels_supported = json_payload.at("value").get<int8_t>();
+      number_of_zone_sensitivity_levels_supported = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -39347,7 +39347,7 @@ static void uic_mqtt_dotdot_on_ias_zone_current_zone_sensitivity_level_attribute
   }
 
 
-  int8_t current_zone_sensitivity_level = {};
+  uint8_t current_zone_sensitivity_level = {};
 
   nlohmann::json json_payload;
   try {
@@ -39360,7 +39360,7 @@ static void uic_mqtt_dotdot_on_ias_zone_current_zone_sensitivity_level_attribute
         return;
       }
 // Start parsing value
-      current_zone_sensitivity_level = json_payload.at("value").get<int8_t>();
+      current_zone_sensitivity_level = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -39507,7 +39507,7 @@ static void uic_mqtt_dotdot_on_iaswd_max_duration_attribute_update(
   }
 
 
-  int16_t max_duration = {};
+  uint16_t max_duration = {};
 
   nlohmann::json json_payload;
   try {
@@ -39520,7 +39520,7 @@ static void uic_mqtt_dotdot_on_iaswd_max_duration_attribute_update(
         return;
       }
 // Start parsing value
-      max_duration = json_payload.at("value").get<int16_t>();
+      max_duration = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -39644,7 +39644,7 @@ static void uic_mqtt_dotdot_on_metering_current_summation_delivered_attribute_up
   }
 
 
-  int64_t current_summation_delivered = {};
+  uint64_t current_summation_delivered = {};
 
   nlohmann::json json_payload;
   try {
@@ -39657,7 +39657,7 @@ static void uic_mqtt_dotdot_on_metering_current_summation_delivered_attribute_up
         return;
       }
 // Start parsing value
-      current_summation_delivered = json_payload.at("value").get<int64_t>();
+      current_summation_delivered = json_payload.at("value").get<uint64_t>();
     
     // End parsing value
     }
@@ -39720,7 +39720,7 @@ static void uic_mqtt_dotdot_on_metering_current_summation_received_attribute_upd
   }
 
 
-  int64_t current_summation_received = {};
+  uint64_t current_summation_received = {};
 
   nlohmann::json json_payload;
   try {
@@ -39733,7 +39733,7 @@ static void uic_mqtt_dotdot_on_metering_current_summation_received_attribute_upd
         return;
       }
 // Start parsing value
-      current_summation_received = json_payload.at("value").get<int64_t>();
+      current_summation_received = json_payload.at("value").get<uint64_t>();
     
     // End parsing value
     }
@@ -39796,7 +39796,7 @@ static void uic_mqtt_dotdot_on_metering_current_max_demand_delivered_attribute_u
   }
 
 
-  int64_t current_max_demand_delivered = {};
+  uint64_t current_max_demand_delivered = {};
 
   nlohmann::json json_payload;
   try {
@@ -39809,7 +39809,7 @@ static void uic_mqtt_dotdot_on_metering_current_max_demand_delivered_attribute_u
         return;
       }
 // Start parsing value
-      current_max_demand_delivered = json_payload.at("value").get<int64_t>();
+      current_max_demand_delivered = json_payload.at("value").get<uint64_t>();
     
     // End parsing value
     }
@@ -40024,7 +40024,7 @@ static void uic_mqtt_dotdot_on_metering_reading_snap_shot_time_attribute_update(
   }
 
 
-  uint8_t reading_snap_shot_time = {};
+  uint32_t reading_snap_shot_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -40037,7 +40037,7 @@ static void uic_mqtt_dotdot_on_metering_reading_snap_shot_time_attribute_update(
         return;
       }
 // Start parsing value
-      reading_snap_shot_time = json_payload.at("value").get<uint8_t>();
+      reading_snap_shot_time = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -40100,7 +40100,7 @@ static void uic_mqtt_dotdot_on_metering_current_max_demand_delivered_time_attrib
   }
 
 
-  uint8_t current_max_demand_delivered_time = {};
+  uint32_t current_max_demand_delivered_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -40113,7 +40113,7 @@ static void uic_mqtt_dotdot_on_metering_current_max_demand_delivered_time_attrib
         return;
       }
 // Start parsing value
-      current_max_demand_delivered_time = json_payload.at("value").get<uint8_t>();
+      current_max_demand_delivered_time = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -40176,7 +40176,7 @@ static void uic_mqtt_dotdot_on_metering_current_max_demand_received_time_attribu
   }
 
 
-  uint8_t current_max_demand_received_time = {};
+  uint32_t current_max_demand_received_time = {};
 
   nlohmann::json json_payload;
   try {
@@ -40189,7 +40189,7 @@ static void uic_mqtt_dotdot_on_metering_current_max_demand_received_time_attribu
         return;
       }
 // Start parsing value
-      current_max_demand_received_time = json_payload.at("value").get<uint8_t>();
+      current_max_demand_received_time = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -40252,7 +40252,7 @@ static void uic_mqtt_dotdot_on_metering_default_update_period_attribute_update(
   }
 
 
-  int8_t default_update_period = {};
+  uint8_t default_update_period = {};
 
   nlohmann::json json_payload;
   try {
@@ -40265,7 +40265,7 @@ static void uic_mqtt_dotdot_on_metering_default_update_period_attribute_update(
         return;
       }
 // Start parsing value
-      default_update_period = json_payload.at("value").get<int8_t>();
+      default_update_period = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -40412,7 +40412,7 @@ static void uic_mqtt_dotdot_on_metering_current_inlet_energy_carrier_summation_a
   }
 
 
-  int64_t current_inlet_energy_carrier_summation = {};
+  uint64_t current_inlet_energy_carrier_summation = {};
 
   nlohmann::json json_payload;
   try {
@@ -40425,7 +40425,7 @@ static void uic_mqtt_dotdot_on_metering_current_inlet_energy_carrier_summation_a
         return;
       }
 // Start parsing value
-      current_inlet_energy_carrier_summation = json_payload.at("value").get<int64_t>();
+      current_inlet_energy_carrier_summation = json_payload.at("value").get<uint64_t>();
     
     // End parsing value
     }
@@ -40488,7 +40488,7 @@ static void uic_mqtt_dotdot_on_metering_current_outlet_energy_carrier_summation_
   }
 
 
-  int64_t current_outlet_energy_carrier_summation = {};
+  uint64_t current_outlet_energy_carrier_summation = {};
 
   nlohmann::json json_payload;
   try {
@@ -40501,7 +40501,7 @@ static void uic_mqtt_dotdot_on_metering_current_outlet_energy_carrier_summation_
         return;
       }
 // Start parsing value
-      current_outlet_energy_carrier_summation = json_payload.at("value").get<int64_t>();
+      current_outlet_energy_carrier_summation = json_payload.at("value").get<uint64_t>();
     
     // End parsing value
     }
@@ -40800,7 +40800,7 @@ static void uic_mqtt_dotdot_on_metering_multiplier_attribute_update(
   }
 
 
-  int32_t multiplier = {};
+  uint32_t multiplier = {};
 
   nlohmann::json json_payload;
   try {
@@ -40813,7 +40813,7 @@ static void uic_mqtt_dotdot_on_metering_multiplier_attribute_update(
         return;
       }
 // Start parsing value
-      multiplier = json_payload.at("value").get<int32_t>();
+      multiplier = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -40876,7 +40876,7 @@ static void uic_mqtt_dotdot_on_metering_divisor_attribute_update(
   }
 
 
-  int32_t divisor = {};
+  uint32_t divisor = {};
 
   nlohmann::json json_payload;
   try {
@@ -40889,7 +40889,7 @@ static void uic_mqtt_dotdot_on_metering_divisor_attribute_update(
         return;
       }
 // Start parsing value
-      divisor = json_payload.at("value").get<int32_t>();
+      divisor = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -42782,7 +42782,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_dc_voltage_multiplier_attr
   }
 
 
-  int16_t dc_voltage_multiplier = {};
+  uint16_t dc_voltage_multiplier = {};
 
   nlohmann::json json_payload;
   try {
@@ -42795,7 +42795,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_dc_voltage_multiplier_attr
         return;
       }
 // Start parsing value
-      dc_voltage_multiplier = json_payload.at("value").get<int16_t>();
+      dc_voltage_multiplier = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -42858,7 +42858,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_dc_voltage_divisor_attribu
   }
 
 
-  int16_t dc_voltage_divisor = {};
+  uint16_t dc_voltage_divisor = {};
 
   nlohmann::json json_payload;
   try {
@@ -42871,7 +42871,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_dc_voltage_divisor_attribu
         return;
       }
 // Start parsing value
-      dc_voltage_divisor = json_payload.at("value").get<int16_t>();
+      dc_voltage_divisor = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -42934,7 +42934,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_dc_current_multiplier_attr
   }
 
 
-  int16_t dc_current_multiplier = {};
+  uint16_t dc_current_multiplier = {};
 
   nlohmann::json json_payload;
   try {
@@ -42947,7 +42947,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_dc_current_multiplier_attr
         return;
       }
 // Start parsing value
-      dc_current_multiplier = json_payload.at("value").get<int16_t>();
+      dc_current_multiplier = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -43010,7 +43010,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_dc_current_divisor_attribu
   }
 
 
-  int16_t dc_current_divisor = {};
+  uint16_t dc_current_divisor = {};
 
   nlohmann::json json_payload;
   try {
@@ -43023,7 +43023,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_dc_current_divisor_attribu
         return;
       }
 // Start parsing value
-      dc_current_divisor = json_payload.at("value").get<int16_t>();
+      dc_current_divisor = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -43086,7 +43086,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_dc_power_multiplier_attrib
   }
 
 
-  int16_t dc_power_multiplier = {};
+  uint16_t dc_power_multiplier = {};
 
   nlohmann::json json_payload;
   try {
@@ -43099,7 +43099,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_dc_power_multiplier_attrib
         return;
       }
 // Start parsing value
-      dc_power_multiplier = json_payload.at("value").get<int16_t>();
+      dc_power_multiplier = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -43162,7 +43162,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_dc_power_divisor_attribute
   }
 
 
-  int16_t dc_power_divisor = {};
+  uint16_t dc_power_divisor = {};
 
   nlohmann::json json_payload;
   try {
@@ -43175,7 +43175,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_dc_power_divisor_attribute
         return;
       }
 // Start parsing value
-      dc_power_divisor = json_payload.at("value").get<int16_t>();
+      dc_power_divisor = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -43238,7 +43238,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_frequency_attribute_upd
   }
 
 
-  int16_t ac_frequency = {};
+  uint16_t ac_frequency = {};
 
   nlohmann::json json_payload;
   try {
@@ -43251,7 +43251,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_frequency_attribute_upd
         return;
       }
 // Start parsing value
-      ac_frequency = json_payload.at("value").get<int16_t>();
+      ac_frequency = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -43314,7 +43314,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_frequency_min_attribute
   }
 
 
-  int16_t ac_frequency_min = {};
+  uint16_t ac_frequency_min = {};
 
   nlohmann::json json_payload;
   try {
@@ -43327,7 +43327,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_frequency_min_attribute
         return;
       }
 // Start parsing value
-      ac_frequency_min = json_payload.at("value").get<int16_t>();
+      ac_frequency_min = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -43390,7 +43390,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_frequency_max_attribute
   }
 
 
-  int16_t ac_frequency_max = {};
+  uint16_t ac_frequency_max = {};
 
   nlohmann::json json_payload;
   try {
@@ -43403,7 +43403,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_frequency_max_attribute
         return;
       }
 // Start parsing value
-      ac_frequency_max = json_payload.at("value").get<int16_t>();
+      ac_frequency_max = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -43466,7 +43466,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_neutral_current_attribute_
   }
 
 
-  int16_t neutral_current = {};
+  uint16_t neutral_current = {};
 
   nlohmann::json json_payload;
   try {
@@ -43479,7 +43479,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_neutral_current_attribute_
         return;
       }
 // Start parsing value
-      neutral_current = json_payload.at("value").get<int16_t>();
+      neutral_current = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -43694,7 +43694,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_total_apparent_power_attri
   }
 
 
-  int32_t total_apparent_power = {};
+  uint32_t total_apparent_power = {};
 
   nlohmann::json json_payload;
   try {
@@ -43707,7 +43707,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_total_apparent_power_attri
         return;
       }
 // Start parsing value
-      total_apparent_power = json_payload.at("value").get<int32_t>();
+      total_apparent_power = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -44682,7 +44682,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_frequency_multiplier_at
   }
 
 
-  int16_t ac_frequency_multiplier = {};
+  uint16_t ac_frequency_multiplier = {};
 
   nlohmann::json json_payload;
   try {
@@ -44695,7 +44695,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_frequency_multiplier_at
         return;
       }
 // Start parsing value
-      ac_frequency_multiplier = json_payload.at("value").get<int16_t>();
+      ac_frequency_multiplier = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -44758,7 +44758,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_frequency_divisor_attri
   }
 
 
-  int16_t ac_frequency_divisor = {};
+  uint16_t ac_frequency_divisor = {};
 
   nlohmann::json json_payload;
   try {
@@ -44771,7 +44771,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_frequency_divisor_attri
         return;
       }
 // Start parsing value
-      ac_frequency_divisor = json_payload.at("value").get<int16_t>();
+      ac_frequency_divisor = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -44834,7 +44834,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_power_multiplier_attribute
   }
 
 
-  int32_t power_multiplier = {};
+  uint32_t power_multiplier = {};
 
   nlohmann::json json_payload;
   try {
@@ -44847,7 +44847,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_power_multiplier_attribute
         return;
       }
 // Start parsing value
-      power_multiplier = json_payload.at("value").get<int32_t>();
+      power_multiplier = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -44910,7 +44910,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_power_divisor_attribute_up
   }
 
 
-  int32_t power_divisor = {};
+  uint32_t power_divisor = {};
 
   nlohmann::json json_payload;
   try {
@@ -44923,7 +44923,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_power_divisor_attribute_up
         return;
       }
 // Start parsing value
-      power_divisor = json_payload.at("value").get<int32_t>();
+      power_divisor = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -45138,7 +45138,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_line_current_attribute_upd
   }
 
 
-  int16_t line_current = {};
+  uint16_t line_current = {};
 
   nlohmann::json json_payload;
   try {
@@ -45151,7 +45151,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_line_current_attribute_upd
         return;
       }
 // Start parsing value
-      line_current = json_payload.at("value").get<int16_t>();
+      line_current = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -45366,7 +45366,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_attribute_upda
   }
 
 
-  int16_t rms_voltage = {};
+  uint16_t rms_voltage = {};
 
   nlohmann::json json_payload;
   try {
@@ -45379,7 +45379,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_attribute_upda
         return;
       }
 // Start parsing value
-      rms_voltage = json_payload.at("value").get<int16_t>();
+      rms_voltage = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -45442,7 +45442,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_min_attribute_
   }
 
 
-  int16_t rms_voltage_min = {};
+  uint16_t rms_voltage_min = {};
 
   nlohmann::json json_payload;
   try {
@@ -45455,7 +45455,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_min_attribute_
         return;
       }
 // Start parsing value
-      rms_voltage_min = json_payload.at("value").get<int16_t>();
+      rms_voltage_min = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -45518,7 +45518,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_max_attribute_
   }
 
 
-  int16_t rms_voltage_max = {};
+  uint16_t rms_voltage_max = {};
 
   nlohmann::json json_payload;
   try {
@@ -45531,7 +45531,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_max_attribute_
         return;
       }
 // Start parsing value
-      rms_voltage_max = json_payload.at("value").get<int16_t>();
+      rms_voltage_max = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -45594,7 +45594,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_attribute_upda
   }
 
 
-  int16_t rms_current = {};
+  uint16_t rms_current = {};
 
   nlohmann::json json_payload;
   try {
@@ -45607,7 +45607,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_attribute_upda
         return;
       }
 // Start parsing value
-      rms_current = json_payload.at("value").get<int16_t>();
+      rms_current = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -45670,7 +45670,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_min_attribute_
   }
 
 
-  int16_t rms_current_min = {};
+  uint16_t rms_current_min = {};
 
   nlohmann::json json_payload;
   try {
@@ -45683,7 +45683,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_min_attribute_
         return;
       }
 // Start parsing value
-      rms_current_min = json_payload.at("value").get<int16_t>();
+      rms_current_min = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -45746,7 +45746,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_max_attribute_
   }
 
 
-  int16_t rms_current_max = {};
+  uint16_t rms_current_max = {};
 
   nlohmann::json json_payload;
   try {
@@ -45759,7 +45759,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_max_attribute_
         return;
       }
 // Start parsing value
-      rms_current_max = json_payload.at("value").get<int16_t>();
+      rms_current_max = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -46126,7 +46126,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_apparent_power_attribute_u
   }
 
 
-  int16_t apparent_power = {};
+  uint16_t apparent_power = {};
 
   nlohmann::json json_payload;
   try {
@@ -46139,7 +46139,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_apparent_power_attribute_u
         return;
       }
 // Start parsing value
-      apparent_power = json_payload.at("value").get<int16_t>();
+      apparent_power = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -46278,7 +46278,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_voltage_measur
   }
 
 
-  int16_t average_rms_voltage_measurement_period = {};
+  uint16_t average_rms_voltage_measurement_period = {};
 
   nlohmann::json json_payload;
   try {
@@ -46291,7 +46291,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_voltage_measur
         return;
       }
 // Start parsing value
-      average_rms_voltage_measurement_period = json_payload.at("value").get<int16_t>();
+      average_rms_voltage_measurement_period = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -46354,7 +46354,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_over_voltage_c
   }
 
 
-  int16_t average_rms_over_voltage_counter = {};
+  uint16_t average_rms_over_voltage_counter = {};
 
   nlohmann::json json_payload;
   try {
@@ -46367,7 +46367,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_over_voltage_c
         return;
       }
 // Start parsing value
-      average_rms_over_voltage_counter = json_payload.at("value").get<int16_t>();
+      average_rms_over_voltage_counter = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -46430,7 +46430,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_under_voltage_
   }
 
 
-  int16_t average_rms_under_voltage_counter = {};
+  uint16_t average_rms_under_voltage_counter = {};
 
   nlohmann::json json_payload;
   try {
@@ -46443,7 +46443,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_under_voltage_
         return;
       }
 // Start parsing value
-      average_rms_under_voltage_counter = json_payload.at("value").get<int16_t>();
+      average_rms_under_voltage_counter = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -46506,7 +46506,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_extreme_over_voltage_p
   }
 
 
-  int16_t rms_extreme_over_voltage_period = {};
+  uint16_t rms_extreme_over_voltage_period = {};
 
   nlohmann::json json_payload;
   try {
@@ -46519,7 +46519,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_extreme_over_voltage_p
         return;
       }
 // Start parsing value
-      rms_extreme_over_voltage_period = json_payload.at("value").get<int16_t>();
+      rms_extreme_over_voltage_period = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -46582,7 +46582,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_extreme_under_voltage_
   }
 
 
-  int16_t rms_extreme_under_voltage_period = {};
+  uint16_t rms_extreme_under_voltage_period = {};
 
   nlohmann::json json_payload;
   try {
@@ -46595,7 +46595,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_extreme_under_voltage_
         return;
       }
 // Start parsing value
-      rms_extreme_under_voltage_period = json_payload.at("value").get<int16_t>();
+      rms_extreme_under_voltage_period = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -46658,7 +46658,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_sag_period_att
   }
 
 
-  int16_t rms_voltage_sag_period = {};
+  uint16_t rms_voltage_sag_period = {};
 
   nlohmann::json json_payload;
   try {
@@ -46671,7 +46671,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_sag_period_att
         return;
       }
 // Start parsing value
-      rms_voltage_sag_period = json_payload.at("value").get<int16_t>();
+      rms_voltage_sag_period = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -46734,7 +46734,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_swell_period_a
   }
 
 
-  int16_t rms_voltage_swell_period = {};
+  uint16_t rms_voltage_swell_period = {};
 
   nlohmann::json json_payload;
   try {
@@ -46747,7 +46747,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_swell_period_a
         return;
       }
 // Start parsing value
-      rms_voltage_swell_period = json_payload.at("value").get<int16_t>();
+      rms_voltage_swell_period = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -46810,7 +46810,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_voltage_multiplier_attr
   }
 
 
-  int16_t ac_voltage_multiplier = {};
+  uint16_t ac_voltage_multiplier = {};
 
   nlohmann::json json_payload;
   try {
@@ -46823,7 +46823,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_voltage_multiplier_attr
         return;
       }
 // Start parsing value
-      ac_voltage_multiplier = json_payload.at("value").get<int16_t>();
+      ac_voltage_multiplier = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -46886,7 +46886,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_voltage_divisor_attribu
   }
 
 
-  int16_t ac_voltage_divisor = {};
+  uint16_t ac_voltage_divisor = {};
 
   nlohmann::json json_payload;
   try {
@@ -46899,7 +46899,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_voltage_divisor_attribu
         return;
       }
 // Start parsing value
-      ac_voltage_divisor = json_payload.at("value").get<int16_t>();
+      ac_voltage_divisor = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -46962,7 +46962,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_current_multiplier_attr
   }
 
 
-  int16_t ac_current_multiplier = {};
+  uint16_t ac_current_multiplier = {};
 
   nlohmann::json json_payload;
   try {
@@ -46975,7 +46975,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_current_multiplier_attr
         return;
       }
 // Start parsing value
-      ac_current_multiplier = json_payload.at("value").get<int16_t>();
+      ac_current_multiplier = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -47038,7 +47038,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_current_divisor_attribu
   }
 
 
-  int16_t ac_current_divisor = {};
+  uint16_t ac_current_divisor = {};
 
   nlohmann::json json_payload;
   try {
@@ -47051,7 +47051,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_current_divisor_attribu
         return;
       }
 // Start parsing value
-      ac_current_divisor = json_payload.at("value").get<int16_t>();
+      ac_current_divisor = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -47114,7 +47114,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_power_multiplier_attrib
   }
 
 
-  int16_t ac_power_multiplier = {};
+  uint16_t ac_power_multiplier = {};
 
   nlohmann::json json_payload;
   try {
@@ -47127,7 +47127,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_power_multiplier_attrib
         return;
       }
 // Start parsing value
-      ac_power_multiplier = json_payload.at("value").get<int16_t>();
+      ac_power_multiplier = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -47190,7 +47190,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_power_divisor_attribute
   }
 
 
-  int16_t ac_power_divisor = {};
+  uint16_t ac_power_divisor = {};
 
   nlohmann::json json_payload;
   try {
@@ -47203,7 +47203,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_ac_power_divisor_attribute
         return;
       }
 // Start parsing value
-      ac_power_divisor = json_payload.at("value").get<int16_t>();
+      ac_power_divisor = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -48330,7 +48330,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_line_current_phb_attribute
   }
 
 
-  int16_t line_current_phb = {};
+  uint16_t line_current_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -48343,7 +48343,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_line_current_phb_attribute
         return;
       }
 // Start parsing value
-      line_current_phb = json_payload.at("value").get<int16_t>();
+      line_current_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -48558,7 +48558,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_phb_attribute_
   }
 
 
-  int16_t rms_voltage_phb = {};
+  uint16_t rms_voltage_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -48571,7 +48571,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_phb_attribute_
         return;
       }
 // Start parsing value
-      rms_voltage_phb = json_payload.at("value").get<int16_t>();
+      rms_voltage_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -48634,7 +48634,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_min_phb_attrib
   }
 
 
-  int16_t rms_voltage_min_phb = {};
+  uint16_t rms_voltage_min_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -48647,7 +48647,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_min_phb_attrib
         return;
       }
 // Start parsing value
-      rms_voltage_min_phb = json_payload.at("value").get<int16_t>();
+      rms_voltage_min_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -48710,7 +48710,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_max_phb_attrib
   }
 
 
-  int16_t rms_voltage_max_phb = {};
+  uint16_t rms_voltage_max_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -48723,7 +48723,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_max_phb_attrib
         return;
       }
 // Start parsing value
-      rms_voltage_max_phb = json_payload.at("value").get<int16_t>();
+      rms_voltage_max_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -48786,7 +48786,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_phb_attribute_
   }
 
 
-  int16_t rms_current_phb = {};
+  uint16_t rms_current_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -48799,7 +48799,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_phb_attribute_
         return;
       }
 // Start parsing value
-      rms_current_phb = json_payload.at("value").get<int16_t>();
+      rms_current_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -48862,7 +48862,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_min_phb_attrib
   }
 
 
-  int16_t rms_current_min_phb = {};
+  uint16_t rms_current_min_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -48875,7 +48875,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_min_phb_attrib
         return;
       }
 // Start parsing value
-      rms_current_min_phb = json_payload.at("value").get<int16_t>();
+      rms_current_min_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -48938,7 +48938,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_max_phb_attrib
   }
 
 
-  int16_t rms_current_max_phb = {};
+  uint16_t rms_current_max_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -48951,7 +48951,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_max_phb_attrib
         return;
       }
 // Start parsing value
-      rms_current_max_phb = json_payload.at("value").get<int16_t>();
+      rms_current_max_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -49318,7 +49318,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_apparent_power_phb_attribu
   }
 
 
-  int16_t apparent_power_phb = {};
+  uint16_t apparent_power_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -49331,7 +49331,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_apparent_power_phb_attribu
         return;
       }
 // Start parsing value
-      apparent_power_phb = json_payload.at("value").get<int16_t>();
+      apparent_power_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -49470,7 +49470,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_voltage_measur
   }
 
 
-  int16_t average_rms_voltage_measurement_period_phb = {};
+  uint16_t average_rms_voltage_measurement_period_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -49483,7 +49483,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_voltage_measur
         return;
       }
 // Start parsing value
-      average_rms_voltage_measurement_period_phb = json_payload.at("value").get<int16_t>();
+      average_rms_voltage_measurement_period_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -49546,7 +49546,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_over_voltage_c
   }
 
 
-  int16_t average_rms_over_voltage_counter_phb = {};
+  uint16_t average_rms_over_voltage_counter_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -49559,7 +49559,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_over_voltage_c
         return;
       }
 // Start parsing value
-      average_rms_over_voltage_counter_phb = json_payload.at("value").get<int16_t>();
+      average_rms_over_voltage_counter_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -49622,7 +49622,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_under_voltage_
   }
 
 
-  int16_t average_rms_under_voltage_counter_phb = {};
+  uint16_t average_rms_under_voltage_counter_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -49635,7 +49635,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_under_voltage_
         return;
       }
 // Start parsing value
-      average_rms_under_voltage_counter_phb = json_payload.at("value").get<int16_t>();
+      average_rms_under_voltage_counter_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -49698,7 +49698,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_extreme_over_voltage_p
   }
 
 
-  int16_t rms_extreme_over_voltage_period_phb = {};
+  uint16_t rms_extreme_over_voltage_period_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -49711,7 +49711,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_extreme_over_voltage_p
         return;
       }
 // Start parsing value
-      rms_extreme_over_voltage_period_phb = json_payload.at("value").get<int16_t>();
+      rms_extreme_over_voltage_period_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -49774,7 +49774,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_extreme_under_voltage_
   }
 
 
-  int16_t rms_extreme_under_voltage_period_phb = {};
+  uint16_t rms_extreme_under_voltage_period_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -49787,7 +49787,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_extreme_under_voltage_
         return;
       }
 // Start parsing value
-      rms_extreme_under_voltage_period_phb = json_payload.at("value").get<int16_t>();
+      rms_extreme_under_voltage_period_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -49850,7 +49850,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_sag_period_phb
   }
 
 
-  int16_t rms_voltage_sag_period_phb = {};
+  uint16_t rms_voltage_sag_period_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -49863,7 +49863,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_sag_period_phb
         return;
       }
 // Start parsing value
-      rms_voltage_sag_period_phb = json_payload.at("value").get<int16_t>();
+      rms_voltage_sag_period_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -49926,7 +49926,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_swell_period_p
   }
 
 
-  int16_t rms_voltage_swell_period_phb = {};
+  uint16_t rms_voltage_swell_period_phb = {};
 
   nlohmann::json json_payload;
   try {
@@ -49939,7 +49939,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_swell_period_p
         return;
       }
 // Start parsing value
-      rms_voltage_swell_period_phb = json_payload.at("value").get<int16_t>();
+      rms_voltage_swell_period_phb = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -50002,7 +50002,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_line_current_phc_attribute
   }
 
 
-  int16_t line_current_phc = {};
+  uint16_t line_current_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -50015,7 +50015,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_line_current_phc_attribute
         return;
       }
 // Start parsing value
-      line_current_phc = json_payload.at("value").get<int16_t>();
+      line_current_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -50230,7 +50230,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_phc_attribute_
   }
 
 
-  int16_t rms_voltage_phc = {};
+  uint16_t rms_voltage_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -50243,7 +50243,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_phc_attribute_
         return;
       }
 // Start parsing value
-      rms_voltage_phc = json_payload.at("value").get<int16_t>();
+      rms_voltage_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -50306,7 +50306,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_min_phc_attrib
   }
 
 
-  int16_t rms_voltage_min_phc = {};
+  uint16_t rms_voltage_min_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -50319,7 +50319,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_min_phc_attrib
         return;
       }
 // Start parsing value
-      rms_voltage_min_phc = json_payload.at("value").get<int16_t>();
+      rms_voltage_min_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -50382,7 +50382,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_max_phc_attrib
   }
 
 
-  int16_t rms_voltage_max_phc = {};
+  uint16_t rms_voltage_max_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -50395,7 +50395,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_max_phc_attrib
         return;
       }
 // Start parsing value
-      rms_voltage_max_phc = json_payload.at("value").get<int16_t>();
+      rms_voltage_max_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -50458,7 +50458,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_phc_attribute_
   }
 
 
-  int16_t rms_current_phc = {};
+  uint16_t rms_current_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -50471,7 +50471,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_phc_attribute_
         return;
       }
 // Start parsing value
-      rms_current_phc = json_payload.at("value").get<int16_t>();
+      rms_current_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -50534,7 +50534,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_min_phc_attrib
   }
 
 
-  int16_t rms_current_min_phc = {};
+  uint16_t rms_current_min_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -50547,7 +50547,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_min_phc_attrib
         return;
       }
 // Start parsing value
-      rms_current_min_phc = json_payload.at("value").get<int16_t>();
+      rms_current_min_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -50610,7 +50610,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_max_phc_attrib
   }
 
 
-  int16_t rms_current_max_phc = {};
+  uint16_t rms_current_max_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -50623,7 +50623,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_current_max_phc_attrib
         return;
       }
 // Start parsing value
-      rms_current_max_phc = json_payload.at("value").get<int16_t>();
+      rms_current_max_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -50990,7 +50990,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_apparent_power_phc_attribu
   }
 
 
-  int16_t apparent_power_phc = {};
+  uint16_t apparent_power_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -51003,7 +51003,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_apparent_power_phc_attribu
         return;
       }
 // Start parsing value
-      apparent_power_phc = json_payload.at("value").get<int16_t>();
+      apparent_power_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -51142,7 +51142,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_voltage_measur
   }
 
 
-  int16_t average_rms_voltage_measurement_period_phc = {};
+  uint16_t average_rms_voltage_measurement_period_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -51155,7 +51155,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_voltage_measur
         return;
       }
 // Start parsing value
-      average_rms_voltage_measurement_period_phc = json_payload.at("value").get<int16_t>();
+      average_rms_voltage_measurement_period_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -51218,7 +51218,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_over_voltage_c
   }
 
 
-  int16_t average_rms_over_voltage_counter_phc = {};
+  uint16_t average_rms_over_voltage_counter_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -51231,7 +51231,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_over_voltage_c
         return;
       }
 // Start parsing value
-      average_rms_over_voltage_counter_phc = json_payload.at("value").get<int16_t>();
+      average_rms_over_voltage_counter_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -51294,7 +51294,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_under_voltage_
   }
 
 
-  int16_t average_rms_under_voltage_counter_phc = {};
+  uint16_t average_rms_under_voltage_counter_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -51307,7 +51307,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_average_rms_under_voltage_
         return;
       }
 // Start parsing value
-      average_rms_under_voltage_counter_phc = json_payload.at("value").get<int16_t>();
+      average_rms_under_voltage_counter_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -51370,7 +51370,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_extreme_over_voltage_p
   }
 
 
-  int16_t rms_extreme_over_voltage_period_phc = {};
+  uint16_t rms_extreme_over_voltage_period_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -51383,7 +51383,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_extreme_over_voltage_p
         return;
       }
 // Start parsing value
-      rms_extreme_over_voltage_period_phc = json_payload.at("value").get<int16_t>();
+      rms_extreme_over_voltage_period_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -51446,7 +51446,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_extreme_under_voltage_
   }
 
 
-  int16_t rms_extreme_under_voltage_period_phc = {};
+  uint16_t rms_extreme_under_voltage_period_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -51459,7 +51459,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_extreme_under_voltage_
         return;
       }
 // Start parsing value
-      rms_extreme_under_voltage_period_phc = json_payload.at("value").get<int16_t>();
+      rms_extreme_under_voltage_period_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -51522,7 +51522,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_sag_period_phc
   }
 
 
-  int16_t rms_voltage_sag_period_phc = {};
+  uint16_t rms_voltage_sag_period_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -51535,7 +51535,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_sag_period_phc
         return;
       }
 // Start parsing value
-      rms_voltage_sag_period_phc = json_payload.at("value").get<int16_t>();
+      rms_voltage_sag_period_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -51598,7 +51598,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_swell_period_p
   }
 
 
-  int16_t rms_voltage_swell_period_phc = {};
+  uint16_t rms_voltage_swell_period_phc = {};
 
   nlohmann::json json_payload;
   try {
@@ -51611,7 +51611,7 @@ static void uic_mqtt_dotdot_on_electrical_measurement_rms_voltage_swell_period_p
         return;
       }
 // Start parsing value
-      rms_voltage_swell_period_phc = json_payload.at("value").get<int16_t>();
+      rms_voltage_swell_period_phc = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -52749,7 +52749,7 @@ static void uic_mqtt_dotdot_on_diagnostics_number_of_resets_attribute_update(
   }
 
 
-  int16_t number_of_resets = {};
+  uint16_t number_of_resets = {};
 
   nlohmann::json json_payload;
   try {
@@ -52762,7 +52762,7 @@ static void uic_mqtt_dotdot_on_diagnostics_number_of_resets_attribute_update(
         return;
       }
 // Start parsing value
-      number_of_resets = json_payload.at("value").get<int16_t>();
+      number_of_resets = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -52825,7 +52825,7 @@ static void uic_mqtt_dotdot_on_diagnostics_persistent_memory_writes_attribute_up
   }
 
 
-  int16_t persistent_memory_writes = {};
+  uint16_t persistent_memory_writes = {};
 
   nlohmann::json json_payload;
   try {
@@ -52838,7 +52838,7 @@ static void uic_mqtt_dotdot_on_diagnostics_persistent_memory_writes_attribute_up
         return;
       }
 // Start parsing value
-      persistent_memory_writes = json_payload.at("value").get<int16_t>();
+      persistent_memory_writes = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -52901,7 +52901,7 @@ static void uic_mqtt_dotdot_on_diagnostics_mac_rx_bcast_attribute_update(
   }
 
 
-  int32_t mac_rx_bcast = {};
+  uint32_t mac_rx_bcast = {};
 
   nlohmann::json json_payload;
   try {
@@ -52914,7 +52914,7 @@ static void uic_mqtt_dotdot_on_diagnostics_mac_rx_bcast_attribute_update(
         return;
       }
 // Start parsing value
-      mac_rx_bcast = json_payload.at("value").get<int32_t>();
+      mac_rx_bcast = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -52977,7 +52977,7 @@ static void uic_mqtt_dotdot_on_diagnostics_mac_tx_bcast_attribute_update(
   }
 
 
-  int32_t mac_tx_bcast = {};
+  uint32_t mac_tx_bcast = {};
 
   nlohmann::json json_payload;
   try {
@@ -52990,7 +52990,7 @@ static void uic_mqtt_dotdot_on_diagnostics_mac_tx_bcast_attribute_update(
         return;
       }
 // Start parsing value
-      mac_tx_bcast = json_payload.at("value").get<int32_t>();
+      mac_tx_bcast = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -53053,7 +53053,7 @@ static void uic_mqtt_dotdot_on_diagnostics_mac_rx_ucast_attribute_update(
   }
 
 
-  int32_t mac_rx_ucast = {};
+  uint32_t mac_rx_ucast = {};
 
   nlohmann::json json_payload;
   try {
@@ -53066,7 +53066,7 @@ static void uic_mqtt_dotdot_on_diagnostics_mac_rx_ucast_attribute_update(
         return;
       }
 // Start parsing value
-      mac_rx_ucast = json_payload.at("value").get<int32_t>();
+      mac_rx_ucast = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -53129,7 +53129,7 @@ static void uic_mqtt_dotdot_on_diagnostics_mac_tx_ucast_attribute_update(
   }
 
 
-  int32_t mac_tx_ucast = {};
+  uint32_t mac_tx_ucast = {};
 
   nlohmann::json json_payload;
   try {
@@ -53142,7 +53142,7 @@ static void uic_mqtt_dotdot_on_diagnostics_mac_tx_ucast_attribute_update(
         return;
       }
 // Start parsing value
-      mac_tx_ucast = json_payload.at("value").get<int32_t>();
+      mac_tx_ucast = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -53205,7 +53205,7 @@ static void uic_mqtt_dotdot_on_diagnostics_mac_tx_ucast_retry_attribute_update(
   }
 
 
-  int16_t mac_tx_ucast_retry = {};
+  uint16_t mac_tx_ucast_retry = {};
 
   nlohmann::json json_payload;
   try {
@@ -53218,7 +53218,7 @@ static void uic_mqtt_dotdot_on_diagnostics_mac_tx_ucast_retry_attribute_update(
         return;
       }
 // Start parsing value
-      mac_tx_ucast_retry = json_payload.at("value").get<int16_t>();
+      mac_tx_ucast_retry = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -53281,7 +53281,7 @@ static void uic_mqtt_dotdot_on_diagnostics_mac_tx_ucast_fail_attribute_update(
   }
 
 
-  int16_t mac_tx_ucast_fail = {};
+  uint16_t mac_tx_ucast_fail = {};
 
   nlohmann::json json_payload;
   try {
@@ -53294,7 +53294,7 @@ static void uic_mqtt_dotdot_on_diagnostics_mac_tx_ucast_fail_attribute_update(
         return;
       }
 // Start parsing value
-      mac_tx_ucast_fail = json_payload.at("value").get<int16_t>();
+      mac_tx_ucast_fail = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -53357,7 +53357,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_rx_bcast_attribute_update(
   }
 
 
-  int16_t aps_rx_bcast = {};
+  uint16_t aps_rx_bcast = {};
 
   nlohmann::json json_payload;
   try {
@@ -53370,7 +53370,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_rx_bcast_attribute_update(
         return;
       }
 // Start parsing value
-      aps_rx_bcast = json_payload.at("value").get<int16_t>();
+      aps_rx_bcast = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -53433,7 +53433,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_tx_bcast_attribute_update(
   }
 
 
-  int16_t aps_tx_bcast = {};
+  uint16_t aps_tx_bcast = {};
 
   nlohmann::json json_payload;
   try {
@@ -53446,7 +53446,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_tx_bcast_attribute_update(
         return;
       }
 // Start parsing value
-      aps_tx_bcast = json_payload.at("value").get<int16_t>();
+      aps_tx_bcast = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -53509,7 +53509,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_rx_ucast_attribute_update(
   }
 
 
-  int16_t aps_rx_ucast = {};
+  uint16_t aps_rx_ucast = {};
 
   nlohmann::json json_payload;
   try {
@@ -53522,7 +53522,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_rx_ucast_attribute_update(
         return;
       }
 // Start parsing value
-      aps_rx_ucast = json_payload.at("value").get<int16_t>();
+      aps_rx_ucast = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -53585,7 +53585,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_tx_ucast_success_attribute_update
   }
 
 
-  int16_t aps_tx_ucast_success = {};
+  uint16_t aps_tx_ucast_success = {};
 
   nlohmann::json json_payload;
   try {
@@ -53598,7 +53598,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_tx_ucast_success_attribute_update
         return;
       }
 // Start parsing value
-      aps_tx_ucast_success = json_payload.at("value").get<int16_t>();
+      aps_tx_ucast_success = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -53661,7 +53661,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_tx_ucast_retry_attribute_update(
   }
 
 
-  int16_t aps_tx_ucast_retry = {};
+  uint16_t aps_tx_ucast_retry = {};
 
   nlohmann::json json_payload;
   try {
@@ -53674,7 +53674,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_tx_ucast_retry_attribute_update(
         return;
       }
 // Start parsing value
-      aps_tx_ucast_retry = json_payload.at("value").get<int16_t>();
+      aps_tx_ucast_retry = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -53737,7 +53737,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_tx_ucast_fail_attribute_update(
   }
 
 
-  int16_t aps_tx_ucast_fail = {};
+  uint16_t aps_tx_ucast_fail = {};
 
   nlohmann::json json_payload;
   try {
@@ -53750,7 +53750,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_tx_ucast_fail_attribute_update(
         return;
       }
 // Start parsing value
-      aps_tx_ucast_fail = json_payload.at("value").get<int16_t>();
+      aps_tx_ucast_fail = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -53813,7 +53813,7 @@ static void uic_mqtt_dotdot_on_diagnostics_route_disc_initiated_attribute_update
   }
 
 
-  int16_t route_disc_initiated = {};
+  uint16_t route_disc_initiated = {};
 
   nlohmann::json json_payload;
   try {
@@ -53826,7 +53826,7 @@ static void uic_mqtt_dotdot_on_diagnostics_route_disc_initiated_attribute_update
         return;
       }
 // Start parsing value
-      route_disc_initiated = json_payload.at("value").get<int16_t>();
+      route_disc_initiated = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -53889,7 +53889,7 @@ static void uic_mqtt_dotdot_on_diagnostics_neighbor_added_attribute_update(
   }
 
 
-  int16_t neighbor_added = {};
+  uint16_t neighbor_added = {};
 
   nlohmann::json json_payload;
   try {
@@ -53902,7 +53902,7 @@ static void uic_mqtt_dotdot_on_diagnostics_neighbor_added_attribute_update(
         return;
       }
 // Start parsing value
-      neighbor_added = json_payload.at("value").get<int16_t>();
+      neighbor_added = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -53965,7 +53965,7 @@ static void uic_mqtt_dotdot_on_diagnostics_neighbor_removed_attribute_update(
   }
 
 
-  int16_t neighbor_removed = {};
+  uint16_t neighbor_removed = {};
 
   nlohmann::json json_payload;
   try {
@@ -53978,7 +53978,7 @@ static void uic_mqtt_dotdot_on_diagnostics_neighbor_removed_attribute_update(
         return;
       }
 // Start parsing value
-      neighbor_removed = json_payload.at("value").get<int16_t>();
+      neighbor_removed = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -54041,7 +54041,7 @@ static void uic_mqtt_dotdot_on_diagnostics_neighbor_stale_attribute_update(
   }
 
 
-  int16_t neighbor_stale = {};
+  uint16_t neighbor_stale = {};
 
   nlohmann::json json_payload;
   try {
@@ -54054,7 +54054,7 @@ static void uic_mqtt_dotdot_on_diagnostics_neighbor_stale_attribute_update(
         return;
       }
 // Start parsing value
-      neighbor_stale = json_payload.at("value").get<int16_t>();
+      neighbor_stale = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -54117,7 +54117,7 @@ static void uic_mqtt_dotdot_on_diagnostics_join_indication_attribute_update(
   }
 
 
-  int16_t join_indication = {};
+  uint16_t join_indication = {};
 
   nlohmann::json json_payload;
   try {
@@ -54130,7 +54130,7 @@ static void uic_mqtt_dotdot_on_diagnostics_join_indication_attribute_update(
         return;
       }
 // Start parsing value
-      join_indication = json_payload.at("value").get<int16_t>();
+      join_indication = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -54193,7 +54193,7 @@ static void uic_mqtt_dotdot_on_diagnostics_child_moved_attribute_update(
   }
 
 
-  int16_t child_moved = {};
+  uint16_t child_moved = {};
 
   nlohmann::json json_payload;
   try {
@@ -54206,7 +54206,7 @@ static void uic_mqtt_dotdot_on_diagnostics_child_moved_attribute_update(
         return;
       }
 // Start parsing value
-      child_moved = json_payload.at("value").get<int16_t>();
+      child_moved = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -54269,7 +54269,7 @@ static void uic_mqtt_dotdot_on_diagnostics_nwkfc_failure_attribute_update(
   }
 
 
-  int16_t nwkfc_failure = {};
+  uint16_t nwkfc_failure = {};
 
   nlohmann::json json_payload;
   try {
@@ -54282,7 +54282,7 @@ static void uic_mqtt_dotdot_on_diagnostics_nwkfc_failure_attribute_update(
         return;
       }
 // Start parsing value
-      nwkfc_failure = json_payload.at("value").get<int16_t>();
+      nwkfc_failure = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -54345,7 +54345,7 @@ static void uic_mqtt_dotdot_on_diagnostics_apsfc_failure_attribute_update(
   }
 
 
-  int16_t apsfc_failure = {};
+  uint16_t apsfc_failure = {};
 
   nlohmann::json json_payload;
   try {
@@ -54358,7 +54358,7 @@ static void uic_mqtt_dotdot_on_diagnostics_apsfc_failure_attribute_update(
         return;
       }
 // Start parsing value
-      apsfc_failure = json_payload.at("value").get<int16_t>();
+      apsfc_failure = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -54421,7 +54421,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_unauthorized_key_attribute_update
   }
 
 
-  int16_t aps_unauthorized_key = {};
+  uint16_t aps_unauthorized_key = {};
 
   nlohmann::json json_payload;
   try {
@@ -54434,7 +54434,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_unauthorized_key_attribute_update
         return;
       }
 // Start parsing value
-      aps_unauthorized_key = json_payload.at("value").get<int16_t>();
+      aps_unauthorized_key = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -54497,7 +54497,7 @@ static void uic_mqtt_dotdot_on_diagnostics_nwk_decrypt_failures_attribute_update
   }
 
 
-  int16_t nwk_decrypt_failures = {};
+  uint16_t nwk_decrypt_failures = {};
 
   nlohmann::json json_payload;
   try {
@@ -54510,7 +54510,7 @@ static void uic_mqtt_dotdot_on_diagnostics_nwk_decrypt_failures_attribute_update
         return;
       }
 // Start parsing value
-      nwk_decrypt_failures = json_payload.at("value").get<int16_t>();
+      nwk_decrypt_failures = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -54573,7 +54573,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_decrypt_failures_attribute_update
   }
 
 
-  int16_t aps_decrypt_failures = {};
+  uint16_t aps_decrypt_failures = {};
 
   nlohmann::json json_payload;
   try {
@@ -54586,7 +54586,7 @@ static void uic_mqtt_dotdot_on_diagnostics_aps_decrypt_failures_attribute_update
         return;
       }
 // Start parsing value
-      aps_decrypt_failures = json_payload.at("value").get<int16_t>();
+      aps_decrypt_failures = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -54649,7 +54649,7 @@ static void uic_mqtt_dotdot_on_diagnostics_packet_buffer_allocate_failures_attri
   }
 
 
-  int16_t packet_buffer_allocate_failures = {};
+  uint16_t packet_buffer_allocate_failures = {};
 
   nlohmann::json json_payload;
   try {
@@ -54662,7 +54662,7 @@ static void uic_mqtt_dotdot_on_diagnostics_packet_buffer_allocate_failures_attri
         return;
       }
 // Start parsing value
-      packet_buffer_allocate_failures = json_payload.at("value").get<int16_t>();
+      packet_buffer_allocate_failures = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -54725,7 +54725,7 @@ static void uic_mqtt_dotdot_on_diagnostics_relayed_ucast_attribute_update(
   }
 
 
-  int16_t relayed_ucast = {};
+  uint16_t relayed_ucast = {};
 
   nlohmann::json json_payload;
   try {
@@ -54738,7 +54738,7 @@ static void uic_mqtt_dotdot_on_diagnostics_relayed_ucast_attribute_update(
         return;
       }
 // Start parsing value
-      relayed_ucast = json_payload.at("value").get<int16_t>();
+      relayed_ucast = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -54801,7 +54801,7 @@ static void uic_mqtt_dotdot_on_diagnostics_phy_to_mac_queue_limit_reached_attrib
   }
 
 
-  int16_t phy_to_mac_queue_limit_reached = {};
+  uint16_t phy_to_mac_queue_limit_reached = {};
 
   nlohmann::json json_payload;
   try {
@@ -54814,7 +54814,7 @@ static void uic_mqtt_dotdot_on_diagnostics_phy_to_mac_queue_limit_reached_attrib
         return;
       }
 // Start parsing value
-      phy_to_mac_queue_limit_reached = json_payload.at("value").get<int16_t>();
+      phy_to_mac_queue_limit_reached = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -54877,7 +54877,7 @@ static void uic_mqtt_dotdot_on_diagnostics_packet_validate_drop_count_attribute_
   }
 
 
-  int16_t packet_validate_drop_count = {};
+  uint16_t packet_validate_drop_count = {};
 
   nlohmann::json json_payload;
   try {
@@ -54890,7 +54890,7 @@ static void uic_mqtt_dotdot_on_diagnostics_packet_validate_drop_count_attribute_
         return;
       }
 // Start parsing value
-      packet_validate_drop_count = json_payload.at("value").get<int16_t>();
+      packet_validate_drop_count = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -54953,7 +54953,7 @@ static void uic_mqtt_dotdot_on_diagnostics_average_mac_retry_per_aps_message_sen
   }
 
 
-  int16_t average_mac_retry_per_aps_message_sent = {};
+  uint16_t average_mac_retry_per_aps_message_sent = {};
 
   nlohmann::json json_payload;
   try {
@@ -54966,7 +54966,7 @@ static void uic_mqtt_dotdot_on_diagnostics_average_mac_retry_per_aps_message_sen
         return;
       }
 // Start parsing value
-      average_mac_retry_per_aps_message_sent = json_payload.at("value").get<int16_t>();
+      average_mac_retry_per_aps_message_sent = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -55029,7 +55029,7 @@ static void uic_mqtt_dotdot_on_diagnostics_last_messagelqi_attribute_update(
   }
 
 
-  int8_t last_messagelqi = {};
+  uint8_t last_messagelqi = {};
 
   nlohmann::json json_payload;
   try {
@@ -55042,7 +55042,7 @@ static void uic_mqtt_dotdot_on_diagnostics_last_messagelqi_attribute_update(
         return;
       }
 // Start parsing value
-      last_messagelqi = json_payload.at("value").get<int8_t>();
+      last_messagelqi = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -55666,7 +55666,7 @@ static void uic_mqtt_dotdot_on_state_endpoint_id_list_attribute_update(
   }
 
 
-  std::vector<int8_t> endpoint_id_list;
+  std::vector<uint8_t> endpoint_id_list;
   size_t endpoint_id_list_count = 0;
 
   nlohmann::json json_payload;
@@ -55682,7 +55682,7 @@ static void uic_mqtt_dotdot_on_state_endpoint_id_list_attribute_update(
 // Start parsing value
       auto &endpoint_id_list_json = json_payload.at("value");
       for (size_t i = 0; i < endpoint_id_list_json.size(); i++) {
-        endpoint_id_list.push_back(endpoint_id_list_json.at(i).get<int8_t>());
+        endpoint_id_list.push_back(endpoint_id_list_json.at(i).get<uint8_t>());
           }
       // Take our vector and pack it into the updated state
       endpoint_id_list_count = endpoint_id_list.size();
@@ -55917,7 +55917,7 @@ static void uic_mqtt_dotdot_on_state_maximum_command_delay_attribute_update(
   }
 
 
-  int32_t maximum_command_delay = {};
+  uint32_t maximum_command_delay = {};
 
   nlohmann::json json_payload;
   try {
@@ -55930,7 +55930,7 @@ static void uic_mqtt_dotdot_on_state_maximum_command_delay_attribute_update(
         return;
       }
 // Start parsing value
-      maximum_command_delay = json_payload.at("value").get<int32_t>();
+      maximum_command_delay = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -56324,7 +56324,7 @@ static void uic_mqtt_dotdot_on_binding_binding_table_attribute_update(
         BindingObject element = {};
         element.ClusterName = binding_table_json.at(i).at("ClusterName").get_ptr<const std::string*>()->c_str();
         element.DestinationUnid = binding_table_json.at(i).at("DestinationUnid").get_ptr<const std::string*>()->c_str();
-        element.DestinationEp = binding_table_json.at(i).at("DestinationEp").get<int8_t>();
+        element.DestinationEp = binding_table_json.at(i).at("DestinationEp").get<uint8_t>();
         binding_table.push_back(element);
       }
       // Take our vector and pack it into the updated state
@@ -56470,7 +56470,7 @@ static void uic_mqtt_dotdot_on_system_metrics_reporting_interval_seconds_attribu
   }
 
 
-  int32_t reporting_interval_seconds = {};
+  uint32_t reporting_interval_seconds = {};
 
   nlohmann::json json_payload;
   try {
@@ -56483,7 +56483,7 @@ static void uic_mqtt_dotdot_on_system_metrics_reporting_interval_seconds_attribu
         return;
       }
 // Start parsing value
-      reporting_interval_seconds = json_payload.at("value").get<int32_t>();
+      reporting_interval_seconds = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -57598,10 +57598,10 @@ static void uic_mqtt_dotdot_on_system_metrics_disks_counters_attribute_update(
       for (size_t i = 0; i < disks_counters_json.size(); i++) {
         DiskIOCounters element = {};
         element.UUID = disks_counters_json.at(i).at("UUID").get_ptr<const std::string*>()->c_str();
-        element.ReadCount = disks_counters_json.at(i).at("ReadCount").get<int64_t>();
-        element.WriteCount = disks_counters_json.at(i).at("WriteCount").get<int64_t>();
-        element.ReadBytes = disks_counters_json.at(i).at("ReadBytes").get<int64_t>();
-        element.WriteBytes = disks_counters_json.at(i).at("WriteBytes").get<int64_t>();
+        element.ReadCount = disks_counters_json.at(i).at("ReadCount").get<uint64_t>();
+        element.WriteCount = disks_counters_json.at(i).at("WriteCount").get<uint64_t>();
+        element.ReadBytes = disks_counters_json.at(i).at("ReadBytes").get<uint64_t>();
+        element.WriteBytes = disks_counters_json.at(i).at("WriteBytes").get<uint64_t>();
         disks_counters.push_back(element);
       }
       // Take our vector and pack it into the updated state
@@ -57687,14 +57687,14 @@ static void uic_mqtt_dotdot_on_system_metrics_network_interfaces_data_attribute_
       for (size_t i = 0; i < network_interfaces_data_json.size(); i++) {
         NetworkInterfaceData element = {};
         element.InterfaceName = network_interfaces_data_json.at(i).at("InterfaceName").get_ptr<const std::string*>()->c_str();
-        element.BytesSent = network_interfaces_data_json.at(i).at("BytesSent").get<int64_t>();
-        element.BytesReceived = network_interfaces_data_json.at(i).at("BytesReceived").get<int64_t>();
-        element.PacketsSent = network_interfaces_data_json.at(i).at("PacketsSent").get<int64_t>();
-        element.PacketsReceived = network_interfaces_data_json.at(i).at("PacketsReceived").get<int64_t>();
-        element.ErrorsIn = network_interfaces_data_json.at(i).at("ErrorsIn").get<int64_t>();
-        element.ErrorsOut = network_interfaces_data_json.at(i).at("ErrorsOut").get<int64_t>();
-        element.DropIn = network_interfaces_data_json.at(i).at("DropIn").get<int64_t>();
-        element.DropOut = network_interfaces_data_json.at(i).at("DropOut").get<int64_t>();
+        element.BytesSent = network_interfaces_data_json.at(i).at("BytesSent").get<uint64_t>();
+        element.BytesReceived = network_interfaces_data_json.at(i).at("BytesReceived").get<uint64_t>();
+        element.PacketsSent = network_interfaces_data_json.at(i).at("PacketsSent").get<uint64_t>();
+        element.PacketsReceived = network_interfaces_data_json.at(i).at("PacketsReceived").get<uint64_t>();
+        element.ErrorsIn = network_interfaces_data_json.at(i).at("ErrorsIn").get<uint64_t>();
+        element.ErrorsOut = network_interfaces_data_json.at(i).at("ErrorsOut").get<uint64_t>();
+        element.DropIn = network_interfaces_data_json.at(i).at("DropIn").get<uint64_t>();
+        element.DropOut = network_interfaces_data_json.at(i).at("DropOut").get<uint64_t>();
         network_interfaces_data.push_back(element);
       }
       // Take our vector and pack it into the updated state
@@ -58000,7 +58000,7 @@ static void uic_mqtt_dotdot_on_system_metrics_uptime_minutes_attribute_update(
   }
 
 
-  int64_t uptime_minutes = {};
+  uint64_t uptime_minutes = {};
 
   nlohmann::json json_payload;
   try {
@@ -58013,7 +58013,7 @@ static void uic_mqtt_dotdot_on_system_metrics_uptime_minutes_attribute_update(
         return;
       }
 // Start parsing value
-      uptime_minutes = json_payload.at("value").get<int64_t>();
+      uptime_minutes = json_payload.at("value").get<uint64_t>();
     
     // End parsing value
     }
@@ -58532,7 +58532,7 @@ static void uic_mqtt_dotdot_on_system_metrics_system_interrupts_attribute_update
   }
 
 
-  int64_t system_interrupts = {};
+  uint64_t system_interrupts = {};
 
   nlohmann::json json_payload;
   try {
@@ -58545,7 +58545,7 @@ static void uic_mqtt_dotdot_on_system_metrics_system_interrupts_attribute_update
         return;
       }
 // Start parsing value
-      system_interrupts = json_payload.at("value").get<int64_t>();
+      system_interrupts = json_payload.at("value").get<uint64_t>();
     
     // End parsing value
     }
@@ -59185,7 +59185,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_uptime_minutes_attribute_u
   }
 
 
-  int64_t uptime_minutes = {};
+  uint64_t uptime_minutes = {};
 
   nlohmann::json json_payload;
   try {
@@ -59198,7 +59198,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_uptime_minutes_attribute_u
         return;
       }
 // Start parsing value
-      uptime_minutes = json_payload.at("value").get<int64_t>();
+      uptime_minutes = json_payload.at("value").get<uint64_t>();
     
     // End parsing value
     }
@@ -59261,7 +59261,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_process_id_attribute_updat
   }
 
 
-  int64_t process_id = {};
+  uint64_t process_id = {};
 
   nlohmann::json json_payload;
   try {
@@ -59274,7 +59274,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_process_id_attribute_updat
         return;
       }
 // Start parsing value
-      process_id = json_payload.at("value").get<int64_t>();
+      process_id = json_payload.at("value").get<uint64_t>();
     
     // End parsing value
     }
@@ -59649,7 +59649,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_mqtt_statistics_reporting_
   }
 
 
-  int32_t mqtt_statistics_reporting_interval_seconds = {};
+  uint32_t mqtt_statistics_reporting_interval_seconds = {};
 
   nlohmann::json json_payload;
   try {
@@ -59662,7 +59662,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_mqtt_statistics_reporting_
         return;
       }
 // Start parsing value
-      mqtt_statistics_reporting_interval_seconds = json_payload.at("value").get<int32_t>();
+      mqtt_statistics_reporting_interval_seconds = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -59725,7 +59725,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_mqtt_messages_sent_attribu
   }
 
 
-  int64_t mqtt_messages_sent = {};
+  uint64_t mqtt_messages_sent = {};
 
   nlohmann::json json_payload;
   try {
@@ -59738,7 +59738,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_mqtt_messages_sent_attribu
         return;
       }
 // Start parsing value
-      mqtt_messages_sent = json_payload.at("value").get<int64_t>();
+      mqtt_messages_sent = json_payload.at("value").get<uint64_t>();
     
     // End parsing value
     }
@@ -59801,7 +59801,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_mqtt_messages_received_att
   }
 
 
-  int64_t mqtt_messages_received = {};
+  uint64_t mqtt_messages_received = {};
 
   nlohmann::json json_payload;
   try {
@@ -59814,7 +59814,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_mqtt_messages_received_att
         return;
       }
 // Start parsing value
-      mqtt_messages_received = json_payload.at("value").get<int64_t>();
+      mqtt_messages_received = json_payload.at("value").get<uint64_t>();
     
     // End parsing value
     }
@@ -59877,7 +59877,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_mqtt_subscription_count_at
   }
 
 
-  int64_t mqtt_subscription_count = {};
+  uint64_t mqtt_subscription_count = {};
 
   nlohmann::json json_payload;
   try {
@@ -59890,7 +59890,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_mqtt_subscription_count_at
         return;
       }
 // Start parsing value
-      mqtt_subscription_count = json_payload.at("value").get<int64_t>();
+      mqtt_subscription_count = json_payload.at("value").get<uint64_t>();
     
     // End parsing value
     }
@@ -60181,7 +60181,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_application_statistics_rep
   }
 
 
-  int32_t application_statistics_reporting_interval_seconds = {};
+  uint32_t application_statistics_reporting_interval_seconds = {};
 
   nlohmann::json json_payload;
   try {
@@ -60194,7 +60194,7 @@ static void uic_mqtt_dotdot_on_application_monitoring_application_statistics_rep
         return;
       }
 // Start parsing value
-      application_statistics_reporting_interval_seconds = json_payload.at("value").get<int32_t>();
+      application_statistics_reporting_interval_seconds = json_payload.at("value").get<uint32_t>();
     
     // End parsing value
     }
@@ -61063,7 +61063,7 @@ static void uic_mqtt_dotdot_on_configuration_parameters_configuration_parameters
       auto &configuration_parameters_json = json_payload.at("value");
       for (size_t i = 0; i < configuration_parameters_json.size(); i++) {
         ConfigurationParameter element = {};
-        element.ParameterId = configuration_parameters_json.at(i).at("ParameterId").get<int16_t>();
+        element.ParameterId = configuration_parameters_json.at(i).at("ParameterId").get<uint16_t>();
         element.Value = configuration_parameters_json.at(i).at("Value").get<int64_t>();
         element.Name = configuration_parameters_json.at(i).at("Name").get_ptr<const std::string*>()->c_str();
         element.Info = configuration_parameters_json.at(i).at("Info").get_ptr<const std::string*>()->c_str();
@@ -61184,7 +61184,7 @@ static void uic_mqtt_dotdot_on_user_credential_supported_user_unique_identifiers
   }
 
 
-  int16_t supported_user_unique_identifiers = {};
+  uint16_t supported_user_unique_identifiers = {};
 
   nlohmann::json json_payload;
   try {
@@ -61197,7 +61197,7 @@ static void uic_mqtt_dotdot_on_user_credential_supported_user_unique_identifiers
         return;
       }
 // Start parsing value
-      supported_user_unique_identifiers = json_payload.at("value").get<int16_t>();
+      supported_user_unique_identifiers = json_payload.at("value").get<uint16_t>();
     
     // End parsing value
     }
@@ -62017,7 +62017,7 @@ static void uic_mqtt_dotdot_on_descriptor_device_type_list_attribute_update(
       for (size_t i = 0; i < device_type_list_json.size(); i++) {
         DeviceTypeStruct element = {};
         element.DeviceType = device_type_list_json.at(i).at("DeviceType").get<DevTypeId>();
-        element.Revision = device_type_list_json.at(i).at("Revision").get<int16_t>();
+        element.Revision = device_type_list_json.at(i).at("Revision").get<uint16_t>();
         device_type_list.push_back(element);
       }
       // Take our vector and pack it into the updated state
@@ -63367,7 +63367,7 @@ static void uic_mqtt_dotdot_on_unify_humidity_control_humidifier_setpoint_precis
   }
 
 
-  int8_t humidifier_setpoint_precision = {};
+  uint8_t humidifier_setpoint_precision = {};
 
   nlohmann::json json_payload;
   try {
@@ -63380,7 +63380,7 @@ static void uic_mqtt_dotdot_on_unify_humidity_control_humidifier_setpoint_precis
         return;
       }
 // Start parsing value
-      humidifier_setpoint_precision = json_payload.at("value").get<int8_t>();
+      humidifier_setpoint_precision = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -63755,7 +63755,7 @@ static void uic_mqtt_dotdot_on_unify_humidity_control_dehumidifier_setpoint_prec
   }
 
 
-  int8_t dehumidifier_setpoint_precision = {};
+  uint8_t dehumidifier_setpoint_precision = {};
 
   nlohmann::json json_payload;
   try {
@@ -63768,7 +63768,7 @@ static void uic_mqtt_dotdot_on_unify_humidity_control_dehumidifier_setpoint_prec
         return;
       }
 // Start parsing value
-      dehumidifier_setpoint_precision = json_payload.at("value").get<int8_t>();
+      dehumidifier_setpoint_precision = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
@@ -64143,7 +64143,7 @@ static void uic_mqtt_dotdot_on_unify_humidity_control_auto_setpoint_precision_at
   }
 
 
-  int8_t auto_setpoint_precision = {};
+  uint8_t auto_setpoint_precision = {};
 
   nlohmann::json json_payload;
   try {
@@ -64156,7 +64156,7 @@ static void uic_mqtt_dotdot_on_unify_humidity_control_auto_setpoint_precision_at
         return;
       }
 // Start parsing value
-      auto_setpoint_precision = json_payload.at("value").get<int8_t>();
+      auto_setpoint_precision = json_payload.at("value").get<uint8_t>();
     
     // End parsing value
     }
