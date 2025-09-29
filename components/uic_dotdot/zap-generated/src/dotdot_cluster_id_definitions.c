@@ -136,6 +136,8 @@ const char* uic_dotdot_get_cluster_name(dotdot_cluster_id_t cluster_id) {
     return "UnifyThermostat";
   case DOTDOT_UNIFY_HUMIDITY_CONTROL_CLUSTER_ID:
     return "UnifyHumidityControl";
+  case DOTDOT_UNIFY_SWITCH_COLOR_CLUSTER_ID:
+    return "UnifySwitchColor";
   default:
     return "Unknown";
   }
@@ -318,6 +320,9 @@ dotdot_cluster_id_t uic_dotdot_get_cluster_id(const char* cluster_name) {
  }
  if (strcmp ("UnifyHumidityControl", cluster_name) == 0) {
    return DOTDOT_UNIFY_HUMIDITY_CONTROL_CLUSTER_ID;
+ }
+ if (strcmp ("UnifySwitchColor", cluster_name) == 0) {
+   return DOTDOT_UNIFY_SWITCH_COLOR_CLUSTER_ID;
  }
 
   // Return an invalid ID if we did not get any match.

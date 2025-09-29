@@ -893,6 +893,15 @@ typedef enum {
 #define DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x11)
 #define DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_SCALE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x12)
 #define DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x13)
+// Definitions for cluster: UnifySwitchColor
+#define DOTDOT_UNIFY_SWITCH_COLOR_WARM_WHITE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x0)
+#define DOTDOT_UNIFY_SWITCH_COLOR_COLD_WHITE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x1)
+#define DOTDOT_UNIFY_SWITCH_COLOR_RED_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x2)
+#define DOTDOT_UNIFY_SWITCH_COLOR_GREEN_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x3)
+#define DOTDOT_UNIFY_SWITCH_COLOR_BLUE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x4)
+#define DOTDOT_UNIFY_SWITCH_COLOR_AMBER_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x5)
+#define DOTDOT_UNIFY_SWITCH_COLOR_CYAN_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x6)
+#define DOTDOT_UNIFY_SWITCH_COLOR_PURPLE_ATTRIBUTE_ID ((dotdot_attribute_id_t)0x7)
 
 // clang-format on
 

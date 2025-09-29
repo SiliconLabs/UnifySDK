@@ -55997,6 +55997,703 @@ mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifyHumidityControl/Commands/ForceRea
 <!-- END OF UnifyHumidityControl Commands Section -->
 <!-- -->
 
+<br><br><br>
+
+
+<!-- -->
+<!-- -->
+<!-- NEW Page Cluster Support -->
+<!-- -->
+<!-- -->
+\page unify_switch_color UnifySwitchColor Cluster
+The following commands and attributes are accepted as JSON payloads for the
+UnifySwitchColor cluster.
+
+<br><br>
+
+<!-- -->
+<!--  START OF UnifySwitchColor Attributes Section -->
+<!-- -->
+\section unify_switch_color_attrs UnifySwitchColor Attributes
+The following attribute topics are used to retrieve the UnifySwitchColor cluster state.
+
+<br>
+
+\subsection unify_switch_color_attr_warm_white UnifySwitchColor/WarmWhite Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifySwitchColor/Attributes/WarmWhite/Reported
+[PREFIX]/UnifySwitchColor/Attributes/WarmWhite/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifySwitchColor Cluster WarmWhite Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for WarmWhite attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifySwitchColor/Attributes/WarmWhite/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/WarmWhite/Desired { "value": <DESIRED_WARM_WHITE>}
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/WarmWhite/Reported { "value": <REPORTED_WARM_WHITE>}
+
+```
+
+<br><br>
+
+\subsection unify_switch_color_attr_cold_white UnifySwitchColor/ColdWhite Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifySwitchColor/Attributes/ColdWhite/Reported
+[PREFIX]/UnifySwitchColor/Attributes/ColdWhite/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifySwitchColor Cluster ColdWhite Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ColdWhite attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifySwitchColor/Attributes/ColdWhite/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/ColdWhite/Desired { "value": <DESIRED_COLD_WHITE>}
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/ColdWhite/Reported { "value": <REPORTED_COLD_WHITE>}
+
+```
+
+<br><br>
+
+\subsection unify_switch_color_attr_red UnifySwitchColor/Red Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifySwitchColor/Attributes/Red/Reported
+[PREFIX]/UnifySwitchColor/Attributes/Red/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifySwitchColor Cluster Red Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for Red attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifySwitchColor/Attributes/Red/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/Red/Desired { "value": <DESIRED_RED>}
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/Red/Reported { "value": <REPORTED_RED>}
+
+```
+
+<br><br>
+
+\subsection unify_switch_color_attr_green UnifySwitchColor/Green Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifySwitchColor/Attributes/Green/Reported
+[PREFIX]/UnifySwitchColor/Attributes/Green/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifySwitchColor Cluster Green Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for Green attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifySwitchColor/Attributes/Green/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/Green/Desired { "value": <DESIRED_GREEN>}
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/Green/Reported { "value": <REPORTED_GREEN>}
+
+```
+
+<br><br>
+
+\subsection unify_switch_color_attr_blue UnifySwitchColor/Blue Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifySwitchColor/Attributes/Blue/Reported
+[PREFIX]/UnifySwitchColor/Attributes/Blue/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifySwitchColor Cluster Blue Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for Blue attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifySwitchColor/Attributes/Blue/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/Blue/Desired { "value": <DESIRED_BLUE>}
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/Blue/Reported { "value": <REPORTED_BLUE>}
+
+```
+
+<br><br>
+
+\subsection unify_switch_color_attr_amber UnifySwitchColor/Amber Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifySwitchColor/Attributes/Amber/Reported
+[PREFIX]/UnifySwitchColor/Attributes/Amber/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifySwitchColor Cluster Amber Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for Amber attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifySwitchColor/Attributes/Amber/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/Amber/Desired { "value": <DESIRED_AMBER>}
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/Amber/Reported { "value": <REPORTED_AMBER>}
+
+```
+
+<br><br>
+
+\subsection unify_switch_color_attr_cyan UnifySwitchColor/Cyan Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifySwitchColor/Attributes/Cyan/Reported
+[PREFIX]/UnifySwitchColor/Attributes/Cyan/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifySwitchColor Cluster Cyan Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for Cyan attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifySwitchColor/Attributes/Cyan/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/Cyan/Desired { "value": <DESIRED_CYAN>}
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/Cyan/Reported { "value": <REPORTED_CYAN>}
+
+```
+
+<br><br>
+
+\subsection unify_switch_color_attr_purple UnifySwitchColor/Purple Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifySwitchColor/Attributes/Purple/Reported
+[PREFIX]/UnifySwitchColor/Attributes/Purple/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifySwitchColor Cluster Purple Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for Purple attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/+/+/UnifySwitchColor/Attributes/Purple/+'
+
+# Example output
+
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/Purple/Desired { "value": <DESIRED_PURPLE>}
+ucl/by-unid/<UNID>/ep0/UnifySwitchColor/Attributes/Purple/Reported { "value": <REPORTED_PURPLE>}
+
+```
+
+<br><br>
+
+
+\subsection unify_switch_color_attr_cluster_revision UnifySwitchColor/ClusterRevision Attribute
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifySwitchColor/Attributes/ClusterRevision/Reported
+[PREFIX]/UnifySwitchColor/Attributes/ClusterRevision/Desired
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifySwitchColor Cluster ClusterRevision Attribute Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see desired/reported value for ClusterRevision attribute under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifySwitchColor/Attributes/ClusterRevision/+'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UnifySwitchColor/Attributes/ClusterRevision/Desired { "value": <DESIRED_CLUSTER_REVISION> }
+ucl/by-unid/<UNID>/<EP>/UnifySwitchColor/Attributes/ClusterRevision/Reported { "value": <REPORTED_CLUSTER_REVISION> }
+```
+
+<!-- -->
+<!--  END OF UnifySwitchColor Attributes Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF UnifySwitchColor Supported Commands Section -->
+<!-- -->
+\section unify_switch_color_recv_cmd_support UnifySwitchColor Command Support
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifySwitchColor/SupportedCommands
+[PREFIX]/UnifySwitchColor/SupportedGeneratedCommands
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifySwitchColor Command Support Properties",
+  "type": "object",
+  "properties": {
+      "value": {
+          "type": "array",
+          "items" : {
+            "type": "string",
+            "enum": [
+              "SetColor",
+              "StartStopChange",
+              "WriteAttributes",
+              "ForceReadAttributes"
+            ]
+          }
+        }
+      }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To see supported commands for UnifySwitchColor cluster under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifySwitchColor/SupportedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UnifySwitchColor/SupportedCommands { "value": ["SetColor","StartStopChange","WriteAttributes", "ForceReadAttributes"] }
+```
+
+To see supported generated commands for UnifySwitchColor cluster under the by-unid topic space:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifySwitchColor/SupportedGeneratedCommands'
+# Example output
+ucl/by-unid/<UNID>/<EP>/UnifySwitchColor/SupportedGeneratedCommands { "value": [] }
+```
+
+<!-- -->
+<!-- END OF UnifySwitchColor Supported Commands Section -->
+<!-- -->
+
+<br><br>
+
+<!-- -->
+<!-- START OF UnifySwitchColor Commands Section -->
+<!-- -->
+\section unify_switch_color_cmds UnifySwitchColor Commands
+
+<br><br>
+
+\subsection unify_switch_color_set_color_cmd UnifySwitchColor/SetColor Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifySwitchColor/Commands/SetColor
+[PREFIX]/UnifySwitchColor/GeneratedCommands/SetColor
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifySwitchColor Cluster SetColor Command Properties",
+  "type": "object",
+  "properties": {
+    "ColorComponentId": {
+      "type": "integer"
+    },
+    "Value": {
+      "type": "integer"
+    },
+    "Duration": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "ColorComponentId",
+    "Value",
+    "Duration"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a UnifySwitchColor/SetColor command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifySwitchColor/Commands/SetColor' -m  '{ "ColorComponentId": <COLOR_COMPONENT_ID_VALUE>,"Value": <VALUE_VALUE>,"Duration": <DURATION_VALUE> }'
+```
+
+To receive a UnifySwitchColor/SetColor generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifySwitchColor/GeneratedCommands/SetColor'
+```
+
+<br><br>
+
+\subsection unify_switch_color_start_stop_change_cmd UnifySwitchColor/StartStopChange Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifySwitchColor/Commands/StartStopChange
+[PREFIX]/UnifySwitchColor/GeneratedCommands/StartStopChange
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifySwitchColor Cluster StartStopChange Command Properties",
+  "type": "object",
+  "properties": {
+    "StartStop": {
+      "type": "boolean"
+    },
+    "UpDown": {
+      "type": "boolean"
+    },
+    "IgnorStartLevel": {
+      "type": "boolean"
+    },
+    "ColorComponentId": {
+      "type": "integer"
+    },
+    "StartLevel": {
+      "type": "integer"
+    },
+    "Duration": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "StartStop",
+    "UpDown",
+    "IgnorStartLevel",
+    "ColorComponentId",
+    "StartLevel",
+    "Duration"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To send a UnifySwitchColor/StartStopChange command under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifySwitchColor/Commands/StartStopChange' -m  '{ "StartStop": <START_STOP_VALUE>,"UpDown": <UP_DOWN_VALUE>,"IgnorStartLevel": <IGNOR_START_LEVEL_VALUE>,"ColorComponentId": <COLOR_COMPONENT_ID_VALUE>,"StartLevel": <START_LEVEL_VALUE>,"Duration": <DURATION_VALUE> }'
+```
+
+To receive a UnifySwitchColor/StartStopChange generated command from a UNID/endpoint:
+
+```console
+mosquitto_sub -t 'ucl/by-unid/<UNID>/<EP>/UnifySwitchColor/GeneratedCommands/StartStopChange'
+```
+
+<br><br>
+
+\subsection unify_switch_color_write_attr_cmd UnifySwitchColor/WriteAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifySwitchColor/Commands/WriteAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifySwitchColor Cluster WriteAttributes Command Properties",
+  "type": "object",
+  "properties": {
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To update all UnifySwitchColor attributes under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifySwitchColor/Commands/WriteAttributes' -m  '{  }'
+```
+
+> NOTE: Specify only the list of attributes to write in this command.
+> Unspecified attributes will not be updated.
+
+<br><br>
+
+\subsection unify_switch_color_force_read_attr_cmd UnifySwitchColor/ForceReadAttributes Command
+
+**MQTT Topic Pattern:**
+
+```
+[PREFIX]/UnifySwitchColor/Commands/ForceReadAttributes
+```
+
+**MQTT Payload JSON Schema:**
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UnifySwitchColor Cluster ForceReadAttributes Command Properties",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "array"
+      "items": {
+        "type": "string",
+        "enum": [
+          "WarmWhite",
+          "ColdWhite",
+          "Red",
+          "Green",
+          "Blue",
+          "Amber",
+          "Cyan",
+          "Purple"
+        ]
+      }
+    }
+  },
+  "required": [
+    "value"
+  ]
+}
+```
+
+**Example Mosquitto CLI Tool Usage**
+
+To force read all UnifySwitchColor attributes under the by-unid topic space (by sending an empty array):
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifySwitchColor/Commands/ForceReadAttributes' -m  '{ "value": [] }'
+```
+
+To force read one of the UnifySwitchColor attributes under the by-unid topic space:
+
+```console
+mosquitto_pub -t 'ucl/by-unid/<UNID>/<EP>/UnifySwitchColor/Commands/ForceReadAttributes' -m  '{ "value": ["WarmWhite"] }'
+```
+
+<!-- -->
+<!-- END OF UnifySwitchColor Commands Section -->
+<!-- -->
+
 
 <br><br><br>
 

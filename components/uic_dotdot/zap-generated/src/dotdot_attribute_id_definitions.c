@@ -2127,6 +2127,31 @@ const char *uic_dotdot_get_attribute_name(dotdot_cluster_id_t cluster_id,
           return "Unknown";
       }
       // clang-format off
+    case DOTDOT_UNIFY_SWITCH_COLOR_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_UNIFY_SWITCH_COLOR_WARM_WHITE_ATTRIBUTE_ID:
+          return "WarmWhite";
+        case DOTDOT_UNIFY_SWITCH_COLOR_COLD_WHITE_ATTRIBUTE_ID:
+          return "ColdWhite";
+        case DOTDOT_UNIFY_SWITCH_COLOR_RED_ATTRIBUTE_ID:
+          return "Red";
+        case DOTDOT_UNIFY_SWITCH_COLOR_GREEN_ATTRIBUTE_ID:
+          return "Green";
+        case DOTDOT_UNIFY_SWITCH_COLOR_BLUE_ATTRIBUTE_ID:
+          return "Blue";
+        case DOTDOT_UNIFY_SWITCH_COLOR_AMBER_ATTRIBUTE_ID:
+          return "Amber";
+        case DOTDOT_UNIFY_SWITCH_COLOR_CYAN_ATTRIBUTE_ID:
+          return "Cyan";
+        case DOTDOT_UNIFY_SWITCH_COLOR_PURPLE_ATTRIBUTE_ID:
+          return "Purple";
+          // clang-format on
+        default:
+          return "Unknown";
+      }
+      // clang-format off
       // clang-format on
     default:
       return "Unknown";
@@ -4618,6 +4643,32 @@ dotdot_attribute_id_t
         return DOTDOT_UNIFY_HUMIDITY_CONTROL_AUTO_SETPOINT_PRECISION_ATTRIBUTE_ID;
       }
     break;
+    case DOTDOT_UNIFY_SWITCH_COLOR_CLUSTER_ID:
+      if (strcmp ("WarmWhite", attribute_name) == 0) {
+        return DOTDOT_UNIFY_SWITCH_COLOR_WARM_WHITE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("ColdWhite", attribute_name) == 0) {
+        return DOTDOT_UNIFY_SWITCH_COLOR_COLD_WHITE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("Red", attribute_name) == 0) {
+        return DOTDOT_UNIFY_SWITCH_COLOR_RED_ATTRIBUTE_ID;
+      }
+      if (strcmp ("Green", attribute_name) == 0) {
+        return DOTDOT_UNIFY_SWITCH_COLOR_GREEN_ATTRIBUTE_ID;
+      }
+      if (strcmp ("Blue", attribute_name) == 0) {
+        return DOTDOT_UNIFY_SWITCH_COLOR_BLUE_ATTRIBUTE_ID;
+      }
+      if (strcmp ("Amber", attribute_name) == 0) {
+        return DOTDOT_UNIFY_SWITCH_COLOR_AMBER_ATTRIBUTE_ID;
+      }
+      if (strcmp ("Cyan", attribute_name) == 0) {
+        return DOTDOT_UNIFY_SWITCH_COLOR_CYAN_ATTRIBUTE_ID;
+      }
+      if (strcmp ("Purple", attribute_name) == 0) {
+        return DOTDOT_UNIFY_SWITCH_COLOR_PURPLE_ATTRIBUTE_ID;
+      }
+    break;
     default:
     return DOTDOT_INVALID_ATTRIBUTE_ID;
   }
@@ -6737,6 +6788,31 @@ dotdot_attribute_json_type_t
           return JSON_TYPE_UNKNOWN;
       }
       // clang-format off
+    case DOTDOT_UNIFY_SWITCH_COLOR_CLUSTER_ID:
+      // clang-format on
+      switch (attribute_id) {
+        // clang-format off
+        case DOTDOT_UNIFY_SWITCH_COLOR_WARM_WHITE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_SWITCH_COLOR_COLD_WHITE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_SWITCH_COLOR_RED_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_SWITCH_COLOR_GREEN_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_SWITCH_COLOR_BLUE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_SWITCH_COLOR_AMBER_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_SWITCH_COLOR_CYAN_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                case DOTDOT_UNIFY_SWITCH_COLOR_PURPLE_ATTRIBUTE_ID:
+          return JSON_TYPE_NUMBER;
+                  // clang-format on
+        default:
+          return JSON_TYPE_UNKNOWN;
+      }
+      // clang-format off
       // clang-format on
     default:
       return JSON_TYPE_UNKNOWN;
@@ -7101,6 +7177,9 @@ bool uic_dotdot_attribute_is_enum(dotdot_cluster_id_t cluster_id,
     if (18 == attribute_id) {
       return true;
     }
+  }
+
+  if (65441 == cluster_id) {
   }
 
   return false;
